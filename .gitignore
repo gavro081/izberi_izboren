@@ -70,3 +70,6 @@ build/
 # Local env files
 .env
 .env.*
+
+
+guidelines.txt
