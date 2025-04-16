@@ -1,0 +1,72 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Django / Python
+*.log
+*.pot
+*.pyc
+*.pyd
+*.env
+env/
+venv/
+instance/
+
+
+# VS Code / IDE
+.vscode/
+.idea/
+
+# System
+.DS_Store
+Thumbs.db
+
+# Docker
+*.pid
+*.db
+*.sock
+*.tar
+*.gz
+
+# Logs
+*.log
+*.log.*
+
+# Coverage
+htmlcov/
+coverage.xml
+*.cover
+.cache
+.tox/
+.nox/
+
+# Unit test / pytest
+.pytest_cache/
+test-results/
+
+# mypy / other static analysis
+.mypy_cache/
+.pyre/
+.pytype/
+
+# Node / frontend
+frontend/node_modules/
+frontend/.turbo/
+frontend/.next/
+frontend/.cache/
+frontend/dist/
+frontend/build/
+frontend/.vite/
+
+# Lock files (optional if not committing lockfiles)
+# package-lock.json
+
+# Output / dist
+*.egg-info/
+dist/
+build/
+
+# Local env files
+.env
+.env.*

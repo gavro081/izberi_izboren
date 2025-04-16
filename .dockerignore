@@ -1,0 +1,52 @@
+# OS / system files
+.DS_Store
+Thumbs.db
+
+# Python / Django
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.py[cod]
+*.log
+*.sqlite3
+*.env
+*.env.*
+*.db
+*.pid
+*.sock
+*.coverage
+*.egg-info/
+backend/venv/
+env/
+venv/
+
+# Node / React
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.vite/
+frontend/.turbo/
+frontend/.cache/
+frontend/.env
+frontend/.env.*
+
+# IDE/editor stuff
+.vscode/
+.idea/
+
+# Git
+.git/
+.gitignore
+
+# Docker build files (optional, if you don’t want to copy these into image)
+Dockerfile
+.dockerignore
+
+# Test & coverage
+.pytest_cache/
+coverage.xml
+test-results/
+.mypy_cache/
+.tox/
+.nox/
