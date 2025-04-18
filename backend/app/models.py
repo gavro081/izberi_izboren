@@ -23,4 +23,4 @@ class Subject(models.Model):
         return f"{self.code} - {self.name}"
 
     class Meta:
-        db_table = 'subjectdata'
+        db_table = 'subject_data'

@@ -1,72 +1,45 @@
-import json
 import psycopg2
+import os
 from psycopg2.extras import execute_values
-import getpass
+from dotenv import load_dotenv
+from pathlib import Path
+import tools.constants.queries as queries
+import tools.constants.values as values
 
-# TODO: CHANGE THIS!!!
-password = getpass.getpass("enter supabase password: ")
+# IMPORTANT:
+# to run script make sure
+# - you are in project root and run "python3 -m tools.scripts.fill_db"
+# - that tools, constants and scripts have __init__.py files, they can be empty
+# - a .env file with the db info exists in backend/.env
 
-conn = psycopg2.connect(f"postgresql://postgres.abbuypyehozzdatmefnp:{password}@aws-0-eu-central-1.pooler.supabase.com:5432/postgres")
+env_path = Path(__file__).resolve().parent.joinpath('../../backend/.env')
+load_dotenv(dotenv_path=env_path)
+
+user = os.getenv("DB_USER")
+password = os.getenv("DB_PASS")
+host = os.getenv("DB_HOST")
+port = os.getenv("DB_PORT")
+dbname = os.getenv("DB_NAME")
+
+conn = psycopg2.connect(
+    f"postgresql://{user}:{password}@{host}:{port}/{dbname}"
+)
 cur = conn.cursor()
 print("connected to DB successfully")
 
-with open("./data/subject_details.json", "r", encoding='utf-8') as f:
-    json_data = json.load(f)
-
-cur.execute("""
-        CREATE TABLE IF NOT EXISTS subjectdata (
-            id SERIAL PRIMARY KEY,
-            name TEXT NOT NULL,
-            code TEXT NOT NULL,
-            level INTEGER NOT NULL,
-            short TEXT,
-            prerequisite TEXT,
-            activated BOOLEAN NOT NULL,
-            e_2024_2025 INTEGER,
-            e_2023_2024 INTEGER,
-            e_2022_2023 INTEGER,
-            mandatory BOOLEAN NOT NULL,
-            mandatoryFor TEXT[],
-            semester INTEGER NOT NULL,
-            season TEXT NOT NULL,
-            electiveFor TEXT[],
-            professors TEXT[],
-            assistants TEXT[]
-        );
-    """)
-
-data_tuples = [
-    (
-        item["subject"],
-        item["code"],
-        item["level"],
-        item.get("short"),
-        item.get("prerequisite"),
-        item["activated"],
-        item.get("2024/2025"),
-        item.get("2023/2024"),
-        item.get("2022/2023"),
-        item["mandatory"],
-        item.get("mandatoryFor", []),
-        item["semester"],
-        item["season"],
-        item.get("electiveFor", []),
-        item.get("professors", []),
-        item.get("assistants", [])
-    )
-    for item in json_data.values()
-]
+cur.execute(queries.CREATE_SUBJECT)
+cur.execute(queries.CREATE_SUBJECT_INFO)
 
 execute_values(
     cur,
-    """
-    INSERT INTO SubjectData (
-        name, code, level, short, prerequisite, activated, e_2024_2025, e_2023_2024,
-        e_2022_2023, mandatory, mandatoryFor, semester, season, electiveFor, professors,
-        assistants 
-        ) VALUES %s
-    """,
-    data_tuples
+    queries.FILL_SUBJECT,
+    values.SUBJECT
+)
+
+execute_values(
+    cur,
+    queries.INSERT_SUBJECT_INFO,
+    values.SUBJECT_INFO
 )
 
 conn.commit()
