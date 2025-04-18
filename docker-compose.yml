@@ -13,7 +13,6 @@ services:
       - ./backend/.env # Load environment variables from the .env file
     environment:
       - DEBUG=True
-      - DB_HOST=db
       - DB_PORT=5432
     command: ./wait-for-db.sh db 5432 python manage.py runserver 0.0.0.0:8000
     depends_on:
