@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
 
-class Subject(models.Model):
+class Subject_Info(models.Model):
     name = models.TextField(null=False)
     code = models.TextField(null=False)
     level = models.IntegerField(null=False)
