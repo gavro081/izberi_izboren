@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
 
+# to access subject_info for a subject use subject.subject_info.<optional_field>
+# to access subject from subject_info use subject_info.subject.<optional_field>
+
 class Subject(models.Model):
     name = models.TextField(null=False)
     code = models.TextField(null=False)
@@ -13,10 +16,12 @@ class Subject(models.Model):
         db_table = "subject"
 
 class Subject_Info(models.Model):
-    subject = models.OneToOneField(Subject, on_delete=models.CASCADE)
+    subject = models.OneToOneField(
+        Subject,
+        on_delete=models.CASCADE,
+        primary_key=True
+    )
 
-    name = models.TextField(null=False)
-    code = models.TextField(null=False)
     level = models.IntegerField(null=False)
     short = models.TextField(blank=True, null=True)
     prerequisite = models.TextField(blank=True, null=True)
@@ -31,7 +36,7 @@ class Subject_Info(models.Model):
     assistants = ArrayField(models.CharField(blank=True))
 
     def __str__(self):
-        return f"Subject info for {self.name}"
+        return f"Subject info for {self.subject.name}"
 
     class Meta:
         db_table = 'subject_data'

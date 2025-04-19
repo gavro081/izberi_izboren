@@ -17,10 +17,7 @@ FILL_SUBJECT = """
 # subject_info
 CREATE_SUBJECT_INFO = """
     CREATE TABLE IF NOT EXISTS subject_data (
-        id SERIAL PRIMARY KEY,
-        subject_id INTEGER UNIQUE NOT NULL REFERENCES subject(id) ON DELETE CASCADE,
-        name TEXT NOT NULL,
-        code TEXT NOT NULL,
+        subject_id INTEGER PRIMARY KEY REFERENCES subject(id) ON DELETE CASCADE,
         level INTEGER NOT NULL,
         short TEXT,
         prerequisite TEXT,
@@ -35,12 +32,9 @@ CREATE_SUBJECT_INFO = """
         assistants TEXT[]
 );
 """
-# TODO:
-# it is repetitive and unnecessary to store the name and code in subject_data,
-# because they can be retrieved with a join, but for now it can stay like this
 INSERT_SUBJECT_INFO =  """
     INSERT INTO subject_data (
-        subject_id, name, code, level, short, prerequisite, activated, participants, 
+        subject_id, level, short, prerequisite, activated, participants, 
         mandatory, mandatory_for, semester, season, elective_for, professors, assistants 
         ) VALUES %s
 """

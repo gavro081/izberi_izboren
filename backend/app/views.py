@@ -11,12 +11,15 @@ def index(request):
 
 
 def test_api(request):
-    # subject_info = Subject.objects.all()
-    # subject_info_data = list(subject_info.values())  
-    # json_data = json.dumps({"rows": subject_info_data})
+    all_subjects = Subject.objects.all()
+    all_subjects_info = Subject_Info.objects.all()
 
-    subjects = Subject_Info.objects.all()
-    subjects_data = list(subjects.values())  
-    json_data = json.dumps({"rows": subjects_data})
+    all_subjects_list = list(all_subjects.values())  
+    all_subjects_info_list = list(all_subjects_info.values())  
+
+    for subject, subject_info in zip(all_subjects_list, all_subjects_info_list):
+        subject["info"] = subject_info
+
+    json_data = json.dumps({"rows": all_subjects_list})
     
     return JsonResponse(json.loads(json_data), safe=False)

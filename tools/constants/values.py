@@ -23,8 +23,6 @@ for item in json_subject_details.values()
 SUBJECT_INFO = [
 (
     index + 1,
-    item["subject"],
-    item["code"],
     item["level"],
     item.get("short"),
     item.get("prerequisite"),

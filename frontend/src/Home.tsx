@@ -1,24 +1,6 @@
 import { useEffect, useState } from "react";
 
-const subject_values = [
-	"id",
-	"name",
-	"code",
-	"level",
-	"short",
-	"prerequisite",
-	"activated",
-	"e_2024_2025",
-	"e_2023_2024",
-	"e_2022_2023",
-	"mandatory",
-	"mandatoryfor",
-	"semester",
-	"season",
-	"electivefor",
-	"professors",
-	"assistants",
-];
+const subject_values = ["id", "name", "code"];
 
 function Home() {
 	const [data, setData] = useState<any[]>([]);
@@ -32,7 +14,6 @@ function Home() {
 		};
 		fetchData();
 	}, []);
-
 	return !isLoaded ? (
 		<p>Loading...</p>
 	) : (
