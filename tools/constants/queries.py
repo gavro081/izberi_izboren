@@ -16,7 +16,7 @@ FILL_SUBJECT = """
 
 # subject_info
 CREATE_SUBJECT_INFO = """
-    CREATE TABLE IF NOT EXISTS subject_data (
+    CREATE TABLE IF NOT EXISTS subject_info (
         subject_id INTEGER PRIMARY KEY REFERENCES subject(id) ON DELETE CASCADE,
         level INTEGER NOT NULL,
         short TEXT,
@@ -33,7 +33,7 @@ CREATE_SUBJECT_INFO = """
 );
 """
 INSERT_SUBJECT_INFO =  """
-    INSERT INTO subject_data (
+    INSERT INTO subject_info(
         subject_id, level, short, prerequisite, activated, participants, 
         mandatory, mandatory_for, semester, season, elective_for, professors, assistants 
         ) VALUES %s

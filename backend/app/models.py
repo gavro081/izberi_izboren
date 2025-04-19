@@ -39,4 +39,4 @@ class Subject_Info(models.Model):
         return f"Subject info for {self.subject.name}"
 
     class Meta:
-        db_table = 'subject_data'
+        db_table = 'subject_info'
