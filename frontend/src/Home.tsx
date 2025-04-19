@@ -10,6 +10,7 @@ function Home() {
 			const response = await fetch("http://localhost:8000/api");
 			const data = await response.json();
 			setData(data.rows);
+			console.log(data.rows);
 			setIsLoaded(true);
 		};
 		fetchData();
@@ -17,27 +18,25 @@ function Home() {
 	return !isLoaded ? (
 		<p>Loading...</p>
 	) : (
-		<>
+		<div>
 			{data.slice(0, 10).map((item) => {
 				return (
-					<div>
-						<ul>
-							{subject_values.map((header) => {
-								return Array.isArray(item[header]) ? (
-									<li>
-										{header}: {item[header].join(", ")}
-									</li>
-								) : (
-									<li key={header}>
-										{header}: {item[header]}
-									</li>
-								);
-							})}
-						</ul>
+					<div key={item.id} className="rounded-md border border-black mt-1">
+						{subject_values.map((header) => {
+							return Array.isArray(item[header]) ? (
+								<p key={header}>
+									{header}: {item[header].join(", ")}
+								</p>
+							) : (
+								<p key={header}>
+									{header}: {item[header]}
+								</p>
+							);
+						})}
 					</div>
 				);
 			})}
-		</>
+		</div>
 	);
 }
 

@@ -20,6 +20,6 @@ def test_api(request):
     for subject, subject_info in zip(all_subjects_list, all_subjects_info_list):
         subject["info"] = subject_info
 
-    json_data = json.dumps({"rows": all_subjects_list})
+    json_data = json.dumps({"rows": all_subjects_list[:177]})
     
     return JsonResponse(json.loads(json_data), safe=False)
