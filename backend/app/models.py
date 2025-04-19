@@ -23,10 +23,10 @@ class Subject_Info(models.Model):
     activated = models.BooleanField(null=False)
     participants = ArrayField(models.IntegerField(blank=True))
     mandatory = models.BooleanField(null=False)
-    mandatoryfor = ArrayField(models.CharField(blank=True))
+    mandatory_for = ArrayField(models.CharField(blank=True))
     semester = models.IntegerField(null=False)
     season = models.TextField(null=False)
-    electivefor = ArrayField(models.CharField(blank=True))
+    elective_for = ArrayField(models.CharField(blank=True))
     professors = ArrayField(models.CharField(blank=True))
     assistants = ArrayField(models.CharField(blank=True))
 
