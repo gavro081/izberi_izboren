@@ -8,9 +8,10 @@ import tools.constants.values as values
 
 # IMPORTANT:
 # to run script make sure
-# - you are in project root and run "python3 -m tools.scripts.fill_db"
+# - you are in project root
 # - that tools, constants and scripts have __init__.py files, they can be empty
 # - a .env file with the db info exists in backend/.env
+# run "python3 -m tools.scripts.fill_db"
 
 env_path = Path(__file__).resolve().parent.joinpath('../../backend/.env')
 load_dotenv(dotenv_path=env_path)

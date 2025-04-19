@@ -19,17 +19,17 @@ for item in json_subject_details.values()
 
 # subject_info
 
+# be aware, using index + 1 is valid only for fresh starts
 SUBJECT_INFO = [
 (
+    index + 1,
     item["subject"],
     item["code"],
     item["level"],
     item.get("short"),
     item.get("prerequisite"),
     item["activated"],
-    item.get("2024/2025"),
-    item.get("2023/2024"),
-    item.get("2022/2023"),
+    item.get("participants", [0,0,0]),
     item["mandatory"],
     item.get("mandatoryFor", []),
     item["semester"],
@@ -38,5 +38,5 @@ SUBJECT_INFO = [
     item.get("professors", []),
     item.get("assistants", [])
 )
-for item in json_subject_details.values()
+for index, item in enumerate(json_subject_details.values())
 ]

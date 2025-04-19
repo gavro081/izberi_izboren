@@ -61,8 +61,11 @@ for i, entry in enumerate(participants_data):
         except ValueError:
             subject_data[course]['activated'] = 'ERROR'
             print(f"Error: Course {course} has a value that is not an integer")
-        for semester in semesters[:3]: # gets last 3 semesters, adjust for less/more
-            subject_data[course][semester] = participants_data[i][semester]
+        
+        # gets last 3 semesters, adjust for less/more
+        subject_data[course]["participants"] = [participants_data[i][semester] for semester in semesters[:3]]
+        # for semester in semesters[:3]: 
+            # subject_data[course][semester] = participants_data[i][semester]
     else:
         print(f"Error: Course {course} is not in subject data")
 

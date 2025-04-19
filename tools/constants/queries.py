@@ -18,30 +18,30 @@ FILL_SUBJECT = """
 CREATE_SUBJECT_INFO = """
     CREATE TABLE IF NOT EXISTS subject_data (
         id SERIAL PRIMARY KEY,
+        subject_id INTEGER UNIQUE NOT NULL REFERENCES subject(id) ON DELETE CASCADE,
         name TEXT NOT NULL,
         code TEXT NOT NULL,
         level INTEGER NOT NULL,
         short TEXT,
         prerequisite TEXT,
         activated BOOLEAN NOT NULL,
-        e_2024_2025 INTEGER,
-        e_2023_2024 INTEGER,
-        e_2022_2023 INTEGER,
+        participants INT[],
         mandatory BOOLEAN NOT NULL,
-        mandatoryFor TEXT[],
+        mandatory_for TEXT[],
         semester INTEGER NOT NULL,
         season TEXT NOT NULL,
-        electiveFor TEXT[],
+        elective_for TEXT[],
         professors TEXT[],
         assistants TEXT[]
 );
 """
-
+# TODO:
+# it is repetitive and unnecessary to store the name and code in subject_data,
+# because they can be retrieved with a join, but for now it can stay like this
 INSERT_SUBJECT_INFO =  """
     INSERT INTO subject_data (
-        name, code, level, short, prerequisite, activated, e_2024_2025, e_2023_2024,
-        e_2022_2023, mandatory, mandatoryFor, semester, season, electiveFor, professors,
-        assistants 
+        subject_id, name, code, level, short, prerequisite, activated, participants, 
+        mandatory, mandatory_for, semester, season, elective_for, professors, assistants 
         ) VALUES %s
 """
 
