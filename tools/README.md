@@ -1,27 +1,29 @@
 ## guide
 
-- data
+### Constants
 
-  - **courses.json** - lista so iminja na site predmeti
-  - **elective.json** - dict so izborni predmeti za sekoj smer
-  - **information.json** - dict so kod, ime, level, link za site predmeti
-  - **mandatory.json** - dict so zadolzitelni predmeti za sekoj smer, po semestar
-  - **participants.json** - dict so broj na zapisani studenti za sekoj semestar za sekoj predmet
-  - **prerequisites.json** - dict so kod, ime, preduslov i semestar za sekoj predmet
-  - **professors.json** - dict so profesori i asistenti za sekoj predmet
-  - **roles.json** - dict so key - semestar, value - site predmeti od toj semestar, zadolzitelni i izborni
-  - **staff.json** - dict so info za site profesori
-  - **subjects_by_program.json** - dict so site smerovi kade sto e zadolzitelen eden predmet
-  - **subject_details.json** - dict so site(?) relevantni informacii za eden predmet
+- `queries.py` - contains raw SQL queries for creating and populating the initial tables in the database.
+- `values.py` - reads from `subject_details.json` and stores the values so they can be used to populate the database.
 
-- scrapers
+### Data
 
-  - **mandatory.py** - scrape-a i zapisuva rezultati vo data/mandatory.json
-  - **elective.py** - scrape-a i zapisuva rezultati vo data/elective.json
+- `courses.json` - array containing the names of all subjects.
+- `elective.json` - JSON containing arrays of all eligible summer and winter subjects for all programs.
+- `information.json` - array with the code, name, level and link for all subjects.
+- `mandatory.json` - JSON containing arrays of all mandatory subjects for all programs, organized by semester.
+- `participants.json` - array listing all courses with their number of participants.
+- `prerequisites.json` - array of subject prerequisites.
+- `professors.json` - array of all subjects with their respective professors and assistants.
+- `subject_details.json` - JSON containing all subjects and relevant information about them, aggregated from the other data files.
+- `subjects_by_program.json` - JSON listing all subjects and the programs for which they are mandatory.
 
-- scripts
+### Scrapers
 
-  - **subjects_by_program.py** - cita od mandatory.json i zapisuva vo subjects_by_program.json
-  - **subject_details.py** - cita od poveke json files i gi spojuva vo eden pogolem dict - subject_details.json
+- `elective.py` - scrapes the FINKI website for all elective subjects per program and writes the results to `data/elective.json`.
+- `mandatory.py` - scrapes the FINKI site for all mandatory subjects per program and writes the results to `data/mandatory.json`.
 
-**playground.js** - as the name suggests, playground za igranje so datata (run with `node playground.js` )
+### Scripts
+
+- `fill_db.py` - connects to the database, creates tables, and populates them.
+- `subjects_by_program.py` - reads data from mandatory.json, and writes the relevant information to data/subjects_by_program.json.
+- `subject_details.py` - aggregates data from multiple JSON files, and writes the combined information in `data/subject_details.json`.

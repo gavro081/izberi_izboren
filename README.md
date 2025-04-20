@@ -34,7 +34,7 @@ DB_NAME=x
 DB_HOST=x
 ```
 
-> adjust the values according to your environment
+> Adjust the values according to your environment
 
 ### 3. Build and run the project using Docker Compose: `docker-compose up --build`
 
