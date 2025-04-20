@@ -1,0 +1,5223 @@
+{
+    "Архитектура и организација на компјутери": {
+        "subject": "Архитектура и организација на компјутери",
+        "code": "F18L1S003, F23L1S003",
+        "level": 1,
+        "short": "АиОнК",
+        "prerequisite": "",
+        "activated": true,
+        "participants": [
+            1063,
+            1311,
+            1350
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "SIIS23",
+            "PIT23",
+            "KN23"
+        ],
+        "semester": 2,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [
+            "Љупчо Антовски",
+            "Билјана Стојкоска Ристеска",
+            "Владимир Здравески",
+            "Дејан Спасов",
+            "Игор Мишковски",
+            "Магдалена Костоска Ѓорчевска",
+            "Марјан Гушев",
+            "Мирослав Мирчев",
+            "Моника Симјаноска",
+            "Сашо Граматиков"
+        ],
+        "assistants": [
+            "Јана Кузманова",
+            "Јована Добрева",
+            "Војдан Ќорвезироски",
+            "Марија Танеска",
+            "Ненад Анчев"
+        ]
+    },
+    "Бизнис и менаџмент": {
+        "subject": "Бизнис и менаџмент",
+        "code": "F18L1W005, F23L1W005",
+        "level": 1,
+        "short": "БиМ",
+        "prerequisite": "",
+        "activated": true,
+        "participants": [
+            814,
+            989,
+            951
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "SIIS23",
+            "IMB23",
+            "PIT23"
+        ],
+        "semester": 1,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Владимир Здравески",
+            "Георгина Мирчева",
+            "Ристе Стојанов",
+            "Смилка Јанеска Саркањац"
+        ],
+        "assistants": [
+            "Александар Тенев",
+            "Милена Трајаноска"
+        ]
+    },
+    "Бизнис статистика": {
+        "subject": "Бизнис статистика",
+        "code": "F18L1S023, F23L1S023",
+        "level": 1,
+        "short": "БС",
+        "prerequisite": "",
+        "activated": true,
+        "participants": [
+            830,
+            801,
+            698
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "PIT23"
+        ],
+        "semester": 2,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [
+            "Александра Поповска Митровиќ",
+            "Верица Бакева Смиљкова",
+            "Весна Димитриевска Ристовска",
+            "Методија Јанчески",
+            "Наташа Илиевска"
+        ],
+        "assistants": [
+            "Петар Секулоски"
+        ]
+    },
+    "Вовед во компјутерските науки": {
+        "subject": "Вовед во компјутерските науки",
+        "code": "F18L1W007, F23L1W007",
+        "level": 1,
+        "short": "ВвКН_1",
+        "prerequisite": "",
+        "activated": true,
+        "participants": [
+            891,
+            1096,
+            1155
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "SIIS23",
+            "IMB23",
+            "PIT23",
+            "IE23",
+            "KN23"
+        ],
+        "semester": 1,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Билјана Стојкоска Ристеска",
+            "Бојана Котеска",
+            "Иван Китановски",
+            "Катерина Здравкова",
+            "Коста Митрески",
+            "Панче Рибарски"
+        ],
+        "assistants": [
+            "Александар Тенев",
+            "Кирил Ќироски",
+            "Стефан Андонов",
+            "Марија Танеска",
+            "Марија Стојчева"
+        ]
+    },
+    "Дизајн на дигитални кола": {
+        "subject": "Дизајн на дигитални кола",
+        "code": "F18L1W041, F23L2W041",
+        "level": 2,
+        "short": "ДнДК",
+        "prerequisite": "",
+        "activated": true,
+        "participants": [
+            33,
+            59,
+            157
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "KI23"
+        ],
+        "semester": 1,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Милош Јовановиќ"
+        ],
+        "assistants": [
+            "Јована Добрева"
+        ]
+    },
+    "Дискретна математика": {
+        "subject": "Дискретна математика",
+        "code": "F18L1W011, F23L2S011",
+        "level": 2,
+        "short": "ДМ",
+        "prerequisite": "",
+        "activated": true,
+        "participants": [
+            33,
+            0,
+            1602
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "KI23"
+        ],
+        "semester": 2,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [],
+        "assistants": [],
+        "flag": "(неактивиран предмет, нова акр.)"
+    },
+    "Дискретни структури 1": {
+        "subject": "Дискретни структури 1",
+        "code": "F18L1W031, F23L2W031",
+        "level": 2,
+        "short": "ДС1",
+        "prerequisite": "",
+        "activated": true,
+        "participants": [
+            100,
+            121,
+            163
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "KN23"
+        ],
+        "semester": 1,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Билјана Тојтовска Рибарски",
+            "Марија Михова"
+        ],
+        "assistants": [
+            "Петар Секулоски"
+        ]
+    },
+    "Дискретни структури 2": {
+        "subject": "Дискретни структури 2",
+        "code": "F18L1S032, F23L2S032",
+        "level": 2,
+        "short": "ДС2",
+        "prerequisite": "",
+        "activated": true,
+        "participants": [
+            103,
+            136,
+            163
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "KN23"
+        ],
+        "semester": 2,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [
+            "Марија Михова"
+        ],
+        "assistants": [
+            "Петар Секулоски"
+        ]
+    },
+    "Е-учење": {
+        "subject": "Е-учење",
+        "code": "F18L1S052, F23L1S052",
+        "level": 1,
+        "short": "ИСзУ",
+        "prerequisite": "",
+        "activated": true,
+        "participants": [
+            77,
+            62,
+            56
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "IE23"
+        ],
+        "semester": 2,
+        "season": "S",
+        "electiveFor": [
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Миле Јованов",
+            "Емил Станков"
+        ],
+        "assistants": [
+            "Мартин Динев",
+            "Мартина Тошевска"
+        ]
+    },
+    "Математика 1": {
+        "subject": "Математика 1",
+        "code": "F18L1S013, F23L2W002",
+        "level": 2,
+        "short": "К_1",
+        "prerequisite": "",
+        "activated": true,
+        "participants": [
+            980,
+            975,
+            923
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "SIIS23",
+            "IMB23",
+            "IE23"
+        ],
+        "semester": 1,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Весна Димитриевска Ристовска"
+        ],
+        "assistants": [
+            "Весна Димитриевска Ристовска"
+        ]
+    },
+    "Калкулус 1": {
+        "subject": "Калкулус 1",
+        "code": "F18L1W033, F23L2W033",
+        "level": 2,
+        "short": "К1",
+        "prerequisite": "",
+        "activated": true,
+        "participants": [
+            144,
+            222,
+            363
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "KI23",
+            "KN23"
+        ],
+        "semester": 1,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Весна Димитриевска Ристовска",
+            "Методија Јанчески"
+        ],
+        "assistants": [
+            "Петар Секулоски"
+        ]
+    },
+    "Калкулус 2": {
+        "subject": "Калкулус 2",
+        "code": "F18L1S034, F23L2S034",
+        "level": 2,
+        "short": "К2",
+        "prerequisite": "",
+        "activated": true,
+        "participants": [
+            189,
+            269,
+            380
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "KI23",
+            "KN23"
+        ],
+        "semester": 2,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [
+            "Александра Поповска Митровиќ",
+            "Верица Бакева Смиљкова",
+            "Ласко Баснарков"
+        ],
+        "assistants": [
+            "Петар Секулоски"
+        ]
+    },
+    "Компјутерски архитектури": {
+        "subject": "Компјутерски архитектури",
+        "code": "F18L1S045, F23L1S045",
+        "level": 1,
+        "short": "КА_1",
+        "prerequisite": "",
+        "activated": true,
+        "participants": [
+            186,
+            231,
+            338
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "IMB23",
+            "IE23",
+            "KI23"
+        ],
+        "semester": 2,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [
+            "Моника Симјаноска",
+            "Ристе Стојанов"
+        ],
+        "assistants": [
+            "Јована Добрева"
+        ]
+    },
+    "Компјутерски компоненти": {
+        "subject": "Компјутерски компоненти",
+        "code": "F18L1S116, F23L1S116",
+        "level": 1,
+        "short": "КК",
+        "prerequisite": "",
+        "activated": true,
+        "participants": [
+            92,
+            86,
+            88
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 2,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Андреја Наумоски",
+            "Коста Митрески"
+        ],
+        "assistants": []
+    },
+    "Креативни вештини за решавање проблеми": {
+        "subject": "Креативни вештини за решавање проблеми",
+        "code": "F18L1S120, F23L1S120",
+        "level": 1,
+        "short": "КВзРП",
+        "prerequisite": "",
+        "activated": true,
+        "participants": [
+            98,
+            88,
+            44
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "IE23"
+        ],
+        "semester": 4,
+        "season": "S",
+        "electiveFor": [
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Владимир Трајковиќ",
+            "Соња Филипоска"
+        ],
+        "assistants": [
+            "Славе Темков"
+        ]
+    },
+    "Маркетинг": {
+        "subject": "Маркетинг",
+        "code": "F18L1S026, F23L2S026",
+        "level": 2,
+        "short": "М",
+        "prerequisite": "нема (2018) | 36 кредити (2023)",
+        "activated": true,
+        "participants": [
+            450,
+            220,
+            593
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 4,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [
+            "Смилка Јанеска Саркањац"
+        ],
+        "assistants": [
+            "Александар Тенев"
+        ]
+    },
+    "Објектно ориентирана анализа и дизајн": {
+        "subject": "Објектно ориентирана анализа и дизајн",
+        "code": "F18L1S015, F23L2S015",
+        "level": 2,
+        "short": "ООАиД",
+        "prerequisite": "",
+        "activated": true,
+        "participants": [
+            433,
+            464,
+            489
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "SIIS23"
+        ],
+        "semester": 2,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23"
+        ],
+        "professors": [
+            "Бојана Котеска",
+            "Илинка Иваноска",
+            "Кире Триводалиев",
+            "Петре Ламески",
+            "Слободан Калајџиски"
+        ],
+        "assistants": [
+            "Мартина Тошевска",
+            "Славе Темков"
+        ]
+    },
+    "Објектно-ориентирано програмирање": {
+        "subject": "Објектно-ориентирано програмирање",
+        "code": "F18L1S016, F23L1S016",
+        "level": 1,
+        "short": "ООП",
+        "prerequisite": "",
+        "activated": true,
+        "participants": [
+            1679,
+            1687,
+            1797
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "SIIS23",
+            "IMB23",
+            "PIT23",
+            "IE23",
+            "KI23",
+            "KN23"
+        ],
+        "semester": 2,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [
+            "Ѓорѓи Маџаров",
+            "Александар Стојменски",
+            "Александар Стојменски",
+            "Ана Мадевска Богданова",
+            "Бобан Јоксимоски",
+            "Дејан Ѓорѓевиќ",
+            "Иван Чорбев",
+            "Ивица Димитровски",
+            "Катарина Тројачанец Динева",
+            "Невена Ацковска",
+            "Христина Михајлоска Трпческа"
+        ],
+        "assistants": [
+            "Александар Тенев",
+            "Влатко Спасев",
+            "Димитар Китановски",
+            "Живко Атанаскоски",
+            "Марија Танеска",
+            "Стефан Андонов"
+        ]
+    },
+    "Основи на Веб дизајн": {
+        "subject": "Основи на Веб дизајн",
+        "code": "F18L1S146, F23L1S146",
+        "level": 1,
+        "short": "ОнВД",
+        "prerequisite": "",
+        "activated": true,
+        "participants": [
+            824,
+            1023,
+            999
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "PIT23",
+            "IE23"
+        ],
+        "semester": 2,
+        "season": "S",
+        "electiveFor": [
+            "IMB23",
+            "KI23",
+            "KN23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Александар Стојменски",
+            "Бобан Јоксимоски",
+            "Гоце Арменски",
+            "Иван Китановски",
+            "Иван Чорбев",
+            "Слободан Калајџиски"
+        ],
+        "assistants": [
+            "Влатко Спасев",
+            "Димитар Китановски"
+        ]
+    },
+    "Основи на сајбер безбедноста": {
+        "subject": "Основи на сајбер безбедноста",
+        "code": "F18L1S066, F23L1S066",
+        "level": 1,
+        "short": "ОнСБ",
+        "prerequisite": "",
+        "activated": true,
+        "participants": [
+            457,
+            458,
+            213
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "IMB23"
+        ],
+        "semester": 2,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [
+            "Анастас Мишев",
+            "Соња Филипоска"
+        ],
+        "assistants": [
+            "Владислав Бидиков",
+            "Војдан Ќорвезироски"
+        ]
+    },
+    "Педагогија": {
+        "subject": "Педагогија",
+        "code": "F18L1W070, F23L2W070",
+        "level": 2,
+        "short": "П_1",
+        "prerequisite": "",
+        "activated": true,
+        "participants": [
+            1,
+            7,
+            30
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "IE23"
+        ],
+        "semester": 1,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Елена Ризов"
+        ],
+        "assistants": [
+            "Елена Ризов"
+        ]
+    },
+    "Професионални вештини": {
+        "subject": "Професионални вештини",
+        "code": "F18L1W018, F23L1W018",
+        "level": 1,
+        "short": "ПВ",
+        "prerequisite": "",
+        "activated": true,
+        "participants": [
+            958,
+            972,
+            1132
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "SIIS23",
+            "IMB23",
+            "PIT23",
+            "IE23",
+            "KI23",
+            "KN23"
+        ],
+        "semester": 1,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Андреја Наумоски",
+            "Билјана Стојкоска Ристеска",
+            "Кире Триводалиев",
+            "Ласко Баснарков",
+            "Магдалена Костоска Ѓорчевска",
+            "Миле Јованов",
+            "Мирослав Мирчев",
+            "Панче Рибарски"
+        ],
+        "assistants": []
+    },
+    "Структурно програмирање": {
+        "subject": "Структурно програмирање",
+        "code": "F18L1W020, F23L1W020",
+        "level": 1,
+        "short": "СП_1",
+        "prerequisite": "",
+        "activated": true,
+        "participants": [
+            1621,
+            1757,
+            1815
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "SIIS23",
+            "IMB23",
+            "PIT23",
+            "IE23",
+            "KI23",
+            "KN23"
+        ],
+        "semester": 1,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Ѓорѓи Маџаров",
+            "Ана Мадевска Богданова",
+            "Бобан Јоксимоски",
+            "Дејан Ѓорѓевиќ",
+            "Емил Станков",
+            "Иван Чорбев",
+            "Ивица Димитровски",
+            "Катарина Тројачанец Динева",
+            "Миле Јованов",
+            "Невена Ацковска",
+            "Христина Михајлоска Трпческа",
+            "Александар Стојменски"
+        ],
+        "assistants": [
+            "Александар Тенев",
+            "Влатко Спасев",
+            "Димитар Китановски",
+            "Стефан Андонов",
+            "Марко Петров",
+            "Ема Пандилова",
+            "Мартин Динев"
+        ]
+    },
+    "Физика": {
+        "subject": "Физика",
+        "code": "F18L1W049, F23L2W049",
+        "level": 2,
+        "short": "Ф",
+        "prerequisite": "",
+        "activated": true,
+        "participants": [
+            29,
+            79,
+            174
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "KI23"
+        ],
+        "semester": 1,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Ласко Баснарков"
+        ],
+        "assistants": [
+            "Зорица Карапанчева"
+        ]
+    },
+    "Алгоритми и податочни структури": {
+        "subject": "Алгоритми и податочни структури",
+        "code": "F18L2W001, F23L2W001",
+        "level": 2,
+        "short": "АиПС",
+        "prerequisite": "Објектно-ориентирано програмирање (2018) | Структурно програмирање (2023)",
+        "activated": true,
+        "participants": [
+            1131,
+            1737,
+            1726
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "SIIS23",
+            "KI23",
+            "KN23"
+        ],
+        "semester": 3,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Ана Мадевска Богданова",
+            "Анастас Мишев",
+            "Бојана Котеска",
+            "Владимир Трајковиќ",
+            "Илинка Иваноска",
+            "Петре Ламески"
+        ],
+        "assistants": [
+            "Јана Кузманова",
+            "Ненад Анчев",
+            "Славе Темков",
+            "Милан Тодоровиќ",
+            "Ана Тодоровска"
+        ]
+    },
+    "Анализа на софтверските барања": {
+        "subject": "Анализа на софтверските барања",
+        "code": "F18L2S002, F23L2S002",
+        "level": 2,
+        "short": "АнСБ",
+        "prerequisite": "Објектно ориентирана анализа и дизајн или Софтверско инженерство (2018) | Објектно ориентирана анализа и дизајн или Објектно-ориентирано програмирање (2023)",
+        "activated": true,
+        "participants": [
+            311,
+            373,
+            337
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "SIIS23"
+        ],
+        "semester": 4,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23"
+        ],
+        "professors": [
+            "Љупчо Антовски",
+            "Георгина Мирчева",
+            "Ефтим Здравевски"
+        ],
+        "assistants": []
+    },
+    "Безжични и мобилни системи": {
+        "subject": "Безжични и мобилни системи",
+        "code": "F18L2S061, F23L2S061",
+        "level": 2,
+        "short": "БиМС",
+        "prerequisite": "Компјутерски мрежи и безбедност или Компјутерски мрежи (2018) | 36 кредити (2023)",
+        "activated": true,
+        "participants": [
+            140,
+            207,
+            152
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "IMB23"
+        ],
+        "semester": 4,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Анастас Мишев",
+            "Соња Филипоска"
+        ],
+        "assistants": [
+            "Војдан Ќорвезироски"
+        ]
+    },
+    "Веројатност и статистика": {
+        "subject": "Веројатност и статистика",
+        "code": "F18L2W006, F23L2W006",
+        "level": 2,
+        "short": "ВиС",
+        "prerequisite": "Калкулус или Калкулус 2 или Бизнис статистика (2018) | Калкулус 1 или Математика 1 (2023)",
+        "activated": true,
+        "participants": [
+            527,
+            842,
+            937
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "KI23",
+            "KN23"
+        ],
+        "semester": 3,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Александра Поповска Митровиќ",
+            "Билјана Тојтовска Рибарски",
+            "Верица Бакева Смиљкова",
+            "Илинка Иваноска",
+            "Марија Михова",
+            "Наташа Илиевска"
+        ],
+        "assistants": [
+            "Јована Добрева",
+            "Петар Секулоски"
+        ]
+    },
+    "Вештачка интелигенција": {
+        "subject": "Вештачка интелигенција",
+        "code": "F18L2S030, F23L2S030",
+        "level": 2,
+        "short": "ВИ",
+        "prerequisite": "Алгоритми и податочни структури (2018) | 36 кредити (2023)",
+        "activated": true,
+        "participants": [
+            476,
+            341,
+            305
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "SIIS23",
+            "KN23"
+        ],
+        "semester": 4,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "PIT23"
+        ],
+        "professors": [
+            "Андреа Кулаков",
+            "Катерина Здравкова",
+            "Кире Триводалиев",
+            "Соња Гиевска"
+        ],
+        "assistants": [
+            "Јана Кузманова",
+            "Мартин Динев",
+            "Мартина Тошевска"
+        ]
+    },
+    "Визуелно програмирање": {
+        "subject": "Визуелно програмирање",
+        "code": "F18L2S082, F23L2S082",
+        "level": 2,
+        "short": "ВП_1",
+        "prerequisite": "Објектно-ориентирано програмирање",
+        "activated": true,
+        "participants": [
+            116,
+            211,
+            198
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 4,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Ѓорѓи Маџаров",
+            "Дејан Ѓорѓевиќ"
+        ],
+        "assistants": [
+            "Стефан Андонов"
+        ]
+    },
+    "Вовед во екоинформатиката": {
+        "subject": "Вовед во екоинформатиката",
+        "code": "F18L2S084, F23L2S084",
+        "level": 2,
+        "short": "ВвЕ",
+        "prerequisite": "нема (2018) | Вовед во компјутерските науки (2023)",
+        "activated": true,
+        "participants": [
+            70,
+            79,
+            94
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 4,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Андреја Наумоски",
+            "Коста Митрески"
+        ],
+        "assistants": []
+    },
+    "Вовед во случајни процеси": {
+        "subject": "Вовед во случајни процеси",
+        "code": "F18L2S090, F23L2S090",
+        "level": 2,
+        "short": "ВвСП",
+        "prerequisite": "Веројатност и статистика или Основи на теоријата на информации (2018) | 36 кредити (2023)",
+        "activated": true,
+        "participants": [
+            14,
+            14,
+            17
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 4,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Верица Бакева Смиљкова"
+        ],
+        "assistants": []
+    },
+    "Дигитално процесирање на слика": {
+        "subject": "Дигитално процесирање на слика",
+        "code": "F18L2S095, F23L2S095",
+        "level": 2,
+        "short": "ДПнС",
+        "prerequisite": "Дискретна математика или Дискретни структури 2 (2018) | Дсикретна математика или Дискретни структури 2 или Математика 2 или Избрани теми од математика (2023)",
+        "activated": true,
+        "participants": [
+            131,
+            225,
+            128
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 4,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Ивица Димитровски"
+        ],
+        "assistants": []
+    },
+    "Дигитизација": {
+        "subject": "Дигитизација",
+        "code": "F18L2W096, F23L2W096",
+        "level": 2,
+        "short": "Д",
+        "prerequisite": "Вовед во компјутерските науки",
+        "activated": true,
+        "participants": [
+            224,
+            75,
+            78
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 4,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [
+            "Бобан Јоксимоски"
+        ],
+        "assistants": [
+            "Марко Петров"
+        ]
+    },
+    "Дизајн на алгоритми": {
+        "subject": "Дизајн на алгоритми",
+        "code": "F18L2S097, F23L2S097",
+        "level": 2,
+        "short": "ДнА",
+        "prerequisite": "Објектно-ориентирано програмирање (2018) | Дискретна математика или Дискретни структури 2 или Математика 2 или Избрани теми од математика (2023)",
+        "activated": true,
+        "participants": [
+            24,
+            46,
+            45
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 4,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Марија Михова"
+        ],
+        "assistants": [
+            "Мартин Динев"
+        ]
+    },
+    "Е-влада": {
+        "subject": "Е-влада",
+        "code": "F18L2S099, F23L2S099",
+        "level": 2,
+        "short": "Е",
+        "prerequisite": "Бизнис и менаџмент",
+        "activated": true,
+        "participants": [
+            360,
+            620,
+            575
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 4,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Георгина Мирчева",
+            "Смилка Јанеска Саркањац"
+        ],
+        "assistants": []
+    },
+    "Економија за ИКТ инженери": {
+        "subject": "Економија за ИКТ инженери",
+        "code": "F18L2S100, F23L2W100",
+        "level": 2,
+        "short": "ЕзИИ",
+        "prerequisite": "Бизнис и менаџмент",
+        "activated": true,
+        "participants": [
+            659,
+            581,
+            527
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "PIT23"
+        ],
+        "semester": 3,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Смилка Јанеска Саркањац"
+        ],
+        "assistants": [
+            "Александар Тенев"
+        ]
+    },
+    "Електрични кола": {
+        "subject": "Електрични кола",
+        "code": "F18L2S042, F23L2S042",
+        "level": 2,
+        "short": "ЕК",
+        "prerequisite": "нема (2018) | 36 кредити (2023)",
+        "activated": true,
+        "participants": [
+            42,
+            64,
+            68
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "KI23"
+        ],
+        "semester": 4,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Коста Митрески"
+        ],
+        "assistants": []
+    },
+    "Информатичко размислување во образованието": {
+        "subject": "Информатичко размислување во образованието",
+        "code": "F18L2S051, F23L2S051",
+        "level": 2,
+        "short": "ИвО",
+        "prerequisite": "ИТ системи за учење (2018) | Вовед во компјутерските науки (2023)",
+        "activated": true,
+        "participants": [
+            35,
+            24,
+            29
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "IE23"
+        ],
+        "semester": 4,
+        "season": "S",
+        "electiveFor": [
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Миле Јованов",
+            "Емил Станков"
+        ],
+        "assistants": []
+    },
+    "Инженерска математика": {
+        "subject": "Инженерска математика",
+        "code": "F18L2W104, F23L2W104",
+        "level": 2,
+        "short": "ИМ",
+        "prerequisite": "Калкулус или Калкулус 2 (2018) | Калкулус 1 или Математика 1 (2023)",
+        "activated": true,
+        "participants": [
+            44,
+            19,
+            25
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 4,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [
+            "Весна Димитрова"
+        ],
+        "assistants": []
+    },
+    "Интернет програмирање на клиентска страна": {
+        "subject": "Интернет програмирање на клиентска страна",
+        "code": "F18L2W109, F23L2W109",
+        "level": 2,
+        "short": "ИПнКС",
+        "prerequisite": "Објектно-ориентирано програмирање (2018) | Структурно програмирање (2023)",
+        "activated": true,
+        "participants": [
+            634,
+            872,
+            858
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 4,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [
+            "Гоце Арменски",
+            "Иван Китановски",
+            "Сузана Лошковска"
+        ],
+        "assistants": [
+            "Влатко Спасев",
+            "Марко Петров"
+        ]
+    },
+    "Интернет технологии": {
+        "subject": "Интернет технологии",
+        "code": "F18L2S110, F23L2S110",
+        "level": 2,
+        "short": "ИТ",
+        "prerequisite": "Објектно-ориентирано програмирање",
+        "activated": true,
+        "participants": [
+            286,
+            288,
+            335
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "IMB23"
+        ],
+        "semester": 4,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Вангел Ајановски",
+            "Гоце Арменски",
+            "Магдалена Костоска Ѓорчевска"
+        ],
+        "assistants": [
+            "Димитар Китановски"
+        ]
+    },
+    "Компјутерска графика": {
+        "subject": "Компјутерска графика",
+        "code": "F18L2S114, F23L2S114",
+        "level": 2,
+        "short": "КГ",
+        "prerequisite": "Објектно-ориентирано програмирање и (Дискретна математика или Дискретни структури 2) (2018) | Објектно-ориентирано програмирање (2023)",
+        "activated": true,
+        "participants": [
+            18,
+            32,
+            64
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 4,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Сузана Лошковска",
+            "Бобан Јоксимоски"
+        ],
+        "assistants": []
+    },
+    "Компјутерски мрежи": {
+        "subject": "Компјутерски мрежи",
+        "code": "F18L2W046, F23L2W046",
+        "level": 2,
+        "short": "КМ",
+        "prerequisite": "Компјутерски архитектури (2018) | 18 кредити (2023)",
+        "activated": true,
+        "participants": [
+            212,
+            213,
+            264
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "IMB23",
+            "KI23"
+        ],
+        "semester": 3,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Дејан Спасов",
+            "Марјан Гушев"
+        ],
+        "assistants": [
+            "Ненад Анчев"
+        ]
+    },
+    "Компјутерски мрежи и безбедност": {
+        "subject": "Компјутерски мрежи и безбедност",
+        "code": "F18L2W014, F23L2W014",
+        "level": 2,
+        "short": "КМиБ",
+        "prerequisite": "Архитектура и организација на компјутери (2018) | 18 кредити (2023)",
+        "activated": true,
+        "participants": [
+            1389,
+            1306,
+            1235
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "SIIS23",
+            "PIT23",
+            "IE23",
+            "KN23"
+        ],
+        "semester": 3,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Александра Каневче Дединец",
+            "Анастас Мишев",
+            "Дејан Спасов",
+            "Игор Мишковски",
+            "Костадин Мишев",
+            "Мирослав Мирчев",
+            "Сашо Граматиков",
+            "Соња Филипоска"
+        ],
+        "assistants": [
+            "Војдан Ќорвезироски",
+            "Димитар Китановски",
+            "Кирил Ќироски",
+            "Марија Танеска"
+        ]
+    },
+    "Концепти на информатичко општество": {
+        "subject": "Концепти на информатичко општество",
+        "code": "F18L2S119, F23L2S119",
+        "level": 2,
+        "short": "КнИО",
+        "prerequisite": "Вовед во компјутерските науки",
+        "activated": true,
+        "participants": [
+            220,
+            479,
+            574
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 3,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Владимир Здравески",
+            "Горан Велинов"
+        ],
+        "assistants": [
+            "Јана Кузманова",
+            "Мила Додевска",
+            "Милена Трајаноска",
+            "Зорица Карапанчева",
+            "Марија Стојчева"
+        ]
+    },
+    "Медиуми и комуникации": {
+        "subject": "Медиуми и комуникации",
+        "code": "F18L2S124, F23L2S124",
+        "level": 2,
+        "short": "МиК",
+        "prerequisite": "Вовед во компјутерските науки",
+        "activated": true,
+        "participants": [
+            184,
+            310,
+            429
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "IE23"
+        ],
+        "semester": 4,
+        "season": "S",
+        "electiveFor": [
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Владимир Трајковиќ"
+        ],
+        "assistants": [
+            "Мила Додевска"
+        ]
+    },
+    "Мултимедијални технологии": {
+        "subject": "Мултимедијални технологии",
+        "code": "F18L3W055, F23L2W055",
+        "level": 2,
+        "short": "МТ",
+        "prerequisite": "Вовед во компјутерските науки",
+        "activated": true,
+        "participants": [
+            235,
+            43,
+            62
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "IE23"
+        ],
+        "semester": 3,
+        "season": "W",
+        "electiveFor": [
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Миле Јованов"
+        ],
+        "assistants": [
+            "Живко Атанаскоски"
+        ]
+    },
+    "Напредно програмирање": {
+        "subject": "Напредно програмирање",
+        "code": "F18L2W140, F23L3W140",
+        "level": 2,
+        "short": "НП",
+        "prerequisite": "Објектно-ориентирано програмирање",
+        "activated": true,
+        "participants": [
+            253,
+            683,
+            532
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "SIIS23",
+            "KN23"
+        ],
+        "semester": 5,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "PIT23"
+        ],
+        "professors": [
+            "Ѓорѓи Маџаров",
+            "Дејан Ѓорѓевиќ"
+        ],
+        "assistants": [
+            "Ана Тодоровска",
+            "Стефан Андонов"
+        ]
+    },
+    "Квантно пресметување": {
+        "subject": "Квантно пресметување",
+        "code": "F18L2S143, F23L3W162",
+        "level": 2,
+        "short": "ОиЕЕКС",
+        "prerequisite": "Компјутерски компоненти (2018) | Архитектура и организација на компјутери или Компјутерски архитектури (2023)",
+        "activated": false,
+        "participants": [
+            0,
+            0,
+            0
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 5,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [],
+        "assistants": [],
+        "flag": "(неактивиран предмет)"
+    },
+    "Оперативни системи": {
+        "subject": "Оперативни системи",
+        "code": "F18L2S017, F23L2S017",
+        "level": 2,
+        "short": "ОС",
+        "prerequisite": "Архитектура и организација на компјутери или Компјутерски архитектури",
+        "activated": true,
+        "participants": [
+            1460,
+            1444,
+            1322
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "SIIS23",
+            "IMB23",
+            "PIT23",
+            "IE23",
+            "KI23",
+            "KN23"
+        ],
+        "semester": 4,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [
+            "Боро Јакимовски",
+            "Весна Димитрова",
+            "Димитар Трајанов",
+            "Игор Мишковски",
+            "Костадин Мишев",
+            "Милош Јовановиќ",
+            "Невена Ацковска",
+            "Ристе Стојанов",
+            "Сашо Граматиков"
+        ],
+        "assistants": [
+            "Јована Добрева",
+            "Ана Тодоровска",
+            "Милена Трајаноска",
+            "Ненад Анчев"
+        ]
+    },
+    "Основи на комуникациски системи": {
+        "subject": "Основи на комуникациски системи",
+        "code": "F18L2W147, F23L2W147",
+        "level": 2,
+        "short": "ОнКС",
+        "prerequisite": "Калкулус или Калкулус 2 (2018) | Калкулус 1 или Математика 1 (2023)",
+        "activated": true,
+        "participants": [
+            10,
+            9,
+            10
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 4,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [
+            "Андреја Наумоски"
+        ],
+        "assistants": []
+    },
+    "Основи на теоријата на информации": {
+        "subject": "Основи на теоријата на информации",
+        "code": "F18L2W067, F23L2W067",
+        "level": 2,
+        "short": "ОнТнИ",
+        "prerequisite": "Калкулус (2018) | Калкулус 1 или Математика 1 (2023)",
+        "activated": true,
+        "participants": [
+            65,
+            59,
+            54
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "IMB23"
+        ],
+        "semester": 3,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Александра Поповска Митровиќ",
+            "Верица Бакева Смиљкова"
+        ],
+        "assistants": []
+    },
+    "Софтверско инженерство": {
+        "subject": "Софтверско инженерство",
+        "code": "F18L2S029, F23L2S029",
+        "level": 2,
+        "short": "СИ",
+        "prerequisite": "Објектно-ориентирано програмирање",
+        "activated": true,
+        "participants": [
+            409,
+            633,
+            564
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "PIT23",
+            "KI23",
+            "KN23"
+        ],
+        "semester": 4,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23"
+        ],
+        "professors": [
+            "Ѓорѓи Маџаров",
+            "Дејан Ѓорѓевиќ",
+            "Катарина Тројачанец Динева",
+            "Катерина Здравкова"
+        ],
+        "assistants": [
+            "Јана Кузманова",
+            "Стефан Андонов"
+        ]
+    },
+    "Теорија на информации со дигитални комуникации": {
+        "subject": "Теорија на информации со дигитални комуникации",
+        "code": "F18L2S164, F23L2S164",
+        "level": 2,
+        "short": "ТнИсДК",
+        "prerequisite": "Веројатност и статистика (2018) | Веројатност и статистика или Математика 3 или Бизнис и статистика (2023)",
+        "activated": true,
+        "participants": [
+            22,
+            16,
+            20
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 4,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Александра Поповска Митровиќ",
+            "Верица Бакева Смиљкова"
+        ],
+        "assistants": []
+    },
+    "Управување со техничка поддршка": {
+        "subject": "Управување со техничка поддршка",
+        "code": "F18L2W165, F23L2W165",
+        "level": 2,
+        "short": "УсТП",
+        "prerequisite": "Вовед во компјутерските науки (2018) | 18 кредити (2023)",
+        "activated": true,
+        "participants": [
+            579,
+            346,
+            358
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "IMB23"
+        ],
+        "semester": 3,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Анастас Мишев",
+            "Соња Филипоска"
+        ],
+        "assistants": [
+            "Војдан Ќорвезироски",
+            "Евгенија Крајчевска"
+        ]
+    },
+    "Шаблони за дизајн на кориснички интерфејси": {
+        "subject": "Шаблони за дизајн на кориснички интерфејси",
+        "code": "F18L2W167, F23L2W167",
+        "level": 2,
+        "short": "ШзДнКИ",
+        "prerequisite": "Објектно-ориентирано програмирање (2018) | Структурно програмирање (2023)",
+        "activated": true,
+        "participants": [
+            416,
+            340,
+            406
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 3,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Иван Китановски",
+            "Ивица Димитровски",
+            "Катарина Тројачанец Динева",
+            "Сузана Лошковска"
+        ],
+        "assistants": [
+            "Влатко Спасев",
+            "Ема Пандилова"
+        ]
+    },
+    "Агентно-базирани системи": {
+        "subject": "Агентно-базирани системи",
+        "code": "F18L3S073, F23L3S073",
+        "level": 3,
+        "short": "АБС",
+        "prerequisite": "Вештачка интелигенција (2018) | Вештачка интелигенција или Математика 3 или Веројатност и статистика или Бизнис статистика (2023)",
+        "activated": true,
+        "participants": [
+            58,
+            50,
+            13
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 3,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Кире Триводалиев",
+            "Соња Гиевска"
+        ],
+        "assistants": [
+            "Мартина Тошевска"
+        ]
+    },
+    "Администрација на мрежи": {
+        "subject": "Администрација на мрежи",
+        "code": "F18L3S059, F23L3S059",
+        "level": 3,
+        "short": "АнМ",
+        "prerequisite": "Компјутерски мрежи (2018) | Компјутерски мрежи или Компјутерски мрежи и безбедност (2023)",
+        "activated": true,
+        "participants": [
+            87,
+            71,
+            48
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "IMB23"
+        ],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Александра Каневче Дединец"
+        ],
+        "assistants": [
+            "Марија Танеска"
+        ]
+    },
+    "Администрација на системи": {
+        "subject": "Администрација на системи",
+        "code": "F18L3W060, F23L3W060",
+        "level": 3,
+        "short": "АнС",
+        "prerequisite": "Оперативни системи (2018) | Компјутерски мрежи или компјутерски мрежи и безбедност (2023)",
+        "activated": true,
+        "participants": [
+            148,
+            171,
+            70
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "IMB23"
+        ],
+        "semester": 5,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Боро Јакимовски"
+        ],
+        "assistants": [
+            "Кирил Ќироски"
+        ]
+    },
+    "Бази на податоци": {
+        "subject": "Бази на податоци",
+        "code": "F18L3W004, F23L3W004",
+        "level": 3,
+        "short": "БнП",
+        "prerequisite": "Алгоритми и податочни структури (2018) | Алгоритми и податочни структури или Примена на алгоритми и податочни структури (2023)",
+        "activated": true,
+        "participants": [
+            1251,
+            1183,
+            985
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "SIIS23",
+            "IMB23",
+            "PIT23",
+            "IE23",
+            "KI23",
+            "KN23"
+        ],
+        "semester": 5,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Вангел Ајановски",
+            "Георгина Мирчева",
+            "Горан Велинов",
+            "Ефтим Здравевски",
+            "Кире Триводалиев",
+            "Слободан Калајџиски",
+            "Соња Гиевска"
+        ],
+        "assistants": [
+            "Јана Кузманова",
+            "Мартина Тошевска",
+            "Ненад Анчев",
+            "Димитар Китановски",
+            "Милан Тодоровиќ",
+            "Зорица Карапанчева"
+        ]
+    },
+    "Вградливи микропроцесорски системи": {
+        "subject": "Вградливи микропроцесорски системи",
+        "code": "F18L3S040, F23L3S040",
+        "level": 3,
+        "short": "ВМС",
+        "prerequisite": "Архитектура и организација на компјутери или Компјутерски архитектури",
+        "activated": true,
+        "participants": [
+            52,
+            59,
+            63
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "KI23"
+        ],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Моника Симјаноска",
+            "Невена Ацковска"
+        ],
+        "assistants": [
+            "Владислав Бидиков"
+        ]
+    },
+    "Веб програмирање": {
+        "subject": "Веб програмирање",
+        "code": "F18L3W024, F23L3W024",
+        "level": 3,
+        "short": "ВП_2",
+        "prerequisite": "Алгоритми и податочни структури (2018) | Алгоритми и податочни структури или Примена на алгоритми и податочни структури (2023)",
+        "activated": true,
+        "participants": [
+            895,
+            778,
+            571
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "PIT23",
+            "KN23"
+        ],
+        "semester": 5,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Димитар Трајанов",
+            "Ристе Стојанов",
+            "Сашо Граматиков",
+            "Костадин Мишев"
+        ],
+        "assistants": [
+            "Ана Тодоровска",
+            "Милена Трајаноска",
+            "Елена Атанасоска",
+            "Дарко Сасански"
+        ]
+    },
+    "Визуелизација": {
+        "subject": "Визуелизација",
+        "code": "F18L3W081, F23L3W081",
+        "level": 3,
+        "short": "В_1",
+        "prerequisite": "Алгоритми и податочни структури (2018) | Алгоритми и податочни структури или Примена на алгоритми и податочни структури (2023)",
+        "activated": true,
+        "participants": [
+            86,
+            0,
+            214
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 5,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Сузана Лошковска"
+        ],
+        "assistants": [
+            "Евгенија Крајчевска"
+        ]
+    },
+    "Виртуелизација": {
+        "subject": "Виртуелизација",
+        "code": "F18L3S062, F23L3S062",
+        "level": 3,
+        "short": "В_2",
+        "prerequisite": "Оперативни системи",
+        "activated": true,
+        "participants": [
+            62,
+            36,
+            30
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "IMB23"
+        ],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Боро Јакимовски"
+        ],
+        "assistants": [
+            "Кирил Ќироски"
+        ]
+    },
+    "Вовед во мрежна наука": {
+        "subject": "Вовед во мрежна наука",
+        "code": "F18L3S087, F23L3S087",
+        "level": 3,
+        "short": "ВвМН",
+        "prerequisite": "Веројатност и статистика или Основи на теоријата на информации (2018) | Веројатност и статистика или Основи на теорија на информации или Математика 3 или Бизнис статистика (2023)",
+        "activated": true,
+        "participants": [
+            14,
+            19,
+            28
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Мирослав Мирчев"
+        ],
+        "assistants": []
+    },
+    "Вовед во науката за податоци": {
+        "subject": "Вовед во науката за податоци",
+        "code": "F18L3W008, F23L3W008",
+        "level": 3,
+        "short": "ВвНзП",
+        "prerequisite": "Бизнис статистика или Веројатност и статистика или Основи на теоријата на информации (2018) | Бизнис статистика или Веројатност и статистика или Основи на теорија на информации или Математика 3 (2023)",
+        "activated": true,
+        "participants": [
+            820,
+            704,
+            404
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "SIIS23",
+            "PIT23"
+        ],
+        "semester": 5,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23"
+        ],
+        "professors": [
+            "Андреа Кулаков",
+            "Димитар Трајанов",
+            "Игор Мишковски",
+            "Слободан Калајџиски"
+        ],
+        "assistants": [
+            "Јована Добрева",
+            "Ана Тодоровска",
+            "Милена Трајаноска",
+            "Димитар Пешевски"
+        ]
+    },
+    "Географски информациски системи": {
+        "subject": "Географски информациски системи",
+        "code": "F18L3S091, F23L3S091",
+        "level": 3,
+        "short": "ГИС",
+        "prerequisite": "Бази на податоци (2018) | 90 кредити (2023)",
+        "activated": true,
+        "participants": [
+            15,
+            25,
+            27
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 5,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Андреја Наумоски",
+            "Коста Митрески"
+        ],
+        "assistants": []
+    },
+    "Дигитална форензика": {
+        "subject": "Дигитална форензика",
+        "code": "F18L3S093, F23L3S093",
+        "level": 3,
+        "short": "ДФ",
+        "prerequisite": "Информациска безбедност (2018) | Оперативни системи (2023)",
+        "activated": true,
+        "participants": [
+            106,
+            130,
+            134
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 5,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Весна Димитрова"
+        ],
+        "assistants": [
+            "Јована Добрева"
+        ]
+    },
+    "Дигитални библиотеки": {
+        "subject": "Дигитални библиотеки",
+        "code": "F18L3S094, F23L3S094",
+        "level": 3,
+        "short": "ДБ",
+        "prerequisite": "Бази на податоци и (Интернет програмирање на клиентска страна или Интернет технологии или Веб програмирање) (2018) | 90 кредити (2023)",
+        "activated": true,
+        "participants": [
+            135,
+            192,
+            204
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 5,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Бојан Илијоски",
+            "Магдалена Костоска Ѓорчевска",
+            "Моника Симјаноска"
+        ],
+        "assistants": [
+            "Ана Тодоровска",
+            "Мила Додевска"
+        ]
+    },
+    "Дизајн и архитектура на софтвер": {
+        "subject": "Дизајн и архитектура на софтвер",
+        "code": "F18L3W009, F23L3W009",
+        "level": 3,
+        "short": "ДиАнС",
+        "prerequisite": "Анализа на софтверските барања или Софтверско инженерство (2018) | Објектно ориентирана анализа и дизајн или Објектно-ориентирано програмирање (2023)",
+        "activated": true,
+        "participants": [
+            396,
+            369,
+            298
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "SIIS23"
+        ],
+        "semester": 5,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23"
+        ],
+        "professors": [
+            "Љупчо Антовски",
+            "Петре Ламески"
+        ],
+        "assistants": [
+            "Јана Кузманова",
+            "Елена Атанасоска"
+        ]
+    },
+    "Дизајн на интеракцијата човек-компјутер": {
+        "subject": "Дизајн на интеракцијата човек-компјутер",
+        "code": "F18L3S010, F23L3S010",
+        "level": 3,
+        "short": "ДнИЧК",
+        "prerequisite": "Алгоритми и податочни структури (2018) | Алгоритми и податочни структури или Примена на алгоритми и податочни структури (2023)",
+        "activated": true,
+        "participants": [
+            758,
+            750,
+            495
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "SIIS23",
+            "PIT23",
+            "KN23"
+        ],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23"
+        ],
+        "professors": [
+            "Бојан Илијоски",
+            "Иван Китановски",
+            "Соња Гиевска",
+            "Сузана Лошковска"
+        ],
+        "assistants": [
+            "Влатко Спасев",
+            "Иван Китановски",
+            "Мила Додевска"
+        ]
+    },
+    "Дизајн на образовен софтвер": {
+        "subject": "Дизајн на образовен софтвер",
+        "code": "F18L3W050, F23L3W050",
+        "level": 3,
+        "short": "ДнОС",
+        "prerequisite": "Информатичко размислување во образованието (2018) | 60 кредити (2023)",
+        "activated": true,
+        "participants": [
+            180,
+            118,
+            89
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "IE23"
+        ],
+        "semester": 5,
+        "season": "W",
+        "electiveFor": [
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Гоце Арменски"
+        ],
+        "assistants": [
+            "Јована Добрева"
+        ]
+    },
+    "Електронска и мобилна трговија": {
+        "subject": "Електронска и мобилна трговија",
+        "code": "F18L3S025, F23L3S025",
+        "level": 3,
+        "short": "ЕиМТ",
+        "prerequisite": "Веб програмирање или Интернет технологии или Имплементација на системи со слободен и отворен код (2018) | Бази на податоци (2023)",
+        "activated": true,
+        "participants": [
+            568,
+            646,
+            524
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "PIT23"
+        ],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Димитар Трајанов",
+            "Костадин Мишев",
+            "Милош Јовановиќ",
+            "Ристе Стојанов",
+            "Сашо Граматиков"
+        ],
+        "assistants": [
+            "Ана Тодоровска"
+        ]
+    },
+    "Интегрирани системи": {
+        "subject": "Интегрирани системи",
+        "code": "F18L3S012, F23L3S012",
+        "level": 3,
+        "short": "ИС_1",
+        "prerequisite": "Анализа на софтверските барања или Софтверско инженерство",
+        "activated": true,
+        "participants": [
+            460,
+            442,
+            325
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "SIIS23"
+        ],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23"
+        ],
+        "professors": [
+            "Александар Стојменски",
+            "Иван Чорбев",
+            "Петре Ламески"
+        ],
+        "assistants": [
+            "Димитар Китановски",
+            "Зорица Карапанчева"
+        ]
+    },
+    "Информациска безбедност": {
+        "subject": "Информациска безбедност",
+        "code": "F18L3W043, F23L3W043",
+        "level": 3,
+        "short": "ИБ",
+        "prerequisite": "Оперативни системи (2018) | Компјутерски мрежи или Компјутерски мрежи и безбедност (2023)",
+        "activated": true,
+        "participants": [
+            77,
+            105,
+            97
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "KI23"
+        ],
+        "semester": 5,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Весна Димитрова",
+            "Христина Михајлоска Трпческа"
+        ],
+        "assistants": []
+    },
+    "Инфраструктурно програмирање": {
+        "subject": "Инфраструктурно програмирање",
+        "code": "F18L3S111, F23L3S111",
+        "level": 3,
+        "short": "ИП",
+        "prerequisite": "Администрација на системи (2018) | Компјутерски мрежи или компјутерски мрежи и безбедност (2023)",
+        "activated": false,
+        "participants": [
+            0,
+            11,
+            6
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "IMB23"
+        ],
+        "semester": 8,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Боро Јакимовски"
+        ],
+        "assistants": [
+            "Владислав Бидиков"
+        ]
+    },
+    "Компјутерска електроника": {
+        "subject": "Компјутерска електроника",
+        "code": "F18L3W044, F23L3W044",
+        "level": 3,
+        "short": "КЕ_2",
+        "prerequisite": "Електрични кола (2018) | Дизајн на дигитални кола или Вовед во компјутерските науки (2023)",
+        "activated": true,
+        "participants": [
+            30,
+            34,
+            21
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "KI23"
+        ],
+        "semester": 5,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Ласко Баснарков"
+        ],
+        "assistants": []
+    },
+    "Компјутерска етика": {
+        "subject": "Компјутерска етика",
+        "code": "F18L3W053, F23L3W053",
+        "level": 3,
+        "short": "КЕ_1",
+        "prerequisite": "Напредно програмирање или Алгоритми и податочни структури (2018) | Алгоритми и податочни структури или Примена на алгоритми и податочни структури (2023)",
+        "activated": true,
+        "participants": [
+            169,
+            224,
+            315
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "IE23"
+        ],
+        "semester": 5,
+        "season": "W",
+        "electiveFor": [
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Бојан Илијоски",
+            "Катерина Здравкова"
+        ],
+        "assistants": []
+    },
+    "Компјутерски звук, музика и говор": {
+        "subject": "Компјутерски звук, музика и говор",
+        "code": "F18L3W115, F23L3S115",
+        "level": 3,
+        "short": "КЗГМ",
+        "prerequisite": "Алгоритми и податочни структури (2018) | Алгоритми и податочни структури или Примена на алгоритми и податочни структури (2023)",
+        "activated": true,
+        "participants": [
+            21,
+            22,
+            15
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 5,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Вангел Ајановски"
+        ],
+        "assistants": []
+    },
+    "Континуирана интеграција и испорака": {
+        "subject": "Континуирана интеграција и испорака",
+        "code": "F18L3S118, F23L3S118",
+        "level": 3,
+        "short": "КИиИ",
+        "prerequisite": "Оперативни системи и (Веб програмирање или Интернет технологии или Имплементација на системи со слободен и отворен код) (2018) | Оперативни системи (2023)",
+        "activated": true,
+        "participants": [
+            232,
+            299,
+            147
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 5,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Милош Јовановиќ",
+            "Панче Рибарски"
+        ],
+        "assistants": []
+    },
+    "Криптографија": {
+        "subject": "Криптографија",
+        "code": "F18L3S122, F23L3S122",
+        "level": 3,
+        "short": "К_2",
+        "prerequisite": "Дискретна математика или Дискретни структури 2 (2018) | Дискретни структури 2 или Дискретна математика или Математика 2 или Избрани теми од математика (2023)",
+        "activated": true,
+        "participants": [
+            31,
+            37,
+            44
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 5,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Весна Димитрова",
+            "Христина Михајлоска Трпческа"
+        ],
+        "assistants": []
+    },
+    "Линеарна алгебра и примени": {
+        "subject": "Линеарна алгебра и примени",
+        "code": "F18L3W035, F23L3W035",
+        "level": 3,
+        "short": "ЛАиП",
+        "prerequisite": "Дискретна математика или Дискретни структури 2 (2018) | Дискретна математика или Дискретни структури 2 или Математика 2 или Избрани теми од математика (2023)",
+        "activated": true,
+        "participants": [
+            137,
+            138,
+            102
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "KN23"
+        ],
+        "semester": 5,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Марија Михова"
+        ],
+        "assistants": []
+    },
+    "Машинско учење": {
+        "subject": "Машинско учење",
+        "code": "F18L3S036, F23L3S036",
+        "level": 3,
+        "short": "МУ",
+        "prerequisite": "Веројатност и статистика или Бизнис статистика (2018) | Веројатност и статистика или Бизнис статистика или Математика 3 (2023)",
+        "activated": true,
+        "participants": [
+            114,
+            101,
+            124
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "KN23"
+        ],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Александра Каневче Дединец",
+            "Илинка Иваноска",
+            "Мирослав Мирчев"
+        ],
+        "assistants": []
+    },
+    "Мерење и анализа на сообраќај": {
+        "subject": "Мерење и анализа на сообраќај",
+        "code": "F18L3S125, F23L3S125",
+        "level": 3,
+        "short": "МиАнИС",
+        "prerequisite": "Веројатност и статистика или Основи на теоријата на информации или Бизнис статистика (2018) | Веројатност и статистика или Основи на теорија на информации или Бизнис статистика или Математика 3 (2023)",
+        "activated": false,
+        "participants": [
+            0,
+            0,
+            0
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Мирослав Мирчев"
+        ],
+        "assistants": []
+    },
+    "Сајбер безбедност": {
+        "subject": "Сајбер безбедност",
+        "code": "F18L3W065, F23L3W065",
+        "level": 3,
+        "short": "МБ",
+        "prerequisite": "Компјутерски мрежи или Компјутерски мрежи и безбедност",
+        "activated": true,
+        "participants": [
+            167,
+            115,
+            74
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "IMB23"
+        ],
+        "semester": 5,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Анастас Мишев",
+            "Соња Филипоска"
+        ],
+        "assistants": [
+            "Војдан Ќорвезироски"
+        ]
+    },
+    "Мултимедиски мрежи": {
+        "subject": "Мултимедиски мрежи",
+        "code": "F18L3W134, F23L3W134",
+        "level": 3,
+        "short": "ММ",
+        "prerequisite": "Компјутерски мрежи или Компјутерски мрежи и безбедност",
+        "activated": true,
+        "participants": [
+            95,
+            117,
+            109
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 5,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Сашо Граматиков"
+        ],
+        "assistants": []
+    },
+    "Мултимедиски системи": {
+        "subject": "Мултимедиски системи",
+        "code": "F18L3S135, F23L3S135",
+        "level": 3,
+        "short": "МС",
+        "prerequisite": "Алгоритми и податочни структури (2018) | Алгоритми и податочни структури или Примена на алгоритми и податочни структури (2023)",
+        "activated": true,
+        "participants": [
+            350,
+            367,
+            374
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 5,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Билјана Стојкоска Ристеска"
+        ],
+        "assistants": []
+    },
+    "Напреден веб дизајн": {
+        "subject": "Напреден веб дизајн",
+        "code": "F18L3W136, F23L3W136",
+        "level": 3,
+        "short": "НВД",
+        "prerequisite": "Основи на Веб дизајн (2018) | Објектно-ориентирано програмирање (2023)",
+        "activated": true,
+        "participants": [
+            159,
+            178,
+            207
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "PIT23"
+        ],
+        "semester": 5,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Бобан Јоксимоски",
+            "Гоце Арменски",
+            "Иван Чорбев"
+        ],
+        "assistants": [
+            "Јована Добрева",
+            "Славе Темков",
+            "Мила Додевска"
+        ]
+    },
+    "Основи на роботиката": {
+        "subject": "Основи на роботиката",
+        "code": "F18L3W148, F23L3W148",
+        "level": 3,
+        "short": "ОнР",
+        "prerequisite": "Алгоритми и податочни структури (2018) | Алгоритми и податочни структури или Примена на алгоритми и податочни структури (2023)",
+        "activated": true,
+        "participants": [
+            86,
+            142,
+            86
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "KI23"
+        ],
+        "semester": 5,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Андреа Кулаков"
+        ],
+        "assistants": [
+            "Влатко Спасев"
+        ]
+    },
+    "Паралелно и дистрибуирано процесирање": {
+        "subject": "Паралелно и дистрибуирано процесирање",
+        "code": "F18L3W037, F23L3W037",
+        "level": 3,
+        "short": "ПиДП",
+        "prerequisite": "Алгоритми и податочни структури и Оперативни системи (2018) | Алгоритми и податочни структури или Примена на алгоритми и податочни структури (2023)",
+        "activated": true,
+        "participants": [
+            76,
+            86,
+            55
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "KN23"
+        ],
+        "semester": 5,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Владимир Здравески"
+        ],
+        "assistants": [
+            "Димитар Пешевски"
+        ]
+    },
+    "Паралелно програмирање": {
+        "subject": "Паралелно програмирање",
+        "code": "F18L3S149, F23L3S149",
+        "level": 3,
+        "short": "ПП_1",
+        "prerequisite": "Алгоритми и податочни структури (2018) | Алгоритми и податочни структури или Примена на алгоритми и податочни структури (2023)",
+        "activated": true,
+        "participants": [
+            10,
+            12,
+            11
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 5,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Марјан Гушев"
+        ],
+        "assistants": [
+            "Владимир Здравески",
+            "Димитар Милески"
+        ]
+    },
+    "Персонализирано учење": {
+        "subject": "Персонализирано учење",
+        "code": "F18L3S056, F23L3W056",
+        "level": 3,
+        "short": "ПУ",
+        "prerequisite": "ИКТ во образованието (2018) | Алгоритми и податочни структури или Примена на алгоритми и податочни структури (2023)",
+        "activated": false,
+        "participants": [
+            0,
+            10,
+            0
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "IE23"
+        ],
+        "semester": 5,
+        "season": "W",
+        "electiveFor": [
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Миле Јованов"
+        ],
+        "assistants": []
+    },
+    "Податочно рударење": {
+        "subject": "Податочно рударење",
+        "code": "F18L3S150, F23L3S150",
+        "level": 3,
+        "short": "ПР_1",
+        "prerequisite": "Бази на податоци или Веројатност и статистика или Бизнис статистика (2018) | Веројатност и статистика или Математика 3 или Основи на теорија на информации или Бизнис Статистика (2023)",
+        "activated": true,
+        "participants": [
+            66,
+            36,
+            29
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 5,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Билјана Тојтовска Рибарски",
+            "Бојан Илијоски"
+        ],
+        "assistants": []
+    },
+    "Процесирање на сигналите": {
+        "subject": "Процесирање на сигналите",
+        "code": "F18L3S047, F23L3S047",
+        "level": 3,
+        "short": "ПнС",
+        "prerequisite": "Инженерска математика или Калкулус 2 (2018) | Математика 1 или Калкулус 1 (2023)",
+        "activated": true,
+        "participants": [
+            27,
+            27,
+            15
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "KI23"
+        ],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Ласко Баснарков"
+        ],
+        "assistants": []
+    },
+    "Вештачка интелигенција за игри": {
+        "subject": "Вештачка интелигенција за игри",
+        "code": "F18L3S153, F23L3S153",
+        "level": 3,
+        "short": "ПР_2",
+        "prerequisite": "Основи на роботиката (2018) | Алгоритми и податочни структури или Примена на алгоритми и податочни структури или Вештачка интелигенција (2023)",
+        "activated": false,
+        "participants": [
+            0,
+            1,
+            0
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [],
+        "assistants": [],
+        "flag": "(неактивиран предмет)"
+    },
+    "Психологија на училишна возраст": {
+        "subject": "Психологија на училишна возраст",
+        "code": "F18L3S071, F23L3S071",
+        "level": 3,
+        "short": "ПнУВ",
+        "prerequisite": "",
+        "activated": true,
+        "participants": [
+            710,
+            522,
+            362
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "IE23"
+        ],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Калина Сотироска"
+        ],
+        "assistants": []
+    },
+    "Работа со надарени ученици": {
+        "subject": "Работа со надарени ученици",
+        "code": "F18L3S057, F23L3S057",
+        "level": 3,
+        "short": "РсНУ",
+        "prerequisite": "ИКТ во образованието (2018) | Алгоритми и податочни структури или Примена на алгоритми и податочни структури (2023)",
+        "activated": true,
+        "participants": [
+            40,
+            9,
+            0
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "IE23"
+        ],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Ана Мадевска Богданова"
+        ],
+        "assistants": []
+    },
+    "Сервисно ориентирани архитектури": {
+        "subject": "Сервисно ориентирани архитектури",
+        "code": "F18L3S155, F23L3S155",
+        "level": 3,
+        "short": "СОА",
+        "prerequisite": "Веб програмирање или Интернет технологии или Имплементација на системи со слободен и отворен код (2018) | Алгоритми и податочни структури или Примена на алгоритми и податочни структури (2023)",
+        "activated": true,
+        "participants": [
+            78,
+            23,
+            33
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Панче Рибарски"
+        ],
+        "assistants": []
+    },
+    "Современи компјутерски архитектури": {
+        "subject": "Современи компјутерски архитектури",
+        "code": "F18L3S158, F23L3W158",
+        "level": 3,
+        "short": "СКА",
+        "prerequisite": "Архитектура и организација на компјутери или Компјутерски архитектури",
+        "activated": false,
+        "participants": [
+            0,
+            9,
+            0
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [
+            "Дејан Спасов"
+        ],
+        "assistants": []
+    },
+    "Софтверски дефинирана безбедност": {
+        "subject": "Софтверски дефинирана безбедност",
+        "code": "F18L3S159, F23L3S159",
+        "level": 3,
+        "short": "СДБ",
+        "prerequisite": "(Информациска безбедност или Мрежна безбедност) и (Веб програмирање или Интернет технологии или Имплементација на системи со слободен и отворен код) (2018) | 100 кредити (2023)",
+        "activated": true,
+        "participants": [
+            13,
+            0,
+            0
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "IMB23"
+        ],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [],
+        "assistants": [],
+        "flag": "(неактивиран предмет)"
+    },
+    "Софтверски квалитет и тестирање": {
+        "subject": "Софтверски квалитет и тестирање",
+        "code": "F18L3S019, F23L3S019",
+        "level": 3,
+        "short": "СКиТ",
+        "prerequisite": "Софтверско инженерство или Дизајн и архитектура на софтвер",
+        "activated": true,
+        "participants": [
+            427,
+            405,
+            325
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "SIIS23"
+        ],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23"
+        ],
+        "professors": [
+            "Ѓорѓи Маџаров",
+            "Бојана Котеска",
+            "Христина Михајлоска Трпческа"
+        ],
+        "assistants": [
+            "Ана Тодоровска",
+            "Славе Темков"
+        ]
+    },
+    "Автоматизирање на процеси во машинско учење": {
+        "subject": "Автоматизирање на процеси во машинско учење",
+        "code": "F18L3S163, F23L3S163",
+        "level": 3,
+        "short": "СМ",
+        "prerequisite": "Веројатност и статистика или Бизнис статистика (2018) | Алгоритми и податочни структури или Примена на алгоритми и податочни структури (2023)",
+        "activated": true,
+        "participants": [
+            22,
+            0,
+            0
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [
+            "Билјана Тојтовска Рибарски"
+        ],
+        "assistants": []
+    },
+    "Учење на далечина": {
+        "subject": "Учење на далечина",
+        "code": "F18L3S166, F23L3S166",
+        "level": 3,
+        "short": "УнД",
+        "prerequisite": "ИКТ во образованието (2018) | Алгоритми и податочни структури или Примена на алгоритми и податочни структури (2023)",
+        "activated": true,
+        "participants": [
+            130,
+            106,
+            142
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "IE23"
+        ],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Гоце Арменски"
+        ],
+        "assistants": []
+    },
+    "Основи на теоријата на компјутерските науки": {
+        "subject": "Основи на теоријата на компјутерските науки",
+        "code": "F18L3S039, F23L3S039",
+        "level": 3,
+        "short": "ФЈиА",
+        "prerequisite": "Структурно програмирање (2018) | Дискретна математика или Дискретни структури 2 или Математика 2 или Избрани теми од математика (2023)",
+        "activated": true,
+        "participants": [
+            97,
+            124,
+            90
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "KN23"
+        ],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Марија Михова"
+        ],
+        "assistants": []
+    },
+    "Автономна роботика": {
+        "subject": "Автономна роботика",
+        "code": "F18L3W072, F23L3W072",
+        "level": 3,
+        "short": "АР",
+        "prerequisite": "Основи на роботиката (2018) | Основи на роботика или Алгоритми и податочни структури (2023)",
+        "activated": false,
+        "participants": [
+            0,
+            0,
+            0
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [
+            "Петре Ламески"
+        ],
+        "assistants": []
+    },
+    "Администрација на бази податоци": {
+        "subject": "Администрација на бази податоци",
+        "code": "F18L3W074, F23L3W074",
+        "level": 3,
+        "short": "АнБнП",
+        "prerequisite": "Бази на податоци",
+        "activated": true,
+        "participants": [
+            10,
+            12,
+            10
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [
+            "Вангел Ајановски"
+        ],
+        "assistants": []
+    },
+    "Анализа и дизајн на ИС": {
+        "subject": "Анализа и дизајн на ИС",
+        "code": "F18L3W075, F23L3W075",
+        "level": 3,
+        "short": "АиДнИ",
+        "prerequisite": "Бази на податоци",
+        "activated": true,
+        "participants": [
+            60,
+            110,
+            165
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [
+            "Владимир Трајковиќ"
+        ],
+        "assistants": [
+            "Јана Кузманова"
+        ]
+    },
+    "Биолошки инспирирано пресметување": {
+        "subject": "Биолошки инспирирано пресметување",
+        "code": "F18L3S07, F23L3S078",
+        "level": 3,
+        "short": "БИП",
+        "prerequisite": "Алгоритми и податочни структури и Вештачка интелигенција (2018) | Алгоритми и податочни структури или Примена на алгоритми и податочни структури (2023)",
+        "activated": true,
+        "participants": [
+            13,
+            6,
+            7
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Илинка Иваноска",
+            "Кире Триводалиев"
+        ],
+        "assistants": []
+    },
+    "Блоковски вериги и криптовалути": {
+        "subject": "Блоковски вериги и криптовалути",
+        "code": "F18L3S121, F23L3W121",
+        "level": 3,
+        "short": "БВиК",
+        "prerequisite": "Криптографија или Информациска безбедност (2018) | Алгоритми и податочни структури или Примена на алгоритми и податочни структури (2023)",
+        "activated": false,
+        "participants": [
+            0,
+            14,
+            10
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [
+            "Панче Рибарски"
+        ],
+        "assistants": []
+    },
+    "Веб базирани системи": {
+        "subject": "Веб базирани системи",
+        "code": "F18L3W079, F23L3W079",
+        "level": 3,
+        "short": "ВБС",
+        "prerequisite": "Веб програмирање или Интернет технологии или Имплементација на системи со слободен и отворен код (2018) | Алгоритми и податочни структури или Примена на алгоритми и податочни структури (2023)",
+        "activated": true,
+        "participants": [
+            63,
+            102,
+            140
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [
+            "Димитар Трајанов",
+            "Милош Јовановиќ"
+        ],
+        "assistants": [
+            "Милена Трајаноска"
+        ]
+    },
+    "Веб пребарувачки системи": {
+        "subject": "Веб пребарувачки системи",
+        "code": "F18L3S080, F23L3S080",
+        "level": 3,
+        "short": "ВПС",
+        "prerequisite": "Обработка на природните јазици (2018) | Вештачка интелигенција или Вовед во науката за податоци или Машинско учење (2023)",
+        "activated": true,
+        "participants": [
+            4,
+            3,
+            5
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Вангел Ајановски"
+        ],
+        "assistants": []
+    },
+    "Виртуелна реалност": {
+        "subject": "Виртуелна реалност",
+        "code": "F18L3S083, F23L3S083",
+        "level": 3,
+        "short": "ВР",
+        "prerequisite": "Дизајн на интеракцијата човек-компјутер (2018) | Алгоритми и податочни структури или Примена на алгоритми и податочни структури (2023)",
+        "activated": true,
+        "participants": [
+            82,
+            131,
+            162
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Катарина Тројачанец Динева",
+            "Сузана Лошковска"
+        ],
+        "assistants": []
+    },
+    "Вовед во анализа на временските серии": {
+        "subject": "Вовед во анализа на временските серии",
+        "code": "F18L3W076, F23L3W076",
+        "level": 3,
+        "short": "ВвАнВС",
+        "prerequisite": "Вовед во случајни процеси или Статистичко моделирање (2018) | Вештачка интелигенција или Вовед во науката за податоци или Машинско учење (2023)",
+        "activated": true,
+        "participants": [
+            8,
+            0,
+            0
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [
+            "Ефтим Здравевски"
+        ],
+        "assistants": []
+    },
+    "Вовед во биоинформатиката": {
+        "subject": "Вовед во биоинформатиката",
+        "code": "F18L3W085, F23L3W085",
+        "level": 3,
+        "short": "ВвБ",
+        "prerequisite": "Машинско учење или Вештачка интелигенција (2018) | Вештачка интелигенција или Машинско учење или Вовед во науката за податоци (2023)",
+        "activated": true,
+        "participants": [
+            20,
+            21,
+            10
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [
+            "Моника Симјаноска",
+            "Невена Ацковска"
+        ],
+        "assistants": []
+    },
+    "Вовед во когнитивни науки": {
+        "subject": "Вовед во когнитивни науки",
+        "code": "F18L3S086, F23L3S086",
+        "level": 3,
+        "short": "ВвКН_2",
+        "prerequisite": "Вештачка интелигенција или Вовед во науката за податоци (2018) | 120 кредити (2023)",
+        "activated": true,
+        "participants": [
+            41,
+            56,
+            139
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Андреа Кулаков"
+        ],
+        "assistants": [
+            "Влатко Спасев"
+        ]
+    },
+    "Вовед во паметни градови": {
+        "subject": "Вовед во паметни градови",
+        "code": "F18L3W088, F23L3W088",
+        "level": 3,
+        "short": "ВвПГ",
+        "prerequisite": "Машинско учење (2018) | Вештачка интелигенција или Вовед во науката за податоци или Машинско учење (2023)",
+        "activated": false,
+        "participants": [
+            0,
+            41,
+            13
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [
+            "Александра Каневче Дединец"
+        ],
+        "assistants": []
+    },
+    "Вовед во препознавање на облици": {
+        "subject": "Вовед во препознавање на облици",
+        "code": "F18L3W089, F23L3W089",
+        "level": 3,
+        "short": "ВвПнО",
+        "prerequisite": "Машинско учење (2018) | Вештачка интелигенција или Вовед во науката за податоци или Машинско учење (2023)",
+        "activated": true,
+        "participants": [
+            8,
+            8,
+            9
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [
+            "Дејан Ѓорѓевиќ"
+        ],
+        "assistants": []
+    },
+    "Дигитална постпродукција": {
+        "subject": "Дигитална постпродукција",
+        "code": "F18L3W092, F23L3W092",
+        "level": 3,
+        "short": "ДП",
+        "prerequisite": "Компјутерска графика или Дигитално процесирање на слика (2018) | Алгоритми и податочни структури или Примена на алгоритми и податочни структури (2023)",
+        "activated": false,
+        "participants": [
+            0,
+            0,
+            0
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [],
+        "assistants": [],
+        "flag": "(неактивиран предмет)"
+    },
+    "Дизајн на компјутерски мрежи": {
+        "subject": "Дизајн на компјутерски мрежи",
+        "code": "F18L3S063, F23L3S063",
+        "level": 3,
+        "short": "ДнКМ",
+        "prerequisite": "Компјутерски мрежи (2018) | Компјутерски мрежи или Компјутерски мрежи и безбедност (2023)",
+        "activated": true,
+        "participants": [
+            51,
+            35,
+            43
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "IMB23"
+        ],
+        "semester": 8,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Александра Каневче Дединец",
+            "Анастас Мишев"
+        ],
+        "assistants": [
+            "Кирил Ќироски"
+        ]
+    },
+    "Дипломска работа": {
+        "subject": "Дипломска работа",
+        "code": "F18L3S168, F23L3S168",
+        "level": 3,
+        "short": "ДР",
+        "prerequisite": "нема (2018) | 204 кредити (2023)",
+        "activated": false,
+        "participants": [
+            0,
+            0,
+            0
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "SIIS23",
+            "IMB23",
+            "PIT23",
+            "IE23",
+            "KI23",
+            "KN23"
+        ],
+        "semester": 8,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [
+            "Сите професори"
+        ],
+        "assistants": []
+    },
+    "Дистрибуирани системи": {
+        "subject": "Дистрибуирани системи",
+        "code": "F18L3W064, F23L3W064",
+        "level": 3,
+        "short": "ДС",
+        "prerequisite": "Оперативни системи и (Компјутерски мрежи или Компјутерски мрежи и безбедност) (2018) | Компјутерски мрежи или Компјутерски мрежи и безбедност (2023)",
+        "activated": true,
+        "participants": [
+            40,
+            45,
+            52
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "IMB23"
+        ],
+        "semester": 7,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Боро Јакимовски"
+        ],
+        "assistants": [
+            "Ненад Анчев"
+        ]
+    },
+    "Дистрибуирано складирање на податоци": {
+        "subject": "Дистрибуирано складирање на податоци",
+        "code": "F18L3W098, F23L3W098",
+        "level": 3,
+        "short": "ДСнП",
+        "prerequisite": "Оперативни системи и (Компјутерски мрежи или Компјутерски мрежи и безбедност) (2018) | Компјутерски мрежи или Компјутерски мрежи и безбедност (2023)",
+        "activated": false,
+        "participants": [
+            0,
+            0,
+            0
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 7,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [],
+        "assistants": [],
+        "flag": "(неактивиран предмет)"
+    },
+    "Етичко хакирање": {
+        "subject": "Етичко хакирање",
+        "code": "F18L3S101, F23L3S101",
+        "level": 3,
+        "short": "ЕХ",
+        "prerequisite": "Информациска безбедност или Мрежна безбедност (2018) | Компјутерски мрежи или компјутерски мрежи и безбедност (2023)",
+        "activated": true,
+        "participants": [
+            82,
+            69,
+            48
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 7,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Анастас Мишев",
+            "Христина Михајлоска Трпческа"
+        ],
+        "assistants": [
+            "Војдан Ќорвезироски"
+        ]
+    },
+    "ИКТ за развој": {
+        "subject": "ИКТ за развој",
+        "code": "F18L3S102, F23L3S102",
+        "level": 3,
+        "short": "ИзР",
+        "prerequisite": "Бизнис и менаџмент и (Веб програмирање или Интернет технологии или Имплементација на системи со слободен и отворен код) (2018) | Бизнис и менаџмент (2023)",
+        "activated": true,
+        "participants": [
+            10,
+            0,
+            0
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 7,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [],
+        "assistants": [],
+        "flag": "(неактивиран предмет)"
+    },
+    "Имплементација на софтверски системи со слободен и отворен код": {
+        "subject": "Имплементација на софтверски системи со слободен и отворен код",
+        "code": "F18L3W103, F23L3W103",
+        "level": 3,
+        "short": "ИнСсСиОК",
+        "prerequisite": "Алгоритми и податочни структури (2018) | Алгоритми и податочни структури или Примена на алгоритми и податочни структури (2023)",
+        "activated": true,
+        "participants": [
+            219,
+            73,
+            69
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 7,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Иван Чорбев",
+            "Александар Стојменски"
+        ],
+        "assistants": [
+            "Ема Пандилова"
+        ]
+    },
+    "Иновации во ИКТ": {
+        "subject": "Иновации во ИКТ",
+        "code": "F18L3W105, F23L3W105",
+        "level": 3,
+        "short": "ИвИ",
+        "prerequisite": "Бизнис и менаџмент и (Веб програмирање или Интернет технологии или Имплементација на системи со слободен и отворен код) (2018) | Бизнис и менаџмент (2023)",
+        "activated": true,
+        "participants": [
+            38,
+            78,
+            93
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 7,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Магдалена Костоска Ѓорчевска",
+            "Марјан Гушев"
+        ],
+        "assistants": [
+            "Димитар Милески"
+        ]
+    },
+    "Откривање знаење со длабоко учење": {
+        "subject": "Откривање знаење со длабоко учење",
+        "code": "F18L3S106, F23L3S106",
+        "level": 3,
+        "short": "ИИС",
+        "prerequisite": "Машинско учење (2018) | Вештачка интелигенција или Вовед во науката за податоци или Машинско учење (2023)",
+        "activated": true,
+        "participants": [
+            27,
+            31,
+            10
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 7,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Кире Триводалиев",
+            "Соња Гиевска"
+        ],
+        "assistants": [
+            "Мартина Тошевска"
+        ]
+    },
+    "Интелигентни системи": {
+        "subject": "Интелигентни системи",
+        "code": "F18L3S107, F23L3S107",
+        "level": 3,
+        "short": "ИС_2",
+        "prerequisite": "Машинско учење (2018) | Вештачка интелигенција или Вовед во науката за податоци или Машинско учење (2023)",
+        "activated": true,
+        "participants": [
+            7,
+            0,
+            6
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 7,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Ана Мадевска Богданова",
+            "Бојан Илијоски"
+        ],
+        "assistants": []
+    },
+    "Интернет на нештата": {
+        "subject": "Интернет на нештата",
+        "code": "F18L3W108, F23L3W108",
+        "level": 3,
+        "short": "ИнН",
+        "prerequisite": "Вградливи микропроцесорски системи и (Компјутерски мрежи или Компјутерски мрежи и безбедност) (2018) | Компјутерски мрежи или Компјутерски мрежи и безбедност (2023)",
+        "activated": true,
+        "participants": [
+            20,
+            8,
+            30
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "KI23"
+        ],
+        "semester": 7,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Игор Мишковски"
+        ],
+        "assistants": [
+            "Владислав Бидиков"
+        ]
+    },
+    "Компјутерска анимација": {
+        "subject": "Компјутерска анимација",
+        "code": "F18L3S113, F23L3S113",
+        "level": 3,
+        "short": "КА_2",
+        "prerequisite": "Компјутерска графика или Дизајн на интеракцијата човек-компјутер (2018) | Алгоритми и податочни структури или Примена на алгоритми и податочни структури (2023)",
+        "activated": false,
+        "participants": [
+            0,
+            32,
+            53
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 7,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Бобан Јоксимоски"
+        ],
+        "assistants": []
+    },
+    "Компјутерски поддржано производство": {
+        "subject": "Компјутерски поддржано производство",
+        "code": "F18L3W117, F23L3W117",
+        "level": 3,
+        "short": "КПП",
+        "prerequisite": "Вградливи микропроцесорски системи (2018) | Архитектура и организација на компјутери или Компјутерски архитектури (2023)",
+        "activated": true,
+        "participants": [
+            11,
+            7,
+            12
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 7,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Андреја Наумоски"
+        ],
+        "assistants": []
+    },
+    "Македонски јазик": {
+        "subject": "Македонски јазик",
+        "code": "F18L3S069, F23L3S070",
+        "level": 3,
+        "short": "МЈ",
+        "prerequisite": "",
+        "activated": false,
+        "participants": [
+            0,
+            0,
+            0
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "IE23"
+        ],
+        "semester": 8,
+        "season": "S",
+        "electiveFor": [
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [],
+        "assistants": [],
+        "flag": "(се држи надвор од ФИНКИ)"
+    },
+    "Машинска визија": {
+        "subject": "Машинска визија",
+        "code": "F18L3W123, F23L3W123",
+        "level": 3,
+        "short": "МВ",
+        "prerequisite": "Дигитално процесирање на слика или Машинско учење (2018) | 120 кредити (2023)",
+        "activated": false,
+        "participants": [
+            0,
+            15,
+            35
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 8,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [
+            "Андреа Кулаков",
+            "Петре Ламески"
+        ],
+        "assistants": []
+    },
+    "Менаџмент информациски системи": {
+        "subject": "Менаџмент информациски системи",
+        "code": "F18L3W027, F23L3W027",
+        "level": 3,
+        "short": "МИС_1",
+        "prerequisite": "Софтверско инженерство или Анализа на софтверските барања",
+        "activated": true,
+        "participants": [
+            466,
+            378,
+            399
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "PIT23"
+        ],
+        "semester": 7,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Љупчо Антовски",
+            "Горан Велинов"
+        ],
+        "assistants": []
+    },
+    "Методика на информатиката": {
+        "subject": "Методика на информатиката",
+        "code": "F18L3S054, F23L3S054",
+        "level": 3,
+        "short": "МнИ",
+        "prerequisite": "150 кредити",
+        "activated": true,
+        "participants": [
+            115,
+            59,
+            16
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "IE23"
+        ],
+        "semester": 8,
+        "season": "S",
+        "electiveFor": [
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Ана Мадевска Богданова"
+        ],
+        "assistants": [
+            "Ана Мадевска Богданова"
+        ]
+    },
+    "Методологија на истражувањето во ИКТ": {
+        "subject": "Методологија на истражувањето во ИКТ",
+        "code": "F18L3W126, F23L3W126",
+        "level": 3,
+        "short": "МнИвИ",
+        "prerequisite": "150 кредити",
+        "activated": true,
+        "participants": [
+            79,
+            126,
+            146
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "KN23"
+        ],
+        "semester": 7,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Андреја Наумоски",
+            "Владимир Трајковиќ"
+        ],
+        "assistants": [
+            "Мартина Тошевска",
+            "Славе Темков"
+        ]
+    },
+    "Мобилни апликации": {
+        "subject": "Мобилни апликации",
+        "code": "F18L3S127, F23L3S127",
+        "level": 3,
+        "short": "МА",
+        "prerequisite": "Алгоритми и податочни структури (2018) | Алгоритми и податочни структури или Примена на алгоритми и податочни структури (2023)",
+        "activated": true,
+        "participants": [
+            22,
+            40,
+            51
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 7,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Љупчо Антовски",
+            "Петре Ламески"
+        ],
+        "assistants": []
+    },
+    "Мобилни информациски системи": {
+        "subject": "Мобилни информациски системи",
+        "code": "F18L3W128, F23L3W128",
+        "level": 3,
+        "short": "МИС_2",
+        "prerequisite": "Алгоритми и податочни структури (2018) | Алгоритми и податочни структури или Примена на алгоритми и податочни структури (2023)",
+        "activated": true,
+        "participants": [
+            269,
+            157,
+            338
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 7,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Петре Ламески"
+        ],
+        "assistants": [
+            "Мила Додевска"
+        ]
+    },
+    "Мобилни платформи и програмирање": {
+        "subject": "Мобилни платформи и програмирање",
+        "code": "F18L3W129, F23L3W129",
+        "level": 3,
+        "short": "МПиП",
+        "prerequisite": "Алгоритми и податочни структури (2018) | Алгоритми и податочни структури или Примена на алгоритми и податочни структури (2023)",
+        "activated": true,
+        "participants": [
+            74,
+            113,
+            106
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 7,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Љупчо Антовски",
+            "Костадин Мишев"
+        ],
+        "assistants": [
+            "Мила Додевска"
+        ]
+    },
+    "Моделирање и менаџирање на бизнис процеси": {
+        "subject": "Моделирање и менаџирање на бизнис процеси",
+        "code": "F18L3S130, F23L3S130",
+        "level": 3,
+        "short": "МиМнБП",
+        "prerequisite": "Бази на податоци и (Софтверско инженерство или Анализа на софтверски барања) | Објектно-ориентирано програмирање (2023)",
+        "activated": true,
+        "participants": [
+            12,
+            39,
+            105
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 7,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Георгина Мирчева"
+        ],
+        "assistants": []
+    },
+    "Моделирање и симулација": {
+        "subject": "Моделирање и симулација",
+        "code": "F18L3W131, F23L3S131",
+        "level": 3,
+        "short": "МиС_3",
+        "prerequisite": "Веројатност и статистика или Основи на теоријата на информации или Бизнис статистика (2018) | Веројатност и статистика или Основи на теорија на информации или Бизнис статистика или Математика 3 (2023)",
+        "activated": false,
+        "participants": [
+            0,
+            14,
+            10
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 7,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Ласко Баснарков",
+            "Мирослав Мирчев"
+        ],
+        "assistants": []
+    },
+    "Модерни трендови во роботика": {
+        "subject": "Модерни трендови во роботика",
+        "code": "F18L3S132, F23L3S132",
+        "level": 3,
+        "short": "МТвР",
+        "prerequisite": "Автономна роботика или Процесна роботика или (Машинско учење и Основи на роботиката) (2018) | Оперативни системи (2023)",
+        "activated": false,
+        "participants": [
+            0,
+            0,
+            0
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "KI23"
+        ],
+        "semester": 8,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [],
+        "assistants": [],
+        "flag": "(неактивиран предмет)"
+    },
+    "Мрежна и мобилна форензика": {
+        "subject": "Мрежна и мобилна форензика",
+        "code": "F18L3W133, F23L3W133",
+        "level": 3,
+        "short": "МиМФ",
+        "prerequisite": "(Компјутерски мрежи и безбедност или Мрежна безбедност) и Безжични и мобилни системи (2018) | Комјутерски мрежи или Компјутерски мрежи и безбедност (2023)",
+        "activated": true,
+        "participants": [
+            37,
+            29,
+            18
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 8,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [
+            "Анастас Мишев",
+            "Соња Филипоска"
+        ],
+        "assistants": [
+            "Војдан Ќорвезироски"
+        ]
+    },
+    "Напредна интеракција човек компјутер": {
+        "subject": "Напредна интеракција човек компјутер",
+        "code": "F18L3W137, F23L3W137",
+        "level": 3,
+        "short": "НИЧК",
+        "prerequisite": "Дизајн на интеракцијата човек-компјутер (2018) | Дизајн на интеракцијата човек-компјутер или Алгоритми и податочни структури или Примена на алгоритми и податочни стуктури (2023)",
+        "activated": true,
+        "participants": [
+            12,
+            29,
+            42
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 8,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [
+            "Невена Ацковска",
+            "Бојан Илијоски"
+        ],
+        "assistants": []
+    },
+    "Напредни бази на податоци": {
+        "subject": "Напредни бази на податоци",
+        "code": "F18L3S138, F23L3S138",
+        "level": 3,
+        "short": "НБнП_2",
+        "prerequisite": "Бази на податоци (2018) | 90 кредити (2023)",
+        "activated": true,
+        "participants": [
+            6,
+            15,
+            121
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "SIIS23"
+        ],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23"
+        ],
+        "professors": [
+            "Горан Велинов"
+        ],
+        "assistants": [
+            "Ненад Анчев"
+        ]
+    },
+    "Web3 апликации": {
+        "subject": "Web3 апликации",
+        "code": "F18L3S139, F23L3S139",
+        "level": 3,
+        "short": "НТоК",
+        "prerequisite": "Криптографија (2018) | Алгоритми и податочни структури или Примена на алгоритни и податочни структури (2023)",
+        "activated": false,
+        "participants": [
+            0,
+            0,
+            0
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [],
+        "assistants": [],
+        "flag": "(неактивиран предмет)"
+    },
+    "Неструктурирани бази на податоци": {
+        "subject": "Неструктурирани бази на податоци",
+        "code": "F18L3S141, F23L3S141",
+        "level": 3,
+        "short": "НБнП_1",
+        "prerequisite": "Бази на податоци",
+        "activated": true,
+        "participants": [
+            124,
+            69,
+            89
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Слободан Калајџиски"
+        ],
+        "assistants": []
+    },
+    "Обработка на природните јазици": {
+        "subject": "Обработка на природните јазици",
+        "code": "F18L3W142, F23L3W142",
+        "level": 3,
+        "short": "ОнПЈ",
+        "prerequisite": "Машинско учење (2018) | Алгоритми и податочни структури или Примена на алгоритми и податочни структури (2023)",
+        "activated": true,
+        "participants": [
+            47,
+            26,
+            18
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [
+            "Соња Гиевска"
+        ],
+        "assistants": [
+            "Мартина Тошевска"
+        ]
+    },
+    "Операциони истражувања": {
+        "subject": "Операциони истражувања",
+        "code": "F18L3W144, F23L3S144",
+        "level": 3,
+        "short": "ОИ",
+        "prerequisite": "Веројатност и статистика или Основи на теоријата на информации (2018) | Веројатност и статистика или Основи на теорија на информации или Математика 3 или Бизнис статистика (2023)",
+        "activated": false,
+        "participants": [
+            0,
+            0,
+            0
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Александра Каневче Дединец"
+        ],
+        "assistants": []
+    },
+    "Оптички мрежи": {
+        "subject": "Оптички мрежи",
+        "code": "F18L3W145, F23L3W145",
+        "level": 3,
+        "short": "ОМ",
+        "prerequisite": "Комјутерски мрежи или Компјутерски мрежи и безбедност",
+        "activated": false,
+        "participants": [
+            0,
+            28,
+            34
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [
+            "Мирослав Мирчев"
+        ],
+        "assistants": []
+    },
+    "Пресметковна биологија": {
+        "subject": "Пресметковна биологија",
+        "code": "F18L3S151",
+        "level": 3,
+        "short": "ПБ",
+        "prerequisite": "Машинско учење",
+        "activated": false,
+        "participants": [
+            0,
+            0,
+            0
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [],
+        "assistants": [],
+        "flag": "(неактивиран предмет)"
+    },
+    "Пресметување во облак": {
+        "subject": "Пресметување во облак",
+        "code": "F18L3W068, F23L3W068",
+        "level": 3,
+        "short": "ПвО",
+        "prerequisite": "Виртуелизација (2018) | Бази на податоци (2023)",
+        "activated": true,
+        "participants": [
+            32,
+            28,
+            28
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "IMB23"
+        ],
+        "semester": 7,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Марјан Гушев"
+        ],
+        "assistants": [
+            "Владислав Бидиков",
+            "Димитар Милески"
+        ]
+    },
+    "Претприемништво": {
+        "subject": "Претприемништво",
+        "code": "F18L3S028, F23L3S028",
+        "level": 3,
+        "short": "П_2",
+        "prerequisite": "Бизнис и менаџмент и (Веб програмирање или Интернет технологии или Имплементација на системи со слободен и отворен код) (2018) | 120 кредити (2023)",
+        "activated": true,
+        "participants": [
+            281,
+            216,
+            251
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "SIIS23",
+            "PIT23"
+        ],
+        "semester": 8,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23"
+        ],
+        "professors": [
+            "Владимир Трајковиќ",
+            "Ефтим Здравевски"
+        ],
+        "assistants": []
+    },
+    "Програмирање на видео игри": {
+        "subject": "Програмирање на видео игри",
+        "code": "F18L3W152, F23L3W152",
+        "level": 3,
+        "short": "ПнВИ",
+        "prerequisite": "Алгоритми и податочни структури (2018) | Алгоритми и податочни структури или Примена на алгоритми и податочни структури (2023)",
+        "activated": true,
+        "participants": [
+            612,
+            459,
+            446
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 8,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [
+            "Катарина Тројачанец Динева"
+        ],
+        "assistants": [
+            "Славе Темков"
+        ]
+    },
+    "Програмски јазици и компајлери": {
+        "subject": "Програмски јазици и компајлери",
+        "code": "F18L3S112, F23L3S112",
+        "level": 3,
+        "short": "ПЈиК",
+        "prerequisite": "Формални јазици и автомати (2018) | Алгоритми и податочни структури или Примена на алгоритми и податочни структури (2023)",
+        "activated": false,
+        "participants": [
+            0,
+            0,
+            4
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 8,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Миле Јованов"
+        ],
+        "assistants": []
+    },
+    "Програмски парадигми": {
+        "subject": "Програмски парадигми",
+        "code": "F18L3W038, F23L3W038",
+        "level": 3,
+        "short": "ПП_2",
+        "prerequisite": "Алгоритми и податочни структури (2018) | Алгоритми и податочни структури или Примена на алгоритми и податочни структури (2023)",
+        "activated": true,
+        "participants": [
+            77,
+            69,
+            66
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "KN23"
+        ],
+        "semester": 7,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Емил Станков",
+            "Кире Триводалиев"
+        ],
+        "assistants": []
+    },
+    "Вовед во рударење на масивни податоци": {
+        "subject": "Вовед во рударење на масивни податоци",
+        "code": "F18L3W154, F23L3W154",
+        "level": 3,
+        "short": "РнМП",
+        "prerequisite": "Паралелно и дистрибуирано процесирање (2018) | Алгоритми и податочни структури или Примена на алгоритми и податочни структури (2023)",
+        "activated": true,
+        "participants": [
+            23,
+            16,
+            14
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 7,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Ѓорѓи Маџаров"
+        ],
+        "assistants": [
+            "Стефан Андонов"
+        ]
+    },
+    "Самостоен проект": {
+        "subject": "Самостоен проект",
+        "code": "F18L3W058, F23L3W058",
+        "level": 3,
+        "short": "СП_2",
+        "prerequisite": "нема (2018) | 150 кредити (2023)",
+        "activated": false,
+        "participants": [
+            0,
+            0,
+            0
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "IE23"
+        ],
+        "semester": 7,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Сите професори"
+        ],
+        "assistants": []
+    },
+    "Системи за поддршка при одлучувањето": {
+        "subject": "Системи за поддршка при одлучувањето",
+        "code": "F18L3W156, F23L3W156",
+        "level": 3,
+        "short": "СзПпО",
+        "prerequisite": "Вештачка интелигенција или Вовед во науката за податоци (2018) | Вештачка интелигенција или Вовед во науката за податоци или Машинско учење (2023)",
+        "activated": true,
+        "participants": [
+            63,
+            153,
+            222
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 7,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Георгина Мирчева"
+        ],
+        "assistants": [
+            "Димитар Китановски"
+        ]
+    },
+    "Складови на податоци и аналитичка обработка": {
+        "subject": "Складови на податоци и аналитичка обработка",
+        "code": "F18L3S157, F23L3S157",
+        "level": 3,
+        "short": "СнПиАО",
+        "prerequisite": "Бази на податоци (2018) | 100 кредити (2023)",
+        "activated": true,
+        "participants": [
+            42,
+            49,
+            32
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "KI23",
+            "KN23"
+        ],
+        "semester": 6,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Ефтим Здравевски"
+        ],
+        "assistants": [
+            "Димитар Китановски"
+        ]
+    },
+    "Софтвер за вградливи системи": {
+        "subject": "Софтвер за вградливи системи",
+        "code": "F18L3W048, F23L3W048",
+        "level": 3,
+        "short": "СзВС",
+        "prerequisite": "Вградливи микропроцесорски системи (2018) | Алгоритми и податочни структури или Примена на алгоритми и податочни структури (2023)",
+        "activated": true,
+        "participants": [
+            26,
+            21,
+            31
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "KI23"
+        ],
+        "semester": 7,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Моника Симјаноска"
+        ],
+        "assistants": [
+            "Моника Симјаноска"
+        ]
+    },
+    "Софтверски дефинирани мрежи": {
+        "subject": "Софтверски дефинирани мрежи",
+        "code": "F18L3W160, F23L3S160",
+        "level": 3,
+        "short": "СДМ",
+        "prerequisite": "Компјутерски мрежи и (Веб програмирање или Интернет технологии или Имплементација на системи со слободен и отворен код) (2018) | Компјутерски мрежи или Компјутерски мрежи и безбедност (2023)",
+        "activated": true,
+        "participants": [
+            4,
+            0,
+            9
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 7,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Соња Филипоска"
+        ],
+        "assistants": []
+    },
+    "Теорија на графови и социјални мрежи": {
+        "subject": "Теорија на графови и социјални мрежи",
+        "code": "F18L3W161, F23L3W161",
+        "level": 3,
+        "short": "СМиМ",
+        "prerequisite": "Вовед во мрежна наука (2018) | Алгоритми и податочни структури или Примена на алгоритми и податочни структури (2023)",
+        "activated": true,
+        "participants": [
+            24,
+            12,
+            10
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 7,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Соња Гиевска"
+        ],
+        "assistants": [
+            "Мартина Тошевска"
+        ]
+    },
+    "Споделување и пресметување во толпа": {
+        "subject": "Споделување и пресметување во толпа",
+        "code": "F18L3S162, F23L3S162",
+        "level": 3,
+        "short": "СиПвТ",
+        "prerequisite": "Машинско учење (2018) | Вештачка интелигенција или Вовед во науката за податоци или Машинско учење (2023)",
+        "activated": false,
+        "participants": [
+            0,
+            0,
+            0
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 7,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [],
+        "assistants": [],
+        "flag": "(неактивиран предмет)"
+    },
+    "Тимски проект": {
+        "subject": "Тимски проект",
+        "code": "F18L3W021, F23L3W021",
+        "level": 3,
+        "short": "ТП",
+        "prerequisite": "150 кредити",
+        "activated": true,
+        "participants": [
+            559,
+            420,
+            351
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "SIIS23",
+            "IMB23",
+            "PIT23",
+            "KI23",
+            "KN23"
+        ],
+        "semester": 7,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Сите професори"
+        ],
+        "assistants": []
+    },
+    "Управување со ИКТ проекти": {
+        "subject": "Управување со ИКТ проекти",
+        "code": "F18L3S022, F23L3S022",
+        "level": 3,
+        "short": "УсИП",
+        "prerequisite": "(Софтверско инженерство или Анализа на софтверски барања) и (Веб програмирање или Интернет технологии или Имплементација на системи со слободен и отворен код) (2018) | Софтверско инженерство или Анализа на софтверски барања (2023)",
+        "activated": true,
+        "participants": [
+            512,
+            362,
+            426
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "SIIS23",
+            "PIT23",
+            "KI23"
+        ],
+        "semester": 8,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KN23"
+        ],
+        "professors": [
+            "Љупчо Антовски",
+            "Владимир Здравески",
+            "Димитар Трајанов"
+        ],
+        "assistants": [
+            "Милена Трајаноска"
+        ]
+    },
+    "Вовед во бази на податоци и SQL": {
+        "subject": "Вовед во бази на податоци и SQL",
+        "code": "F23L1W003",
+        "level": 1,
+        "short": "УсИП",
+        "prerequisite": "",
+        "activated": true,
+        "participants": [
+            51,
+            55,
+            0
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 8,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [
+            "Ефтим Здравевски"
+        ],
+        "assistants": [
+            "Димитар Китановски"
+        ]
+    },
+    "Примена на алгоритми и податочни структури": {
+        "subject": "Примена на алгоритми и податочни структури",
+        "code": "F23L2W201",
+        "level": 2,
+        "short": "УсИП",
+        "prerequisite": "Структурно програмирање",
+        "activated": true,
+        "participants": [
+            289,
+            58,
+            0
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "IMB23",
+            "PIT23",
+            "IE23"
+        ],
+        "semester": 3,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Ефтим Здравевски",
+            "Магдалена Костоска Ѓорчевска",
+            "Слободан Калајџиски",
+            "Христина Михајлоска Трпческа"
+        ],
+        "assistants": [
+            "Мартин Динев",
+            "Јана Кузманова"
+        ]
+    },
+    "Математика 3": {
+        "subject": "Математика 3",
+        "code": "F23L3W001",
+        "level": 3,
+        "short": "УсИП",
+        "prerequisite": "",
+        "activated": true,
+        "participants": [
+            367,
+            0,
+            0
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "SIIS23"
+        ],
+        "semester": 3,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23"
+        ],
+        "professors": [
+            "Билјана Тојтовска Рибарски",
+            "Марија Михова",
+            "Наташа Илиевска",
+            "Илинка Иваноска"
+        ],
+        "assistants": [
+            "Јована Добрева",
+            "Димитар Пешевски"
+        ]
+    },
+    "Избрани теми од математика": {
+        "subject": "Избрани теми од математика",
+        "code": "F23L2W003",
+        "level": 2,
+        "short": "УсИП",
+        "prerequisite": "",
+        "activated": true,
+        "participants": [
+            731,
+            777,
+            0
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "PIT23"
+        ],
+        "semester": 1,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Весна Димитриевска Ристовска",
+            "Методија Јанчески",
+            "Наташа Илиевска",
+            "Дејан Спасов"
+        ],
+        "assistants": [
+            "Живко Атанаскоски",
+            "Петар Секулоски"
+        ]
+    },
+    "Математика 2": {
+        "subject": "Математика 2",
+        "code": "F23L2S001",
+        "level": 2,
+        "short": "УсИП",
+        "prerequisite": "",
+        "activated": true,
+        "participants": [
+            657,
+            1056,
+            0
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "SIIS23",
+            "IMB23",
+            "IE23"
+        ],
+        "semester": 2,
+        "season": "S",
+        "electiveFor": [],
+        "professors": [
+            "Билјана Тојтовска Рибарски",
+            "Весна Димитриевска Ристовска",
+            "Дејан Спасов",
+            "Емил Станков",
+            "Марија Михова",
+            "Методија Јанчески",
+            "Наташа Илиевска"
+        ],
+        "assistants": [
+            "Живко Атанаскоски",
+            "Петар Секулоски",
+            "Сијче Печкова"
+        ]
+    },
+    "Тестирање на софтвер": {
+        "subject": "Тестирање на софтвер",
+        "code": "F23L3W033",
+        "level": 3,
+        "short": "УсИП",
+        "prerequisite": "",
+        "activated": true,
+        "participants": [
+            41,
+            0,
+            0
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "PIT23"
+        ],
+        "semester": 7,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23"
+        ],
+        "professors": [
+            "Бојана Котеска"
+        ],
+        "assistants": [
+            "Славе Темков"
+        ]
+    },
+    "Сензорски системи": {
+        "subject": "Сензорски системи",
+        "code": "F23L3W200",
+        "level": 3,
+        "short": "УсИП",
+        "prerequisite": "Архитектура и организација на компјутери или Компјутерски архитектури",
+        "activated": false,
+        "participants": [
+            0,
+            0,
+            12
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 7,
+        "season": "W",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23",
+            "PIT23",
+            "SIIS23"
+        ],
+        "professors": [
+            "Билјана Стојкоска Ристеска"
+        ],
+        "assistants": []
+    },
+    "Адаптивни и интерактивни веб информациски системи": {
+        "subject": "Адаптивни и интерактивни веб информациски системи",
+        "code": "F23L3S069",
+        "level": 3,
+        "short": "УсИП",
+        "prerequisite": "Алгоритми и податочни структури или Примена на алгоритми и податочни структури",
+        "activated": false,
+        "participants": [
+            0,
+            0,
+            0
+        ],
+        "mandatory": false,
+        "mandatoryFor": [],
+        "semester": 7,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [
+            "Вангел Ајановски"
+        ],
+        "assistants": []
+    },
+    "Спорт и здравје": {
+        "subject": "Спорт и здравје",
+        "code": "F23L1W004",
+        "level": 1,
+        "short": "УсИП",
+        "prerequisite": "",
+        "activated": false,
+        "participants": [
+            0,
+            0,
+            0
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "SIIS23",
+            "IMB23",
+            "PIT23",
+            "IE23",
+            "KI23",
+            "KN23"
+        ],
+        "semester": 1,
+        "season": "W",
+        "electiveFor": [],
+        "professors": [],
+        "assistants": [],
+        "flag": "(се држи надвор од ФИНКИ)"
+    },
+    "Деловна пракса": {
+        "subject": "Деловна пракса",
+        "code": "F23L3S100",
+        "level": 3,
+        "short": "УсИП",
+        "prerequisite": "36 кредити",
+        "activated": false,
+        "participants": [
+            0,
+            0,
+            0
+        ],
+        "mandatory": true,
+        "mandatoryFor": [
+            "SIIS23",
+            "PIT23"
+        ],
+        "semester": 4,
+        "season": "S",
+        "electiveFor": [
+            "IE23",
+            "IMB23",
+            "KI23",
+            "KN23"
+        ],
+        "professors": [],
+        "assistants": [],
+        "flag": "(неактивиран предмет)"
+    }
+}

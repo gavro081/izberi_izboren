@@ -1,5 +1,5 @@
 # Use an official Node.js runtime as the base image
-FROM node:18
+FROM node:22
 
 # Set working directory
 WORKDIR /app
@@ -12,6 +12,9 @@ RUN npm install
 
 # Copy the rest of the application code
 COPY . .
+
+# build tailwind css
+RUN npm run build:css
 
 # Expose port 3000 for React
 EXPOSE 3000
