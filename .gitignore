@@ -13,7 +13,6 @@ env/
 backend/.venv
 instance/
 
-./backend/wait-for-db.sh
 backend/.idea
 
 # VS Code / IDE
