@@ -16,9 +16,9 @@ interface SubjectInfo {
 	level: number;
 	short: string;
 	prerequisite: string;
-	activated: Boolean;
+	activated: boolean;
 	participants: number[];
-	mandatory: Boolean;
+	mandatory: boolean;
 	mandatory_for: string[];
 	semester: number;
 	season: string;
@@ -28,9 +28,9 @@ interface SubjectInfo {
 }
 
 function Home() {
-	const [data, setData] = useState<any[]>([]);
+	const [data, setData] = useState<Subject[]>([]);
 	const [extraData, setExtraData] = useState<SubjectInfo[]>([]);
-	const [showData, setShowData] = useState<Boolean[]>([]);
+	const [showData, setShowData] = useState<boolean[]>([]);
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [limit, setLimit] = useState(10);
 
