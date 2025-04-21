@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import { Subject, SubjectInfo } from "../types";
+import { Subject } from "../types";
+import SubjectModal from "./SubjectModal";
 const SubjectCatalog = () => {
 	const [visibleCourses, setVisibleCourses] = useState<number>(10);
 	const [searchTerm, setSearchTerm] = useState<string>("");
 	const [selectedSubject, setSelectedSubject] = useState<Subject | null>(null);
 	const [subjectData, setSubjectData] = useState<Subject[]>([]);
-	const [extraData, setExtraData] = useState<SubjectInfo[]>([]);
+	// const [extraData, setExtraData] = useState<SubjectInfo[]>([]);
 	const [isLoaded, setIsLoaded] = useState(false);
+	const [showModal, setShowModal] = useState(false);
 
 	const SkeletonCard = () => {
 		return (
@@ -36,11 +38,11 @@ const SubjectCatalog = () => {
 			const response = await fetch("http://localhost:8000/api");
 			const data = await response.json();
 			setSubjectData(data.rows);
-			const object_data: SubjectInfo[] = data.rows.map((item: Subject) => {
-				return item.info;
-			});
-			console.log(object_data);
-			setExtraData(object_data);
+			// const object_data: SubjectInfo[] = data.rows.map((item: Subject) => {
+			// 	return item.info;
+			// });
+			// console.log(object_data);
+			// setExtraData(object_data);
 			setIsLoaded(true);
 		};
 		fetchData();
@@ -51,8 +53,12 @@ const SubjectCatalog = () => {
 	};
 
 	const openSubjectDetails = (subject: Subject) => {
-		setSelectedSubject(subject);
-		console.log(subject);
+		setSelectedSubject(subjectData[subject.id - 1]);
+		setShowModal(true);
+	};
+
+	const closeModal = () => {
+		setShowModal(false);
 	};
 
 	return (
@@ -75,27 +81,25 @@ const SubjectCatalog = () => {
 					<div className="mb-4">
 						<h3 className="font-medium mb-2">Filter criterium</h3>
 						<div className="space-y-1">
-							{["filter_value1", "filter_value2", "filter_value3"].map(
-								(dept) => (
-									<div key={dept} className="flex items-center">
-										<input
-											type="checkbox"
-											id={`dept-${dept}`}
-											checked={true}
-											onChange={() =>
-												console.log("filtering logic; not implemented yet")
-											}
-											className="h-4 w-4 rounded border-gray-300 text-blue-600"
-										/>
-										<label
-											htmlFor={`dept-${dept}`}
-											className="ml-2 text-sm text-gray-700"
-										>
-											{dept}
-										</label>
-									</div>
-								)
-							)}
+							{["make", "this", "work"].map((dept) => (
+								<div key={dept} className="flex items-center">
+									<input
+										type="checkbox"
+										id={`dept-${dept}`}
+										checked={true}
+										onChange={() =>
+											console.log("filtering logic; not implemented yet")
+										}
+										className="h-4 w-4 rounded border-gray-300 text-blue-600"
+									/>
+									<label
+										htmlFor={`dept-${dept}`}
+										className="ml-2 text-sm text-gray-700"
+									>
+										{dept}
+									</label>
+								</div>
+							))}
 						</div>
 					</div>
 				</div>
@@ -106,7 +110,7 @@ const SubjectCatalog = () => {
 					<div className="mb-6 relative">
 						<input
 							type="text"
-							placeholder="Пребарувај по клучни зборови дрн дрн..."
+							placeholder="TODO: make this work :)"
 							value={searchTerm}
 							onChange={(e) => setSearchTerm(e.target.value)}
 							className="w-full p-3 pl-4 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -260,6 +264,12 @@ const SubjectCatalog = () => {
 					)}
 				</div>
 			</div>
+			{showModal && selectedSubject && (
+				<SubjectModal
+					selectedSubject={selectedSubject}
+					closeModal={closeModal}
+				/>
+			)}
 		</div>
 	);
 };
