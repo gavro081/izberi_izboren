@@ -35,9 +35,10 @@ const SubjectCatalog = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const response = await fetch("http://localhost:8000/api");
+			const response = await fetch("http://localhost:8000/subjects");
 			const data = await response.json();
-			setSubjectData(data.rows);
+			setSubjectData(data.subjects);
+			console.log(data.subjects);
 			// const object_data: SubjectInfo[] = data.rows.map((item: Subject) => {
 			// 	return item.info;
 			// });
