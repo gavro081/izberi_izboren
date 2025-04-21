@@ -6,7 +6,6 @@ const SubjectCatalog = () => {
 	const [searchTerm, setSearchTerm] = useState<string>("");
 	const [selectedSubject, setSelectedSubject] = useState<Subject | null>(null);
 	const [subjectData, setSubjectData] = useState<Subject[]>([]);
-	// const [extraData, setExtraData] = useState<SubjectInfo[]>([]);
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [showModal, setShowModal] = useState(false);
 
@@ -38,12 +37,6 @@ const SubjectCatalog = () => {
 			const response = await fetch("http://localhost:8000/subjects");
 			const data = await response.json();
 			setSubjectData(data.subjects);
-			console.log(data.subjects);
-			// const object_data: SubjectInfo[] = data.rows.map((item: Subject) => {
-			// 	return item.info;
-			// });
-			// console.log(object_data);
-			// setExtraData(object_data);
 			setIsLoaded(true);
 		};
 		fetchData();
@@ -69,7 +62,7 @@ const SubjectCatalog = () => {
 				{/* filters sidebar */}
 				<div className="w-full md:w-64 bg-gray-50 p-4 rounded-lg">
 					<div className="flex justify-between items-center mb-4">
-						<h2 className="text-lg font-semibold">Филтери</h2>
+						<h2 className="text-lg font-semibold">Филтри</h2>
 						<button
 							onClick={() => console.log("reset filters; not implemented yet")}
 							className="text-sm text-gray-600 hover:text-gray-900"
@@ -125,7 +118,7 @@ const SubjectCatalog = () => {
 
 					{!isLoaded ? (
 						<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-							{[...Array(6)].map((_, index) => (
+							{[...Array(9)].map((_, index) => (
 								<SkeletonCard key={index} />
 							))}
 						</div>
@@ -184,26 +177,10 @@ const SubjectCatalog = () => {
 												onClick={() => openSubjectDetails(subject)}
 												className="flex items-center text-gray-700 hover:text-gray-900"
 											>
-												<svg
+												<img
+													src="src/assets/eye.svg"
 													className="w-4 h-4 mr-1"
-													fill="none"
-													stroke="currentColor"
-													viewBox="0 0 24 24"
-													xmlns="http://www.w3.org/2000/svg"
-												>
-													<path
-														strokeLinecap="round"
-														strokeLinejoin="round"
-														strokeWidth={2}
-														d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-													/>
-													<path
-														strokeLinecap="round"
-														strokeLinejoin="round"
-														strokeWidth={2}
-														d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-													/>
-												</svg>
+												/>
 												Погледни детали
 											</button>
 											{/* this could lead to a subject view page, for now there is no such thing*/}

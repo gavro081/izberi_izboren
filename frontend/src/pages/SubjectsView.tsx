@@ -1,7 +1,7 @@
 import SubjectCatalog from "../components/SubjectCatalog";
 
-function Test() {
+function SubjectsView() {
 	return <SubjectCatalog />;
 }
 
-export default Test;
+export default SubjectsView;
