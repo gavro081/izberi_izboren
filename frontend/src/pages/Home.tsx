@@ -1,31 +1,9 @@
 import { useEffect, useState } from "react";
+import { Subject, SubjectInfo } from "../types";
 
 type ValidHeader = Extract<keyof Subject, "name" | "code">;
 const subject_values: ValidHeader[] = ["name", "code"];
 // const subject_values: (keyof Subject)[] = ["name", "code"];
-
-interface Subject {
-	id: number;
-	code: string;
-	name: string;
-	abstract: string;
-	info: SubjectInfo;
-}
-
-interface SubjectInfo {
-	level: number;
-	short: string;
-	prerequisite: string;
-	activated: boolean;
-	participants: number[];
-	mandatory: boolean;
-	mandatory_for: string[];
-	semester: number;
-	season: string;
-	elective_for: string[];
-	professors: string[];
-	assistants: string[];
-}
 
 function Home() {
 	const [data, setData] = useState<Subject[]>([]);
