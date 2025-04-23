@@ -32,6 +32,13 @@ const SubjectCatalog = () => {
 		);
 	};
 
+	const filteredSubjects = subjectData.filter(
+		(subject) =>
+			subject.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+			subject.code.toLowerCase().includes(searchTerm.toLowerCase()) ||
+			subject.abstract?.toLowerCase().includes(searchTerm.toLowerCase())
+	);
+
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await fetch("http://localhost:8000/subjects");
@@ -104,7 +111,7 @@ const SubjectCatalog = () => {
 					<div className="mb-6 relative">
 						<input
 							type="text"
-							placeholder="TODO: make this work :)"
+							placeholder="Пребарувај предмети по име, код, опис..."
 							value={searchTerm}
 							onChange={(e) => setSearchTerm(e.target.value)}
 							className="w-full p-3 pl-4 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -124,7 +131,7 @@ const SubjectCatalog = () => {
 						</div>
 					) : (
 						<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-							{subjectData.slice(0, visibleCourses).map((subject) => (
+							{filteredSubjects.slice(0, visibleCourses).map((subject) => (
 								<div
 									key={subject.id}
 									className="border border-gray-200 rounded-lg overflow-hidden shadow-sm 
@@ -213,7 +220,7 @@ const SubjectCatalog = () => {
 					)}
 
 					{/* Load more button */}
-					{isLoaded && subjectData.length > visibleCourses && (
+					{isLoaded && filteredSubjects.length > visibleCourses && (
 						<div className="mt-5 text-center">
 							<button
 								onClick={loadMore}
@@ -225,7 +232,7 @@ const SubjectCatalog = () => {
 					)}
 
 					{/* No results message */}
-					{isLoaded && subjectData.length === 0 && (
+					{isLoaded && filteredSubjects.length === 0 && (
 						<div className="text-center py-12">
 							<p className="text-gray-500 text-lg">
 								Не постојат такви предмети
