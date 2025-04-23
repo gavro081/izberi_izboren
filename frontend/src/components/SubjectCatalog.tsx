@@ -8,6 +8,31 @@ const SubjectCatalog = () => {
 	const [subjectData, setSubjectData] = useState<Subject[]>([]);
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [showModal, setShowModal] = useState(false);
+	const [filters, setFilters] = useState({
+		season: "" as "W" | "S" | "",
+		semester: [] as number[],
+	});
+
+	{
+		/*
+		filter checklist
+		[] level: number;
+		? prerequisite: string;
+		[] activated: boolean;
+		? participants: number[];
+		[] mandatory: boolean;
+		[] mandatory_for: string[];
+		[x] semester: number;
+		[x] season: string;
+		[] elective_for: string[];
+		?professors: string[];
+		?assistants: string[];
+
+		izbrisi btn da raboti
+
+		reset filters da raboti
+	*/
+	}
 
 	const SkeletonCard = () => {
 		return (
@@ -32,12 +57,21 @@ const SubjectCatalog = () => {
 		);
 	};
 
-	const filteredSubjects = subjectData.filter(
-		(subject) =>
+	const filteredSubjects = subjectData.filter((subject) => {
+		const searchMatches =
 			subject.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
 			subject.code.toLowerCase().includes(searchTerm.toLowerCase()) ||
-			subject.abstract?.toLowerCase().includes(searchTerm.toLowerCase())
-	);
+			subject.abstract?.toLowerCase().includes(searchTerm.toLowerCase());
+
+		const seasonMatches =
+			filters.season === "" || filters.season === subject.info.season;
+
+		const semesterMatches =
+			filters.semester.length === 0 ||
+			filters.semester.includes(subject.info.semester);
+
+		return searchMatches && seasonMatches && semesterMatches;
+	});
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -77,30 +111,73 @@ const SubjectCatalog = () => {
 							Избриши
 						</button>
 					</div>
-
 					{/* TODO: add more filters following this template*/}
 					<div className="mb-4">
-						<h3 className="font-medium mb-2">Filter criterium</h3>
+						{/* filter by season*/}
+						<div className="space-y-1 mb-2">
+							<h3 className="font-medium mb-2">Сезона</h3>
+							{["Летен", "Зимски"].map((season) => {
+								const seasonValue = season === "Летен" ? "S" : "W";
+								return (
+									<div key={season} className="flex items-center">
+										<input
+											type="checkbox"
+											name="season"
+											id={seasonValue}
+											onChange={() =>
+												setFilters((prev) => ({
+													...prev,
+													season:
+														prev.season === seasonValue ? "" : seasonValue,
+												}))
+											}
+											checked={filters.season === seasonValue}
+											className="h-4 w-4 rounded border-gray-300 text-blue-600"
+										/>
+										<label
+											htmlFor={seasonValue}
+											className="ml-2 text-sm text-gray-700"
+										>
+											{season}
+										</label>
+									</div>
+								);
+							})}
+						</div>
+
+						{/* filter by semester*/}
 						<div className="space-y-1">
-							{["make", "this", "work"].map((dept) => (
-								<div key={dept} className="flex items-center">
-									<input
-										type="checkbox"
-										id={`dept-${dept}`}
-										checked={true}
-										onChange={() =>
-											console.log("filtering logic; not implemented yet")
-										}
-										className="h-4 w-4 rounded border-gray-300 text-blue-600"
-									/>
-									<label
-										htmlFor={`dept-${dept}`}
-										className="ml-2 text-sm text-gray-700"
-									>
-										{dept}
-									</label>
-								</div>
-							))}
+							<h3 className="font-medium mb-2">Семестар</h3>
+							<div className="grid grid-cols-4 gap-2">
+								{Array.from(Array(8)).map((_, index) => {
+									const i = index + 1;
+									return (
+										<div key={i} className="flex items-center space-x-2">
+											<input
+												type="checkbox"
+												name="season"
+												id={`s${i}`}
+												onChange={() =>
+													setFilters((prev) => ({
+														...prev,
+														semester: prev.semester.includes(i)
+															? prev.semester.filter((item) => item !== i)
+															: [...prev.semester, i],
+													}))
+												}
+												checked={filters.semester.includes(i)}
+												className="h-4 w-4 rounded border-gray-300 text-blue-600"
+											/>
+											<label
+												htmlFor={`s${i}`}
+												className="text-sm text-gray-700"
+											>
+												{i}
+											</label>
+										</div>
+									);
+								})}
+							</div>
 						</div>
 					</div>
 				</div>
