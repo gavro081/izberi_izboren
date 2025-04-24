@@ -4,13 +4,12 @@ CREATE_SUBJECT = """
         id SERIAL PRIMARY KEY,
         name TEXT NOT NULL,
         code TEXT NOT NULL,
-        abstract TEXT DEFAULT NULL
+        abstract TEXT NOT NULL
 );
 """
-# TODO: scrape and insert abstract
 FILL_SUBJECT = """
     INSERT INTO subject (
-        name, code        
+        name, code, abstract        
         ) VALUES %s
 """
 

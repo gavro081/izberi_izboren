@@ -19,7 +19,7 @@ const SubjectList = ({
 					className="border border-gray-200 rounded-lg overflow-hidden shadow-sm 
                                     hover:shadow-md transition-shadow duration-200"
 				>
-					<div className="p-4 min-h-full flex flex-col">
+					<div className="p-4 min-h-full flex flex-col gap-1">
 						<div className="flex justify-between items-start mb-2">
 							<div>
 								<h3 className="text-lg font-semibold">{subject.name}</h3>
@@ -27,12 +27,9 @@ const SubjectList = ({
 							</div>
 						</div>
 
-						<p className="text-gray-700 text-sm mb-4 line-clamp-2">
-							<strong>tuka treba abstract:</strong> Lorem ipsum dolor sit, amet
-							consectetur adipisicing elit. Et praesentium dolores est animi
-							officiis aperiam.
+						{/* <p className="text-gray-700 text-sm mb-4 line-clamp-2">
 							{subject.abstract}
-						</p>
+						</p> */}
 
 						<div className="flex flex-wrap gap-2 mb-4">
 							{/* these tags are for listing the domains a subject covers, ex. backend, AI ...*/}
@@ -48,45 +45,23 @@ const SubjectList = ({
 							)}
 						</div>
 
-						<div className="flex justify-between mt-auto">
+						<div className="flex justify-end mt-auto">
 							{/* these tags could be used as certain flags for some subjects, like most picked subject, best match etc. */}
-							<div className="flex gap-3">
+							{/* <div className="flex gap-3">
 								<div className="bg-red-500 px-1 py-1 rounded-full text-sm font-medium">
 									TAG1
 								</div>
 								<div className="bg-green-500 px-1 py-1 rounded-full text-sm font-medium">
 									TAG2
 								</div>
-							</div>
+							</div> */}
 							<button
 								onClick={() => openSubjectDetails(subject)}
-								className="flex items-center text-gray-700 hover:text-gray-900"
+								className="flex items-center text-sm text-gray-700 hover:text-gray-900"
 							>
 								<img src="src/assets/eye.svg" className="w-4 h-4 mr-1" />
 								Погледни детали
 							</button>
-							{/* this could lead to a subject view page, for now there is no such thing*/}
-							{/* if implemented, tags should be moved elsewhere*/}
-							{/* <button
-											onClick={() => openCourseDetails(course)}
-											className="flex items-center text-blue-600 hover:text-blue-800"
-										>
-											Погледни детали
-											<svg
-												className="w-4 h-4 ml-1"
-												fill="none"
-												stroke="currentColor"
-												viewBox="0 0 24 24"
-												xmlns="http://www.w3.org/2000/svg"
-											>
-												<path
-													strokeLinecap="round"
-													strokeLinejoin="round"
-													strokeWidth={2}
-													d="M9 5l7 7-7 7"
-												/>
-											</svg>
-										</button> */}
 						</div>
 					</div>
 				</div>

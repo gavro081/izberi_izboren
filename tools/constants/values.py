@@ -11,8 +11,9 @@ with open(SUBJECT_DETAILS_PATH, "r", encoding='utf-8') as f:
 SUBJECT = [
 (
     item["subject"],
+    # where there are 2 codes, the second one is for accreditation 23
     item["code"] if "," not in item["code"] else item["code"].split(",")[1].strip(),
-    # item["abstract"], TODO :)
+    item["abstract"],
 )
 for item in json_subject_details.values()       
 ]

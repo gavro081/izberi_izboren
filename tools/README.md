@@ -7,6 +7,7 @@
 
 ### Data
 
+- `abstracts.json` - JSON containing short descriptions for each subject
 - `courses.json` - array containing the names of all subjects.
 - `elective.json` - JSON containing arrays of all eligible summer and winter subjects for all programs.
 - `information.json` - array with the code, name, level and link for all subjects.
@@ -19,6 +20,7 @@
 
 ### Scrapers
 
+- `abstract.py` - scrapes the FINKI website for short descriptions for each subject
 - `elective.py` - scrapes the FINKI website for all elective subjects per program and writes the results to `data/elective.json`.
 - `mandatory.py` - scrapes the FINKI site for all mandatory subjects per program and writes the results to `data/mandatory.json`.
 

@@ -6,6 +6,7 @@ participants_file_path = '../data/participants.json' # participant counts
 subjects_by_program_file_path = '../data/subjects_by_program.json' # which subjects are mandatory and in which semester
 professors_file_path = '../data/professors.json' # teaching staff for each subject'
 elective_file_path = '../data/elective.json' # which elective subjects can a certain program choose from
+abstract_file_path = '../data/abstracts.json' # short descriptions for all subjects
 
 try:
     with open(information_file_path, 'r', encoding='utf-8') as f:
@@ -20,13 +21,15 @@ try:
         professors_data = json.load(f)
     with open(elective_file_path, 'r', encoding='utf-8') as f:
         elective_data = json.load(f)
+    with open(abstract_file_path, 'r', encoding='utf-8') as f:
+        abstract_data = json.load(f)
 except FileNotFoundError as e:
     print(f"Error: Could not find file: {e.filename}")
     exit(1)
 
 ALL_PROGRAMS = ["SIIS23", "IMB23", "PIT23", "IE23", "KI23", "KN23"]
 
-subject_data = {} # the holy grail, se ide tuka
+subject_data = {} # the holy grail, everything goes here
 
 for entry in information_data:
     code, course, level, _ = entry.values()
@@ -40,6 +43,7 @@ for entry in information_data:
         "subject": course,
         "code": code,
         "level": level,
+        "abstract": abstract_data[course]
     }
 
 for entry in prerequisites_data:

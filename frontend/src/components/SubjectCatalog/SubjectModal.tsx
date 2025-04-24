@@ -38,12 +38,7 @@ function SubjectModal({ selectedSubject, closeModal }: SubjectModalProps) {
 						</div>
 
 						<div className="mb-4">
-							<p className="text-gray-700">
-								<strong>tuka ide abstract</strong> Lorem ipsum dolor, sit amet
-								consectetur adipisicing elit. Quia, ad repellat consectetur
-								laboriosam aperiam cumque.
-								{selectedSubject.abstract}
-							</p>
+							<p className="">{selectedSubject.abstract}</p>
 						</div>
 
 						<div className="mb-2">
