@@ -24,16 +24,6 @@ const SubjectCatalog = () => {
 		hasPrerequisites: false as boolean,
 	});
 
-	{
-		/*
-		filter checklist
-
-		izbrisi btn da raboti
-
-		reset filters da raboti
-	*/
-	}
-
 	const filteredSubjects = subjectData.filter((subject) => {
 		const searchMatches =
 			subject.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -96,13 +86,28 @@ const SubjectCatalog = () => {
 		);
 	});
 
+	const resetFilters = () => {
+		setSearchTerm("");
+		setFilters({
+			season: "" as "W" | "S" | "",
+			semester: [] as number[],
+			level: [] as number[],
+			activated: "" as "activated" | "not_activated" | "",
+			mandatoryFor: [] as Programs[],
+			electiveFor: [] as Programs[],
+			professors: [] as string[],
+			assistants: [] as string[],
+			hasPrerequisites: false,
+		});
+	};
+
 	const FilterSidebar = () => {
 		return (
 			<div className="">
 				<div className="flex justify-between items-center mb-4">
 					<h2 className="text-lg font-semibold">Филтри</h2>
 					<button
-						onClick={() => console.log("reset filters; not implemented yet")}
+						onClick={resetFilters}
 						className="text-sm text-gray-600 hover:text-gray-900"
 					>
 						Избриши
@@ -283,7 +288,7 @@ const SubjectCatalog = () => {
 						</div>
 					</div>
 					{/* filter by electiveFor */}
-					<div className="space-y-1 mb-4">
+					<div className="space-y-1 mb-6">
 						<h3 className="font-medium mb-2">Изборен за:</h3>
 						<div className="grid grid-cols-3 gap-2">
 							{PROGRAMS.map((program) => {
@@ -318,7 +323,7 @@ const SubjectCatalog = () => {
 							})}
 						</div>
 					</div>
-					{/* filter by level */}
+					{/* filter by prereq */}
 					<div className="space-y-1 mb-4">
 						<div className="flex items-center space-x-2">
 							<input
@@ -453,14 +458,18 @@ const SubjectCatalog = () => {
 					<div className="mb-6 relative">
 						<input
 							type="text"
-							placeholder="Пребарувај предмети по име, код, опис..."
+							placeholder="Пребарувај предмети по име, код, опис"
 							value={searchTerm}
 							onChange={(e) => setSearchTerm(e.target.value)}
-							className="w-full p-3 pl-4 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+							className="w-full p-3 pl-4 pr-12 border border-gray-300 rounded-lg 
+							focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 						/>
-						<button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-4 py-1 rounded-lg">
-							Search
-						</button>
+						{/* <button
+							className="absolute right-2 top-1/2 transform -translate-y-1/2
+						 bg-gray-800 text-white px-4 py-1 rounded-lg"
+						>
+							Избриши
+						</button> */}
 					</div>
 
 					{/* Course grid */}
@@ -580,9 +589,7 @@ const SubjectCatalog = () => {
 								Не постојат такви предмети
 							</p>
 							<button
-								onClick={() =>
-									console.log("reset filters; not implemented yet")
-								}
+								onClick={resetFilters}
 								className="mt-2 text-blue-600 hover:text-blue-800"
 							>
 								Ресетирај филтри
