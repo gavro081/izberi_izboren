@@ -1,3 +1,5 @@
+import { PROGRAMS } from "./constants/subjects";
+
 export interface Subject {
 	id: number;
 	code: string;
@@ -13,10 +15,12 @@ export interface SubjectInfo {
 	activated: boolean;
 	participants: number[];
 	mandatory: boolean;
-	mandatory_for: string[];
+	mandatory_for: Programs[];
 	semester: number;
 	season: string;
-	elective_for: string[];
+	elective_for: Programs[];
 	professors: string[];
 	assistants: string[];
 }
+
+export type Programs = (typeof PROGRAMS)[number];

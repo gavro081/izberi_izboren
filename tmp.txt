@@ -1,0 +1,397 @@
+
+
+export default function CourseCatalog() {
+  const [visibleCourses, setVisibleCourses] = useState<number>(10);
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [filters, setFilters] = useState({
+    department: [] as string[],
+    semester: [] as string[],
+    level: [] as string[]
+  });
+
+  // Filter and search logic
+  const filteredCourses = courseData.filter(course => {
+    // Search term filter
+    const matchesSearch = 
+      course.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      course.code.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      course.description.toLowerCase().includes(searchTerm.toLowerCase());
+
+    // Department filter
+    const departmentMatch = filters.department.length === 0 || 
+      filters.department.includes(course.department);
+    
+    // Semester filter
+    const semesterMatch = filters.semester.length === 0 || 
+      filters.semester.includes(course.semester);
+    
+    // Level filter
+    const levelMatch = filters.level.length === 0 || 
+      filters.level.includes(course.level);
+    
+    return matchesSearch && departmentMatch && semesterMatch && levelMatch;
+  });
+
+  // Handler for checkbox filters
+  const handleFilterChange = (category: 'department' | 'semester' | 'level', value: string) => {
+    setFilters(prev => {
+      const updatedFilters = { ...prev };
+      if (updatedFilters[category].includes(value)) {
+        updatedFilters[category] = updatedFilters[category].filter(item => item !== value);
+      } else {
+        updatedFilters[category] = [...updatedFilters[category], value];
+      }
+      return updatedFilters;
+    });
+  };
+
+  // Reset filters
+  const resetFilters = () => {
+    setFilters({
+      department: [],
+      semester: [],
+      level: []
+    });
+    setSearchTerm('');
+  };
+
+  // Load more courses
+  const loadMore = () => {
+    setVisibleCourses(prev => prev + 10);
+  };
+
+  // Open course details modal
+  const openCourseDetails = (course: Course) => {
+    setSelectedCourse(course);
+    setShowModal(true);
+  };
+
+  // Close course details modal
+  const closeModal = () => {
+    setShowModal(false);
+    setSelectedCourse(null);
+  };
+
+  return (
+    <div className="max-w-7xl mx-auto p-4 bg-white min-h-screen">
+      <h1 className="text-3xl font-bold mb-6">Faculty Course Catalog</h1>
+      
+      <div className="flex flex-col md:flex-row gap-6">
+        {/* Filters sidebar */}
+        <div className="w-full md:w-64 bg-gray-50 p-4 rounded-lg">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-lg font-semibold">Filters</h2>
+            <button 
+              onClick={resetFilters}
+              className="text-sm text-gray-600 hover:text-gray-900"
+            >
+              Reset
+            </button>
+          </div>
+          
+          {/* Department filter */}
+          <div className="mb-4">
+            <h3 className="font-medium mb-2">Department</h3>
+            <div className="space-y-1">
+              {['Computer Science', 'Mathematics', 'Physics', 'Engineering'].map(dept => (
+                <div key={dept} className="flex items-center">
+                  <input
+                    type="checkbox"
+                    id={`dept-${dept}`}
+                    checked={filters.department.includes(dept)}
+                    onChange={() => handleFilterChange('department', dept)}
+                    className="h-4 w-4 rounded border-gray-300 text-blue-600"
+                  />
+                  <label htmlFor={`dept-${dept}`} className="ml-2 text-sm text-gray-700">
+                    {dept}
+                  </label>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          {/* Semester filter */}
+          <div className="mb-4">
+            <h3 className="font-medium mb-2">Semester</h3>
+            <div className="space-y-1">
+              {['Fall', 'Spring', 'Summer'].map(semester => (
+                <div key={semester} className="flex items-center">
+                  <input
+                    type="radio"
+                    id={`semester-${semester}`}
+                    name="semester"
+                    checked={filters.semester.includes(semester)}
+                    onChange={() => {
+                      setFilters(prev => ({
+                        ...prev,
+                        semester: [semester]
+                      }));
+                    }}
+                    className="h-4 w-4 rounded-full border-gray-300 text-blue-600"
+                  />
+                  <label htmlFor={`semester-${semester}`} className="ml-2 text-sm text-gray-700">
+                    {semester}
+                  </label>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          {/* Level filter */}
+          <div className="mb-4">
+            <h3 className="font-medium mb-2">Level</h3>
+            <div className="space-y-1">
+              {['Beginner', 'Intermediate', 'Advanced'].map(level => (
+                <div key={level} className="flex items-center">
+                  <input
+                    type="checkbox"
+                    id={`level-${level}`}
+                    checked={filters.level.includes(level)}
+                    onChange={() => handleFilterChange('level', level)}
+                    className="h-4 w-4 rounded border-gray-300 text-blue-600"
+                  />
+                  <label htmlFor={`level-${level}`} className="ml-2 text-sm text-gray-700">
+                    {level}
+                  </label>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        
+        {/* Main content */}
+        <div className="flex-1">
+          {/* Search bar */}
+          <div className="mb-6 relative">
+            <input
+              type="text"
+              placeholder="Search for courses by name, code, or keywords..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full p-3 pl-4 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+            <button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-4 py-1 rounded-lg">
+              Search
+            </button>
+          </div>
+          
+          {/* Course grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {filteredCourses.slice(0, visibleCourses).map(course => (
+              <div 
+                key={course.id} 
+                className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200"
+              >
+                <div className="p-4">
+                  <div className="flex justify-between items-start mb-2">
+                    <div>
+                      <h3 className="text-lg font-semibold">{course.name}</h3>
+                      <p className="text-gray-600">{course.code}</p>
+                    </div>
+                    <div className="bg-gray-100 px-3 py-1 rounded-full text-sm font-medium">
+                      {course.credits} credits
+                    </div>
+                  </div>
+                  
+                  <p className="text-gray-700 text-sm mb-4 line-clamp-2">
+                    {course.description}
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {course.tags.map(tag => (
+                      <span 
+                        key={tag} 
+                        className="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  
+                  <div className="flex justify-between">
+                    <button
+                      onClick={() => openCourseDetails(course)}
+                      className="flex items-center text-gray-700 hover:text-gray-900"
+                    >
+                      <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                      </svg>
+                      Quick View
+                    </button>
+                    
+                    <button
+                      onClick={() => openCourseDetails(course)}
+                      className="flex items-center text-blue-600 hover:text-blue-800"
+                    >
+                      Details
+                      <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Load more button */}
+          {filteredCourses.length > visibleCourses && (
+            <div className="mt-8 text-center">
+              <button
+                onClick={loadMore}
+                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors duration-200"
+              >
+                Load More Courses
+              </button>
+            </div>
+          )}
+          
+          {/* No results message */}
+          {filteredCourses.length === 0 && (
+            <div className="text-center py-12">
+              <p className="text-gray-500 text-lg">No courses match your search criteria.</p>
+              <button 
+                onClick={resetFilters}
+                className="mt-2 text-blue-600 hover:text-blue-800"
+              >
+                Reset filters
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+      
+      {/* Course details modal */}
+      {showModal && selectedCourse && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-6">
+              <div className="flex justify-between items-start mb-4">
+                <div>
+                  <h2 className="text-2xl font-bold">{selectedCourse.name}</h2>
+                  <p className="text-gray-600">{selectedCourse.code}</p>
+                </div>
+                <button 
+                  onClick={closeModal}
+                  className="text-gray-400 hover:text-gray-600"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+              
+              <div className="mb-6">
+                <h3 className="text-lg font-medium mb-2">About this course</h3>
+                <p className="text-gray-700">{selectedCourse.description}</p>
+              </div>
+              
+              {selectedCourse.learningOutcomes && (
+                <div className="mb-6">
+                  <h3 className="text-lg font-medium mb-2">Learning outcomes</h3>
+                  <ul className="list-disc pl-5 space-y-1">
+                    {selectedCourse.learningOutcomes.map((outcome, index) => (
+                      <li key={index} className="text-gray-700">{outcome}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              
+              <div className="bg-gray-50 rounded-lg p-4">
+                <h3 className="text-lg font-medium mb-4">Course details</h3>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <div className="flex items-center mb-3">
+                      <svg className="w-5 h-5 text-gray-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <div>
+                        <p className="text-sm text-gray-500">Credits</p>
+                        <p className="font-medium">{selectedCourse.credits}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center mb-3">
+                      <svg className="w-5 h-5 text-gray-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                      <div>
+                        <p className="text-sm text-gray-500">Semester</p>
+                        <p className="font-medium">{selectedCourse.semester}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center">
+                      <svg className="w-5 h-5 text-gray-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <div>
+                        <p className="text-sm text-gray-500">Duration</p>
+                        <p className="font-medium">{selectedCourse.duration}</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <div className="flex items-center mb-3">
+                      <svg className="w-5 h-5 text-gray-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                      </svg>
+                      <div>
+                        <p className="text-sm text-gray-500">Department</p>
+                        <p className="font-medium">{selectedCourse.department}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center mb-3">
+                      <svg className="w-5 h-5 text-gray-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                      <div>
+                        <p className="text-sm text-gray-500">Prerequisites</p>
+                        <p className="font-medium">{selectedCourse.prerequisites}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="mt-6">
+                <h3 className="text-lg font-medium mb-2">Tags</h3>
+                <div className="flex flex-wrap gap-2">
+                  {selectedCourse.tags.map(tag => (
+                    <span 
+                      key={tag} 
+                      className="bg-gray-100 text-gray-800 px-3 py-1 rounded-full"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              
+              <div className="mt-8 flex justify-end space-x-3">
+                <button
+                  onClick={closeModal}
+                  className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
+                >
+                  Close
+                </button>
+                <button
+                  onClick={closeModal}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                >
+                  View Full Details
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
