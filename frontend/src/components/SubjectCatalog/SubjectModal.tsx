@@ -1,4 +1,4 @@
-import { Subject } from "../types";
+import { Subject } from "./types";
 
 interface SubjectModalProps {
 	selectedSubject: Subject;

@@ -1,4 +1,4 @@
-import SubjectCatalog from "../components/SubjectCatalog";
+import SubjectCatalog from "../components/SubjectCatalog/SubjectCatalog";
 
 function SubjectsView() {
 	return <SubjectCatalog />;
