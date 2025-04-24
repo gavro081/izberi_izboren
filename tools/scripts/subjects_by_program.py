@@ -30,7 +30,7 @@ for program_name, semesters in mandatory_data.items():
                     subject_data[subject]["programs"].append(program_name)
 
 
-with open('subjects_by_program.json', 'w', encoding='utf-8') as f:
+with open('../data/subjects_by_program.json', 'w', encoding='utf-8') as f:
     json.dump(subject_data, f, ensure_ascii=False, indent=4)
 
 print("Processing complete. Data saved to subjects_by_program.json")

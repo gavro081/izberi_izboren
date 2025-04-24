@@ -10,7 +10,7 @@ def index(request):
 
 
 def all_subjects(request):
-    all_subjects = Subject.objects.select_related('subject_info').filter(subject_info__isnull=False)
+    all_subjects = Subject.objects.select_related('subject_info').filter(subject_info__isnull=False).order_by('id')
 
     result = []
     for subject in all_subjects:
@@ -36,7 +36,6 @@ def all_subjects(request):
                 "assistants": subject_info.assistants,
             }
         }
-
         result.append(subject_data)
     
     return JsonResponse({"subjects": result}, safe=False)

@@ -42,6 +42,10 @@ for program_link in program_links:
             if anchor:
                 subject_text = anchor.text.strip()
                 if subject_text:  # Only add non-empty subjects
+                    # not my proudest moment
+                    if subject_text == "F23L2S026 Маркетинг": subject_text = "Маркетинг"
+                    if subject_text == "F23L1S066 Основи на сајбер безбедноста": subject_text = "Основи на сајбер безбедноста"
+
                     subjects.append(subject_text)
         
         if subjects:  
