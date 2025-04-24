@@ -31,6 +31,7 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING="true"
     depends_on:
       - backend
     networks:
