@@ -114,5 +114,5 @@ for entry in professors_data:
 
 
 
-with open('../data/subject_details.json', 'w', encoding='utf-8') as f:
+with open('../../backend/subjects/management/commands/subject_details.json', 'w', encoding='utf-8') as f:
     json.dump(subject_data, f, ensure_ascii=False, indent=4)

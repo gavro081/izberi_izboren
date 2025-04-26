@@ -1,10 +1,5 @@
 ## guide
 
-### Constants
-
-- `queries.py` - contains raw SQL queries for creating and populating the initial tables in the database.
-- `values.py` - reads from `subject_details.json` and stores the values so they can be used to populate the database.
-
 ### Data
 
 - `abstracts.json` - JSON containing short descriptions for each subject
@@ -26,6 +21,5 @@
 
 ### Scripts
 
-- `fill_db.py` - connects to the database, creates tables, and populates them.
 - `subjects_by_program.py` - reads data from mandatory.json, and writes the relevant information to data/subjects_by_program.json.
 - `subject_details.py` - aggregates data from multiple JSON files, and writes the combined information in `data/subject_details.json`.
