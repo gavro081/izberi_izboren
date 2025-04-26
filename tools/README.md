@@ -10,7 +10,6 @@
 - `participants.json` - array listing all courses with their number of participants.
 - `prerequisites.json` - array of subject prerequisites.
 - `professors.json` - array of all subjects with their respective professors and assistants.
-- `subject_details.json` - JSON containing all subjects and relevant information about them, aggregated from the other data files.
 - `subjects_by_program.json` - JSON listing all subjects and the programs for which they are mandatory.
 
 ### Scrapers
@@ -22,4 +21,4 @@
 ### Scripts
 
 - `subjects_by_program.py` - reads data from mandatory.json, and writes the relevant information to data/subjects_by_program.json.
-- `subject_details.py` - aggregates data from multiple JSON files, and writes the combined information in `data/subject_details.json`.
+- `subject_details.py` - aggregates data from multiple JSON files, and writes the combined information in `backend/subjects/management/commands/subject_details.json`. Modify this script to modify the initial data that is used to populate the db.
