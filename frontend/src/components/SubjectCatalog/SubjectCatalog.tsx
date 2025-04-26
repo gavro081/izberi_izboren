@@ -55,7 +55,9 @@ const SubjectCatalog = () => {
 	};
 
 	const openSubjectDetails = (subject: Subject) => {
-		setSelectedSubject(subjectData[subject.id - 1]);
+		setSelectedSubject(
+			subjectData.find((item) => item.id == subject.id) ?? null
+		);
 		setShowModal(true);
 	};
 
