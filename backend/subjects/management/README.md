@@ -1,6 +1,6 @@
-## guide
+# guide
 
-### Data
+## Data
 
 - `abstracts.json` - JSON containing short descriptions for each subject
 - `courses.json` - array containing the names of all subjects.
@@ -11,7 +11,15 @@
 - `participants.json` - array listing all courses with their number of participants.
 - `prerequisites.json` - array of subject prerequisites (as strings).
 - `professors.json` - array of all subjects with their respective professors and assistants.
+- `subject_details.json` - JSON containing all subjects and relevant information about them, aggregated from the other data files..
 - `subjects_by_program.json` - JSON listing all subjects and the programs for which they are mandatory.
+
+## Commands
+
+the template for running commands is:
+`python3 manage.py <filename>`
+
+> Make sure you exclude the .py extension from the filename
 
 ### Scrapers
 

@@ -1,0 +1,1064 @@
+[
+	{
+		"code": "F18L1S003, F23L1S003",
+		"course": "Архитектура и организација на компјутери",
+		"level": 1,
+		"link": "https://finki.ukim.mk/subject/F23L1S003"
+	},
+	{
+		"code": "F18L1W005, F23L1W005",
+		"course": "Бизнис и менаџмент",
+		"level": 1,
+		"link": "https://finki.ukim.mk/subject/F23L1W005"
+	},
+	{
+		"code": "F18L1S023, F23L1S023",
+		"course": "Бизнис статистика",
+		"level": 1,
+		"link": "https://finki.ukim.mk/subject/F23L1S023"
+	},
+	{
+		"code": "F18L1W007, F23L1W007",
+		"course": "Вовед во компјутерските науки",
+		"level": 1,
+		"link": "https://finki.ukim.mk/subject/F23L1W007"
+	},
+	{
+		"code": "F18L1W041, F23L2W041",
+		"course": "Дизајн на дигитални кола",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2W041"
+	},
+	{
+		"code": "F18L1W011, F23L2S011",
+		"course": "Дискретна математика",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2S011"
+	},
+	{
+		"code": "F18L1W031, F23L2W031",
+		"course": "Дискретни структури 1",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2W031"
+	},
+	{
+		"code": "F18L1S032, F23L2S032",
+		"course": "Дискретни структури 2",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2S032"
+	},
+	{
+		"code": "F18L1S052, F23L1S052",
+		"course": "Е-учење",
+		"level": 1,
+		"link": "https://finki.ukim.mk/subject/F23L1S052"
+	},
+	{
+		"code": "F18L1S013, F23L2W002",
+		"course": "Математика 1",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2W002"
+	},
+	{
+		"code": "F18L1W033, F23L2W033",
+		"course": "Калкулус 1",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2W033"
+	},
+	{
+		"code": "F18L1S034, F23L2S034",
+		"course": "Калкулус 2",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2S034"
+	},
+	{
+		"code": "F18L1S045, F23L1S045",
+		"course": "Компјутерски архитектури",
+		"level": 1,
+		"link": "https://finki.ukim.mk/subject/F23L1S045"
+	},
+	{
+		"code": "F18L1S116, F23L1S116",
+		"course": "Компјутерски компоненти",
+		"level": 1,
+		"link": "https://finki.ukim.mk/subject/F23L1S116"
+	},
+	{
+		"code": "F18L1S120, F23L1S120",
+		"course": "Креативни вештини за решавање проблеми",
+		"level": 1,
+		"link": "https://finki.ukim.mk/subject/F23L1S120"
+	},
+	{
+		"code": "F18L1S026, F23L2S026",
+		"course": "Маркетинг",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L1S026"
+	},
+	{
+		"code": "F18L1S015, F23L2S015",
+		"course": "Објектно ориентирана анализа и дизајн",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2S015"
+	},
+	{
+		"code": "F18L1S016, F23L1S016",
+		"course": "Објектно-ориентирано програмирање",
+		"level": 1,
+		"link": "https://finki.ukim.mk/subject/F23L1S016"
+	},
+	{
+		"code": "F18L1S146, F23L1S146",
+		"course": "Основи на Веб дизајн",
+		"level": 1,
+		"link": "https://finki.ukim.mk/subject/F23L1S146"
+	},
+	{
+		"code": "F18L1S066, F23L1S066",
+		"course": "Основи на сајбер безбедноста",
+		"level": 1,
+		"link": "https://finki.ukim.mk/subject/F23L2S066"
+	},
+	{
+		"code": "F18L1W070, F23L2W070",
+		"course": "Педагогија",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2W070"
+	},
+	{
+		"code": "F18L1W018, F23L1W018",
+		"course": "Професионални вештини",
+		"level": 1,
+		"link": "https://finki.ukim.mk/subject/F23L1W018"
+	},
+	{
+		"code": "F18L1W020, F23L1W020",
+		"course": "Структурно програмирање",
+		"level": 1,
+		"link": "https://finki.ukim.mk/subject/F23L1W020"
+	},
+	{
+		"code": "F18L1W049, F23L2W049",
+		"course": "Физика",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2W049"
+	},
+	{
+		"code": "F18L2W001, F23L2W001",
+		"course": "Алгоритми и податочни структури",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2W001"
+	},
+	{
+		"code": "F18L2S002, F23L2S002",
+		"course": "Анализа на софтверските барања",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2S002"
+	},
+	{
+		"code": "F18L2S061, F23L2S061",
+		"course": "Безжични и мобилни системи",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2S061"
+	},
+	{
+		"code": "F18L2W006, F23L2W006",
+		"course": "Веројатност и статистика",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2W006"
+	},
+	{
+		"code": "F18L2S030, F23L2S030",
+		"course": "Вештачка интелигенција",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2S030"
+	},
+	{
+		"code": "F18L2S082, F23L2S082",
+		"course": "Визуелно програмирање",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2S082"
+	},
+	{
+		"code": "F18L2S084, F23L2S084",
+		"course": "Вовед во екоинформатиката",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2S084"
+	},
+	{
+		"code": "F18L2S090, F23L2S090",
+		"course": "Вовед во случајни процеси",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2S090"
+	},
+	{
+		"code": "F18L2S095, F23L2S095",
+		"course": "Дигитално процесирање на слика",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2S095"
+	},
+	{
+		"code": "F18L2W096, F23L2W096",
+		"course": "Дигитизација",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2W096"
+	},
+	{
+		"code": "F18L2S097, F23L2S097",
+		"course": "Дизајн на алгоритми",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2S097"
+	},
+	{
+		"code": "F18L2S099, F23L2S099",
+		"course": "Е-влада",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2S099"
+	},
+	{
+		"code": "F18L2S100, F23L2W100",
+		"course": "Економија за ИКТ инженери",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2W100"
+	},
+	{
+		"code": "F18L2S042, F23L2S042",
+		"course": "Електрични кола",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2S042"
+	},
+	{
+		"code": "F18L2S051, F23L2S051",
+		"course": "Информатичко размислување во образованието",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2S051"
+	},
+	{
+		"code": "F18L2W104, F23L2W104",
+		"course": "Инженерска математика",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2W104"
+	},
+	{
+		"code": "F18L2W109, F23L2W109",
+		"course": "Интернет програмирање на клиентска страна",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2W109"
+	},
+	{
+		"code": "F18L2S110, F23L2S110",
+		"course": "Интернет технологии",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2S110"
+	},
+	{
+		"code": "F18L2S114, F23L2S114",
+		"course": "Компјутерска графика",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2S114"
+	},
+	{
+		"code": "F18L2W046, F23L2W046",
+		"course": "Компјутерски мрежи",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2W046"
+	},
+	{
+		"code": "F18L2W014, F23L2W014",
+		"course": "Компјутерски мрежи и безбедност",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2W014"
+	},
+	{
+		"code": "F18L2S119, F23L2S119",
+		"course": "Концепти на информатичко општество",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2S119"
+	},
+	{
+		"code": "F18L2S124, F23L2S124",
+		"course": "Медиуми и комуникации",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2S124"
+	},
+	{
+		"code": "F18L3W055, F23L2W055",
+		"course": "Мултимедијални технологии",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2W055"
+	},
+	{
+		"code": "F18L2W140, F23L3W140",
+		"course": "Напредно програмирање",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L3W140"
+	},
+	{
+		"code": "F18L2S143, F23L3W162",
+		"course": "Квантно пресметување",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L3W162"
+	},
+	{
+		"code": "F18L2S017, F23L2S017",
+		"course": "Оперативни системи",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2S017"
+	},
+	{
+		"code": "F18L2W147, F23L2W147",
+		"course": "Основи на комуникациски системи",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2W147"
+	},
+	{
+		"code": "F18L2W067, F23L2W067",
+		"course": "Основи на теоријата на информации",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2W067"
+	},
+	{
+		"code": "F18L2S029, F23L2S029",
+		"course": "Софтверско инженерство",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2S029"
+	},
+	{
+		"code": "F18L2S164, F23L2S164",
+		"course": "Теорија на информации со дигитални комуникации",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2S164"
+	},
+	{
+		"code": "F18L2W165, F23L2W165",
+		"course": "Управување со техничка поддршка",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2W165"
+	},
+	{
+		"code": "F18L2W167, F23L2W167",
+		"course": "Шаблони за дизајн на кориснички интерфејси",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2W167"
+	},
+	{
+		"code": "F18L3S073, F23L3S073",
+		"course": "Агентно-базирани системи",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S073"
+	},
+	{
+		"code": "F18L3S059, F23L3S059",
+		"course": "Администрација на мрежи",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S059"
+	},
+	{
+		"code": "F18L3W060, F23L3W060",
+		"course": "Администрација на системи",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W060"
+	},
+	{
+		"code": "F18L3W004, F23L3W004",
+		"course": "Бази на податоци",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W004"
+	},
+	{
+		"code": "F18L3S040, F23L3S040",
+		"course": "Вградливи микропроцесорски системи",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S040"
+	},
+	{
+		"code": "F18L3W024, F23L3W024",
+		"course": "Веб програмирање",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W024"
+	},
+	{
+		"code": "F18L3W081, F23L3W081",
+		"course": "Визуелизација",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W081"
+	},
+	{
+		"code": "F18L3S062, F23L3S062",
+		"course": "Виртуелизација",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S062"
+	},
+	{
+		"code": "F18L3S087, F23L3S087",
+		"course": "Вовед во мрежна наука",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S087"
+	},
+	{
+		"code": "F18L3W008, F23L3W008",
+		"course": "Вовед во науката за податоци",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W008"
+	},
+	{
+		"code": "F18L3S091, F23L3S091",
+		"course": "Географски информациски системи",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S091"
+	},
+	{
+		"code": "F18L3S093, F23L3S093",
+		"course": "Дигитална форензика",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S093"
+	},
+	{
+		"code": "F18L3S094, F23L3S094",
+		"course": "Дигитални библиотеки",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S094"
+	},
+	{
+		"code": "F18L3W009, F23L3W009",
+		"course": "Дизајн и архитектура на софтвер",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W009"
+	},
+	{
+		"code": "F18L3S010, F23L3S010",
+		"course": "Дизајн на интеракцијата човек-компјутер",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S010"
+	},
+	{
+		"code": "F18L3W050, F23L3W050",
+		"course": "Дизајн на образовен софтвер",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W050"
+	},
+	{
+		"code": "F18L3S025, F23L3S025",
+		"course": "Електронска и мобилна трговија",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S025"
+	},
+	{
+		"code": "F18L3S012, F23L3S012",
+		"course": "Интегрирани системи",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S012"
+	},
+	{
+		"code": "F18L3W043, F23L3W043",
+		"course": "Информациска безбедност",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W043"
+	},
+	{
+		"code": "F18L3S111, F23L3S111",
+		"course": "Инфраструктурно програмирање",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S111"
+	},
+	{
+		"code": "F18L3W044, F23L3W044",
+		"course": "Компјутерска електроника",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W044"
+	},
+	{
+		"code": "F18L3W053, F23L3W053",
+		"course": "Компјутерска етика",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W053"
+	},
+	{
+		"code": "F18L3W115, F23L3S115",
+		"course": "Компјутерски звук, музика и говор",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S115"
+	},
+	{
+		"code": "F18L3S118, F23L3S118",
+		"course": "Континуирана интеграција и испорака",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S118"
+	},
+	{
+		"code": "F18L3S122, F23L3S122",
+		"course": "Криптографија",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S122"
+	},
+	{
+		"code": "F18L3W035, F23L3W035",
+		"course": "Линеарна алгебра и примени",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W035"
+	},
+	{
+		"code": "F18L3S036, F23L3S036",
+		"course": "Машинско учење",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S036"
+	},
+	{
+		"code": "F18L3S125, F23L3S125",
+		"course": "Мерење и анализа на сообраќај",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S125"
+	},
+	{
+		"code": "F18L3W065, F23L3W065",
+		"course": "Сајбер безбедност",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W065"
+	},
+	{
+		"code": "F18L3W134, F23L3W134",
+		"course": "Мултимедиски мрежи",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W134"
+	},
+	{
+		"code": "F18L3S135, F23L3S135",
+		"course": "Мултимедиски системи",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S135"
+	},
+	{
+		"code": "F18L3W136, F23L3W136",
+		"course": "Напреден веб дизајн",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W136"
+	},
+	{
+		"code": "F18L3W148, F23L3W148",
+		"course": "Основи на роботиката",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W148"
+	},
+	{
+		"code": "F18L3W037, F23L3W037",
+		"course": "Паралелно и дистрибуирано процесирање",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W037"
+	},
+	{
+		"code": "F18L3S149, F23L3S149",
+		"course": "Паралелно програмирање",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S149"
+	},
+	{
+		"code": "F18L3S056, F23L3W056",
+		"course": "Персонализирано учење",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W056"
+	},
+	{
+		"code": "F18L3S150, F23L3S150",
+		"course": "Податочно рударење",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S150"
+	},
+	{
+		"code": "F18L3S047, F23L3S047",
+		"course": "Процесирање на сигналите",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S047"
+	},
+	{
+		"code": "F18L3S153, F23L3S153",
+		"course": "Вештачка интелигенција за игри",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S153"
+	},
+	{
+		"code": "F18L3S071, F23L3S071",
+		"course": "Психологија на училишна возраст",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S071"
+	},
+	{
+		"code": "F18L3S057, F23L3S057",
+		"course": "Работа со надарени ученици",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S057"
+	},
+	{
+		"code": "F18L3S155, F23L3S155",
+		"course": "Сервисно ориентирани архитектури",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S155"
+	},
+	{
+		"code": "F18L3S158, F23L3W158",
+		"course": "Современи компјутерски архитектури",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W158"
+	},
+	{
+		"code": "F18L3S159, F23L3S159",
+		"course": "Софтверски дефинирана безбедност",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S159"
+	},
+	{
+		"code": "F18L3S019, F23L3S019",
+		"course": "Софтверски квалитет и тестирање",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S019"
+	},
+	{
+		"code": "F18L3S163, F23L3S163",
+		"course": "Автоматизирање на процеси во машинско учење",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S163"
+	},
+	{
+		"code": "F18L3S166, F23L3S166",
+		"course": "Учење на далечина",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S166"
+	},
+	{
+		"code": "F18L3S039, F23L3S039",
+		"course": "Основи на теоријата на компјутерските науки",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S039"
+	},
+	{
+		"code": "F18L3W072, F23L3W072",
+		"course": "Автономна роботика",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W072"
+	},
+	{
+		"code": "F18L3W074, F23L3W074",
+		"course": "Администрација на бази податоци",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W074"
+	},
+	{
+		"code": "F18L3W075, F23L3W075",
+		"course": "Анализа и дизајн на ИС",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W075"
+	},
+	{
+		"code": "F18L3S07, F23L3S078",
+		"course": "Биолошки инспирирано пресметување",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S078"
+	},
+	{
+		"code": "F18L3S121, F23L3W121",
+		"course": "Блоковски вериги и криптовалути",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W121"
+	},
+	{
+		"code": "F18L3W079, F23L3W079",
+		"course": "Веб базирани системи",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W079"
+	},
+	{
+		"code": "F18L3S080, F23L3S080",
+		"course": "Веб пребарувачки системи",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S080"
+	},
+	{
+		"code": "F18L3S083, F23L3S083",
+		"course": "Виртуелна реалност",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S083"
+	},
+	{
+		"code": "F18L3W076, F23L3W076",
+		"course": "Вовед во анализа на временските серии",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W076"
+	},
+	{
+		"code": "F18L3W085, F23L3W085",
+		"course": "Вовед во биоинформатиката",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W085"
+	},
+	{
+		"code": "F18L3S086, F23L3S086",
+		"course": "Вовед во когнитивни науки",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S086"
+	},
+	{
+		"code": "F18L3W088, F23L3W088",
+		"course": "Вовед во паметни градови",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W088"
+	},
+	{
+		"code": "F18L3W089, F23L3W089",
+		"course": "Вовед во препознавање на облици",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W089"
+	},
+	{
+		"code": "F18L3W092, F23L3W092",
+		"course": "Дигитална постпродукција",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W092"
+	},
+	{
+		"code": "F18L3S063, F23L3S063",
+		"course": "Дизајн на компјутерски мрежи",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S063"
+	},
+	{
+		"code": "F18L3S168, F23L3S168",
+		"course": "Дипломска работа",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S168"
+	},
+	{
+		"code": "F18L3W064, F23L3W064",
+		"course": "Дистрибуирани системи",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W064"
+	},
+	{
+		"code": "F18L3W098, F23L3W098",
+		"course": "Дистрибуирано складирање на податоци",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W098"
+	},
+	{
+		"code": "F18L3S101, F23L3S101",
+		"course": "Етичко хакирање",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S101"
+	},
+	{
+		"code": "F18L3S102, F23L3S102",
+		"course": "ИКТ за развој",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S102"
+	},
+	{
+		"code": "F18L3W103, F23L3W103",
+		"course": "Имплементација на софтверски системи со слободен и отворен код",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W103"
+	},
+	{
+		"code": "F18L3W105, F23L3W105",
+		"course": "Иновации во ИКТ",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W105"
+	},
+	{
+		"code": "F18L3S106, F23L3S106",
+		"course": "Откривање знаење со длабоко учење",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S106"
+	},
+	{
+		"code": "F18L3S107, F23L3S107",
+		"course": "Интелигентни системи",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S107"
+	},
+	{
+		"code": "F18L3W108, F23L3W108",
+		"course": "Интернет на нештата",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W108"
+	},
+	{
+		"code": "F18L3S113, F23L3S113",
+		"course": "Компјутерска анимација",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S113"
+	},
+	{
+		"code": "F18L3W117, F23L3W117",
+		"course": "Компјутерски поддржано производство",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W117"
+	},
+	{
+		"code": "F18L3S069, F23L3S070",
+		"course": "Македонски јазик",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S070"
+	},
+	{
+		"code": "F18L3W123, F23L3W123",
+		"course": "Машинска визија",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W123"
+	},
+	{
+		"code": "F18L3W027, F23L3W027",
+		"course": "Менаџмент информациски системи",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W027"
+	},
+	{
+		"code": "F18L3S054, F23L3S054",
+		"course": "Методика на информатиката",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S054"
+	},
+	{
+		"code": "F18L3W126, F23L3W126",
+		"course": "Методологија на истражувањето во ИКТ",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W126"
+	},
+	{
+		"code": "F18L3S127, F23L3S127",
+		"course": "Мобилни апликации",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S127"
+	},
+	{
+		"code": "F18L3W128, F23L3W128",
+		"course": "Мобилни информациски системи",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W128"
+	},
+	{
+		"code": "F18L3W129, F23L3W129",
+		"course": "Мобилни платформи и програмирање",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W129"
+	},
+	{
+		"code": "F18L3S130, F23L3S130",
+		"course": "Моделирање и менаџирање на бизнис процеси",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S130"
+	},
+	{
+		"code": "F18L3W131, F23L3S131",
+		"course": "Моделирање и симулација",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S131"
+	},
+	{
+		"code": "F18L3S132, F23L3S132",
+		"course": "Модерни трендови во роботика",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S132"
+	},
+	{
+		"code": "F18L3W133, F23L3W133",
+		"course": "Мрежна и мобилна форензика",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W133"
+	},
+	{
+		"code": "F18L3W137, F23L3W137",
+		"course": "Напредна интеракција човек компјутер",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W137"
+	},
+	{
+		"code": "F18L3S138, F23L3S138",
+		"course": "Напредни бази на податоци",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S138"
+	},
+	{
+		"code": "F18L3S139, F23L3S139",
+		"course": "Web3 апликации",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S139"
+	},
+	{
+		"code": "F18L3S141, F23L3S141",
+		"course": "Неструктурирани бази на податоци",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S141"
+	},
+	{
+		"code": "F18L3W142, F23L3W142",
+		"course": "Обработка на природните јазици",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W142"
+	},
+	{
+		"code": "F18L3W144, F23L3S144",
+		"course": "Операциони истражувања",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S144"
+	},
+	{
+		"code": "F18L3W145, F23L3W145",
+		"course": "Оптички мрежи",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W145"
+	},
+	{
+		"code": "F18L3S151",
+		"course": "Пресметковна биологија",
+		"level": 3,
+		"link": "https://www.finki.ukim.mk/mk/subject/%D0%BF%D1%80%D0%B5%D1%81%D0%BC%D0%B5%D1%82%D0%BA%D0%BE%D0%B2%D0%BD%D0%B0-%D0%B1%D0%B8%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D1%98%D0%B0"
+	},
+	{
+		"code": "F18L3W068, F23L3W068",
+		"course": "Пресметување во облак",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W068"
+	},
+	{
+		"code": "F18L3S028, F23L3S028",
+		"course": "Претприемништво",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S028"
+	},
+	{
+		"code": "F18L3W152, F23L3W152",
+		"course": "Програмирање на видео игри",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W152"
+	},
+	{
+		"code": "F18L3S112, F23L3S112",
+		"course": "Програмски јазици и компајлери",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S112"
+	},
+	{
+		"code": "F18L3W038, F23L3W038",
+		"course": "Програмски парадигми",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W038"
+	},
+	{
+		"code": "F18L3W154, F23L3W154",
+		"course": "Вовед во рударење на масивни податоци",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W154"
+	},
+	{
+		"code": "F18L3W058, F23L3W058",
+		"course": "Самостоен проект",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W058"
+	},
+	{
+		"code": "F18L3W156, F23L3W156",
+		"course": "Системи за поддршка при одлучувањето",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W156"
+	},
+	{
+		"code": "F18L3S157, F23L3S157",
+		"course": "Складови на податоци и аналитичка обработка",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S157"
+	},
+	{
+		"code": "F18L3W048, F23L3W048",
+		"course": "Софтвер за вградливи системи",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W048"
+	},
+	{
+		"code": "F18L3W160, F23L3S160",
+		"course": "Софтверски дефинирани мрежи",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S160"
+	},
+	{
+		"code": "F18L3W161, F23L3W161",
+		"course": "Теорија на графови и социјални мрежи",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W161"
+	},
+	{
+		"code": "F18L3S162, F23L3S162",
+		"course": "Споделување и пресметување во толпа",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S162"
+	},
+	{
+		"code": "F18L3W021, F23L3W021",
+		"course": "Тимски проект",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W021"
+	},
+	{
+		"code": "F18L3S022, F23L3S022",
+		"course": "Управување со ИКТ проекти",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S022"
+	},
+	{
+		"code": "F23L1W003",
+		"course": "Вовед во бази на податоци и SQL",
+		"level": 1,
+		"link": "https://finki.ukim.mk/subject/F23L1W003"
+	},
+	{
+		"code": "F23L2W201",
+		"course": "Примена на алгоритми и податочни структури",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2W201"
+	},
+	{
+		"code": "F23L3W001",
+		"course": "Математика 3",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W001"
+	},
+	{
+		"code": "F23L2W003",
+		"course": "Избрани теми од математика",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2W003"
+	},
+	{
+		"code": "F23L2S001",
+		"course": "Математика 2",
+		"level": 2,
+		"link": "https://finki.ukim.mk/subject/F23L2S001"
+	},
+	{
+		"code": "F23L3W033",
+		"course": "Тестирање на софтвер",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W033"
+	},
+	{
+		"code": "F23L3W200",
+		"course": "Сензорски системи",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3W200"
+	},
+	{
+		"code": "F23L3S069",
+		"course": "Адаптивни и интерактивни веб информациски системи",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S069"
+	},
+	{
+		"code": "F23L1W004",
+		"course": "Спорт и здравје",
+		"level": 1,
+		"link": "https://finki.ukim.mk/subject/F23L1W004"
+	},
+	{
+		"code": "F23L3S100",
+		"course": "Деловна пракса",
+		"level": 3,
+		"link": "https://finki.ukim.mk/subject/F23L3S100"
+	}
+]

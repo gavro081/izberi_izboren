@@ -5,17 +5,27 @@ from subjects.models import Subject, Subject_Info
 from pathlib import Path
 
 class Command(BaseCommand):
-    help = "Drop existing tables and fill db with subjects and subject info from JSON"
+    help = "Fill db with subjects and subject info from JSON"
 
-    def handle(self, *args, **kwargs):
-        Subject_Info.objects.all().delete()
-        Subject.objects.all().delete()
-        self.stdout.write(self.style.SUCCESS('Existing data cleared successfully!'))
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '--reset',
+            action='store_true',
+            help='Delete existing Subjects and Subject_Info before filling.'
+        )
 
-        base_dir = Path(__file__).resolve().parent
-        data_path = base_dir / 'subject_details.json'
+    def handle(self, *args, **options):
+        reset_db = options['reset']
+
+        if reset_db:
+            self.stdout.write("Reset flag enabled: Clearing existing database entries...")
+            Subject_Info.objects.all().delete()
+            Subject.objects.all().delete()
+
+        base_dir = Path(__file__).resolve().parent.parent
+        file_path = base_dir / 'data' / 'subject_details.json'
         
-        with open(data_path, 'r', encoding='utf-8') as f:
+        with open(file_path, 'r', encoding='utf-8') as f:
             subject_details = json.load(f)
 
         for item in subject_details.values():
@@ -71,5 +81,5 @@ class Command(BaseCommand):
         
         Subject_Info.objects.bulk_create(subject_infos)
         
-        self.stdout.write(self.style.SUCCESS('Database filled successfully!'))
+        self.stdout.write(self.style.SUCCESS('Database filled successfully.'))
         
