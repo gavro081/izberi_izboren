@@ -1,18 +1,19 @@
 import json
 
 information_file_path = '../data/information.json' # code, subject name, level
-prerequisites_file_path = '../data/prerequisites.json' # short name, prereq, semester
+# prerequisites_file_path = '../data/prerequisites.json' # short name, prereq, semester
 participants_file_path = '../data/participants.json' # participant counts
 subjects_by_program_file_path = '../data/subjects_by_program.json' # which subjects are mandatory and in which semester
 professors_file_path = '../data/professors.json' # teaching staff for each subject'
 elective_file_path = '../data/elective.json' # which elective subjects can a certain program choose from
 abstract_file_path = '../data/abstracts.json' # short descriptions for all subjects
+formatted_prereqs_file_path = '../data/formatted_prereqs.json' # prerequisites for each subject
 
 try:
     with open(information_file_path, 'r', encoding='utf-8') as f:
         information_data = json.load(f)
-    with open(prerequisites_file_path, 'r', encoding='utf-8') as f:
-        prerequisites_data = json.load(f)
+    # with open(prerequisites_file_path, 'r', encoding='utf-8') as f:
+    #     prerequisites_data = json.load(f)
     with open(participants_file_path, 'r', encoding='utf-8') as f:
         participants_data = json.load(f)
     with open(subjects_by_program_file_path, 'r', encoding='utf-8') as f:
@@ -23,6 +24,8 @@ try:
         elective_data = json.load(f)
     with open(abstract_file_path, 'r', encoding='utf-8') as f:
         abstract_data = json.load(f)
+    with open(formatted_prereqs_file_path, 'r', encoding='utf-8') as f:
+        formatted_prereq_data = json.load(f)
 except FileNotFoundError as e:
     print(f"Error: Could not find file: {e.filename}")
     exit(1)
@@ -46,11 +49,19 @@ for entry in information_data:
         "abstract": abstract_data[course]
     }
 
-for entry in prerequisites_data:
-    code, course, prerequisite, _ = entry.values()
+# for entry in prerequisites_data:
+#     code, course, prerequisite, _ = entry.values()
+#     if course in subject_data:
+#         subject_data[course]['short'] = code
+#         subject_data[course]['prerequisite'] = prerequisite
+#     else:
+#         print(f"Error: Course {course} is not in subject data")
+
+for course in formatted_prereq_data:
+    code, prereqs = formatted_prereq_data[course].values()
     if course in subject_data:
-        subject_data[course]['short'] = code
-        subject_data[course]['prerequisite'] = prerequisite
+        subject_data[course]["short"] = code
+        subject_data[course]["prerequisite"] = prereqs
     else:
         print(f"Error: Course {course} is not in subject data")
 
