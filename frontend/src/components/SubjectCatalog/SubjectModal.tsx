@@ -1,11 +1,34 @@
+import { useState } from "react";
 import { Subject } from "./types";
 
 interface SubjectModalProps {
 	selectedSubject: Subject;
+	subjectPrerequisites: string[] | number | "Нема предуслов";
 	closeModal: () => void;
 }
 
-function SubjectModal({ selectedSubject, closeModal }: SubjectModalProps) {
+function SubjectModal({
+	selectedSubject,
+	closeModal,
+	subjectPrerequisites,
+}: SubjectModalProps) {
+	const [isExpanded, setIsExpanded] = useState(false);
+
+	const WORD_LIMIT = 40;
+
+	const truncateText = (text: string) => {
+		if (!text) return "";
+		const words = text.split(/\s+/);
+		console.log(words.slice(0, WORD_LIMIT).join(" ") + "...");
+		return words.length <= WORD_LIMIT
+			? text
+			: words.slice(0, WORD_LIMIT).join(" ") + "...";
+	};
+
+	const canToggle = selectedSubject.abstract.split(/\s+/).length > WORD_LIMIT;
+	const abstractText = isExpanded
+		? selectedSubject.abstract
+		: truncateText(selectedSubject.abstract);
 	return (
 		<>
 			<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
@@ -38,7 +61,17 @@ function SubjectModal({ selectedSubject, closeModal }: SubjectModalProps) {
 						</div>
 
 						<div className="mb-4">
-							<p className="">{selectedSubject.abstract}</p>
+							<span className="inline">
+								<span className="">{abstractText}</span>
+								{canToggle && (
+									<button
+										className="text-blue-500 hover:underline ml-1 inline"
+										onClick={() => setIsExpanded(!isExpanded)}
+									>
+										{isExpanded ? "Прочитај помалку" : "Прочитај повеќе"}
+									</button>
+								)}
+							</span>
 						</div>
 
 						<div className="mb-2">
@@ -123,9 +156,11 @@ function SubjectModal({ selectedSubject, closeModal }: SubjectModalProps) {
 										<div>
 											<p className="text-sm text-gray-500">Предуслови:</p>
 											<p className="font-medium">
-												{selectedSubject.info.prerequisite.length == 0
-													? "Нема предуслов"
-													: selectedSubject.info.prerequisite}
+												{Array.isArray(subjectPrerequisites)
+													? subjectPrerequisites.join(" или ")
+													: typeof subjectPrerequisites === "number"
+													? `${subjectPrerequisites} кредити`
+													: subjectPrerequisites}
 											</p>
 										</div>
 									</div>

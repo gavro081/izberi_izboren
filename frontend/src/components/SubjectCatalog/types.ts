@@ -8,10 +8,12 @@ export interface Subject {
 	info: SubjectInfo;
 }
 
+type Prerequisite = { subjects: number[] } | { credits: number } | {};
+
 export interface SubjectInfo {
 	level: number;
 	short: string;
-	prerequisite: string;
+	prerequisite: Prerequisite;
 	activated: boolean;
 	participants: number[];
 	mandatory: boolean;

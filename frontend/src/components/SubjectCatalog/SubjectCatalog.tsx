@@ -55,13 +55,28 @@ const SubjectCatalog = () => {
 	};
 
 	const openSubjectDetails = (subject: Subject) => {
-		setSelectedSubject(subjectData[subject.id - 1]);
+		setSelectedSubject(
+			subjectData.find((item) => item.id == subject.id) ?? null
+		);
 		setShowModal(true);
 	};
 
 	const closeModal = () => {
 		setShowModal(false);
 	};
+
+	const getSubjectPrerequisites = () => {
+		if (!selectedSubject) return "Нема предуслов";
+		return "subjects" in selectedSubject?.info.prerequisite
+			? selectedSubject.info.prerequisite.subjects.map(
+					(item) =>
+						subjectData.find((subject) => subject.id === item)?.name || "/"
+			  )
+			: "credits" in selectedSubject.info.prerequisite
+			? selectedSubject.info.prerequisite.credits
+			: "Нема предуслов";
+	};
+
 	return (
 		<div className="mx-auto p-4 bg-white min-h-screen">
 			<h1 className="text-3xl font-bold mb-6">Преглед на сите предмети</h1>
@@ -157,6 +172,7 @@ const SubjectCatalog = () => {
 				<SubjectModal
 					selectedSubject={selectedSubject}
 					closeModal={closeModal}
+					subjectPrerequisites={getSubjectPrerequisites()}
 				/>
 			)}
 		</div>
