@@ -1,7 +1,26 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.contrib.postgres.fields import ArrayField
 # Create your models here.
+
+class UserManager(BaseUserManager):
+    def create_user(self, email, password=None, **extra_fields):
+        if not email:
+            raise ValueError('The Email field but be set')
+        email = self.normalize_email(email)
+        extra_fields.setdefault('username', email)
+
+        user = self.model(email=email, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+    def create_superuser(self, email, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('username', email)
+
+        return self.create_user(email, password, **extra_fields)
+    
 class User(AbstractUser):
     USER_TYPE_CHOICES = [
     ('student', 'Student'),
@@ -14,6 +33,8 @@ class User(AbstractUser):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
+    
+    objects = UserManager()
 
     def __str__(self):
         return self.email
@@ -45,6 +66,8 @@ class Student(models.Model):
     passed_subjects = models.ManyToManyField('subjects.subject', related_name="passed_subjects")
     enrolled_subjects = models.ManyToManyField('subjects.subject', related_name="enrolled_subjects")
 
+    
+
     def update_info(self, new_preferences):
         self.preferred_domains = new_preferences
         self.save()
@@ -55,3 +78,6 @@ class Student(models.Model):
 
     def get_user_info(self):
         return self
+
+
+    
