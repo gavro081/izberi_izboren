@@ -1,6 +1,7 @@
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate
 from rest_framework import serializers
 from django.contrib.auth.password_validation import validate_password
+from rest_framework.exceptions import AuthenticationFailed
 
 User = get_user_model()
 
@@ -28,3 +29,24 @@ class RegistrationSerializer(serializers.ModelSerializer):
         )
 
         return user
+
+class LoginSerializer(serializers.Serializer):
+    email = serializers.EmailField(required=True)
+    password = serializers.CharField(required=True, write_only=True)
+
+    def validate(self, data):
+        email = data.get('email')
+        password = data.get('password')
+
+        # AuthenticationFailed error
+        if email and password:
+            user = authenticate(username=email, password=password)
+            if user is None:
+                raise AuthenticationFailed('Invalid email or password')
+            if not user.is_active:
+                raise AuthenticationFailed('User account is disabled')
+            
+            data['user'] = user
+            return data
+        else:
+            serializers.ValidationError('Must include "email" and "password"')
