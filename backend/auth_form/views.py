@@ -23,7 +23,9 @@ class RegisterView(APIView):
             }, status=status.HTTP_201_CREATED)
 
         # If the serializer is not valid, return an error response
+        print(serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class LoginView(APIView):
     def post(self, request):
