@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios, { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import PasswordInput from "../components/PasswordInput";
+import { useAuth } from "../hooks/useAuth";
 
 interface RegisterForm {
   email: string;
@@ -22,6 +23,7 @@ const Register: React.FC = () => {
     Partial<RegisterForm> & { non_field_errors?: string[] }
   >({});
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -47,9 +49,8 @@ const Register: React.FC = () => {
         }
       );
 
-      const { token, userType } = response.data;
-      localStorage.setItem("token", token);
-      localStorage.setItem("userType", userType);
+      const { token } = response.data;
+      login(token);
       navigate("/");
     } catch (err: unknown) {
       const axiosError = err as AxiosError<{

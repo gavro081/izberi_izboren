@@ -2,6 +2,7 @@ import axios, { AxiosError } from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PasswordInput from "../components/PasswordInput";
+import { useAuth } from "../hooks/useAuth";
 
 interface LoginForm {
   email: string;
@@ -17,6 +18,7 @@ const Login: React.FC = () => {
     Partial<LoginForm> & { detail?: string[] }
   >({});
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -38,7 +40,7 @@ const Login: React.FC = () => {
         }
       );
       const token = response.data.token;
-      localStorage.setItem("token", token);
+      login(token);
       navigate("/");
     } catch (err: unknown) {
       const axiosError = err as AxiosError<{
