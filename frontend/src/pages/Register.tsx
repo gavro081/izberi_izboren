@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
+import PasswordInput from "../components/PasswordInput";
 
 interface RegisterForm {
   email: string;
@@ -17,7 +18,9 @@ const Register: React.FC = () => {
     fullName: "",
   });
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [errors, setErrors] = useState<
+    Partial<RegisterForm> & { non_field_errors?: string[] }
+  >({});
   const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,44 +32,41 @@ const Register: React.FC = () => {
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(null);
+    setErrors({});
     setLoading(true);
-
-    if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match.");
-      setLoading(false);
-      return;
-    }
 
     try {
       console.log(formData);
-      const response = await axios
-        .post("http://localhost:8000/auth/register/", {
+      const response = await axios.post(
+        "http://localhost:8000/auth/register/",
+        {
           email: formData.email,
           password: formData.password,
           confirm_password: formData.confirmPassword,
           full_name: formData.fullName,
-        })
-        .catch((error) => {
-          console.error(
-            "Registration failed:",
-            error.response?.data || error.message
-          );
-          setError(
-            error.response?.data?.error ||
-              "Registration failed. Please try again."
-          );
-        });
-        // property data does not exist on type 'void'?
-      const { token, userType } = response.data;
+        }
+      );
 
+      const { token, userType } = response.data;
       localStorage.setItem("token", token);
       localStorage.setItem("userType", userType);
-
       navigate("/");
-      // ovde ne znam sto so err i any da pravam :()
-    } catch (err: any) {
-      setError("Registration failed. Please try again.");
+    } catch (err: unknown) {
+      const axiosError = err as AxiosError<{
+        [key: string]: string[] | string;
+      }>;
+      if (axiosError.response && axiosError.response.data) {
+        const errorData = axiosError.response.data;
+        const normalizedErrors: { [key: string]: string[] } = {};
+        Object.entries(errorData).forEach(([field, message]) => {
+          normalizedErrors[field] = Array.isArray(message)
+            ? message
+            : [message];
+        });
+        setErrors(normalizedErrors);
+      } else {
+        setErrors({ non_field_errors: ["An unexpected error occurred."] });
+      }
     } finally {
       setLoading(false);
     }
@@ -78,7 +78,11 @@ const Register: React.FC = () => {
         className="bg-white p-6 rounded-lg shadow-md w-80"
       >
         <h2 className="text-xl font-semibold mb-4 text-center">Register</h2>
-        {error && <div className="text-red-500 mb-3 text-sm">{error}</div>}
+        {errors.non_field_errors && (
+          <div className="text-red-500 mb-3 text-sm">
+            {errors.non_field_errors[0]}
+          </div>
+        )}
         <input
           type="email"
           name="email"
@@ -88,23 +92,19 @@ const Register: React.FC = () => {
           placeholder="Email"
           className="w-full mb-3 p-2 border rounded"
         />
-        <input
-          type="password"
+        {errors.email && (
+          <p className="text-red-500 text-sm mb-2">{errors.email[0]}</p>
+        )}
+        <PasswordInput
           name="password"
-          required
           value={formData.password}
           onChange={handleChange}
-          placeholder="Password"
-          className="w-full mb-3 p-2 border rounded"
+          error={errors.password ? errors.password[0] : undefined}
         />
-        <input
-          type="password"
+        <PasswordInput
           name="confirmPassword"
-          required
-          value={formData.confirmPassword}
+          value={formData.password}
           onChange={handleChange}
-          placeholder="Confirm Password"
-          className="w-full mb-3 p-2 border rounded"
         />
         <input
           type="text"

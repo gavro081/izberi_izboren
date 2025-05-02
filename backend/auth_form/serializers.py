@@ -22,10 +22,13 @@ class RegistrationSerializer(serializers.ModelSerializer):
         fields = ['email', 'full_name', 'password', 'confirm_password']
     
     def validate(self, data):
+        errors = {}
         if not re.match(r"^[^@]+@(students\.)?finki\.ukim\.mk$", data['email']):
-            raise serializers.ValidationError("Email must be a valid FINKI email address")
+            errors['email'] = ["Email must be a valid FINKI email address"]
         if data['password'] != data['confirm_password']:
-            raise serializers.ValidationError("Passwords do not match")
+            errors['confirm_password'] = ["Passwords do not match"]
+        if errors:
+            raise serializers.ValidationError(errors)
         return data
     
     def create(self, validated_data):
