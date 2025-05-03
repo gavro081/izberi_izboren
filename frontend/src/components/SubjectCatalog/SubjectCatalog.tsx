@@ -40,6 +40,7 @@ const SubjectCatalog = () => {
     const fetchData = async () => {
       const response = await fetch("http://localhost:8000/subjects");
       const data = await response.json();
+      console.log(data);
       setSubjectData(data.subjects);
       setIsLoaded(true);
     };
