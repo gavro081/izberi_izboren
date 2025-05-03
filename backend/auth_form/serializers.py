@@ -4,6 +4,9 @@ from rest_framework import serializers
 from django.contrib.auth.password_validation import validate_password
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from .models import Student
+from subjects.models import Subject
+from subjects.serializers import SubjectSerializer
 
 User = get_user_model()
 
@@ -63,3 +66,15 @@ class LoginSerializer(serializers.Serializer):
             return data
         else:
             serializers.ValidationError('Must include "email" and "password"')
+
+class StudentFormSerializer(serializers.ModelSerializer):
+    passed_subjects = serializers.PrimaryKeyRelatedField(queryset=Subject.objects.all(), many=True)
+
+    class Meta:
+        model = Student
+        exclude = ['user', 'has_filled_form']
+    
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+        rep['passed_subjects'] = SubjectSerializer(instance.passed_subjects.all(), many=True).data
+        return rep

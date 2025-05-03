@@ -42,8 +42,8 @@ class User(AbstractUser):
         return self.user_type
 
 class Student(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='student_profile')
-    index = models.CharField(max_length=20, unique=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='student')
+    index = models.CharField(max_length=20, unique=True, null=True, blank=True)
 
     STUDY_TRACK_CHOICES = [
         ('SIIS23', 'SIIS'),
@@ -53,18 +53,17 @@ class Student(models.Model):
         ('IMB23', 'IMB'),
         ('PIT23', 'PIT'),
     ]
-    study_track = models.CharField(max_length=20, choices=STUDY_TRACK_CHOICES)
-
-    current_year = models.PositiveIntegerField()
-    study_effort = models.PositiveIntegerField(help_text="Hours per week")
-    preferred_domains = ArrayField(models.CharField(max_length=64))
-    preferred_technologies = ArrayField(models.CharField(max_length=64))
-    preferred_evaluation = ArrayField(models.CharField(max_length=16))
-    favorite_professors = ArrayField(models.CharField(max_length=16))
-
+    study_track = models.CharField(max_length=20, choices=STUDY_TRACK_CHOICES, null=True, blank=True)
+    has_filled_form = models.BooleanField(default=False)
     
-    passed_subjects = models.ManyToManyField('subjects.subject', related_name="passed_subjects")
-    enrolled_subjects = models.ManyToManyField('subjects.subject', related_name="enrolled_subjects")
+    current_year = models.PositiveIntegerField(null=True)
+    study_effort = models.PositiveIntegerField(help_text="Hours per week", null=True)
+    preferred_domains = ArrayField(models.CharField(max_length=64), null=True, blank=True)
+    preferred_technologies = ArrayField(models.CharField(max_length=64), null=True, blank=True)
+    preferred_evaluation = ArrayField(models.CharField(max_length=16), null=True, blank=True)
+    favorite_professors = ArrayField(models.CharField(max_length=16), null=True, blank=True)
+
+    passed_subjects = models.ManyToManyField('subjects.subject', related_name="passed_subjects", blank=True)
 
     
 
@@ -78,6 +77,15 @@ class Student(models.Model):
 
     def get_user_info(self):
         return self
+    
+    def get_subjects_info(self):
+        return [
+            {
+                'subject_name': subject.name,
+                'subject_info': subject.subject_info._dict__,
+            }
+            for subject in self.passed_subjects.all()
+        ]
 
 
     

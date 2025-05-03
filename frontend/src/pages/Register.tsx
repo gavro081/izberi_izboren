@@ -104,7 +104,7 @@ const Register: React.FC = () => {
         />
         <PasswordInput
           name="confirmPassword"
-          value={formData.password}
+          value={formData.confirmPassword}
           onChange={handleChange}
         />
         <input
