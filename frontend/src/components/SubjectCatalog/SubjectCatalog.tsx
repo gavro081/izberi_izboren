@@ -40,8 +40,8 @@ const SubjectCatalog = () => {
     const fetchData = async () => {
       const response = await fetch("http://localhost:8000/subjects");
       const data = await response.json();
-      console.log(data);
-      setSubjectData(data.subjects);
+	  // ova se eba poso veke data ne e data.subjects tuku e samo data (ne znam sto da se napravi)
+      setSubjectData(data);
       setIsLoaded(true);
     };
     fetchData();
