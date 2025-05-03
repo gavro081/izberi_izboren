@@ -3,7 +3,7 @@ import CourseCatalog from "./components/SubjectCatalog/SubjectCatalog";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
-import Form from "./pages/Form";
+import Account from "./pages/Account";
 import PrivateRoute from "./components/PrivateRoute";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -28,10 +28,10 @@ const router = createBrowserRouter([
       { path: "login", element: <Login /> },
       { path: "register", element: <Register /> },
       {
-        path: "form",
+        path: "account",
         element: (
           <PrivateRoute>
-            <Form />
+            <Account />
           </PrivateRoute>
         ),
       },

@@ -53,7 +53,6 @@ class StudentFormView(APIView):
         return [IsAuthenticated(), IsStudent()]
     
     def get(self, request):
-        print(request.user)
         student = request.user.student
         serializer = StudentFormSerializer(student)
         return Response(serializer.data)
