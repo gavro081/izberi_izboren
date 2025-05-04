@@ -21,7 +21,7 @@ export interface StudentData {
   	favorite_professors: string[]
 }
 
-type Prerequisite = { subjects: number[] } | { credits: number } | {};
+type Prerequisite = { subjects: number[] } | { credits: number } | { none: true };
 
 export interface SubjectInfo {
 	level: number;

@@ -32,46 +32,46 @@ export const filterSubjects = ({
       subject.abstract?.toLowerCase().includes(searchTerm.toLowerCase());
 
     const seasonMatches =
-      filters.season === "" || filters.season === subject.info.season;
+      filters.season === "" || filters.season === subject.subject_info.season;
 
     const semesterMatches =
       filters.semester.length === 0 ||
-      filters.semester.includes(subject.info.semester);
+      filters.semester.includes(subject.subject_info.semester);
 
     const levelMatches =
-      filters.level.length === 0 || filters.level.includes(subject.info.level);
+      filters.level.length === 0 || filters.level.includes(subject.subject_info.level);
 
     const activatedMatches =
       filters.activated == "" ||
-      (filters.activated == "activated" && subject.info.activated) ||
-      (filters.activated == "not_activated" && !subject.info.activated);
+      (filters.activated == "activated" && subject.subject_info.activated) ||
+      (filters.activated == "not_activated" && !subject.subject_info.activated);
 
     const mandatoryMatches =
       filters.mandatoryFor.length === 0 ||
-      subject.info.mandatory_for.some((item) =>
+      subject.subject_info.mandatory_for.some((item) =>
         filters.mandatoryFor.includes(item)
       );
 
     const electiveMatches =
       filters.electiveFor.length === 0 ||
-      subject.info.elective_for.some((item) =>
+      subject.subject_info.elective_for.some((item) =>
         filters.electiveFor.includes(item)
       );
 
     const professorsMatches =
       professorSearchTerm == "" ||
-      subject.info.professors.some((item) =>
+      subject.subject_info.professors.some((item) =>
         item.toLowerCase().includes(professorSearchTerm.toLowerCase())
       );
 
     const assistantsMatches =
       assistantSearchTerm == "" ||
-      subject.info.assistants.some((item) =>
+      subject.subject_info.assistants.some((item) =>
         item.toLowerCase().includes(assistantSearchTerm.toLowerCase())
       );
 
     const prerequisitesMatch =
-      !filters.hasPrerequisites || subject.info.prerequisite == "";
+      !filters.hasPrerequisites || subject.subject_info.prerequisite == null;
 
     return (
       searchMatches &&
@@ -117,15 +117,15 @@ export const getRandomStaff = (
   const getRandomProfessor = () => {
     const randomSubject1 =
       subjectData[Math.floor(Math.random() * subjectData.length)];
-    return randomSubject1?.info.professors[
-      Math.floor(Math.random() * randomSubject1.info.professors.length)
+    return randomSubject1?.subject_info.professors[
+      Math.floor(Math.random() * randomSubject1.subject_info.professors.length)
     ];
   };
   const getRandomAssistant = () => {
     const randomSubject2 =
       subjectData[Math.floor(Math.random() * subjectData.length)];
-    return randomSubject2?.info.assistants[
-      Math.floor(Math.random() * randomSubject2.info.assistants.length)
+    return randomSubject2?.subject_info.assistants[
+      Math.floor(Math.random() * randomSubject2.subject_info.assistants.length)
     ];
   };
   let randomProfessor = "";

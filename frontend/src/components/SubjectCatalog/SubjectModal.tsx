@@ -77,17 +77,17 @@ function SubjectModal({
             <div className="mb-2">
               <h3 className="text-lg font-medium">Професори:</h3>
               <p>
-                {selectedSubject.info.professors.length == 0
+                {selectedSubject.subject_info.professors.length == 0
                   ? "Нема одредени професори"
-                  : selectedSubject.info.professors.join(", ")}
+                  : selectedSubject.subject_info.professors.join(", ")}
               </p>
             </div>
             <div className="mb-4">
               <h3 className="text-lg font-medium">Асистенти:</h3>
               <p>
-                {selectedSubject.info.assistants.length == 0
+                {selectedSubject.subject_info.assistants.length == 0
                   ? "Нема одредени асистенти"
-                  : selectedSubject.info.assistants.join(", ")}
+                  : selectedSubject.subject_info.assistants.join(", ")}
               </p>
             </div>
 
@@ -104,7 +104,7 @@ function SubjectModal({
                         Препорачан семестар
                       </p>
                       <p className="font-medium">
-                        {selectedSubject.info.semester}
+                        {selectedSubject.subject_info.semester}
                       </p>
                     </div>
                   </div>
@@ -112,7 +112,7 @@ function SubjectModal({
                     <div>
                       <p className="text-sm text-gray-500">Зимски / Летен</p>
                       <p className="font-medium">
-                        {selectedSubject.info.season == "S"
+                        {selectedSubject.subject_info.season == "S"
                           ? "Летен"
                           : "Зимски"}
                       </p>
@@ -122,7 +122,7 @@ function SubjectModal({
                     <div>
                       <p className="text-sm text-gray-500">Ниво</p>
                       <p className="font-medium">
-                        L{selectedSubject.info.level}
+                        L{selectedSubject.subject_info.level}
                       </p>
                     </div>
                   </div>
@@ -132,9 +132,9 @@ function SubjectModal({
                     <div>
                       <p className="text-sm text-gray-500">Задолжителен за:</p>
                       <p className="font-medium">
-                        {selectedSubject.info.mandatory_for.length == 0
+                        {selectedSubject.subject_info.mandatory_for.length == 0
                           ? "Не е задолжителен предмет"
-                          : selectedSubject.info.mandatory_for
+                          : selectedSubject.subject_info.mandatory_for
                               .map((s) => s.replace(/\d+$/, ""))
                               .join(", ")}
                       </p>
@@ -144,9 +144,9 @@ function SubjectModal({
                     <div>
                       <p className="text-sm text-gray-500">Изборен за:</p>
                       <p className="font-medium">
-                        {selectedSubject.info.elective_for.length == 0
+                        {selectedSubject.subject_info.elective_for.length == 0
                           ? "Не е изборен предмет"
-                          : selectedSubject.info.elective_for
+                          : selectedSubject.subject_info.elective_for
                               .map((s) => s.replace(/\d+$/, ""))
                               .join(", ")}
                       </p>
@@ -168,13 +168,13 @@ function SubjectModal({
               </div>
             </div>
             <div>
-              {selectedSubject.info.participants[0] == 0 ? (
+              {selectedSubject.subject_info.participants[0] == 0 ? (
                 <div className="bg-red-500 py-3 pl-2 rounded-md">
                   Овој предмет не бил активиран минатиот семестар.
                 </div>
               ) : (
                 <p>{`Овој предмет минатиот семестар бил запишан од
-									${selectedSubject.info.participants[0]} студенти.`}</p>
+									${selectedSubject.subject_info.participants[0]} студенти.`}</p>
               )}
             </div>
             <div className="mt-6">

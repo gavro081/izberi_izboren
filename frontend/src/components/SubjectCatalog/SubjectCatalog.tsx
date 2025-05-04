@@ -40,7 +40,7 @@ const SubjectCatalog = () => {
     const fetchData = async () => {
       const response = await fetch("http://localhost:8000/subjects");
       const data = await response.json();
-	  // ova se eba poso veke data ne e data.subjects tuku e samo data (ne znam sto da se napravi)
+      console.log(data);
       setSubjectData(data);
       setIsLoaded(true);
     };
@@ -66,17 +66,26 @@ const SubjectCatalog = () => {
     setShowModal(false);
   };
 
-  const getSubjectPrerequisites = () => {
-    if (!selectedSubject) return "Нема предуслов";
-    return "subjects" in selectedSubject?.info.prerequisite
-      ? selectedSubject.info.prerequisite.subjects.map(
-          (item) =>
-            subjectData.find((subject) => subject.id === item)?.name || "/"
-        )
-      : "credits" in selectedSubject.info.prerequisite
-      ? selectedSubject.info.prerequisite.credits
-      : "Нема предуслов";
+  const getSubjectPrerequisites = (): "Нема предуслов" | number | string[] => {
+    const prerequisite = selectedSubject?.subject_info?.prerequisite;
+  
+    if (!prerequisite) return "Нема предуслов";
+  
+    if ("subjects" in prerequisite && Array.isArray(prerequisite.subjects)) {
+      const names = prerequisite.subjects.map(
+        (item) =>
+          subjectData.find((subject) => subject.id === item)?.name || "/"
+      );
+      return names.length > 0 ? names : "Нема предуслов";
+    }
+  
+    if ("credits" in prerequisite && typeof prerequisite.credits === "number") {
+      return prerequisite.credits;
+    }
+  
+    return "Нема предуслов";
   };
+  
 
   return (
     <div className="mx-auto p-4 bg-white min-h-screen">
