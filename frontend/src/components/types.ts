@@ -5,7 +5,20 @@ export interface Subject {
 	code: string;
 	name: string;
 	abstract: string;
-	info: SubjectInfo;
+	subject_info: SubjectInfo;
+}
+
+export interface StudentData {
+	id: number;
+	index: string;
+	study_track: Programs;
+	current_year: number;
+	passed_subjects: Subject[];
+  	study_effort: string,
+  	preferred_domains: string[],
+  	preferred_technologies: string[],
+  	preferred_evaluation: string[],
+  	favorite_professors: string[]
 }
 
 type Prerequisite = { subjects: number[] } | { credits: number } | {};

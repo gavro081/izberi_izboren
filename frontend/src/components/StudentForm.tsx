@@ -1,21 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
-
-interface Subject {
-  id: number;
-  name: string;
-  study_track: string;
-  year: number;
-  professors: string[];
-}
+import { StudentData } from "./types";
+import { Subject } from "./types";
+import { Programs } from "./types";
 
 interface StudentFormProps {
-  formData: any;
+  formData: StudentData | null;
   subjects: Subject[];
   professors: string[];
 }
 
-const STUDY_TRACKS = ["SIIS", "SEIS", "PIT", "KI", "KN", "IMB"];
+// IE apparently is not valid in the backend, SEIS is
+
+const STUDY_TRACKS = ["SIIS23", "IE23", "PIT23", "KI23", "KN23", "IMB23"];
 const STUDY_EFFORT = [1, 2, 3, 4, 5];
 const YEARS = [1, 2, 3, 4];
 const DOMAINS = ["Web Dev", "AI", "Data Science"];
@@ -26,9 +23,11 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
   const { token } = useAuth();
 
   const [index, setIndex] = useState(formData?.index || "");
-  const [studyTrack, setStudyTrack] = useState(formData?.study_track || "");
+  const [studyTrack, setStudyTrack] = useState<Programs | "">(
+    (formData?.study_track as Programs) || ""
+  );
   const [year, setYear] = useState(formData?.current_year || 1);
-  const [passedSubjects, setPassedSubjects] = useState<number[]>(
+  const [passedSubjects, setPassedSubjects] = useState<Subject[]>(
     formData?.passed_subjects || []
   );
   const [studyEffort, setStudyEffort] = useState(formData?.study_effort || "");
@@ -38,7 +37,9 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
   const [technologies, setTechnologies] = useState<string[]>(
     formData?.preferred_technologies || []
   );
-  const [evaluation, setEvaluation] = useState(formData?.preferred_evaluation || "");
+  const [evaluation, setEvaluation] = useState(
+    formData?.preferred_evaluation || ""
+  );
   const [favoriteProfs, setFavoriteProfs] = useState<string[]>(
     formData?.favorite_professors || []
   );
@@ -55,22 +56,31 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
     }
   };
 
+  const toggleSubject = (subject: Subject) => {
+    const exists = passedSubjects.some((s) => s.id === subject.id);
+    if (exists) {
+      setPassedSubjects(passedSubjects.filter((s) => s.id !== subject.id));
+    } else {
+      setPassedSubjects([...passedSubjects, subject]);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    
     const payload = {
       index,
       study_track: studyTrack,
       current_year: year,
-      passed_subjects: passedSubjects,
+      passed_subjects: passedSubjects.map(subject => subject.id),
       study_effort: studyEffort,
       preferred_domains: domains,
       preferred_technologies: technologies,
-      preferred_evaluation: evaluation,
+      preferred_evaluation: [evaluation],
       favorite_professors: favoriteProfs,
     };
-
-    const method = formData ? "PUT" : "POST";
+    
+    const method = formData?.current_year ? "PUT" : "POST";
     const endpoint = "http://localhost:8000/auth/form/";
 
     const res = await fetch(endpoint, {
@@ -85,11 +95,16 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
     const data = await res.json();
     if (res.ok) alert("Form submitted successfully!");
     else alert("Error submitting form.");
+    console.log(data);
   };
 
-  const filteredSubjects = subjects.filter(
-    (subj) => subj.study_track === studyTrack && subj.year <= year
-  );
+  const filteredSubjects = studyTrack
+    ? subjects.filter(
+        (subj) =>
+          subj.subject_info.mandatory_for.includes(studyTrack) &&
+          subj.subject_info.semester <= year * 2
+      )
+    : [];
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -103,7 +118,7 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
 
       <select
         value={studyTrack}
-        onChange={(e) => setStudyTrack(e.target.value)}
+        onChange={(e) => setStudyTrack(e.target.value as Programs | "")}
         className="input"
       >
         <option value="">Choose Track</option>
@@ -129,21 +144,60 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
       <div>
         <h3 className="font-semibold mb-1">Passed Subjects</h3>
         <div className="flex flex-wrap gap-2">
-          {filteredSubjects.map((subject) => (
-            <button
-              type="button"
-              key={subject.id}
-              onClick={() =>
-                toggleSelection(subject.id, setPassedSubjects, passedSubjects)
-              }
-              className={`px-2 py-1 border rounded ${
-                passedSubjects.includes(subject.id) ? "bg-blue-200" : ""
-              }`}
-            >
-              {subject.name}
-            </button>
-          ))}
+          {filteredSubjects.map((subject) => {
+            const isSelected = passedSubjects.some((s) => s.id === subject.id);
+            return (
+              <button
+                type="button"
+                key={subject.id}
+                onClick={() => toggleSubject(subject)}
+                className={`flex items-center gap-6 px-3 py-2 border rounded-md transition-all duration-200 ease-in-out
+                  ${
+                    isSelected
+                      ? "bg-green-500 text-white border-green-600 shadow-md transform scale-105"
+                      : "bg-white text-gray-800 border-gray-300 hover:bg-gray-100"
+                  }`}
+                aria-pressed={isSelected}
+              >
+                {isSelected && (
+                  <span className="flex items-center justify-center text-white">
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M5 13l4 4L19 7"
+                      ></path>
+                    </svg>
+                  </span>
+                )}
+                {subject.name}
+              </button>
+            );
+          })}
         </div>
+      </div>
+
+      <div>
+        <h3 className="font-semibold mb-1">Study Effort</h3>
+        <select
+          value={studyEffort}
+          onChange={(e) => setStudyEffort(e.target.value)}
+          className="input"
+        >
+          <option value="">Select effort</option>
+          {STUDY_EFFORT.map((effort) => (
+            <option key={effort} value={effort}>
+              {effort}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div>

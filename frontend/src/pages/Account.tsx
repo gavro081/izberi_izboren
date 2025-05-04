@@ -1,26 +1,18 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import StudentForm from "../components/StudentForm";
-
-interface Subject {
-  id: number;
-  name: string;
-  study_track: string;
-  year: number;
-  subject_info: {
-    professors: string[];
-  }
-}
+import { Subject } from "../components/types";
+import { StudentData } from "../components/types";
 
 const Account = () => {
   const { token } = useAuth();
-  const [formData, setFormData] = useState<any>(null);
+  const [formData, setFormData] = useState<StudentData | null>(null);
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [professors, setProfessors] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const resForm = await fetch("http://localhost:8000/auth/form", {
+      const resForm = await fetch("http://localhost:8000/auth/form/", {
         headers: { Authorization: `Bearer ${token}` },
       });
       const formJson = await resForm.json();
@@ -29,16 +21,16 @@ const Account = () => {
       }
 
       const resSubjects = await fetch("http://localhost:8000/subjects");
-      const subJson = await resSubjects.json();
       if (resSubjects.ok) {
+        const subJson: Subject[] = await resSubjects.json();
         setSubjects(subJson || []);
-        console.log(subJson)
-        const allProfessors = subJson.subject_info.professors
-          .flatMap((subject: Subject) => subject.subject_info.professors);
-        console.log(allProfessors)
+        const allProfessors: string[] = subJson
+          .flatMap((subject: Subject) => subject.subject_info.professors)
+          .filter((p): p is string => typeof p === "string");
+
         const uniqueProfessors = Array.from(new Set(allProfessors));
-        console.log(uniqueProfessors)
-        setProfessors(uniqueProfessors);
+        const filteredProfessors = uniqueProfessors.filter((prof) => prof.trim().toLowerCase() !== 'сите професори');
+        setProfessors(filteredProfessors);
       }
     };
 
@@ -48,7 +40,11 @@ const Account = () => {
   return (
     <div className="p-4">
       <h1 className="text-2xl mb-4">Account info</h1>
-      <StudentForm formData={formData} subjects={subjects} professors={professors} />
+      <StudentForm
+        formData={formData}
+        subjects={subjects}
+        professors={professors}
+      />
     </div>
   );
 };

@@ -9,7 +9,7 @@ const Navbar: React.FC = () => {
     logout();
     navigate("/");
   };
-  console.log(isAuthenticated); // Log to check state changes
+
 
   return (
     <nav className="p-4 bg-gray-800 text-white flex justify-between">

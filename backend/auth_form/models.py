@@ -61,6 +61,7 @@ class Student(models.Model):
     preferred_domains = ArrayField(models.CharField(max_length=64), null=True, blank=True)
     preferred_technologies = ArrayField(models.CharField(max_length=64), null=True, blank=True)
     preferred_evaluation = ArrayField(models.CharField(max_length=16), null=True, blank=True)
+    # update max_length to 64
     favorite_professors = ArrayField(models.CharField(max_length=16), null=True, blank=True)
 
     passed_subjects = models.ManyToManyField('subjects.subject', related_name="passed_subjects", blank=True)

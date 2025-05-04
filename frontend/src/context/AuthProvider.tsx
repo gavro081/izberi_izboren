@@ -5,7 +5,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [token, setToken] = useState<string | null>(localStorage.getItem("token"));
-
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
     if (storedToken !== token) {
@@ -13,6 +12,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     }
   }, [token]);
   const login = (newToken: string) => {
+    console.log("Logging in with token:", newToken);
     localStorage.setItem("token", newToken);
     setToken(newToken);
   };
