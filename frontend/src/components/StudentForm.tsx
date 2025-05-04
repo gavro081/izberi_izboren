@@ -138,7 +138,7 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
 
     try {
       // For updating existing form data use PATCH instead of PUT for partial updates
-      const method = formData ? "PATCH" : "POST";
+      const method = formData?.current_year ? "PATCH" : "POST";
       const endpoint = "http://localhost:8000/auth/form/";
 
       const res = await fetch(endpoint, {
@@ -191,7 +191,7 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
   return (
     <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl mx-auto">
       <h2 className="text-2xl font-bold mb-4">
-        {formData ? "Ажурирај ги податоците" : "Внеси податоци"}
+        {formData?.current_year ? "Ажурирај ги податоците" : "Внеси податоци"}
       </h2>
 
       {formStatus.message && (
