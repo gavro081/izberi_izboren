@@ -9,11 +9,6 @@ interface LoginForm {
   password: string;
 }
 
-interface AuthResponse {
-  
-  access: string;
-}
-
 const Login: React.FC = () => {
   const [formData, setFormData] = useState<LoginForm>({
     email: "",
@@ -44,10 +39,8 @@ const Login: React.FC = () => {
           password: formData.password,
         }
       );
-      const data = response.data;
-      // Fix this error: ts related
-      const token = data.access;
-      login(token);
+      const { access, refresh } = response.data;
+      login(access, refresh);
       navigate("/");
     } catch (err: unknown) {
       const axiosError = err as AxiosError<{

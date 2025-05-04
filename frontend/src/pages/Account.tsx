@@ -5,7 +5,7 @@ import { Subject } from "../components/types";
 import { StudentData } from "../components/types";
 
 const Account = () => {
-  const { token } = useAuth();
+  const { accessToken } = useAuth();
   const [formData, setFormData] = useState<StudentData | null>(null);
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [professors, setProfessors] = useState<string[]>([]);
@@ -13,7 +13,7 @@ const Account = () => {
   useEffect(() => {
     const fetchData = async () => {
       const resForm = await fetch("http://localhost:8000/auth/form/", {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${accessToken}` },
       });
       const formJson = await resForm.json();
       if (resForm.ok) {
@@ -34,7 +34,7 @@ const Account = () => {
     };
 
     fetchData();
-  }, [token]);
+  }, [accessToken]);
 
   return (
     <div className="p-4">

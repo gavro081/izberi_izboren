@@ -49,8 +49,8 @@ const Register: React.FC = () => {
         }
       );
 
-      const { token } = response.data;
-      login(token);
+      const { access, refresh } = response.data;
+      login(access, refresh);
       navigate("/");
     } catch (err: unknown) {
       const axiosError = err as AxiosError<{

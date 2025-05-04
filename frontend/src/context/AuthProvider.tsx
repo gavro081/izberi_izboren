@@ -1,32 +1,74 @@
 import React, { useState, useEffect, ReactNode } from "react";
 import AuthContext, { AuthContextType } from "./AuthContext";
+import axios from "axios";
 
+const refreshAccessToken = async (): Promise<string | null> => {
+  const refreshToken = localStorage.getItem("refresh_token");
+  if (!refreshToken) {
+    return null;
+  }
+  try {
+    const response = await axios.post<{ access: string }>(
+      "http://localhost:8000/auth/refresh/",
+      {
+        refresh: refreshToken,
+      }
+    );
+    const newAccessToken = response.data.access;
+    localStorage.setItem("access_token", newAccessToken);
+    return newAccessToken;
+  } catch (error) {
+    console.error("Error refrershing access token:", error);
+    return null;
+  }
+};
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [token, setToken] = useState<string | null>(localStorage.getItem("token"));
+  const [accessToken, setAccessToken] = useState<string | null>(
+    localStorage.getItem("access_token")
+  );
+  const [refreshToken, setRefreshToken] = useState<string | null>(
+    localStorage.getItem("refresh_token")
+  );
   useEffect(() => {
-    const storedToken = localStorage.getItem("token");
-    if (storedToken !== token) {
-      setToken(storedToken);
+    const storedAccessToken = localStorage.getItem("access_token");
+    const storedRefreshToken = localStorage.getItem("refresh_token");
+
+    if (storedAccessToken !== accessToken) {
+      setAccessToken(storedAccessToken);
     }
-  }, [token]);
-  const login = (newToken: string) => {
-    console.log("Logging in with token:", newToken);
-    localStorage.setItem("token", newToken);
-    setToken(newToken);
+
+    if (storedRefreshToken !== refreshToken) {
+      setAccessToken(storedRefreshToken);
+    }
+
+  }, [accessToken, refreshToken]);
+  const login = (newAccessToken: string, newRefreshToken: string) => {
+    console.log("Logging in with access token:", newAccessToken);
+    console.log("Refresh token:", newRefreshToken);
+    localStorage.setItem("access_token", newAccessToken);
+    localStorage.setItem("refresh_token", newRefreshToken);
+    setAccessToken(newAccessToken);
+    setRefreshToken(newRefreshToken);
   };
+
   const logout = () => {
-    localStorage.removeItem("token");
-    setToken(null);
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
+    setAccessToken(null);
+    setRefreshToken(null);
   };
-  const isAuthenticated = !!token;
+
+  const isAuthenticated = !!accessToken;
 
   const contextValue: AuthContextType = {
-    token,
+    accessToken,
+    refreshToken,
     login,
     logout,
     isAuthenticated,
+    refreshAccessToken,
   };
   return (
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
