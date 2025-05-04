@@ -19,10 +19,11 @@ const Account = () => {
       if (resForm.ok) {
         setFormData(formJson);
       }
-
+      console.log(formJson);
       const resSubjects = await fetch("http://localhost:8000/subjects");
       if (resSubjects.ok) {
         const subJson: Subject[] = await resSubjects.json();
+        console.log(subJson);
         setSubjects(subJson || []);
         const allProfessors: string[] = subJson
           .flatMap((subject: Subject) => subject.subject_info.professors)

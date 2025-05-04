@@ -10,8 +10,6 @@ interface StudentFormProps {
   professors: string[];
 }
 
-// IE apparently is not valid in the backend, SEIS is
-
 const STUDY_TRACKS = ["SIIS23", "IE23", "PIT23", "KI23", "KN23", "IMB23"];
 const STUDY_EFFORT = [1, 2, 3, 4, 5];
 const YEARS = [1, 2, 3, 4];
@@ -67,19 +65,19 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const payload = {
       index,
       study_track: studyTrack,
       current_year: year,
-      passed_subjects: passedSubjects.map(subject => subject.id),
+      passed_subjects: passedSubjects.map((subject) => subject.id),
       study_effort: studyEffort,
       preferred_domains: domains,
       preferred_technologies: technologies,
       preferred_evaluation: [evaluation],
       favorite_professors: favoriteProfs,
     };
-    
+
     const method = formData?.current_year ? "PUT" : "POST";
     const endpoint = "http://localhost:8000/auth/form/";
 
@@ -98,19 +96,25 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
     console.log(data);
   };
 
-  const filteredSubjects = studyTrack
+  const filteredMandatorySubjects = studyTrack
     ? subjects.filter(
         (subj) =>
           subj.subject_info.mandatory_for.includes(studyTrack) &&
           subj.subject_info.semester <= year * 2
       )
     : [];
-
+  const filteredElectiveSubjects = studyTrack
+    ? subjects.filter(
+        (subj) =>
+          subj.subject_info.elective_for.includes(studyTrack) &&
+          subj.subject_info.semester <= year * 2
+      )
+    : [];
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <input
         type="text"
-        placeholder="Index"
+        placeholder="Индекс"
         value={index}
         onChange={(e) => setIndex(e.target.value)}
         className="input"
@@ -136,33 +140,78 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
       >
         {YEARS.map((y) => (
           <option key={y} value={y}>
-            {y}. year
+            {y}. година
           </option>
         ))}
       </select>
 
       <div>
-        <h3 className="font-semibold mb-1">Passed Subjects</h3>
+        <h3 className="font-semibold mb-1">Положени предмети</h3>
         <div className="flex flex-wrap gap-2">
-          {filteredSubjects.map((subject) => {
+          {filteredMandatorySubjects.map((subject) => {
             const isSelected = passedSubjects.some((s) => s.id === subject.id);
             return (
               <button
                 type="button"
                 key={subject.id}
                 onClick={() => toggleSubject(subject)}
-                className={`flex items-center gap-6 px-3 py-2 border rounded-md transition-all duration-200 ease-in-out
+                className={`flex items-center gap-6 px-3 py-2 border rounded-md transition-all duration-200 ease-in-out 
                   ${
                     isSelected
-                      ? "bg-green-500 text-white border-green-600 shadow-md transform scale-105"
+                      ? "bg-green-500 text-white border-green-600 shadow-md transform "
                       : "bg-white text-gray-800 border-gray-300 hover:bg-gray-100"
                   }`}
+                // for accessibility
                 aria-pressed={isSelected}
               >
                 {isSelected && (
                   <span className="flex items-center justify-center text-white">
                     <svg
-                      className="w-4 h-4"
+                      className="w-6 h-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M5 13l4 4L19 7"
+                      ></path>
+                    </svg>
+                  </span>
+                )}
+                {subject.name}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <div>
+        <h3 className="font-semibold mb-1">Положени изборни предмети</h3>
+        <div className="flex flex-wrap gap-2">
+          {filteredElectiveSubjects.map((subject) => {
+            const isSelected = passedSubjects.some((s) => s.id === subject.id);
+            return (
+              <button
+                type="button"
+                key={subject.id}
+                onClick={() => toggleSubject(subject)}
+                className={`flex items-center gap-6 px-3 py-2 border rounded-md transition-all duration-200 ease-in-out 
+                  ${
+                    isSelected
+                      ? "bg-green-500 text-white border-green-600 shadow-md transform "
+                      : "bg-white text-gray-800 border-gray-300 hover:bg-gray-100"
+                  }`}
+                // for accessibility
+                aria-pressed={isSelected}
+              >
+                {isSelected && (
+                  <span className="flex items-center justify-center text-white">
+                    <svg
+                      className="w-6 h-6"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -255,7 +304,7 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
       </div>
 
       <div>
-        <h3 className="font-semibold mb-1">Favorite Professors</h3>
+        <h3 className="font-semibold mb-1">Омилени професори</h3>
         <div className="mt-2 flex flex-wrap gap-2">
           {professors.map((prof) => (
             <button
