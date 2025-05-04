@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'subjects',
     'rest_framework',
     'rest_framework_simplejwt',
-    'auth_form'
+    'rest_framework_simplejwt.token_blacklist',
+    'auth_form',
 ]
 
 REST_FRAMEWORK = {

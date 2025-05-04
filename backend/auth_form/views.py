@@ -20,9 +20,12 @@ class RegisterView(APIView):
         if serializer.is_valid():
             # Step 3: Save the user
             user = serializer.save()
+            refresh = RefreshToken.for_user(user)
 
             # Step 4: Return a success response
             return Response({
+                'refresh': str(refresh),
+                'access': str(refresh.access_token),
                 'message': 'User registered successfully',
                 'user': serializer.data
             }, status=status.HTTP_201_CREATED)
@@ -60,6 +63,10 @@ class StudentFormView(APIView):
         return Response(serializer.data)
     
     def post(self, request):
+        print(request.data)
+        if hasattr(request.user, 'student') and request.user.student.has_filled_form:
+            return Response({"detail": "Student profile already exists."}, status=status.HTTP_400_BAD_REQUEST)
+        
         serializer = StudentFormSerializer(instance=request.user.student, data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -68,7 +75,9 @@ class StudentFormView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-    def put(self, request):
+    def patch(self, request):
+        if not hasattr(request.user, 'student'):
+            return Response({"detail": "No student profile found."}, status=status.HTTP_404_NOT_FOUND)
         serializer = StudentFormSerializer(instance=request.user.student, data=request.data)
         if serializer.is_valid():
             serializer.save()

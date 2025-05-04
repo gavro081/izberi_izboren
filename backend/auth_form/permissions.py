@@ -1,7 +1,7 @@
 from rest_framework.permissions import BasePermission
 
 class IsStudent(BasePermission):
-    def has_permssion(self, request, view):
+    def has_perimssion(self, request, view):
         return hasattr(request.user, 'student')
     
 class CanSubmitForm(BasePermission):

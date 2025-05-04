@@ -48,8 +48,9 @@ const Register: React.FC = () => {
           full_name: formData.fullName,
         }
       );
-
+      console.log(response);
       const { access, refresh } = response.data;
+      console.log(access, refresh);
       login(access, refresh);
       navigate("/");
     } catch (err: unknown) {

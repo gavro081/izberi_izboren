@@ -4,6 +4,7 @@ import axios from "axios";
 
 const refreshAccessToken = async (): Promise<string | null> => {
   const refreshToken = localStorage.getItem("refresh_token");
+  console.log(refreshToken);
   if (!refreshToken) {
     return null;
   }
@@ -14,6 +15,7 @@ const refreshAccessToken = async (): Promise<string | null> => {
         refresh: refreshToken,
       }
     );
+    console.log(response);
     const newAccessToken = response.data.access;
     localStorage.setItem("access_token", newAccessToken);
     return newAccessToken;
