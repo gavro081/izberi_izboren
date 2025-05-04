@@ -19,11 +19,9 @@ const Account = () => {
       if (resForm.ok) {
         setFormData(formJson);
       }
-      console.log(formJson);
       const resSubjects = await fetch("http://localhost:8000/subjects");
       if (resSubjects.ok) {
         const subJson: Subject[] = await resSubjects.json();
-        console.log(subJson);
         setSubjects(subJson || []);
         const allProfessors: string[] = subJson
           .flatMap((subject: Subject) => subject.subject_info.professors)
@@ -40,7 +38,7 @@ const Account = () => {
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl mb-4">Account info</h1>
+      <h1 className="text-2xl mb-4">Лични информации</h1>
       <StudentForm
         formData={formData}
         subjects={subjects}

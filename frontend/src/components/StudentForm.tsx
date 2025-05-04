@@ -13,13 +13,15 @@ interface StudentFormProps {
 const STUDY_TRACKS = ["SIIS23", "IE23", "PIT23", "KI23", "KN23", "IMB23"];
 const STUDY_EFFORT = [1, 2, 3, 4, 5];
 const YEARS = [1, 2, 3, 4];
-const DOMAINS = ["Web Dev", "AI", "Data Science"];
-const TECHNOLOGIES = ["React", "Django", "Flutter"];
-const EVALUATIONS = ["Exams", "Projects", "Presentations"];
+const DOMAINS = ["Web Dev", "AI", "Data Science", "Немам"];
+const TECHNOLOGIES = ["React", "Django", "Flutter", "Немам"];
+const EVALUATIONS = ["Испити", "Проекти", "Семинарски", "Немам"];
 
 const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
   const { token } = useAuth();
-
+  const [validationErrors, setValidationErrors] = useState<{
+    [key: string]: string;
+  }>({});
   const [index, setIndex] = useState(formData?.index || "");
   const [studyTrack, setStudyTrack] = useState<Programs | "">(
     (formData?.study_track as Programs) || ""
@@ -41,6 +43,27 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
   const [favoriteProfs, setFavoriteProfs] = useState<string[]>(
     formData?.favorite_professors || []
   );
+
+  const validateForm = () => {
+    const errors: { [key: string]: string } = {};
+
+    if (!index.trim()) {
+      errors.index = "Индексот e задолжителен.";
+    } else if (!/^\d{6}$/.test(index)) {
+      // Validate if index is exactly 6 digits
+      errors.index = "Индексот треба да има точно 6 цифри.";
+    }
+    if (!studyTrack) errors.studyTrack = "Избери насока.";
+    if (!year) errors.year = "Избери година.";
+    if (!studyEffort) errors.studyEffort = "Избери пожелен вложен труд.";
+    if (passedSubjects.length === 0)
+      errors.passedSubjects = "Избери барем еден предмет.";
+    if (domains.length === 0) errors.domains = "Избери барем едно поле.";
+    if (technologies.length === 0)
+      errors.technologies = "Избери барем една технологија.";
+    if (!evaluation) errors.evaluation = "Избери тип на оценување.";
+    return errors;
+  };
 
   const toggleSelection = (
     value: string | number,
@@ -66,6 +89,13 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    const errors = validateForm();
+    if (Object.keys(errors).length > 0) {
+      setValidationErrors(errors);
+      return;
+    }
+    setValidationErrors({});
+
     const payload = {
       index,
       study_track: studyTrack,
@@ -89,11 +119,8 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
       },
       body: JSON.stringify(payload),
     });
-
-    const data = await res.json();
     if (res.ok) alert("Form submitted successfully!");
     else alert("Error submitting form.");
-    console.log(data);
   };
 
   const filteredMandatorySubjects = studyTrack
@@ -112,41 +139,55 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
     : [];
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <input
-        type="text"
-        placeholder="Индекс"
-        value={index}
-        onChange={(e) => setIndex(e.target.value)}
-        className="input"
-      />
-
-      <select
-        value={studyTrack}
-        onChange={(e) => setStudyTrack(e.target.value as Programs | "")}
-        className="input"
-      >
-        <option value="">Choose Track</option>
-        {STUDY_TRACKS.map((track) => (
-          <option key={track} value={track}>
-            {track}
-          </option>
-        ))}
-      </select>
-
-      <select
-        value={year}
-        onChange={(e) => setYear(Number(e.target.value))}
-        className="input"
-      >
-        {YEARS.map((y) => (
-          <option key={y} value={y}>
-            {y}. година
-          </option>
-        ))}
-      </select>
-
       <div>
-        <h3 className="font-semibold mb-1">Положени предмети</h3>
+        <input
+          type="text"
+          placeholder="Индекс"
+          value={index}
+          onChange={(e) => setIndex(e.target.value)}
+          className="input"
+        />
+        {validationErrors.index && (
+          <span className="text-red-600 text-sm">{validationErrors.index}</span>
+        )}
+      </div>
+      <div>
+        <select
+          value={studyTrack}
+          onChange={(e) => setStudyTrack(e.target.value as Programs | "")}
+          className="input"
+        >
+          <option value="">Смер</option>
+          {STUDY_TRACKS.map((track) => (
+            <option key={track} value={track}>
+              {track}
+            </option>
+          ))}
+        </select>
+        {validationErrors.studyTrack && (
+          <span className="text-red-600 text-sm">
+            {validationErrors.studyTrack}
+          </span>
+        )}
+      </div>
+      <div>
+        <select
+          value={year}
+          onChange={(e) => setYear(Number(e.target.value))}
+          className="input"
+        >
+          {YEARS.map((y) => (
+            <option key={y} value={y}>
+              {y}. година
+            </option>
+          ))}
+        </select>
+        {validationErrors.year && (
+          <span className="text-red-600 text-sm">{validationErrors.year}</span>
+        )}
+      </div>
+      <div>
+        <h3 className="font-semibold mb-1">Положени задолжителни предмети</h3>
         <div className="flex flex-wrap gap-2">
           {filteredMandatorySubjects.map((subject) => {
             const isSelected = passedSubjects.some((s) => s.id === subject.id);
@@ -188,7 +229,11 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
           })}
         </div>
       </div>
-
+      {validationErrors.passedSubjects && (
+        <span className="text-red-600 text-sm">
+          {validationErrors.passedSubjects}
+        </span>
+      )}
       <div>
         <h3 className="font-semibold mb-1">Положени изборни предмети</h3>
         <div className="flex flex-wrap gap-2">
@@ -232,15 +277,19 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
           })}
         </div>
       </div>
-
+      {validationErrors.passedSubjects && (
+        <span className="text-red-600 text-sm">
+          {validationErrors.passedSubjects}
+        </span>
+      )}
       <div>
-        <h3 className="font-semibold mb-1">Study Effort</h3>
+        <h3 className="font-semibold mb-1">Вложен труд</h3>
         <select
           value={studyEffort}
           onChange={(e) => setStudyEffort(e.target.value)}
           className="input"
         >
-          <option value="">Select effort</option>
+          <option value="">Одбери колку труд вложуваш при учење</option>
           {STUDY_EFFORT.map((effort) => (
             <option key={effort} value={effort}>
               {effort}
@@ -248,9 +297,13 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
           ))}
         </select>
       </div>
-
+      {validationErrors.studyEffort && (
+        <span className="text-red-600 text-sm">
+          {validationErrors.studyEffort}
+        </span>
+      )}
       <div>
-        <h3 className="font-semibold mb-1">Preferred Domains</h3>
+        <h3 className="font-semibold mb-1">Полиња на интерес</h3>
         <div className="flex gap-2 flex-wrap">
           {DOMAINS.map((d) => (
             <button
@@ -266,9 +319,11 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
           ))}
         </div>
       </div>
-
+      {validationErrors.domains && (
+        <span className="text-red-600 text-sm">{validationErrors.domains}</span>
+      )}
       <div>
-        <h3 className="font-semibold mb-1">Preferred Technologies</h3>
+        <h3 className="font-semibold mb-1">Преферирани технологии</h3>
         <div className="flex gap-2 flex-wrap">
           {TECHNOLOGIES.map((tech) => (
             <button
@@ -286,15 +341,19 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
           ))}
         </div>
       </div>
-
+      {validationErrors.technologies && (
+        <span className="text-red-600 text-sm">
+          {validationErrors.technologies}
+        </span>
+      )}
       <div>
-        <h3 className="font-semibold mb-1">Preferred Evaluation Method</h3>
+        <h3 className="font-semibold mb-1">Преферирани начин на оценување</h3>
         <select
           value={evaluation}
           onChange={(e) => setEvaluation(e.target.value)}
           className="input"
         >
-          <option value="">Select Evaluation</option>
+          <option value="">Како сакаш да те оценат</option>
           {EVALUATIONS.map((ev) => (
             <option key={ev} value={ev}>
               {ev}
@@ -302,7 +361,11 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
           ))}
         </select>
       </div>
-
+      {validationErrors.evaluation && (
+        <span className="text-red-600 text-sm">
+          {validationErrors.evaluation}
+        </span>
+      )}
       <div>
         <h3 className="font-semibold mb-1">Омилени професори</h3>
         <div className="mt-2 flex flex-wrap gap-2">
@@ -322,13 +385,19 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
           ))}
         </div>
       </div>
-
-      <button
-        type="submit"
-        className="bg-blue-600 text-white px-4 py-2 rounded"
-      >
-        Submit
-      </button>
+      {validationErrors.favoriteProfessors && (
+        <span className="text-red-600 text-sm">
+          {validationErrors.favoriteProfessors}
+        </span>
+      )}
+      <div>
+        <button
+          type="submit"
+          className="bg-blue-600 text-white px-4 py-2 rounded"
+        >
+          Submit
+        </button>
+      </div>
     </form>
   );
 };

@@ -14,9 +14,9 @@ const Navbar: React.FC = () => {
   return (
     <nav className="p-4 bg-gray-800 text-white flex justify-between">
       <div className="space-x-4">
-        <Link to="/">Home</Link>
-        <Link to="/subjects">Subjects</Link>
-        {isAuthenticated && <Link to="/account">Account</Link>}
+        <Link to="/">Дома</Link>
+        <Link to="/subjects">Предмети</Link>
+        {isAuthenticated && <Link to="/account">Профил</Link>}
       </div>
 
       <div>
