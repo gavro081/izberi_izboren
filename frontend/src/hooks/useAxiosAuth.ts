@@ -22,8 +22,9 @@ const useAxiosAuth = () => {
         if (error.response?.status === 401 && !originalRequest._retry) {
           originalRequest._retry = true;
           const newToken = await refreshAccessToken();
-
+          localStorage.setItem("access_token", newToken || "");
           if (newToken) {
+            axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${newToken}`;
             originalRequest.headers["Authorization"] = `Bearer ${newToken}`;
             return axiosInstance(originalRequest);
           } else {

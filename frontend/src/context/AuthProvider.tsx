@@ -2,34 +2,6 @@ import React, { useState, useEffect, ReactNode } from "react";
 import AuthContext, { AuthContextType } from "./AuthContext";
 import axios from "axios";
 
-const refreshAccessToken = async (): Promise<string | null> => {
-  const refreshToken = localStorage.getItem("refresh_token");
-  console.log(refreshToken);
-  if (!refreshToken) {
-    return null;
-  }
-  try {
-    const response = await axios.post<{ access: string; refresh?: string }>(
-      "http://localhost:8000/auth/refresh/",
-      { refresh: refreshToken }
-    );
-    console.log(response);
-
-    const newAccessToken = response.data.access;
-
-    localStorage.setItem("access_token", newAccessToken);
-
-    if (response.data.refresh) {
-      const newRefreshToken = response.data.refresh;
-      localStorage.setItem("refresh_token", newRefreshToken);
-    }
-
-    return newAccessToken;
-  } catch (error) {
-    console.error("Error refrershing access token:", error);
-    return null;
-  }
-};
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
@@ -39,6 +11,32 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const [refreshToken, setRefreshToken] = useState<string | null>(
     localStorage.getItem("refresh_token")
   );
+  const refreshAccessToken = async (): Promise<string | null> => {
+    const refreshToken = localStorage.getItem("refresh_token")
+    if (!refreshToken) {
+      return null;
+    }
+    try {
+      const response = await axios.post<{ access: string; refresh?: string }>(
+        "http://localhost:8000/auth/refresh/",
+        { refresh: refreshToken }
+      );
+
+      const newAccessToken = response.data.access;
+      localStorage.setItem("access_token", newAccessToken);
+      setAccessToken(newAccessToken);
+      if (response.data.refresh) {
+        const newRefreshToken = response.data.refresh;
+        localStorage.setItem("refresh_token", newRefreshToken);
+        setRefreshToken(newRefreshToken);
+      }
+
+      return newAccessToken;
+    } catch (error) {
+      console.error("Error refrershing access token:", error);
+      return null;
+    }
+  };
   useEffect(() => {
     const storedAccessToken = localStorage.getItem("access_token");
     const storedRefreshToken = localStorage.getItem("refresh_token");
@@ -48,7 +46,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     }
 
     if (storedRefreshToken !== refreshToken) {
-      setAccessToken(storedRefreshToken);
+      setRefreshToken(storedRefreshToken);
     }
   }, [accessToken, refreshToken]);
   const login = (newAccessToken: string, newRefreshToken: string) => {

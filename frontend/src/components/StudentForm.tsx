@@ -321,8 +321,8 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
         ) : (
           <p className="text-gray-500 italic">
             {!studyTrack
-              ? "Избери смер и година за да се прикажат предметите"
-              : "Нема задолжителни предмети за избраниот смер и година"}
+              ? "Избери смер и година за да се прикажат предметите."
+              : "Нема задолжителни предмети за избраниот смер и година."}
           </p>
         )}
         {validationErrors.passedSubjects && (

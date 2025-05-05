@@ -30,14 +30,13 @@ const Account = () => {
       setTokenChecked(true); 
     };
     checkToken();
-  }, [refreshAccessToken]);
+  }, [refreshAccessToken, navigate]);
 
   useEffect(() => {
     const fetchData = async () => {
       if (!accessToken) {
         return;
       }
-      console.log(accessToken);
       try {
         const resForm = await axiosInstance.get("/auth/form/");
         setFormData(resForm.data);
