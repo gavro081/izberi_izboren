@@ -20,7 +20,9 @@ const Register: React.FC = () => {
   });
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<
-    Partial<RegisterForm> & { non_field_errors?: string[] }
+    Partial<Record<keyof RegisterForm, string[]>> & {
+      non_field_errors?: string[];
+    }
   >({});
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -35,6 +37,10 @@ const Register: React.FC = () => {
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrors({});
+    if (formData.password !== formData.confirmPassword) {
+      setErrors({ confirmPassword: ["Password do not match. "] });
+      return;
+    }
     setLoading(true);
 
     try {
@@ -108,13 +114,18 @@ const Register: React.FC = () => {
           value={formData.confirmPassword}
           onChange={handleChange}
         />
+        {errors.confirmPassword && (
+          <p className="text-red-500 text-sm mb-2">
+            {errors.confirmPassword[0]}
+          </p>
+        )}
         <input
           type="text"
           name="fullName"
           required
           value={formData.fullName}
           onChange={handleChange}
-          placeholder="Full Name"
+          placeholder="Име презиме"
           className="w-full mb-3 p-2 border rounded"
         />
         <button

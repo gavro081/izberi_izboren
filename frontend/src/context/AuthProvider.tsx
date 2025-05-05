@@ -9,15 +9,21 @@ const refreshAccessToken = async (): Promise<string | null> => {
     return null;
   }
   try {
-    const response = await axios.post<{ access: string }>(
+    const response = await axios.post<{ access: string; refresh?: string }>(
       "http://localhost:8000/auth/refresh/",
-      {
-        refresh: refreshToken,
-      }
+      { refresh: refreshToken }
     );
     console.log(response);
+
     const newAccessToken = response.data.access;
+
     localStorage.setItem("access_token", newAccessToken);
+
+    if (response.data.refresh) {
+      const newRefreshToken = response.data.refresh;
+      localStorage.setItem("refresh_token", newRefreshToken);
+    }
+
     return newAccessToken;
   } catch (error) {
     console.error("Error refrershing access token:", error);
@@ -44,7 +50,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     if (storedRefreshToken !== refreshToken) {
       setAccessToken(storedRefreshToken);
     }
-
   }, [accessToken, refreshToken]);
   const login = (newAccessToken: string, newRefreshToken: string) => {
     console.log("Logging in with access token:", newAccessToken);

@@ -7,6 +7,7 @@ import Account from "./pages/Account";
 import PrivateRoute from "./components/PrivateRoute";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import useAxiosAuth from "./hooks/useAxiosAuth";
 import "./index.css";
 
 const Layout = () => (
@@ -40,6 +41,7 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  useAxiosAuth();
   return <RouterProvider router={router} />;
 }
 

@@ -207,7 +207,6 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
               : "bg-green-100 border border-green-400 text-green-700"
           }`}
         >
-          {formStatus.message}
         </div>
       )}
 
@@ -553,7 +552,7 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
         >
           {formStatus.isSubmitting
             ? "Се зачувува..."
-            : formData
+            : formData?.current_year
             ? "Ажурирај"
             : "Зачувај"}
         </button>
