@@ -19,6 +19,7 @@ const EVALUATIONS = ["Испити", "Проекти", "Семинарски", "
 
 const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
   const { accessToken } = useAuth();
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [validationErrors, setValidationErrors] = useState<{
     [key: string]: string;
   }>({});
@@ -164,6 +165,7 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
         const errorData = await res.json();
         throw new Error(errorData.message || "Error submitting form");
       }
+      setIsSubmitted(true);
     } catch (error) {
       console.error("Form submission error:", error);
       setFormStatus({
@@ -188,15 +190,18 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
           subj.subject_info.semester <= year * 2
       )
     : [];
+
   return (
     <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl mx-auto">
-      <h2 className="text-2xl font-bold mb-4">
-        {formData?.current_year ? "Ажурирај ги податоците" : "Внеси податоци"}
+      <h2 className="text-2xl font-bold mb-4 text-center">
+        {isSubmitted || formData?.current_year
+          ? "Ажурирај ги податоците"
+          : "Внеси податоци"}
       </h2>
 
       {formStatus.message && (
         <div
-          className={`px-4 py-3 rounded mb-4 ${
+          className={`px-4 py-3 rounded mb-4 font-bold ${
             formStatus.isError
               ? "bg-red-100 border border-red-400 text-red-700"
               : "bg-green-100 border border-green-400 text-green-700"
@@ -219,7 +224,7 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
             className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
           />
           {validationErrors.index && (
-            <p className="mt-1 text-sm text-red-600">
+            <p className="mt-1 text-sm text-red-600 font-bold">
               {validationErrors.index}
             </p>
           )}
@@ -242,7 +247,7 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
             ))}
           </select>
           {validationErrors.studyTrack && (
-            <p className="mt-1 text-sm text-red-600">
+            <p className="mt-1 text-sm text-red-600 font-bold">
               {validationErrors.studyTrack}
             </p>
           )}
@@ -265,7 +270,9 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
           ))}
         </select>
         {validationErrors.year && (
-          <p className="mt-1 text-sm text-red-600">{validationErrors.year}</p>
+          <p className="mt-1 text-sm text-red-600 font-bold">
+            {validationErrors.year}
+          </p>
         )}
       </div>
 
@@ -320,7 +327,7 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
           </p>
         )}
         {validationErrors.passedSubjects && (
-          <p className="mt-1 text-sm text-red-600">
+          <p className="mt-1 text-sm text-red-600 font-bold">
             {validationErrors.passedSubjects}
           </p>
         )}
@@ -395,7 +402,7 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
           ))}
         </select>
         {validationErrors.studyEffort && (
-          <p className="mt-1 text-sm text-red-600">
+          <p className="mt-1 text-sm text-red-600 font-bold">
             {validationErrors.studyEffort}
           </p>
         )}
@@ -406,23 +413,40 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
           Полиња на интерес
         </h3>
         <div className="flex flex-wrap gap-2">
-          {DOMAINS.map((d) => (
-            <button
-              type="button"
-              key={d}
-              onClick={() => toggleSelection(d, setDomains, domains)}
-              className={`px-3 py-2 border rounded-md transition-colors ${
-                domains.includes(d)
-                  ? "bg-blue-100 border-blue-300 text-blue-800"
-                  : "bg-white hover:bg-gray-50 border-gray-300"
-              }`}
-            >
-              {d}
-            </button>
-          ))}
+          {DOMAINS.map((domain) => {
+            const isSelected = domains.includes(domain);
+            const isNemamSelected = domains.includes("Немам");
+            const shouldBeDisabled = isNemamSelected && domain !== "Немам";
+            return (
+              <button
+                type="button"
+                key={domain}
+                onClick={() => {
+                  if (domain === "Немам") {
+                    if (domains.includes("Немам")) {
+                      setDomains([]);
+                    } else {
+                      setDomains(["Немам"]);
+                    }
+                  } else {
+                    const newDomains = domains.filter((t) => t !== "Немам");
+                    toggleSelection(domain, setDomains, newDomains);
+                  }
+                }}
+                disabled={shouldBeDisabled}
+                className={`px-3 py-2 border rounded-md transition-colors ${
+                  isSelected
+                    ? "bg-green-100 border-green-300 text-green-800"
+                    : "bg-white hover:bg-gray-50 border-gray-300"
+                } ${shouldBeDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+              >
+                {domain}
+              </button>
+            );
+          })}
         </div>
         {validationErrors.domains && (
-          <p className="mt-1 text-sm text-red-600">
+          <p className="mt-1 text-sm text-red-600 font-bold">
             {validationErrors.domains}
           </p>
         )}
@@ -433,25 +457,40 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
           Преферирани технологии
         </h3>
         <div className="flex flex-wrap gap-2">
-          {TECHNOLOGIES.map((tech) => (
-            <button
-              type="button"
-              key={tech}
-              onClick={() =>
-                toggleSelection(tech, setTechnologies, technologies)
-              }
-              className={`px-3 py-2 border rounded-md transition-colors ${
-                technologies.includes(tech)
-                  ? "bg-yellow-100 border-yellow-300 text-yellow-800"
-                  : "bg-white hover:bg-gray-50 border-gray-300"
-              }`}
-            >
-              {tech}
-            </button>
-          ))}
+          {TECHNOLOGIES.map((tech) => {
+            const isSelected = technologies.includes(tech);
+            const isNemamSelected = technologies.includes("Немам");
+            const shouldBeDisabled = isNemamSelected && tech !== "Немам";
+            return (
+              <button
+                type="button"
+                key={tech}
+                onClick={() => {
+                  if (tech === "Немам") {
+                    if (technologies.includes("Немам")) {
+                      setTechnologies([]);
+                    } else {
+                      setTechnologies(["Немам"]);
+                    }
+                  } else {
+                    const newTechs = technologies.filter((t) => t !== "Немам");
+                    toggleSelection(tech, setTechnologies, newTechs);
+                  }
+                }}
+                disabled={shouldBeDisabled}
+                className={`px-3 py-2 border rounded-md transition-colors ${
+                  isSelected
+                    ? "bg-yellow-100 border-yellow-300 text-yellow-800"
+                    : "bg-white hover:bg-gray-50 border-gray-300"
+                } ${shouldBeDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+              >
+                {tech}
+              </button>
+            );
+          })}
         </div>
         {validationErrors.technologies && (
-          <p className="mt-1 text-sm text-red-600">
+          <p className="mt-1 text-sm text-red-600 font-bold">
             {validationErrors.technologies}
           </p>
         )}
@@ -474,7 +513,7 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
           ))}
         </select>
         {validationErrors.evaluation && (
-          <p className="mt-1 text-sm text-red-600">
+          <p className="mt-1 text-sm text-red-600 font-bold">
             {validationErrors.evaluation}
           </p>
         )}
