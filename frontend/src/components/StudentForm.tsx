@@ -141,7 +141,6 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
       // For updating existing form data use PATCH instead of PUT for partial updates
       const method = formData?.current_year ? "PATCH" : "POST";
       const endpoint = "http://localhost:8000/auth/form/";
-
       const res = await fetch(endpoint, {
         method,
         headers: {
@@ -207,9 +206,9 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
               : "bg-green-100 border border-green-400 text-green-700"
           }`}
         >
+        {formStatus.message}
         </div>
       )}
-
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
