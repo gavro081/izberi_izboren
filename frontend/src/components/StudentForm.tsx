@@ -209,9 +209,7 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
 			)}
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 				<div>
-					<label className="block text-sm font-medium text-gray-700 mb-1">
-						Индекс
-					</label>
+					<h3 className="text-lg font-medium text-gray-900 mb-2">Индекс</h3>
 					<input
 						type="text"
 						placeholder="Внеси индекс"
@@ -227,9 +225,7 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
 				</div>
 
 				<div>
-					<label className="block text-sm font-medium text-gray-700 mb-1">
-						Смер
-					</label>
+					<h3 className="text-lg font-medium text-gray-900 mb-2">Смер</h3>
 					<select
 						value={studyTrack}
 						onChange={(e) => setStudyTrack(e.target.value as Programs | "")}
@@ -251,9 +247,9 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
 			</div>
 
 			<div>
-				<label className="block text-sm font-medium text-gray-700 mb-1">
+				<h3 className="text-lg font-medium text-gray-900 mb-2">
 					Година на студии
-				</label>
+				</h3>
 				<select
 					value={year}
 					onChange={(e) => setYear(Number(e.target.value))}
@@ -382,9 +378,9 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
 			</div>
 
 			<div>
-				<label className="block text-sm font-medium text-gray-700 mb-1">
+				<h3 className="text-lg font-medium text-gray-900 mb-2">
 					Вложен труд при учење
-				</label>
+				</h3>
 				<select
 					value={studyEffort}
 					onChange={(e) => setStudyEffort(e.target.value)}
