@@ -6,7 +6,7 @@ from django.contrib.postgres.fields import ArrayField
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None, full_name=None, **extra_fields):
         if not email:
-            raise ValueError('The Email field but be set')
+            raise ValueError('The Email field must be set')
         email = self.normalize_email(email)
         extra_fields.setdefault('username', email)
 
@@ -46,12 +46,12 @@ class Student(models.Model):
     index = models.CharField(max_length=20, unique=True, null=True, blank=True)
 
     STUDY_TRACK_CHOICES = [
-        ('SIIS23', 'SIIS'),
-        ('IE23', 'IE'),
-        ('KI23', 'KI'),
-        ('KN23', 'KN'),
-        ('IMB23', 'IMB'),
-        ('PIT23', 'PIT'),
+        ('SIIS23', 'SIIS23'),
+        ('IE23', 'IE23'),
+        ('KI23', 'KI23'),
+        ('KN23', 'KN23'),
+        ('IMB23', 'IMB23'),
+        ('PIT23', 'PIT23'),
     ]
     study_track = models.CharField(max_length=20, choices=STUDY_TRACK_CHOICES, null=True, blank=True)
     has_filled_form = models.BooleanField(default=False)
