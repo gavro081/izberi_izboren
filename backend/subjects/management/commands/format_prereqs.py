@@ -42,11 +42,10 @@ class Command(BaseCommand):
         
 
         for entry in prerequisite_data:
-            code, subject, prereq, semester = entry.values()
+            code, subject, prereq, _ = entry.values()
             # have to convert everything to lowercase, to avoid inconsistencies in data
             formatted_prereqs[subject] = {}
             formatted_prereqs[subject]["code"] = code
-            formatted_prereqs[subject]["semester"] = semester
             prereq = prereq.lower()
             if prereq == "": 
                 formatted_prereqs[subject]["prerequisite"] = {}

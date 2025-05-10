@@ -78,7 +78,7 @@ class Command(BaseCommand):
             }
         self.stdout.write(self.style.SUCCESS(f"Information data collected..."))
         for course in formatted_prereq_data:
-            code, _ , prereqs  = formatted_prereq_data[course].values()
+            code, prereqs  = formatted_prereq_data[course].values()
             if course in subject_data:
                 subject_data[course]["short"] = code
                 subject_data[course]["prerequisite"] = prereqs
@@ -165,7 +165,8 @@ class Command(BaseCommand):
 
         for remove in to_remove:
             subject_data.pop(remove)
-            self.stdout.write(self.style.WARNING(f"Removing {remove} from dataset."))
+            if with_warnings:
+                self.stdout.write(self.style.WARNING(f"Removing {remove} from dataset."))
 
         with open(output_path, 'w', encoding='utf-8') as f:
             json.dump(subject_data, f, ensure_ascii=False, indent=4)
