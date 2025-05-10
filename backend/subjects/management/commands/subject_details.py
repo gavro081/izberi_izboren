@@ -25,6 +25,9 @@ class Command(BaseCommand):
         with_flags = options['flags']
 
         ALL_PROGRAMS = ["SIIS23", "IMB23", "PIT23", "IE23", "KI23", "KN23"]
+        WINTER = "W"
+        SUMMER = "S"
+
         subject_data = {} # the holy grail, everything goes here
 
         base_dir = Path(__file__).resolve().parent.parent
@@ -36,7 +39,7 @@ class Command(BaseCommand):
         abstract_file_path = base_dir / 'data' / 'abstracts.json' # short descriptions for all subjects
         formatted_prereqs_file_path = base_dir / 'data' / 'formatted_prereqs.json' # prerequisites for each subject
 
-        output_path = base_dir / 'data' / 'subject_details123.json'
+        output_path = base_dir / 'data' / 'subject_details.json'
 
         try:
             with open(information_file_path, 'r', encoding='utf-8') as f:
@@ -75,7 +78,7 @@ class Command(BaseCommand):
             }
         self.stdout.write(self.style.SUCCESS(f"Information data collected..."))
         for course in formatted_prereq_data:
-            code, prereqs = formatted_prereq_data[course].values()
+            code, _ , prereqs  = formatted_prereq_data[course].values()
             if course in subject_data:
                 subject_data[course]["short"] = code
                 subject_data[course]["prerequisite"] = prereqs
@@ -107,27 +110,32 @@ class Command(BaseCommand):
         # for each subject in the records, label which programs that subject is mandatory for
         # additionally label which semester that subject is (preffered to be) taken, and whether it is a summer or a winter subject
         for subject in subject_data:
-            subject_primary_data = subject_data[subject]
+
             if subject in subjects_by_program_data:
-                subject_mandatory_data = subjects_by_program_data[subject]
-                subject_primary_data['mandatory'] = True
-                subject_primary_data['mandatoryFor'] = subject_mandatory_data['programs']
+                subject_data[subject]['mandatory'] = True
+                subject_data[subject]['mandatoryFor'] = subjects_by_program_data[subject]['programs']
+                semester = subjects_by_program_data[subject]['semester']
+                subject_data[subject]['semester'] = semester
+                subject_data[subject]['season'] = WINTER if semester % 2 != 0 else SUMMER
+
             else:
-                subject_primary_data['mandatory'] = False
-                subject_primary_data['mandatoryFor'] = []
-            
+                subject_data[subject]['mandatory'] = False
+                subject_data[subject]['mandatoryFor'] = []
 
-            subject_primary_data['semester'] = subject_mandatory_data['semester']
-            season = 'W' if int(subject_mandatory_data['semester']) % 2 != 0 else 'S'
-            subject_primary_data['season'] = season
-
-            subject_primary_data['electiveFor'] = []
+            subject_data[subject]['electiveFor'] = []
             # check if a subject is elective only for those programs where it is not mandatory
             # NOTE: some subjects like 'Математика 1' are mandatory for some programs, but cannot be chosen by others
             # so assuming that a subject can be chosen by all programs where it isn't elective would be wrong, although intuitive
-            for program in sorted(set(ALL_PROGRAMS) - set(subject_primary_data['mandatoryFor'])):
-                if subject in elective_data[program][season]:
-                    subject_primary_data['electiveFor'].append(program)
+            for program in sorted(set(ALL_PROGRAMS) - set(subject_data[subject]['mandatoryFor'])):
+                # for handling data inconsistencies due to oudated data
+                if subject in elective_data[program][WINTER]:
+                    subject_data[subject]['season'] = WINTER
+                    subject_data[subject]['semester'] = elective_data[program][WINTER][subject]['semester']
+                    subject_data[subject]['electiveFor'].append(program)
+                elif subject in elective_data[program][SUMMER]:
+                    subject_data[subject]['season'] = SUMMER
+                    subject_data[subject]['semester'] = elective_data[program][SUMMER][subject]['semester']
+                    subject_data[subject]['electiveFor'].append(program)
         
         self.stdout.write(self.style.SUCCESS("Mandatory and elective data collected..."))
 
@@ -148,6 +156,16 @@ class Command(BaseCommand):
                         self.stdout.write(self.style.WARNING(f"Course {course} is not in subject data"))
         self.stdout.write(self.style.SUCCESS("Staff data collected..."))
 
+        to_remove = []
+        for subject in subject_data:
+            try:
+                int(subject_data[subject]['semester'])
+            except:
+                to_remove.append(subject)
+
+        for remove in to_remove:
+            subject_data.pop(remove)
+            self.stdout.write(self.style.WARNING(f"Removing {remove} from dataset."))
 
         with open(output_path, 'w', encoding='utf-8') as f:
             json.dump(subject_data, f, ensure_ascii=False, indent=4)

@@ -47,7 +47,7 @@ class Command(BaseCommand):
             semesters_dict['W'] = []
             
             for table in selected_tables:
-                subjects = []
+                subjects = {}
                 first_row = table.find_all('tr')[1]
                 code_td = first_row.find_all('td')[0].text.strip() if first_row else ''
                 if len(code_td) >= 6:
@@ -60,11 +60,23 @@ class Command(BaseCommand):
                             # :)
                             if subject_text == "F23L2S026 Маркетинг": subject_text = "Маркетинг"
                             if subject_text == "F23L1S066 Основи на сајбер безбедноста": subject_text = "Основи на сајбер безбедноста"
-                            subjects.append(subject_text)
+                            if subject_text == "Автоматизирање на процеси во  машинско учење": subject_text = "Автоматизирање на процеси во машинско учење"
+
+                            subjects[subject_text] = {}
+                            subjects[subject_text]["subject"] = subject_text
+                    else:
+                        try:
+                            semester = int(td.text)
+                            subjects[subject_text]["semester"] = semester
+                            print(f"{subject_text} se slusa vo {semester} semestar")
+                        except ValueError:
+                            pass
+                    
                 if subjects:
                     semester = 'S' if is_summer else 'W'
-                    semesters_dict[semester] += subjects
-                
+                    if not semesters_dict[semester]: semesters_dict[semester] = {}
+                    semesters_dict[semester].update(subjects)
+
                 self.stdout.write(f"{round(table_index/5 * 100)}% scraped...")
                 table_index += 1
 
@@ -72,7 +84,6 @@ class Command(BaseCommand):
                 programs_dict[program_name] = semesters_dict
             
             self.stdout.write(self.style.SUCCESS(f"{program_name} finished scraping."))
-            break
 
         with open(output_file_path, 'w', encoding='utf-8') as f:
             json.dump(programs_dict, f, ensure_ascii=False, indent=4)

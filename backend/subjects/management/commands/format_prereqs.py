@@ -29,11 +29,24 @@ class Command(BaseCommand):
             "примена на алгоритни и податочни структури": "примена на алгоритми и податочни структури",
             "анализа на софтверски барања": "анализа на софтверските барања",
         }
+
+        arr = []
         for entry in prerequisite_data:
-            code, subject, prereq, _ = entry.values()
+            _, val, _, _ = entry.values()
+            if val in arr:
+                print(val)
+                self.stdout.write(self.style.ERROR(f"${val} is a duplicate value. Remove it before you rerun this script"))
+                exit(1)
+            arr.append(val)
+        self.stdout.write(self.style.SUCCESS("No duplicate values."))
+        
+
+        for entry in prerequisite_data:
+            code, subject, prereq, semester = entry.values()
             # have to convert everything to lowercase, to avoid inconsistencies in data
             formatted_prereqs[subject] = {}
             formatted_prereqs[subject]["code"] = code
+            formatted_prereqs[subject]["semester"] = semester
             prereq = prereq.lower()
             if prereq == "": 
                 formatted_prereqs[subject]["prerequisite"] = {}
