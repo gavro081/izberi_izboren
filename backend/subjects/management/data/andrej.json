@@ -181,7 +181,9 @@
 	{
 		"name": "Виртуелна реалност",
 		"tags": ["UI/UX & Digital Media", "Multimedia"],
-		"isEasy": "yes"
+		"isEasy": "yes",
+		"technologies": ["C# (Unity)"],
+		"evaluation": ["Theory", "Project"]
 	},
 	{
 		"name": "Вовед во анализа на временските серии",
@@ -251,7 +253,8 @@
 			"Systems Infrastructure",
 			"Web Development"
 		],
-		"technologies": ["PHP (Laravel)"]
+		"technologies": ["PHP (Laravel)"],
+		"evaluation": ["Theory + Code", "Project"]
 	},
 	{
 		"name": "Иновации во ИКТ",
@@ -261,7 +264,9 @@
 	{
 		"name": "Откривање знаење со длабоко учење",
 		"tags": ["AI / ML", "Data Science"],
-		"technologies": ["Python"]
+		"technologies": ["Python"],
+		"evaluation": ["Project"]
+
 	},
 	{
 		"name": "Интелигентни системи",
@@ -287,7 +292,9 @@
 			"Multimedia",
 			"Game Development",
 			"Software Engineering"
-		]
+		],
+		"technologies": ["Blender"],
+		"evaluation": ["Project"]
 	},
 	{
 		"name": "Компјутерски поддржано производство",
@@ -317,7 +324,9 @@
 	{
 		"name": "Методика на информатиката",
 		"tags": ["Education", "Computer Science"],
-		"isEasy": "yes"
+		"isEasy": "yes",
+		"technologies": [],
+		"evaluation": ["Project"]
 	},
 	{
 		"name": "Методологија на истражувањето во ИКТ",
@@ -435,7 +444,8 @@
 			"UI/UX & Digital Media",
 			"Multimedia"
 		],
-		"technologies": ["C# (Unity)", "PROVERI"]
+		"technologies": ["Python"],
+		"evaluation": ["Code", "Project"]
 	},
 	{
 		"name": "Програмски јазици и компајлери",
@@ -444,7 +454,9 @@
 	},
 	{
 		"name": "Програмски парадигми",
-		"tags": ["Software Engineering", "Computer Science"]
+		"tags": ["Software Engineering", "Computer Science"],
+		"technologies": ["Prolog"],
+		"evaluation": ["Theory + Code"]
 	},
 	{
 		"name": "Вовед во рударење на масивни податоци",
@@ -479,7 +491,9 @@
 			"Embedded Systems",
 			"Software Engineering",
 			"Computer Architecture"
-		]
+		],
+		"technologies": ["C", "C++"],
+		"evaluation": ["Project"]
 	},
 	{
 		"name": "Софтверски дефинирани мрежи",
