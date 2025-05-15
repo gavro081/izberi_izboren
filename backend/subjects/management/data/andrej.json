@@ -1,571 +1,589 @@
 [
-	{
-		"name": "Мултимедиски мрежи",
-		"tags": ["Multimedia", "Networking"]
-	},
-	{
-		"name": "Мултимедиски системи",
-		"tags": [
-			"Multimedia",
-			"Software Engineering",
-			"Systems Infrastructure",
-			"Computer Architecture"
-		],
-		"isEasy": "yes"
-	},
-	{
-		"name": "Тестирање на софтвер",
-		"tags": ["Software Engineering"]
-	},
-	{
-		"name": "Напреден веб дизајн",
-		"tags": [
-			"Web Development",
-			"UI/UX & Digital Media",
-			"Software Engineering"
-		],
-		"technologies": ["Vue", "HTML", "CSS"]
-	},
-	{
-		"name": "Основи на роботиката",
-		"tags": [
-			"Embedded Systems",
-			"AI / ML",
-			"Computer Architecture",
-			"Software Engineering"
-		]
-	},
-	{
-		"name": "Паралелно и дистрибуирано процесирање",
-		"tags": [
-			"Systems Infrastructure",
-			"Computer Science",
-			"Software Engineering"
-		]
-	},
-	{
-		"name": "Паралелно програмирање",
-		"tags": [
-			"Cloud Engineering & DevOps",
-			"Systems Infrastructure",
-			"Software Engineering",
-			"Computer Science"
-		],
-		"nema kanal": ""
-	},
-	{
-		"name": "Персонализирано учење",
-		"tags": ["Education", "Data Science", "Web Development"],
-		"isEasy": "yes",
-		"nema kanal": ""
-	},
-	{
-		"name": "Податочно рударење",
-		"tags": ["Data Science", "AI / ML", "Computer Science"],
-		"technologies": ["Python"]
-	},
-	{
-		"name": "Процесирање на сигналите",
-		"tags": ["Computer Science", "Mathematics", "Multimedia"]
-	},
-	{
-		"name": "Вештачка интелигенција за игри",
-		"tags": ["Game Development", "AI / ML", "Software Engineering"],
-		"technologies": [],
-		"evaluation": []
-	},
-	{
-		"name": "Психологија на училишна возраст",
-		"tags": ["Societal Skills", "Education"],
-		"technologies": [],
-		"isEasy": "yes",
-		"evaluation": ["Theory"]
-	},
-	{
-		"name": "Работа со надарени ученици",
-		"tags": ["Education", "Societal Skills"],
-		"technologies": [],
-		"isEasy": "yes",
-		"evaluation": ["Theory"]
-	},
-	{
-		"name": "Сензорски системи",
-		"tags": ["Embedded Systems", "Networking", "Data Science"],
-		"nema kanal": ""
-	},
-	{
-		"name": "Сервисно ориентирани архитектури",
-		"tags": [
-			"Software Engineering",
-			"Cloud Engineering & DevOps",
-			"Web Development"
-		]
-	},
-	{
-		"name": "Современи компјутерски архитектури",
-		"tags": ["Computer Architecture"],
-		"nema kanal": ""
-	},
-	{
-		"name": "Софтверски дефинирана безбедност",
-		"tags": ["Cybersecurity", "Networking", "Cloud Engineering & DevOps"],
-		"nema kanal": ""
-	},
-	{
-		"name": "Софтверски квалитет и тестирање",
-		"tags": ["Software Engineering"],
-		"technologies": ["Java"]
-	},
-	{
-		"name": "Автоматизирање на процеси во машинско учење",
-		"tags": [
-			"AI / ML",
-			"Cloud Engineering & DevOps",
-			"Software Engineering",
-			"Data Science"
-		],
-		"nema kanal": ""
-	},
-	{
-		"name": "Учење на далечина",
-		"tags": ["Education"],
-		"technologies": [],
-		"isEasy": "yes"
-	},
-	{
-		"name": "Основи на теоријата на компјутерските науки",
-		"tags": ["Computer Science", "Mathematics"]
-	},
-	{
-		"name": "Автономна роботика",
-		"tags": [
-			"Embedded Systems",
-			"AI / ML",
-			"Software Engineering",
-			"Computer Architecture"
-		],
-		"nema kanal": ""
-	},
-	{
-		"name": "Администрација на бази податоци",
-		"tags": ["Databases", "Systems Infrastructure"],
-		"nema kanal": ""
-	},
-	{
-		"name": "Анализа и дизајн на ИС",
-		"tags": ["Software Engineering", "Societal Skills"],
-
-	},
-	{
-		"name": "Биолошки инспирирано пресметување",
-		"tags": ["AI / ML", "Computer Science"],
-		"nema kanal": ""
-	},
-	{
-		"name": "Блоковски вериги и криптовалути",
-		"tags": ["Cybersecurity", "Software Engineering", "Computer Science"],
-		"technologies": ["Solidity"],
-		"evaluation": ["Project"]
-	},
-	{
-		"name": "Веб базирани системи",
-		"tags": ["Web Development", "Software Engineering", "AI / ML"],
-		"technologies": [],
-		"evaluation": ["Project", "Theory"]
-	},
-	{
-		"name": "Веб пребарувачки системи",
-		"tags": ["Web Development", "Databases", "Computer Science"],
-		"nema kanal": ""
-	},
-	{
-		"name": "Виртуелна реалност",
-		"tags": ["UI/UX & Digital Media", "Multimedia"],
-		"isEasy": "yes",
-		"technologies": ["C# (Unity)"],
-		"evaluation": ["Theory", "Project"]
-	},
-	{
-		"name": "Вовед во анализа на временските серии",
-		"tags": ["Data Science", "Mathematics", "AI / ML"],
-		"nema kanal": ""
-	},
-	{
-		"name": "Вовед во биоинформатиката",
-		"tags": ["Data Science", "AI / ML", "Computer Science", "Databases"]
-	},
-	{
-		"name": "Вовед во когнитивни науки",
-		"tags": ["AI / ML", "Computer Science"],
-		"isEasy": "yes"
-	},
-	{
-		"name": "Вовед во препознавање на облици",
-		"tags": ["AI / ML", "Data Science", "Computer Science"]
-	},
-	{
-		"name": "Дигитална постпродукција",
-		"tags": ["Multimedia", "UI/UX & Digital Media"]
-	},
-	{
-		"name": "Дизајн на компјутерски мрежи",
-		"tags": ["Networking"]
-	},
-	{
-		"name": "Дипломска работа",
-		"tags": [],
-		"technologies": [],
-		"evaluation": ["Project"]
-	},
-	{
-		"name": "Дистрибуирани системи",
-		"tags": [
-			"Cloud Engineering & DevOps",
-			"Systems Infrastructure",
-			"Networking",
-			"Software Engineering"
-		]
-	},
-	{
-		"name": "Дистрибуирано складирање на податоци",
-		"tags": [
-			"Databases",
-			"Cloud Engineering & DevOps",
-			"Systems Infrastructure"
-		],
-		"nema kanal": ""
-	},
-	{
-		"name": "Етичко хакирање",
-		"tags": ["Cybersecurity", "Networking"]
-	},
-	{
-		"name": "ИКТ за развој",
-		"tags": [],
-		"technologies": [],
-		"isEasy": "yes",
-		"nema kanal": ""
-	},
-	{
-		"name": "Имплементација на софтверски системи со слободен и отворен код",
-		"tags": [
-			"Software Engineering",
-			"Systems Infrastructure",
-			"Web Development"
-		],
-		"technologies": ["PHP (Laravel)"],
-		"evaluation": ["Theory + Code", "Project"]
-	},
-	{
-		"name": "Иновации во ИКТ",
-		"tags": ["Societal Skills", "Computer Science", "Software Engineering"],
-		"isEasy": "yes"
-	},
-	{
-		"name": "Откривање знаење со длабоко учење",
-		"tags": ["AI / ML", "Data Science"],
-		"technologies": ["Python"],
-		"evaluation": ["Project"]
-
-	},
-	{
-		"name": "Интелигентни системи",
-		"tags": ["AI / ML", "Software Engineering", "Data Science"],
-		"technologies": ["Python"],
-		"nema kanal": ""
-	},
-	{
-		"name": "Интернет на нештата",
-		"tags": [
-			"Embedded Systems",
-			"Networking",
-			"Cloud Engineering & DevOps",
-			"Cybersecurity",
-			"AI / ML"
-		],
-		"nema kanal": ""
-	},
-	{
-		"name": "Компјутерска анимација",
-		"tags": [
-			"UI/UX & Digital Media",
-			"Multimedia",
-			"Game Development",
-			"Software Engineering"
-		],
-		"technologies": ["Blender"],
-		"evaluation": ["Project"]
-	},
-	{
-		"name": "Компјутерски поддржано производство",
-		"tags": [
-			"Embedded Systems",
-			"Software Engineering",
-			"Computer Architecture"
-		],
-		"nema kanal": ""
-	},
-	{
-		"name": "Македонски јазик",
-		"tags": ["Societal Skills", "Education"],
-		"technologies": [],
-		"isEasy": "yes",
-		"evaluation": ["Theory"]
-	},
-	{
-		"name": "Машинска визија",
-		"tags": ["AI / ML", "Multimedia", "Data Science"]
-	},
-	{
-		"name": "Менаџмент информациски системи",
-		"tags": ["Software Engineering", "Societal Skills"],
-		"isEasy": "yes"
-	},
-	{
-		"name": "Методика на информатиката",
-		"tags": ["Education", "Computer Science"],
-		"isEasy": "yes",
-		"technologies": [],
-		"evaluation": ["Project"]
-	},
-	{
-		"name": "Методологија на истражувањето во ИКТ",
-		"tags": ["Societal Skills", "Computer Science"],
-		"isEasy": "yes",
-		"evaluation": ["Theory"],
-		"technologies": []
-	},
-	{
-		"name": "Мобилни апликации",
-		"tags": ["Software Engineering", "UI/UX & Digital Media", "Databases"],
-		"technologies": ["Swift"],
-		"evaluation": ["Project"]
-	},
-	{
-		"name": "Мобилни информациски системи",
-		"tags": ["Software Engineering", "UI/UX & Digital Media", "Databases"],
-		"technologies": ["Flutter", "any"],
-		"evaluation": ["Project"]
-	},
-	{
-		"name": "Мобилни платформи и програмирање",
-		"tags": ["Software Engineering", "UI/UX & Digital Media", "Databases"],
-		"technologies": ["Java (Kotlin)"],
-		"evaluation": ["Project"]
-	},
-	{
-		"name": "Моделирање и менаџирање на бизнис процеси",
-		"tags": ["Societal Skills", "Software Engineering"],
-		"isEasy": "yes",
-		"technologies": [""],
-		"evaluation": ["Theory"]
-	},
-	{
-		"name": "Моделирање и симулација",
-		"tags": ["Computer Science", "Software Engineering", "Data Science"],
-		"isEasy": "yes",
-		"nema kanal": ""
-	},
-	{
-		"name": "Модерни трендови во роботика",
-		"tags": ["Embedded Systems", "AI / ML", "Software Engineering"],
-		"nema kanal": ""
-	},
-	{
-		"name": "Мрежна и мобилна форензика",
-		"tags": ["Cybersecurity", "Networking", "Embedded Systems"]
-	},
-	{
-		"name": "Напредна интеракција човек компјутер",
-		"tags": ["UI/UX & Digital Media", "Software Engineering"]
-	},
-	{
-		"name": "Напредни бази на податоци",
-		"tags": ["Databases", "Software Engineering", "Data Science"]
-	},
-	{
-		"name": "Web3 апликации",
-		"tags": [
-			"Web Development",
-			"Cybersecurity",
-			"Software Engineering",
-			"Databases"
-		],
-		"nema kanal": ""
-	},
-	{
-		"name": "Неструктурирани бази на податоци",
-		"tags": ["Databases", "Software Engineering", "Cloud Engineering & DevOps"]
-	},
-	{
-		"name": "Обработка на природните јазици",
-		"tags": [
-			"AI / ML",
-			"Data Science",
-			"Software Engineering",
-			"Computer Science"
-		],
-		"technologies": ["Python"]
-	},
-	{
-		"name": "Операциони истражувања",
-		"tags": [
-			"Mathematics",
-			"Data Science",
-			"Computer Science",
-			"Societal Skills"
-		],
-		"nema kanal": ""
-	},
-	{
-		"name": "Оптички мрежи",
-		"tags": ["Networking", "Physics"]
-	},
-	{
-		"name": "Пресметување во облак",
-		"tags": [
-			"Cloud Engineering & DevOps",
-			"Systems Infrastructure",
-			"Networking",
-			"Software Engineering"
-		]
-	},
-	{
-		"name": "Претприемништво",
-		"tags": ["Societal Skills"],
-		"technologies": [],
-		"isEasy": "yes"
-	},
-	{
-		"name": "Програмирање на видео игри",
-		"tags": [
-			"Game Development",
-			"Software Engineering",
-			"UI/UX & Digital Media",
-			"Multimedia"
-		],
-		"technologies": ["Python"],
-		"evaluation": ["Code", "Project"]
-	},
-	{
-		"name": "Програмски јазици и компајлери",
-		"tags": ["Computer Science", "Software Engineering", "Mathematics"],
-		"nema kanal": ""
-	},
-	{
-		"name": "Програмски парадигми",
-		"tags": ["Software Engineering", "Computer Science"],
-		"technologies": ["Prolog"],
-		"evaluation": ["Theory + Code"]
-	},
-	{
-		"name": "Вовед во рударење на масивни податоци",
-		"tags": ["Data Science", "AI / ML", "Cloud Engineering & DevOps"],
-		"technologies": ["Flink"],
-		"evaluation": ["Project"]
-	},
-	{
-		"name": "Самостоен проект",
-		"tags": ["Education"],
-		"technologies": [],
-		"isEasy": "yes",
-		"evaluation": ["Project"]
-	},
-	{
-		"name": "Системи за поддршка при одлучувањето",
-		"tags": [
-			"Data Science",
-			"AI / ML",
-			"Software Engineering",
-			"Societal Skills"
-		],
-		"isEasy": "yes"
-	},
-	{
-		"name": "Складови на податоци и аналитичка обработка",
-		"tags": ["Databases", "Data Science", "Software Engineering"]
-	},
-	{
-		"name": "Софтвер за вградливи системи",
-		"tags": [
-			"Embedded Systems",
-			"Software Engineering",
-			"Computer Architecture"
-		],
-		"technologies": ["C", "C++"],
-		"evaluation": ["Project"]
-	},
-	{
-		"name": "Софтверски дефинирани мрежи",
-		"tags": [
-			"Networking",
-			"Cloud Engineering & DevOps",
-			"Software Engineering",
-			"Cybersecurity"
-		]
-	},
-	{
-		"name": "Теорија на графови и социјални мрежи",
-		"tags": ["Mathematics", "Computer Science", "Data Science", "Networking"],
-		"nema kanal": ""
-	},
-	{
-		"name": "Споделување и пресметување во толпа",
-		"tags": ["Data Science"],
-		"nema kanal": ""
-	},
-	{
-		"name": "Тимски проект",
-		"tags": [],
-		"technologies": ["any"],
-		"isEasy": "yes",
-		"evaluation": ["Project"]
-	},
-	{
-		"name": "Управување со ИКТ проекти",
-		"tags": ["Societal Skills", "Software Engineering"],
-		"isEasy": "yes",
-		"technologies": ["Git"],
-		"evaluation": ["Theory"]
-	},
-	{
-		"name": "Примена на алгоритми и податочни структури",
-		"tags": ["Computer Science", "Software Engineering"],
-		"technologies": ["Java"],
-		"evaluation": ["Theory + Code"]
-	},
-	{
-		"name": "Математика 3",
-		"tags": ["Mathematics", "Data Science", "Computer Science"],
-		"technologies": ["R"],
-		"evaluation": ["Theory + Practical", "Code"]
-	},
-	{
-		"name": "Избрани теми од математика",
-		"tags": ["Mathematics"],
-		"technologies": [],
-		"evaluation": ["Theory + Practical"]
-	},
-	{
-		"name": "Адаптивни и интерактивни веб информациски системи",
-		"tags": [
-			"Web Development",
-			"AI / ML",
-			"Software Engineering",
-			"UI/UX & Digital Media"
-		]
-	},
-	{
-		"name": "Спорт и здравје",
-		"tags": [],
-		"technologies": [],
-		"isEasy": "yes",
-		"evaluation": []
-	},
-	{
-		"name": "Деловна пракса",
-		"tags": [],
-		"technologies": ["any"],
-		"evaluation": ["Project"]
-	}
+  {
+    "name": "Мултимедиски мрежи",
+    "tags": ["Multimedia", "Networking"],
+    "technologies": [],
+    "evaluation": ["Theory + Practical", "Project"]
+  },
+  {
+    "name": "Мултимедиски системи",
+    "tags": [
+      "Multimedia",
+      "Software Engineering",
+      "Systems Infrastructure",
+      "Computer Architecture"
+    ],
+    "isEasy": "yes"
+  },
+  {
+    "name": "Тестирање на софтвер",
+    "tags": ["Software Engineering"]
+  },
+  {
+    "name": "Напреден веб дизајн",
+    "tags": [
+      "Web Development",
+      "UI/UX & Digital Media",
+      "Software Engineering"
+    ],
+    "technologies": ["Vue", "HTML", "CSS"],
+    "evaluation": ["Theory + Code", "Project"]
+  },
+  {
+    "name": "Основи на роботиката",
+    "tags": [
+      "Embedded Systems",
+      "AI / ML",
+      "Computer Architecture",
+      "Software Engineering"
+    ]
+  },
+  {
+    "name": "Паралелно и дистрибуирано процесирање",
+    "tags": [
+      "Systems Infrastructure",
+      "Computer Science",
+      "Software Engineering"
+    ]
+  },
+  {
+    "name": "Паралелно програмирање",
+    "tags": [
+      "Cloud Engineering & DevOps",
+      "Systems Infrastructure",
+      "Software Engineering",
+      "Computer Science"
+    ],
+    "nema kanal": ""
+  },
+  {
+    "name": "Персонализирано учење",
+    "tags": ["Education", "Data Science", "Web Development"],
+    "isEasy": "yes",
+    "nema kanal": ""
+  },
+  {
+    "name": "Податочно рударење",
+    "tags": ["Data Science", "AI / ML", "Computer Science"],
+    "technologies": ["Python"],
+    "evaluation": ["Project", "Theory + Code"]
+  },
+  {
+    "name": "Процесирање на сигналите",
+    "tags": ["Computer Science", "Mathematics", "Multimedia"]
+  },
+  {
+    "name": "Вештачка интелигенција за игри",
+    "tags": ["Game Development", "AI / ML", "Software Engineering"],
+    "technologies": [],
+    "evaluation": []
+  },
+  {
+    "name": "Психологија на училишна возраст",
+    "tags": ["Societal Skills", "Education"],
+    "technologies": [],
+    "isEasy": "yes",
+    "evaluation": ["Theory"]
+  },
+  {
+    "name": "Работа со надарени ученици",
+    "tags": ["Education", "Societal Skills"],
+    "technologies": [],
+    "isEasy": "yes",
+    "evaluation": ["Theory"]
+  },
+  {
+    "name": "Сензорски системи",
+    "tags": ["Embedded Systems", "Networking", "Data Science"],
+    "nema kanal": ""
+  },
+  {
+    "name": "Сервисно ориентирани архитектури",
+    "tags": [
+      "Software Engineering",
+      "Cloud Engineering & DevOps",
+      "Web Development"
+    ]
+  },
+  {
+    "name": "Современи компјутерски архитектури",
+    "tags": ["Computer Architecture"],
+    "nema kanal": ""
+  },
+  {
+    "name": "Софтверски дефинирана безбедност",
+    "tags": ["Cybersecurity", "Networking", "Cloud Engineering & DevOps"],
+    "nema kanal": ""
+  },
+  {
+    "name": "Софтверски квалитет и тестирање",
+    "tags": ["Software Engineering"],
+    "technologies": ["Java"],
+    "evaluation": ["Theory + Code", "Project"]
+  },
+  {
+    "name": "Автоматизирање на процеси во машинско учење",
+    "tags": [
+      "AI / ML",
+      "Cloud Engineering & DevOps",
+      "Software Engineering",
+      "Data Science"
+    ],
+    "nema kanal": ""
+  },
+  {
+    "name": "Учење на далечина",
+    "tags": ["Education"],
+    "technologies": [],
+    "isEasy": "yes",
+    "evaluation": ["Theory", "Project"]
+  },
+  {
+    "name": "Основи на теоријата на компјутерските науки",
+    "tags": ["Computer Science", "Mathematics"],
+    "technologies": [],
+    "evaluation": ["Theory + Practical"]
+  },
+  {
+    "name": "Автономна роботика",
+    "tags": [
+      "Embedded Systems",
+      "AI / ML",
+      "Software Engineering",
+      "Computer Architecture"
+    ],
+    "nema kanal": ""
+  },
+  {
+    "name": "Администрација на бази податоци",
+    "tags": ["Databases", "Systems Infrastructure"],
+    "nema kanal": ""
+  },
+  {
+    "name": "Анализа и дизајн на ИС",
+    "tags": ["Software Engineering", "Societal Skills"]
+  },
+  {
+    "name": "Биолошки инспирирано пресметување",
+    "tags": ["AI / ML", "Computer Science"],
+    "nema kanal": ""
+  },
+  {
+    "name": "Блоковски вериги и криптовалути",
+    "tags": ["Cybersecurity", "Software Engineering", "Computer Science"],
+    "technologies": ["Solidity"],
+    "evaluation": ["Project"]
+  },
+  {
+    "name": "Веб базирани системи",
+    "tags": ["Web Development", "Software Engineering", "AI / ML"],
+    "technologies": [],
+    "evaluation": ["Project", "Theory"]
+  },
+  {
+    "name": "Веб пребарувачки системи",
+    "tags": ["Web Development", "Databases", "Computer Science"],
+    "nema kanal": ""
+  },
+  {
+    "name": "Виртуелна реалност",
+    "tags": ["UI/UX & Digital Media", "Multimedia"],
+    "isEasy": "yes",
+    "technologies": ["C# (Unity)"],
+    "evaluation": ["Theory", "Project"]
+  },
+  {
+    "name": "Вовед во анализа на временските серии",
+    "tags": ["Data Science", "Mathematics", "AI / ML"],
+    "nema kanal": ""
+  },
+  {
+    "name": "Вовед во биоинформатиката",
+    "tags": ["Data Science", "AI / ML", "Computer Science", "Databases"]
+  },
+  {
+    "name": "Вовед во когнитивни науки",
+    "tags": ["AI / ML", "Computer Science"],
+    "isEasy": "yes",
+    "technologies": [],
+    "evaluation": ["Theory", "Project"]
+  },
+  {
+    "name": "Вовед во препознавање на облици",
+    "tags": ["AI / ML", "Data Science", "Computer Science"]
+  },
+  {
+    "name": "Дигитална постпродукција",
+    "tags": ["Multimedia", "UI/UX & Digital Media"]
+  },
+  {
+    "name": "Дизајн на компјутерски мрежи",
+    "tags": ["Networking"],
+    "technologies": ["Cisco", "GNS3"],
+    "evaluation": ["Theory + Practical", "Project"]
+  },
+  {
+    "name": "Дипломска работа",
+    "tags": [],
+    "technologies": [],
+    "evaluation": ["Project"]
+  },
+  {
+    "name": "Дистрибуирани системи",
+    "tags": [
+      "Cloud Engineering & DevOps",
+      "Systems Infrastructure",
+      "Networking",
+      "Software Engineering"
+    ]
+  },
+  {
+    "name": "Дистрибуирано складирање на податоци",
+    "tags": [
+      "Databases",
+      "Cloud Engineering & DevOps",
+      "Systems Infrastructure"
+    ],
+    "nema kanal": ""
+  },
+  {
+    "name": "Етичко хакирање",
+    "tags": ["Cybersecurity", "Networking"],
+    "technologies": [],
+    "evaluation": ["Theory", "Project"]
+  },
+  {
+    "name": "ИКТ за развој",
+    "tags": [],
+    "technologies": [],
+    "isEasy": "yes",
+    "nema kanal": ""
+  },
+  {
+    "name": "Имплементација на софтверски системи со слободен и отворен код",
+    "tags": [
+      "Software Engineering",
+      "Systems Infrastructure",
+      "Web Development"
+    ],
+    "technologies": ["PHP (Laravel)"],
+    "evaluation": ["Theory + Code", "Project"]
+  },
+  {
+    "name": "Иновации во ИКТ",
+    "tags": ["Societal Skills", "Computer Science", "Software Engineering"],
+    "isEasy": "yes"
+  },
+  {
+    "name": "Откривање знаење со длабоко учење",
+    "tags": ["AI / ML", "Data Science"],
+    "technologies": ["Python"],
+    "evaluation": ["Project"]
+  },
+  {
+    "name": "Интелигентни системи",
+    "tags": ["AI / ML", "Software Engineering", "Data Science"],
+    "technologies": ["Python"],
+    "nema kanal": ""
+  },
+  {
+    "name": "Интернет на нештата",
+    "tags": [
+      "Embedded Systems",
+      "Networking",
+      "Cloud Engineering & DevOps",
+      "Cybersecurity",
+      "AI / ML"
+    ],
+    "nema kanal": ""
+  },
+  {
+    "name": "Компјутерска анимација",
+    "tags": [
+      "UI/UX & Digital Media",
+      "Multimedia",
+      "Game Development",
+      "Software Engineering"
+    ],
+    "technologies": ["Blender"],
+    "evaluation": ["Project"]
+  },
+  {
+    "name": "Компјутерски поддржано производство",
+    "tags": [
+      "Embedded Systems",
+      "Software Engineering",
+      "Computer Architecture"
+    ],
+    "nema kanal": ""
+  },
+  {
+    "name": "Македонски јазик",
+    "tags": ["Societal Skills", "Education"],
+    "technologies": [],
+    "isEasy": "yes",
+    "evaluation": ["Theory"]
+  },
+  {
+    "name": "Машинска визија",
+    "tags": ["AI / ML", "Multimedia", "Data Science"],
+    "technologies": ["Python"],
+    "evaluation": ["Theory + Practical", "Project"]
+  },
+  {
+    "name": "Менаџмент информациски системи",
+    "tags": ["Software Engineering", "Societal Skills"],
+    "isEasy": "yes"
+  },
+  {
+    "name": "Методика на информатиката",
+    "tags": ["Education", "Computer Science"],
+    "isEasy": "yes",
+    "technologies": [],
+    "evaluation": ["Project"]
+  },
+  {
+    "name": "Методологија на истражувањето во ИКТ",
+    "tags": ["Societal Skills", "Computer Science"],
+    "isEasy": "yes",
+    "evaluation": ["Theory"],
+    "technologies": []
+  },
+  {
+    "name": "Мобилни апликации",
+    "tags": ["Software Engineering", "UI/UX & Digital Media", "Databases"],
+    "technologies": ["Swift"],
+    "evaluation": ["Project"]
+  },
+  {
+    "name": "Мобилни информациски системи",
+    "tags": ["Software Engineering", "UI/UX & Digital Media", "Databases"],
+    "technologies": ["Flutter", "any"],
+    "evaluation": ["Project"]
+  },
+  {
+    "name": "Мобилни платформи и програмирање",
+    "tags": ["Software Engineering", "UI/UX & Digital Media", "Databases"],
+    "technologies": ["Java (Kotlin)"],
+    "evaluation": ["Project"]
+  },
+  {
+    "name": "Моделирање и менаџирање на бизнис процеси",
+    "tags": ["Societal Skills", "Software Engineering"],
+    "isEasy": "yes",
+    "technologies": [""],
+    "evaluation": ["Theory"]
+  },
+  {
+    "name": "Моделирање и симулација",
+    "tags": ["Computer Science", "Software Engineering", "Data Science"],
+    "isEasy": "yes",
+    "nema kanal": ""
+  },
+  {
+    "name": "Модерни трендови во роботика",
+    "tags": ["Embedded Systems", "AI / ML", "Software Engineering"],
+    "nema kanal": ""
+  },
+  {
+    "name": "Мрежна и мобилна форензика",
+    "tags": ["Cybersecurity", "Networking", "Embedded Systems"]
+  },
+  {
+    "name": "Напредна интеракција човек компјутер",
+    "tags": ["UI/UX & Digital Media", "Software Engineering"]
+  },
+  {
+    "name": "Напредни бази на податоци",
+    "tags": ["Databases", "Software Engineering", "Data Science"]
+  },
+  {
+    "name": "Web3 апликации",
+    "tags": [
+      "Web Development",
+      "Cybersecurity",
+      "Software Engineering",
+      "Databases"
+    ],
+    "nema kanal": ""
+  },
+  {
+    "name": "Неструктурирани бази на податоци",
+    "tags": ["Databases", "Software Engineering", "Cloud Engineering & DevOps"],
+    "technologies": ["NoSQL", "XML"],
+    "evaluation": ["Theory + Code", "Project"]
+  },
+  {
+    "name": "Обработка на природните јазици",
+    "tags": [
+      "AI / ML",
+      "Data Science",
+      "Software Engineering",
+      "Computer Science"
+    ],
+    "technologies": ["Python"]
+  },
+  {
+    "name": "Операциони истражувања",
+    "tags": [
+      "Mathematics",
+      "Data Science",
+      "Computer Science",
+      "Societal Skills"
+    ],
+    "nema kanal": ""
+  },
+  {
+    "name": "Оптички мрежи",
+    "tags": ["Networking", "Physics"]
+  },
+  {
+    "name": "Пресметување во облак",
+    "tags": [
+      "Cloud Engineering & DevOps",
+      "Systems Infrastructure",
+      "Networking",
+      "Software Engineering"
+    ]
+  },
+  {
+    "name": "Претприемништво",
+    "tags": ["Societal Skills"],
+    "technologies": [],
+    "isEasy": "yes"
+  },
+  {
+    "name": "Програмирање на видео игри",
+    "tags": [
+      "Game Development",
+      "Software Engineering",
+      "UI/UX & Digital Media",
+      "Multimedia"
+    ],
+    "technologies": ["Python"],
+    "evaluation": ["Code", "Project"]
+  },
+  {
+    "name": "Програмски јазици и компајлери",
+    "tags": ["Computer Science", "Software Engineering", "Mathematics"],
+    "nema kanal": ""
+  },
+  {
+    "name": "Програмски парадигми",
+    "tags": ["Software Engineering", "Computer Science"],
+    "technologies": ["Prolog"],
+    "evaluation": ["Theory + Code"]
+  },
+  {
+    "name": "Вовед во рударење на масивни податоци",
+    "tags": ["Data Science", "AI / ML", "Cloud Engineering & DevOps"],
+    "technologies": ["Flink"],
+    "evaluation": ["Project"]
+  },
+  {
+    "name": "Самостоен проект",
+    "tags": ["Education"],
+    "technologies": [],
+    "isEasy": "yes",
+    "evaluation": ["Project"]
+  },
+  {
+    "name": "Системи за поддршка при одлучувањето",
+    "tags": [
+      "Data Science",
+      "AI / ML",
+      "Software Engineering",
+      "Societal Skills"
+    ],
+    "isEasy": "yes"
+  },
+  {
+    "name": "Складови на податоци и аналитичка обработка",
+    "tags": ["Databases", "Data Science", "Software Engineering"],
+    "technologies": ["SQL"],
+    "evaluation": ["Theory + Code"]
+  },
+  {
+    "name": "Софтвер за вградливи системи",
+    "tags": [
+      "Embedded Systems",
+      "Software Engineering",
+      "Computer Architecture"
+    ],
+    "technologies": ["C", "C++"],
+    "evaluation": ["Project"]
+  },
+  {
+    "name": "Софтверски дефинирани мрежи",
+    "tags": [
+      "Networking",
+      "Cloud Engineering & DevOps",
+      "Software Engineering",
+      "Cybersecurity"
+    ]
+  },
+  {
+    "name": "Теорија на графови и социјални мрежи",
+    "tags": ["Mathematics", "Computer Science", "Data Science", "Networking"],
+    "nema kanal": ""
+  },
+  {
+    "name": "Споделување и пресметување во толпа",
+    "tags": ["Data Science"],
+    "nema kanal": ""
+  },
+  {
+    "name": "Тимски проект",
+    "tags": [],
+    "technologies": ["any"],
+    "isEasy": "yes",
+    "evaluation": ["Project"]
+  },
+  {
+    "name": "Управување со ИКТ проекти",
+    "tags": ["Societal Skills", "Software Engineering"],
+    "isEasy": "yes",
+    "technologies": ["Git"],
+    "evaluation": ["Theory"]
+  },
+  {
+    "name": "Примена на алгоритми и податочни структури",
+    "tags": ["Computer Science", "Software Engineering"],
+    "technologies": ["Java"],
+    "evaluation": ["Theory + Code"]
+  },
+  {
+    "name": "Математика 3",
+    "tags": ["Mathematics", "Data Science", "Computer Science"],
+    "technologies": ["R"],
+    "evaluation": ["Theory + Practical", "Code"]
+  },
+  {
+    "name": "Избрани теми од математика",
+    "tags": ["Mathematics"],
+    "technologies": [],
+    "evaluation": ["Theory + Practical"]
+  },
+  {
+    "name": "Адаптивни и интерактивни веб информациски системи",
+    "tags": [
+      "Web Development",
+      "AI / ML",
+      "Software Engineering",
+      "UI/UX & Digital Media"
+    ]
+  },
+  {
+    "name": "Спорт и здравје",
+    "tags": [],
+    "technologies": [],
+    "isEasy": "yes",
+    "evaluation": []
+  },
+  {
+    "name": "Деловна пракса",
+    "tags": [],
+    "technologies": ["any"],
+    "evaluation": ["Project"]
+  }
 ]
