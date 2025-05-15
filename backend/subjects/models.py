@@ -34,6 +34,10 @@ class Subject_Info(models.Model):
     elective_for = ArrayField(models.CharField(max_length=16, blank=True))
     professors = ArrayField(models.CharField(max_length=64, blank=True))
     assistants = ArrayField(models.CharField(max_length=64, blank=True))
+    tags = ArrayField(models.CharField(max_length=64, blank=True))
+    technologies = ArrayField(models.CharField(max_length=64, blank=True))
+    evaluation = ArrayField(models.CharField(max_length=64, blank=True))
+    is_easy = models.BooleanField(null=False)
 
     def __str__(self):
         return f"Subject info for {self.subject.name}"

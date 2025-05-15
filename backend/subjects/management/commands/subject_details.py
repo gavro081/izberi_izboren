@@ -38,6 +38,7 @@ class Command(BaseCommand):
         elective_file_path = base_dir / 'data' / 'elective.json' # which elective subjects can a certain program choose from
         abstract_file_path = base_dir / 'data' / 'abstracts.json' # short descriptions for all subjects
         formatted_prereqs_file_path = base_dir / 'data' / 'formatted_prereqs.json' # prerequisites for each subject
+        additional_info_file_path = base_dir / 'data' / 'additional_info.json' # technologies and evaluation techniques for each subject
 
         output_path = base_dir / 'data' / 'subject_details.json'
 
@@ -56,6 +57,8 @@ class Command(BaseCommand):
                 abstract_data = json.load(f)
             with open(formatted_prereqs_file_path, 'r', encoding='utf-8') as f:
                 formatted_prereq_data = json.load(f)
+            with open(additional_info_file_path, 'r', encoding='utf-8') as f:
+                additional_info_data = json.load(f)
         except FileNotFoundError as e:
             self.stdout.write(self.style.ERROR(f"Could not find file: {e.filename}"))
             exit(1)
@@ -157,6 +160,29 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS("Staff data collected..."))
 
         to_remove = []
+
+        for course in additional_info_data:
+            name = course["name"]
+            tags = course["tags"]
+            subject_data[name]["tags"] = tags
+            if name in subject_data:
+                if "technologies" in course and len(course["technologies"]) != 0:
+                    subject_data[name]["technologies"] = course["technologies"]
+                else:
+                    subject_data[name]["technologies"] = []
+                
+                if "evaluation" in course and len(course["evaluation"]) != 0:
+                    subject_data[name]["evaluation"] = course["evaluation"]
+                else:
+                    subject_data[name]["evaluation"] = []            
+
+                subject_data[name]["isEasy"] = True if "isEasy" in course else False
+
+            else:
+                if with_warnings:
+                    self.stdout.write(self.style.WARNING(f"Course {course} is not in subject data"))
+
+
         for subject in subject_data:
             try:
                 int(subject_data[subject]['semester'])

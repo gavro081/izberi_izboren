@@ -75,7 +75,11 @@ class Command(BaseCommand):
                 season=item["season"],
                 elective_for=item.get("electiveFor", []),
                 professors=item.get("professors", []),
-                assistants=item.get("assistants", [])
+                assistants=item.get("assistants", []),
+                tags=item.get("tags", []),
+                technologies=item.get("technologies", []),
+                evaluation=item.get("evaluation", []),
+                is_easy=item.get("isEasy", False),
             )
             subject_infos.append(info)
         

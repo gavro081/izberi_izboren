@@ -31,7 +31,11 @@
 			"Војдан Ќорвезироски",
 			"Марија Танеска",
 			"Ненад Анчев"
-		]
+		],
+		"tags": ["Computer Architecture", "Systems Infrastructure"],
+		"technologies": [],
+		"evaluation": ["Theory + Practical"],
+		"isEasy": false
 	},
 	"Бизнис и менаџмент": {
 		"subject": "Бизнис и менаџмент",
@@ -53,7 +57,11 @@
 			"Ристе Стојанов",
 			"Смилка Јанеска Саркањац"
 		],
-		"assistants": ["Александар Тенев", "Милена Трајаноска"]
+		"assistants": ["Александар Тенев", "Милена Трајаноска"],
+		"tags": ["Societal Skills"],
+		"technologies": [],
+		"evaluation": ["Theory"],
+		"isEasy": true
 	},
 	"Бизнис статистика": {
 		"subject": "Бизнис статистика",
@@ -76,7 +84,11 @@
 			"Методија Јанчески",
 			"Наташа Илиевска"
 		],
-		"assistants": ["Петар Секулоски"]
+		"assistants": ["Петар Секулоски"],
+		"tags": ["Data Science", "Mathematics"],
+		"technologies": [],
+		"evaluation": ["Theory + Practical"],
+		"isEasy": false
 	},
 	"Вовед во компјутерските науки": {
 		"subject": "Вовед во компјутерските науки",
@@ -106,7 +118,11 @@
 			"Стефан Андонов",
 			"Марија Танеска",
 			"Марија Стојчева"
-		]
+		],
+		"tags": ["Computer Science"],
+		"technologies": [],
+		"evaluation": ["Theory + Practical"],
+		"isEasy": false
 	},
 	"Дизајн на дигитални кола": {
 		"subject": "Дизајн на дигитални кола",
@@ -123,7 +139,11 @@
 		"season": "W",
 		"electiveFor": [],
 		"professors": ["Милош Јовановиќ"],
-		"assistants": ["Јована Добрева"]
+		"assistants": ["Јована Добрева"],
+		"tags": ["Computer Architecture", "Embedded Systems"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Дискретна математика": {
 		"subject": "Дискретна математика",
@@ -140,7 +160,11 @@
 		"season": "S",
 		"electiveFor": [],
 		"professors": [],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Mathematics", "Computer Science"],
+		"technologies": [],
+		"evaluation": ["Theory + Practical"],
+		"isEasy": false
 	},
 	"Дискретни структури 1": {
 		"subject": "Дискретни структури 1",
@@ -157,7 +181,11 @@
 		"season": "W",
 		"electiveFor": [],
 		"professors": ["Билјана Тојтовска Рибарски", "Марија Михова"],
-		"assistants": ["Петар Секулоски"]
+		"assistants": ["Петар Секулоски"],
+		"tags": ["Mathematics", "Computer Science"],
+		"technologies": [],
+		"evaluation": ["Theory + Practical"],
+		"isEasy": false
 	},
 	"Дискретни структури 2": {
 		"subject": "Дискретни структури 2",
@@ -174,7 +202,11 @@
 		"season": "S",
 		"electiveFor": [],
 		"professors": ["Марија Михова"],
-		"assistants": ["Петар Секулоски"]
+		"assistants": ["Петар Секулоски"],
+		"tags": ["Mathematics", "Computer Science"],
+		"technologies": [],
+		"evaluation": ["Theory + Practical"],
+		"isEasy": false
 	},
 	"Е-учење": {
 		"subject": "Е-учење",
@@ -191,7 +223,11 @@
 		"season": "S",
 		"electiveFor": ["IMB23", "KI23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Миле Јованов", "Емил Станков"],
-		"assistants": ["Мартин Динев", "Мартина Тошевска"]
+		"assistants": ["Мартин Динев", "Мартина Тошевска"],
+		"tags": ["Education", "Societal Skills"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": true
 	},
 	"Математика 1": {
 		"subject": "Математика 1",
@@ -208,7 +244,11 @@
 		"season": "W",
 		"electiveFor": [],
 		"professors": ["Весна Димитриевска Ристовска"],
-		"assistants": ["Весна Димитриевска Ристовска"]
+		"assistants": ["Весна Димитриевска Ристовска"],
+		"tags": ["Mathematics", "Computer Science"],
+		"technologies": [],
+		"evaluation": ["Theory + Practical"],
+		"isEasy": false
 	},
 	"Калкулус 1": {
 		"subject": "Калкулус 1",
@@ -225,7 +265,11 @@
 		"season": "W",
 		"electiveFor": [],
 		"professors": ["Весна Димитриевска Ристовска", "Методија Јанчески"],
-		"assistants": ["Петар Секулоски"]
+		"assistants": ["Петар Секулоски"],
+		"tags": ["Mathematics", "Computer Science"],
+		"technologies": [],
+		"evaluation": ["Theory + Practical"],
+		"isEasy": false
 	},
 	"Калкулус 2": {
 		"subject": "Калкулус 2",
@@ -246,7 +290,11 @@
 			"Верица Бакева Смиљкова",
 			"Ласко Баснарков"
 		],
-		"assistants": ["Петар Секулоски"]
+		"assistants": ["Петар Секулоски"],
+		"tags": ["Mathematics", "Computer Science"],
+		"technologies": [],
+		"evaluation": ["Theory + Practical"],
+		"isEasy": false
 	},
 	"Компјутерски архитектури": {
 		"subject": "Компјутерски архитектури",
@@ -263,7 +311,11 @@
 		"season": "S",
 		"electiveFor": [],
 		"professors": ["Моника Симјаноска", "Ристе Стојанов"],
-		"assistants": ["Јована Добрева"]
+		"assistants": ["Јована Добрева"],
+		"tags": ["Computer Architecture"],
+		"technologies": [],
+		"evaluation": ["Theory + Practical"],
+		"isEasy": false
 	},
 	"Компјутерски компоненти": {
 		"subject": "Компјутерски компоненти",
@@ -280,7 +332,11 @@
 		"season": "S",
 		"semester": 2,
 		"professors": ["Андреја Наумоски", "Коста Митрески"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Computer Architecture", "Embedded Systems"],
+		"technologies": [],
+		"evaluation": ["Theory"],
+		"isEasy": true
 	},
 	"Креативни вештини за решавање проблеми": {
 		"subject": "Креативни вештини за решавање проблеми",
@@ -297,7 +353,11 @@
 		"season": "S",
 		"electiveFor": ["IMB23", "KI23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Владимир Трајковиќ", "Соња Филипоска"],
-		"assistants": ["Славе Темков"]
+		"assistants": ["Славе Темков"],
+		"tags": ["Societal Skills"],
+		"technologies": [],
+		"evaluation": ["Theory"],
+		"isEasy": true
 	},
 	"Маркетинг": {
 		"subject": "Маркетинг",
@@ -316,7 +376,11 @@
 		"season": "S",
 		"electiveFor": ["IE23", "IMB23", "KI23", "KN23", "SIIS23"],
 		"professors": ["Смилка Јанеска Саркањац"],
-		"assistants": ["Александар Тенев"]
+		"assistants": ["Александар Тенев"],
+		"tags": ["Societal Skills"],
+		"technologies": [],
+		"evaluation": ["Theory"],
+		"isEasy": true
 	},
 	"Објектно ориентирана анализа и дизајн": {
 		"subject": "Објектно ориентирана анализа и дизајн",
@@ -339,7 +403,11 @@
 			"Петре Ламески",
 			"Слободан Калајџиски"
 		],
-		"assistants": ["Мартина Тошевска", "Славе Темков"]
+		"assistants": ["Мартина Тошевска", "Славе Темков"],
+		"tags": ["Software Engineering"],
+		"technologies": [],
+		"evaluation": ["Theory + Practical"],
+		"isEasy": false
 	},
 	"Објектно-ориентирано програмирање": {
 		"subject": "Објектно-ориентирано програмирање",
@@ -375,7 +443,11 @@
 			"Живко Атанаскоски",
 			"Марија Танеска",
 			"Стефан Андонов"
-		]
+		],
+		"tags": ["Software Engineering", "Computer Science"],
+		"technologies": ["C++"],
+		"evaluation": ["Theory + Code"],
+		"isEasy": false
 	},
 	"Основи на Веб дизајн": {
 		"subject": "Основи на Веб дизајн",
@@ -399,7 +471,11 @@
 			"Иван Чорбев",
 			"Слободан Калајџиски"
 		],
-		"assistants": ["Влатко Спасев", "Димитар Китановски"]
+		"assistants": ["Влатко Спасев", "Димитар Китановски"],
+		"tags": ["Web Development", "UI/UX & Digital Media"],
+		"technologies": ["HTML", "CSS"],
+		"evaluation": ["Theory + Code"],
+		"isEasy": false
 	},
 	"Основи на сајбер безбедноста": {
 		"subject": "Основи на сајбер безбедноста",
@@ -416,7 +492,11 @@
 		"season": "S",
 		"electiveFor": ["IE23", "KI23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Анастас Мишев", "Соња Филипоска"],
-		"assistants": ["Владислав Бидиков", "Војдан Ќорвезироски"]
+		"assistants": ["Владислав Бидиков", "Војдан Ќорвезироски"],
+		"tags": ["Cybersecurity", "Networking"],
+		"technologies": [],
+		"evaluation": ["Theory"],
+		"isEasy": true
 	},
 	"Педагогија": {
 		"subject": "Педагогија",
@@ -433,7 +513,11 @@
 		"season": "W",
 		"electiveFor": [],
 		"professors": ["Елена Ризов"],
-		"assistants": ["Елена Ризов"]
+		"assistants": ["Елена Ризов"],
+		"tags": ["Education", "Societal Skills"],
+		"technologies": [],
+		"evaluation": ["Theory"],
+		"isEasy": true
 	},
 	"Професионални вештини": {
 		"subject": "Професионални вештини",
@@ -459,7 +543,11 @@
 			"Мирослав Мирчев",
 			"Панче Рибарски"
 		],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Societal Skills"],
+		"technologies": [],
+		"evaluation": ["Project"],
+		"isEasy": true
 	},
 	"Структурно програмирање": {
 		"subject": "Структурно програмирање",
@@ -497,7 +585,11 @@
 			"Марко Петров",
 			"Ема Пандилова",
 			"Мартин Динев"
-		]
+		],
+		"tags": ["Software Engineering", "Computer Science"],
+		"technologies": ["C++"],
+		"evaluation": ["Theory + Code"],
+		"isEasy": false
 	},
 	"Физика": {
 		"subject": "Физика",
@@ -514,7 +606,11 @@
 		"season": "W",
 		"electiveFor": [],
 		"professors": ["Ласко Баснарков"],
-		"assistants": ["Зорица Карапанчева"]
+		"assistants": ["Зорица Карапанчева"],
+		"tags": ["Physics"],
+		"technologies": [],
+		"evaluation": ["Theory + Practical"],
+		"isEasy": false
 	},
 	"Алгоритми и податочни структури": {
 		"subject": "Алгоритми и податочни структури",
@@ -546,7 +642,11 @@
 			"Славе Темков",
 			"Милан Тодоровиќ",
 			"Ана Тодоровска"
-		]
+		],
+		"tags": ["Computer Science", "Software Engineering"],
+		"technologies": ["Java"],
+		"evaluation": ["Theory + Code"],
+		"isEasy": false
 	},
 	"Анализа на софтверските барања": {
 		"subject": "Анализа на софтверските барања",
@@ -568,7 +668,11 @@
 		"season": "S",
 		"electiveFor": ["IE23", "IMB23", "KI23", "KN23", "PIT23"],
 		"professors": ["Љупчо Антовски", "Георгина Мирчева", "Ефтим Здравевски"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Software Engineering", "Societal Skills"],
+		"technologies": [],
+		"evaluation": ["Theory", "Project"],
+		"isEasy": true
 	},
 	"Безжични и мобилни системи": {
 		"subject": "Безжични и мобилни системи",
@@ -587,7 +691,11 @@
 		"season": "S",
 		"electiveFor": ["IE23", "KI23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Анастас Мишев", "Соња Филипоска"],
-		"assistants": ["Војдан Ќорвезироски"]
+		"assistants": ["Војдан Ќорвезироски"],
+		"tags": ["Networking", "Cybersecurity", "Embedded Systems"],
+		"technologies": [],
+		"evaluation": ["Theory + Practical"],
+		"isEasy": false
 	},
 	"Веројатност и статистика": {
 		"subject": "Веројатност и статистика",
@@ -613,7 +721,11 @@
 			"Марија Михова",
 			"Наташа Илиевска"
 		],
-		"assistants": ["Јована Добрева", "Петар Секулоски"]
+		"assistants": ["Јована Добрева", "Петар Секулоски"],
+		"tags": ["Mathematics", "Data Science", "Computer Science"],
+		"technologies": ["R"],
+		"evaluation": ["Theory + Practical", "Code"],
+		"isEasy": false
 	},
 	"Вештачка интелигенција": {
 		"subject": "Вештачка интелигенција",
@@ -637,7 +749,11 @@
 			"Кире Триводалиев",
 			"Соња Гиевска"
 		],
-		"assistants": ["Јана Кузманова", "Мартин Динев", "Мартина Тошевска"]
+		"assistants": ["Јана Кузманова", "Мартин Динев", "Мартина Тошевска"],
+		"tags": ["AI / ML", "Computer Science"],
+		"technologies": ["Python"],
+		"evaluation": ["Theory + Code"],
+		"isEasy": false
 	},
 	"Визуелно програмирање": {
 		"subject": "Визуелно програмирање",
@@ -656,7 +772,11 @@
 		"season": "S",
 		"semester": 4,
 		"professors": ["Ѓорѓи Маџаров", "Дејан Ѓорѓевиќ"],
-		"assistants": ["Стефан Андонов"]
+		"assistants": ["Стефан Андонов"],
+		"tags": ["Software Engineering", "UI/UX & Digital Media"],
+		"technologies": [".NET"],
+		"evaluation": ["Code", "Project"],
+		"isEasy": false
 	},
 	"Вовед во екоинформатиката": {
 		"subject": "Вовед во екоинформатиката",
@@ -675,7 +795,11 @@
 		"season": "S",
 		"semester": 4,
 		"professors": ["Андреја Наумоски", "Коста Митрески"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Data Science", "Computer Science", "Societal Skills"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": true
 	},
 	"Вовед во случајни процеси": {
 		"subject": "Вовед во случајни процеси",
@@ -694,7 +818,11 @@
 		"season": "S",
 		"semester": 4,
 		"professors": ["Верица Бакева Смиљкова"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Mathematics", "Data Science", "Computer Science"],
+		"technologies": [],
+		"evaluation": ["Theory + Practical"],
+		"isEasy": false
 	},
 	"Дигитално процесирање на слика": {
 		"subject": "Дигитално процесирање на слика",
@@ -718,7 +846,11 @@
 		"season": "S",
 		"semester": 4,
 		"professors": ["Ивица Димитровски"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Multimedia", "AI / ML", "Data Science", "Computer Science"],
+		"technologies": ["Python"],
+		"evaluation": ["Theory + Code", "Project"],
+		"isEasy": true
 	},
 	"Дигитизација": {
 		"subject": "Дигитизација",
@@ -737,7 +869,11 @@
 		"season": "W",
 		"semester": 3,
 		"professors": ["Бобан Јоксимоски"],
-		"assistants": ["Марко Петров"]
+		"assistants": ["Марко Петров"],
+		"tags": ["Multimedia"],
+		"technologies": ["Blender"],
+		"evaluation": ["Theory", "Project"],
+		"isEasy": true
 	},
 	"Дизајн на алгоритми": {
 		"subject": "Дизајн на алгоритми",
@@ -761,7 +897,11 @@
 		"season": "S",
 		"semester": 4,
 		"professors": ["Марија Михова"],
-		"assistants": ["Мартин Динев"]
+		"assistants": ["Мартин Динев"],
+		"tags": ["Computer Science", "Software Engineering", "Mathematics"],
+		"technologies": ["any"],
+		"evaluation": ["Theory + Code", "Project"],
+		"isEasy": false
 	},
 	"Е-влада": {
 		"subject": "Е-влада",
@@ -780,7 +920,11 @@
 		"season": "S",
 		"semester": 4,
 		"professors": ["Георгина Мирчева", "Смилка Јанеска Саркањац"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Societal Skills"],
+		"technologies": [],
+		"evaluation": ["Theory"],
+		"isEasy": true
 	},
 	"Економија за ИКТ инженери": {
 		"subject": "Економија за ИКТ инженери",
@@ -799,7 +943,11 @@
 		"season": "W",
 		"electiveFor": ["IE23", "IMB23", "KI23", "KN23", "SIIS23"],
 		"professors": ["Смилка Јанеска Саркањац"],
-		"assistants": ["Александар Тенев"]
+		"assistants": ["Александар Тенев"],
+		"tags": ["Societal Skills"],
+		"technologies": [],
+		"evaluation": ["Theory"],
+		"isEasy": true
 	},
 	"Електрични кола": {
 		"subject": "Електрични кола",
@@ -818,7 +966,11 @@
 		"season": "S",
 		"electiveFor": ["IE23", "IMB23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Коста Митрески"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Computer Architecture", "Physics"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Информатичко размислување во образованието": {
 		"subject": "Информатичко размислување во образованието",
@@ -837,7 +989,11 @@
 		"season": "S",
 		"electiveFor": ["IMB23", "KI23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Миле Јованов", "Емил Станков"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Education", "Computer Science", "Societal Skills"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": true
 	},
 	"Инженерска математика": {
 		"subject": "Инженерска математика",
@@ -856,7 +1012,11 @@
 		"season": "W",
 		"semester": 3,
 		"professors": ["Весна Димитрова"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Mathematics"],
+		"technologies": [],
+		"evaluation": ["Theory + Practical", "Project"],
+		"isEasy": false
 	},
 	"Интернет програмирање на клиентска страна": {
 		"subject": "Интернет програмирање на клиентска страна",
@@ -875,7 +1035,11 @@
 		"season": "W",
 		"semester": 3,
 		"professors": ["Гоце Арменски", "Иван Китановски", "Сузана Лошковска"],
-		"assistants": ["Влатко Спасев", "Марко Петров"]
+		"assistants": ["Влатко Спасев", "Марко Петров"],
+		"tags": ["Web Development", "Software Engineering"],
+		"technologies": ["HTML", "CSS", "JavaScript"],
+		"evaluation": ["Theory + Code", "Project"],
+		"isEasy": false
 	},
 	"Интернет технологии": {
 		"subject": "Интернет технологии",
@@ -898,7 +1062,11 @@
 			"Гоце Арменски",
 			"Магдалена Костоска Ѓорчевска"
 		],
-		"assistants": ["Димитар Китановски"]
+		"assistants": ["Димитар Китановски"],
+		"tags": ["Web Development", "Software Engineering"],
+		"technologies": [".NET", "any", "HTML", "CSS"],
+		"evaluation": ["Theory + Code", "Project"],
+		"isEasy": false
 	},
 	"Компјутерска графика": {
 		"subject": "Компјутерска графика",
@@ -917,7 +1085,11 @@
 		"season": "S",
 		"semester": 4,
 		"professors": ["Сузана Лошковска", "Бобан Јоксимоски"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["UI/UX & Digital Media", "Multimedia", "Software Engineering"],
+		"technologies": ["C++"],
+		"evaluation": ["Theory + Code", "Project"],
+		"isEasy": false
 	},
 	"Компјутерски мрежи": {
 		"subject": "Компјутерски мрежи",
@@ -936,7 +1108,11 @@
 		"season": "W",
 		"electiveFor": [],
 		"professors": ["Дејан Спасов", "Марјан Гушев"],
-		"assistants": ["Ненад Анчев"]
+		"assistants": ["Ненад Анчев"],
+		"tags": ["Networking"],
+		"technologies": [],
+		"evaluation": ["Theory + Practical"],
+		"isEasy": false
 	},
 	"Компјутерски мрежи и безбедност": {
 		"subject": "Компјутерски мрежи и безбедност",
@@ -969,7 +1145,11 @@
 			"Димитар Китановски",
 			"Кирил Ќироски",
 			"Марија Танеска"
-		]
+		],
+		"tags": ["Networking", "Cybersecurity"],
+		"technologies": [],
+		"evaluation": ["Theory + Practical"],
+		"isEasy": false
 	},
 	"Концепти на информатичко општество": {
 		"subject": "Концепти на информатичко општество",
@@ -994,7 +1174,11 @@
 			"Милена Трајаноска",
 			"Зорица Карапанчева",
 			"Марија Стојчева"
-		]
+		],
+		"tags": ["Societal Skills", "Computer Science"],
+		"technologies": ["any"],
+		"evaluation": ["Theory", "Project"],
+		"isEasy": true
 	},
 	"Медиуми и комуникации": {
 		"subject": "Медиуми и комуникации",
@@ -1013,7 +1197,11 @@
 		"season": "S",
 		"electiveFor": ["IMB23", "KI23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Владимир Трајковиќ"],
-		"assistants": ["Мила Додевска"]
+		"assistants": ["Мила Додевска"],
+		"tags": ["Multimedia", "Societal Skills"],
+		"technologies": [],
+		"evaluation": ["Theory"],
+		"isEasy": true
 	},
 	"Мултимедијални технологии": {
 		"subject": "Мултимедијални технологии",
@@ -1032,7 +1220,11 @@
 		"season": "W",
 		"electiveFor": ["IMB23", "KI23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Миле Јованов"],
-		"assistants": ["Живко Атанаскоски"]
+		"assistants": ["Живко Атанаскоски"],
+		"tags": ["Multimedia"],
+		"technologies": [],
+		"evaluation": ["Theory + Practical"],
+		"isEasy": true
 	},
 	"Напредно програмирање": {
 		"subject": "Напредно програмирање",
@@ -1051,7 +1243,11 @@
 		"season": "W",
 		"electiveFor": ["IE23", "IMB23", "KI23", "PIT23"],
 		"professors": ["Ѓорѓи Маџаров", "Дејан Ѓорѓевиќ"],
-		"assistants": ["Ана Тодоровска", "Стефан Андонов"]
+		"assistants": ["Ана Тодоровска", "Стефан Андонов"],
+		"tags": ["Software Engineering", "Computer Science"],
+		"technologies": ["Kotlin"],
+		"evaluation": ["Theory + Code"],
+		"isEasy": false
 	},
 	"Квантно пресметување": {
 		"subject": "Квантно пресметување",
@@ -1073,7 +1269,11 @@
 		"season": "W",
 		"semester": 7,
 		"professors": [],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Computer Science", "Physics", "Mathematics"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Оперативни системи": {
 		"subject": "Оперативни системи",
@@ -1110,7 +1310,15 @@
 			"Ана Тодоровска",
 			"Милена Трајаноска",
 			"Ненад Анчев"
-		]
+		],
+		"tags": [
+			"Systems Infrastructure",
+			"Computer Science",
+			"Computer Architecture"
+		],
+		"technologies": ["Docker", "Java"],
+		"evaluation": ["Theory + Practical"],
+		"isEasy": false
 	},
 	"Основи на комуникациски системи": {
 		"subject": "Основи на комуникациски системи",
@@ -1129,7 +1337,11 @@
 		"season": "W",
 		"semester": 3,
 		"professors": ["Андреја Наумоски"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Networking", "Physics"],
+		"technologies": [],
+		"evaluation": ["Project"],
+		"isEasy": false
 	},
 	"Основи на теоријата на информации": {
 		"subject": "Основи на теоријата на информации",
@@ -1148,7 +1360,11 @@
 		"season": "W",
 		"electiveFor": ["IE23", "KI23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Александра Поповска Митровиќ", "Верица Бакева Смиљкова"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Computer Science", "Mathematics"],
+		"technologies": [],
+		"evaluation": ["Theory + Practical"],
+		"isEasy": false
 	},
 	"Софтверско инженерство": {
 		"subject": "Софтверско инженерство",
@@ -1172,7 +1388,11 @@
 			"Катарина Тројачанец Динева",
 			"Катерина Здравкова"
 		],
-		"assistants": ["Јана Кузманова", "Стефан Андонов"]
+		"assistants": ["Јана Кузманова", "Стефан Андонов"],
+		"tags": ["Software Engineering", "Cloud Engineering & DevOps"],
+		"technologies": ["Git", "Docker"],
+		"evaluation": ["Theory + Practical"],
+		"isEasy": false
 	},
 	"Теорија на информации со дигитални комуникации": {
 		"subject": "Теорија на информации со дигитални комуникации",
@@ -1195,7 +1415,11 @@
 		"season": "S",
 		"semester": 4,
 		"professors": ["Александра Поповска Митровиќ", "Верица Бакева Смиљкова"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Computer Science", "Mathematics"],
+		"technologies": [],
+		"evaluation": ["Theory + Practical"],
+		"isEasy": false
 	},
 	"Управување со техничка поддршка": {
 		"subject": "Управување со техничка поддршка",
@@ -1214,7 +1438,11 @@
 		"season": "W",
 		"electiveFor": ["IE23", "KI23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Анастас Мишев", "Соња Филипоска"],
-		"assistants": ["Војдан Ќорвезироски", "Евгенија Крајчевска"]
+		"assistants": ["Војдан Ќорвезироски", "Евгенија Крајчевска"],
+		"tags": ["Societal Skills", "Systems Infrastructure"],
+		"technologies": [],
+		"evaluation": ["Theory + Practical", "Project"],
+		"isEasy": false
 	},
 	"Шаблони за дизајн на кориснички интерфејси": {
 		"subject": "Шаблони за дизајн на кориснички интерфејси",
@@ -1238,7 +1466,15 @@
 			"Катарина Тројачанец Динева",
 			"Сузана Лошковска"
 		],
-		"assistants": ["Влатко Спасев", "Ема Пандилова"]
+		"assistants": ["Влатко Спасев", "Ема Пандилова"],
+		"tags": [
+			"UI/UX & Digital Media",
+			"Web Development",
+			"Software Engineering"
+		],
+		"technologies": ["jQuery", "Figma"],
+		"evaluation": ["Theory + Code"],
+		"isEasy": false
 	},
 	"Агентно-базирани системи": {
 		"subject": "Агентно-базирани системи",
@@ -1262,7 +1498,11 @@
 		"season": "S",
 		"semester": 6,
 		"professors": ["Кире Триводалиев", "Соња Гиевска"],
-		"assistants": ["Мартина Тошевска"]
+		"assistants": ["Мартина Тошевска"],
+		"tags": ["AI / ML", "Software Engineering", "Computer Science"],
+		"technologies": ["Python"],
+		"evaluation": ["Project"],
+		"isEasy": false
 	},
 	"Администрација на мрежи": {
 		"subject": "Администрација на мрежи",
@@ -1281,7 +1521,11 @@
 		"season": "S",
 		"electiveFor": ["IE23", "KI23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Александра Каневче Дединец"],
-		"assistants": ["Марија Танеска"]
+		"assistants": ["Марија Танеска"],
+		"tags": ["Networking", "Systems Infrastructure", "Cybersecurity"],
+		"technologies": [],
+		"evaluation": ["Theory", "Project"],
+		"isEasy": false
 	},
 	"Администрација на системи": {
 		"subject": "Администрација на системи",
@@ -1300,7 +1544,11 @@
 		"season": "W",
 		"electiveFor": ["IE23", "KI23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Боро Јакимовски"],
-		"assistants": ["Кирил Ќироски"]
+		"assistants": ["Кирил Ќироски"],
+		"tags": ["Systems Infrastructure", "Networking", "Cybersecurity"],
+		"technologies": [],
+		"evaluation": ["Theory + Practical"],
+		"isEasy": false
 	},
 	"Бази на податоци": {
 		"subject": "Бази на податоци",
@@ -1337,7 +1585,11 @@
 			"Димитар Китановски",
 			"Милан Тодоровиќ",
 			"Зорица Карапанчева"
-		]
+		],
+		"tags": ["Databases", "Software Engineering"],
+		"technologies": [],
+		"evaluation": ["Theory + Code", "Project"],
+		"isEasy": false
 	},
 	"Вградливи микропроцесорски системи": {
 		"subject": "Вградливи микропроцесорски системи",
@@ -1359,7 +1611,15 @@
 		"season": "S",
 		"electiveFor": ["IE23", "IMB23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Моника Симјаноска", "Невена Ацковска"],
-		"assistants": ["Владислав Бидиков"]
+		"assistants": ["Владислав Бидиков"],
+		"tags": [
+			"Embedded Systems",
+			"Computer Architecture",
+			"Software Engineering"
+		],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Веб програмирање": {
 		"subject": "Веб програмирање",
@@ -1391,7 +1651,11 @@
 			"Милена Трајаноска",
 			"Елена Атанасоска",
 			"Дарко Сасански"
-		]
+		],
+		"tags": ["Web Development", "Software Engineering"],
+		"technologies": ["Spring"],
+		"evaluation": ["Theory + Code", "Project"],
+		"isEasy": false
 	},
 	"Визуелизација": {
 		"subject": "Визуелизација",
@@ -1413,7 +1677,11 @@
 		"season": "W",
 		"semester": 5,
 		"professors": ["Сузана Лошковска"],
-		"assistants": ["Евгенија Крајчевска"]
+		"assistants": ["Евгенија Крајчевска"],
+		"tags": ["UI/UX & Digital Media", "Data Science", "Multimedia"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": true
 	},
 	"Виртуелизација": {
 		"subject": "Виртуелизација",
@@ -1432,7 +1700,11 @@
 		"season": "S",
 		"electiveFor": ["IE23", "KI23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Боро Јакимовски"],
-		"assistants": ["Кирил Ќироски"]
+		"assistants": ["Кирил Ќироски"],
+		"tags": ["Cloud Engineering & DevOps", "Systems Infrastructure"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Вовед во мрежна наука": {
 		"subject": "Вовед во мрежна наука",
@@ -1456,7 +1728,11 @@
 		"season": "S",
 		"semester": 6,
 		"professors": ["Мирослав Мирчев"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Networking", "Data Science", "Computer Science"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": true
 	},
 	"Вовед во науката за податоци": {
 		"subject": "Вовед во науката за податоци",
@@ -1490,7 +1766,11 @@
 			"Ана Тодоровска",
 			"Милена Трајаноска",
 			"Димитар Пешевски"
-		]
+		],
+		"tags": ["Data Science", "Computer Science", "AI / ML"],
+		"technologies": ["Python"],
+		"evaluation": ["Theory + Code", "Project"],
+		"isEasy": false
 	},
 	"Географски информациски системи": {
 		"subject": "Географски информациски системи",
@@ -1509,7 +1789,11 @@
 		"season": "S",
 		"semester": 6,
 		"professors": ["Андреја Наумоски", "Коста Митрески"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Data Science"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": true
 	},
 	"Дигитална форензика": {
 		"subject": "Дигитална форензика",
@@ -1528,7 +1812,11 @@
 		"season": "S",
 		"semester": 6,
 		"professors": ["Весна Димитрова"],
-		"assistants": ["Јована Добрева"]
+		"assistants": ["Јована Добрева"],
+		"tags": ["Cybersecurity", "Systems Infrastructure"],
+		"technologies": [],
+		"evaluation": ["Theory", "Project"],
+		"isEasy": true
 	},
 	"Дигитални библиотеки": {
 		"subject": "Дигитални библиотеки",
@@ -1551,7 +1839,11 @@
 			"Магдалена Костоска Ѓорчевска",
 			"Моника Симјаноска"
 		],
-		"assistants": ["Ана Тодоровска", "Мила Додевска"]
+		"assistants": ["Ана Тодоровска", "Мила Додевска"],
+		"tags": ["Computer Science"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": true
 	},
 	"Дизајн и архитектура на софтвер": {
 		"subject": "Дизајн и архитектура на софтвер",
@@ -1573,7 +1865,15 @@
 		"season": "W",
 		"electiveFor": ["IE23", "IMB23", "KI23", "KN23", "PIT23"],
 		"professors": ["Љупчо Антовски", "Петре Ламески"],
-		"assistants": ["Јана Кузманова", "Елена Атанасоска"]
+		"assistants": ["Јана Кузманова", "Елена Атанасоска"],
+		"tags": [
+			"Software Engineering",
+			"Cloud Engineering & DevOps",
+			"Systems Infrastructure"
+		],
+		"technologies": ["any"],
+		"evaluation": ["Theory", "Project"],
+		"isEasy": false
 	},
 	"Дизајн на интеракцијата човек-компјутер": {
 		"subject": "Дизајн на интеракцијата човек-компјутер",
@@ -1600,7 +1900,15 @@
 			"Соња Гиевска",
 			"Сузана Лошковска"
 		],
-		"assistants": ["Влатко Спасев", "Иван Китановски", "Мила Додевска"]
+		"assistants": ["Влатко Спасев", "Иван Китановски", "Мила Додевска"],
+		"tags": [
+			"UI/UX & Digital Media",
+			"Software Engineering",
+			"Web Development"
+		],
+		"technologies": ["Figma", "Django", "HTML", "CSS"],
+		"evaluation": ["Theory + Code", "Project"],
+		"isEasy": false
 	},
 	"Дизајн на образовен софтвер": {
 		"subject": "Дизајн на образовен софтвер",
@@ -1619,7 +1927,11 @@
 		"season": "W",
 		"electiveFor": ["IMB23", "KI23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Гоце Арменски"],
-		"assistants": ["Јована Добрева"]
+		"assistants": ["Јована Добрева"],
+		"tags": ["Education", "Software Engineering"],
+		"technologies": [],
+		"evaluation": ["Theory", "Project"],
+		"isEasy": true
 	},
 	"Електронска и мобилна трговија": {
 		"subject": "Електронска и мобилна трговија",
@@ -1644,7 +1956,16 @@
 			"Ристе Стојанов",
 			"Сашо Граматиков"
 		],
-		"assistants": ["Ана Тодоровска"]
+		"assistants": ["Ана Тодоровска"],
+		"tags": [
+			"Web Development",
+			"Societal Skills",
+			"Software Engineering",
+			"UI/UX & Digital Media"
+		],
+		"technologies": ["React"],
+		"evaluation": ["Theory + Code", "Project", "PROVERI"],
+		"isEasy": false
 	},
 	"Интегрирани системи": {
 		"subject": "Интегрирани системи",
@@ -1663,7 +1984,16 @@
 		"season": "S",
 		"electiveFor": ["IE23", "IMB23", "KI23", "KN23", "PIT23"],
 		"professors": ["Александар Стојменски", "Иван Чорбев", "Петре Ламески"],
-		"assistants": ["Димитар Китановски", "Зорица Карапанчева"]
+		"assistants": ["Димитар Китановски", "Зорица Карапанчева"],
+		"tags": [
+			"Embedded Systems",
+			"Web Development",
+			"Computer Architecture",
+			"Software Engineering"
+		],
+		"technologies": [".NET"],
+		"evaluation": ["Theory + Practical", "Project"],
+		"isEasy": false
 	},
 	"Информациска безбедност": {
 		"subject": "Информациска безбедност",
@@ -1682,7 +2012,11 @@
 		"season": "W",
 		"electiveFor": ["IE23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Весна Димитрова", "Христина Михајлоска Трпческа"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Cybersecurity", "Networking"],
+		"technologies": ["any"],
+		"evaluation": ["Theory + Practical", "Project"],
+		"isEasy": false
 	},
 	"Инфраструктурно програмирање": {
 		"subject": "Инфраструктурно програмирање",
@@ -1701,7 +2035,15 @@
 		"season": "S",
 		"electiveFor": ["IE23", "KI23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Боро Јакимовски"],
-		"assistants": ["Владислав Бидиков"]
+		"assistants": ["Владислав Бидиков"],
+		"tags": [
+			"Cloud Engineering & DevOps",
+			"Systems Infrastructure",
+			"Software Engineering"
+		],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Компјутерска електроника": {
 		"subject": "Компјутерска електроника",
@@ -1720,7 +2062,11 @@
 		"season": "W",
 		"electiveFor": ["IE23", "IMB23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Ласко Баснарков"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Computer Architecture", "Embedded Systems", "Physics"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Компјутерска етика": {
 		"subject": "Компјутерска етика",
@@ -1742,7 +2088,11 @@
 		"season": "W",
 		"electiveFor": ["IMB23", "KI23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Бојан Илијоски", "Катерина Здравкова"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Societal Skills", "Computer Science"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": true
 	},
 	"Компјутерски звук, музика и говор": {
 		"subject": "Компјутерски звук, музика и говор",
@@ -1764,7 +2114,11 @@
 		"season": "S",
 		"semester": 6,
 		"professors": ["Вангел Ајановски"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Multimedia", "Software Engineering", "UI/UX & Digital Media"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Континуирана интеграција и испорака": {
 		"subject": "Континуирана интеграција и испорака",
@@ -1783,7 +2137,15 @@
 		"season": "S",
 		"semester": 6,
 		"professors": ["Милош Јовановиќ", "Панче Рибарски"],
-		"assistants": []
+		"assistants": [],
+		"tags": [
+			"Cloud Engineering & DevOps",
+			"Software Engineering",
+			"Systems Infrastructure"
+		],
+		"technologies": ["Git", "Docker", "Jenkins", "Kubernetes"],
+		"evaluation": ["Theory + Practical", "Project"],
+		"isEasy": false
 	},
 	"Криптографија": {
 		"subject": "Криптографија",
@@ -1807,7 +2169,11 @@
 		"season": "S",
 		"semester": 6,
 		"professors": ["Весна Димитрова", "Христина Михајлоска Трпческа"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Cybersecurity", "Mathematics", "Computer Science"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Линеарна алгебра и примени": {
 		"subject": "Линеарна алгебра и примени",
@@ -1831,7 +2197,11 @@
 		"season": "W",
 		"electiveFor": ["IE23", "IMB23", "KI23", "PIT23", "SIIS23"],
 		"professors": ["Марија Михова"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Mathematics", "Computer Science", "Data Science"],
+		"technologies": [],
+		"evaluation": ["Theory + Practical"],
+		"isEasy": false
 	},
 	"Машинско учење": {
 		"subject": "Машинско учење",
@@ -1858,7 +2228,11 @@
 			"Илинка Иваноска",
 			"Мирослав Мирчев"
 		],
-		"assistants": []
+		"assistants": [],
+		"tags": ["AI / ML", "Data Science", "Computer Science"],
+		"technologies": ["Python"],
+		"evaluation": ["Theory + Practical", "Project"],
+		"isEasy": false
 	},
 	"Мерење и анализа на сообраќај": {
 		"subject": "Мерење и анализа на сообраќај",
@@ -1882,7 +2256,11 @@
 		"season": "S",
 		"semester": 6,
 		"professors": ["Мирослав Мирчев"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Networking", "Data Science", "Cybersecurity"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": true
 	},
 	"Сајбер безбедност": {
 		"subject": "Сајбер безбедност",
@@ -1901,7 +2279,11 @@
 		"season": "W",
 		"electiveFor": ["IE23", "KI23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Анастас Мишев", "Соња Филипоска"],
-		"assistants": ["Војдан Ќорвезироски"]
+		"assistants": ["Војдан Ќорвезироски"],
+		"tags": ["Cybersecurity", "Networking"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Мултимедиски мрежи": {
 		"subject": "Мултимедиски мрежи",
@@ -1920,7 +2302,11 @@
 		"season": "W",
 		"semester": 5,
 		"professors": ["Сашо Граматиков"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Multimedia", "Networking"],
+		"technologies": [],
+		"evaluation": ["Theory + Practical", "Project"],
+		"isEasy": false
 	},
 	"Мултимедиски системи": {
 		"subject": "Мултимедиски системи",
@@ -1942,7 +2328,16 @@
 		"season": "S",
 		"semester": 6,
 		"professors": ["Билјана Стојкоска Ристеска"],
-		"assistants": []
+		"assistants": [],
+		"tags": [
+			"Multimedia",
+			"Software Engineering",
+			"Systems Infrastructure",
+			"Computer Architecture"
+		],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": true
 	},
 	"Напреден веб дизајн": {
 		"subject": "Напреден веб дизајн",
@@ -1961,7 +2356,15 @@
 		"season": "W",
 		"electiveFor": ["IE23", "IMB23", "KI23", "KN23", "SIIS23"],
 		"professors": ["Бобан Јоксимоски", "Гоце Арменски", "Иван Чорбев"],
-		"assistants": ["Јована Добрева", "Славе Темков", "Мила Додевска"]
+		"assistants": ["Јована Добрева", "Славе Темков", "Мила Додевска"],
+		"tags": [
+			"Web Development",
+			"UI/UX & Digital Media",
+			"Software Engineering"
+		],
+		"technologies": ["Vue", "HTML", "CSS"],
+		"evaluation": ["Theory + Code", "Project"],
+		"isEasy": false
 	},
 	"Основи на роботиката": {
 		"subject": "Основи на роботиката",
@@ -1983,7 +2386,16 @@
 		"season": "W",
 		"electiveFor": ["IE23", "IMB23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Андреа Кулаков"],
-		"assistants": ["Влатко Спасев"]
+		"assistants": ["Влатко Спасев"],
+		"tags": [
+			"Embedded Systems",
+			"AI / ML",
+			"Computer Architecture",
+			"Software Engineering"
+		],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Паралелно и дистрибуирано процесирање": {
 		"subject": "Паралелно и дистрибуирано процесирање",
@@ -2005,7 +2417,15 @@
 		"season": "W",
 		"electiveFor": ["IE23", "IMB23", "KI23", "PIT23", "SIIS23"],
 		"professors": ["Владимир Здравески"],
-		"assistants": ["Димитар Пешевски"]
+		"assistants": ["Димитар Пешевски"],
+		"tags": [
+			"Systems Infrastructure",
+			"Computer Science",
+			"Software Engineering"
+		],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Паралелно програмирање": {
 		"subject": "Паралелно програмирање",
@@ -2027,7 +2447,16 @@
 		"season": "S",
 		"semester": 6,
 		"professors": ["Марјан Гушев"],
-		"assistants": ["Владимир Здравески", "Димитар Милески"]
+		"assistants": ["Владимир Здравески", "Димитар Милески"],
+		"tags": [
+			"Cloud Engineering & DevOps",
+			"Systems Infrastructure",
+			"Software Engineering",
+			"Computer Science"
+		],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Персонализирано учење": {
 		"subject": "Персонализирано учење",
@@ -2049,7 +2478,11 @@
 		"season": "W",
 		"electiveFor": ["IMB23", "KI23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Миле Јованов"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Education", "Data Science", "Web Development"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": true
 	},
 	"Податочно рударење": {
 		"subject": "Податочно рударење",
@@ -2073,7 +2506,11 @@
 		"season": "S",
 		"semester": 6,
 		"professors": ["Билјана Тојтовска Рибарски", "Бојан Илијоски"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Data Science", "AI / ML", "Computer Science"],
+		"technologies": ["Python"],
+		"evaluation": ["Project", "Theory + Code"],
+		"isEasy": false
 	},
 	"Процесирање на сигналите": {
 		"subject": "Процесирање на сигналите",
@@ -2092,7 +2529,11 @@
 		"season": "S",
 		"electiveFor": ["IE23", "IMB23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Ласко Баснарков"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Computer Science", "Mathematics", "Multimedia"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Вештачка интелигенција за игри": {
 		"subject": "Вештачка интелигенција за игри",
@@ -2115,7 +2556,11 @@
 		"season": "S",
 		"semester": 6,
 		"professors": [],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Game Development", "AI / ML", "Software Engineering"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Психологија на училишна возраст": {
 		"subject": "Психологија на училишна возраст",
@@ -2132,7 +2577,11 @@
 		"season": "S",
 		"electiveFor": ["IMB23", "KI23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Калина Сотироска"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Societal Skills", "Education"],
+		"technologies": [],
+		"evaluation": ["Theory"],
+		"isEasy": true
 	},
 	"Работа со надарени ученици": {
 		"subject": "Работа со надарени ученици",
@@ -2154,7 +2603,11 @@
 		"season": "S",
 		"electiveFor": ["IMB23", "KI23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Ана Мадевска Богданова"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Education", "Societal Skills"],
+		"technologies": [],
+		"evaluation": ["Theory"],
+		"isEasy": true
 	},
 	"Сервисно ориентирани архитектури": {
 		"subject": "Сервисно ориентирани архитектури",
@@ -2176,7 +2629,15 @@
 		"season": "S",
 		"semester": 6,
 		"professors": ["Панче Рибарски"],
-		"assistants": []
+		"assistants": [],
+		"tags": [
+			"Software Engineering",
+			"Cloud Engineering & DevOps",
+			"Web Development"
+		],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Современи компјутерски архитектури": {
 		"subject": "Современи компјутерски архитектури",
@@ -2198,7 +2659,11 @@
 		"season": "W",
 		"semester": 5,
 		"professors": ["Дејан Спасов"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Computer Architecture"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Софтверски дефинирана безбедност": {
 		"subject": "Софтверски дефинирана безбедност",
@@ -2217,7 +2682,11 @@
 		"season": "S",
 		"electiveFor": ["IE23", "KI23", "KN23", "PIT23", "SIIS23"],
 		"professors": [],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Cybersecurity", "Networking", "Cloud Engineering & DevOps"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Софтверски квалитет и тестирање": {
 		"subject": "Софтверски квалитет и тестирање",
@@ -2240,7 +2709,11 @@
 			"Бојана Котеска",
 			"Христина Михајлоска Трпческа"
 		],
-		"assistants": ["Ана Тодоровска", "Славе Темков"]
+		"assistants": ["Ана Тодоровска", "Славе Темков"],
+		"tags": ["Software Engineering"],
+		"technologies": ["Java"],
+		"evaluation": ["Theory + Code", "Project"],
+		"isEasy": false
 	},
 	"Автоматизирање на процеси во машинско учење": {
 		"subject": "Автоматизирање на процеси во машинско учење",
@@ -2262,7 +2735,16 @@
 		"season": "S",
 		"semester": 6,
 		"professors": ["Билјана Тојтовска Рибарски"],
-		"assistants": []
+		"assistants": [],
+		"tags": [
+			"AI / ML",
+			"Cloud Engineering & DevOps",
+			"Software Engineering",
+			"Data Science"
+		],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Учење на далечина": {
 		"subject": "Учење на далечина",
@@ -2284,7 +2766,11 @@
 		"season": "S",
 		"electiveFor": ["IMB23", "KI23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Гоце Арменски"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Education"],
+		"technologies": [],
+		"evaluation": ["Theory", "Project"],
+		"isEasy": true
 	},
 	"Основи на теоријата на компјутерските науки": {
 		"subject": "Основи на теоријата на компјутерските науки",
@@ -2308,7 +2794,11 @@
 		"season": "S",
 		"electiveFor": ["IE23", "IMB23", "KI23", "PIT23", "SIIS23"],
 		"professors": ["Марија Михова"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Computer Science", "Mathematics"],
+		"technologies": [],
+		"evaluation": ["Theory + Practical"],
+		"isEasy": false
 	},
 	"Автономна роботика": {
 		"subject": "Автономна роботика",
@@ -2327,7 +2817,16 @@
 		"season": "W",
 		"semester": 7,
 		"professors": ["Петре Ламески"],
-		"assistants": []
+		"assistants": [],
+		"tags": [
+			"Embedded Systems",
+			"AI / ML",
+			"Software Engineering",
+			"Computer Architecture"
+		],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Администрација на бази податоци": {
 		"subject": "Администрација на бази податоци",
@@ -2346,7 +2845,11 @@
 		"season": "W",
 		"semester": 7,
 		"professors": ["Вангел Ајановски"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Databases", "Systems Infrastructure"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Анализа и дизајн на ИС": {
 		"subject": "Анализа и дизајн на ИС",
@@ -2365,7 +2868,11 @@
 		"season": "W",
 		"semester": 7,
 		"professors": ["Владимир Трајковиќ"],
-		"assistants": ["Јана Кузманова"]
+		"assistants": ["Јана Кузманова"],
+		"tags": ["Software Engineering", "Societal Skills"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Биолошки инспирирано пресметување": {
 		"subject": "Биолошки инспирирано пресметување",
@@ -2387,7 +2894,11 @@
 		"season": "S",
 		"semester": 8,
 		"professors": ["Илинка Иваноска", "Кире Триводалиев"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["AI / ML", "Computer Science"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Блоковски вериги и криптовалути": {
 		"subject": "Блоковски вериги и криптовалути",
@@ -2409,7 +2920,11 @@
 		"season": "W",
 		"semester": 7,
 		"professors": ["Панче Рибарски"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Cybersecurity", "Software Engineering", "Computer Science"],
+		"technologies": [],
+		"evaluation": ["Project"],
+		"isEasy": false
 	},
 	"Веб базирани системи": {
 		"subject": "Веб базирани системи",
@@ -2431,7 +2946,11 @@
 		"season": "W",
 		"semester": 7,
 		"professors": ["Димитар Трајанов", "Милош Јовановиќ"],
-		"assistants": ["Милена Трајаноска"]
+		"assistants": ["Милена Трајаноска"],
+		"tags": ["Web Development", "Software Engineering", "AI / ML"],
+		"technologies": [],
+		"evaluation": ["Project", "Theory"],
+		"isEasy": false
 	},
 	"Веб пребарувачки системи": {
 		"subject": "Веб пребарувачки системи",
@@ -2454,7 +2973,11 @@
 		"season": "S",
 		"semester": 8,
 		"professors": ["Вангел Ајановски"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Web Development", "Databases", "Computer Science"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Виртуелна реалност": {
 		"subject": "Виртуелна реалност",
@@ -2476,7 +2999,11 @@
 		"season": "S",
 		"semester": 8,
 		"professors": ["Катарина Тројачанец Динева", "Сузана Лошковска"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["UI/UX & Digital Media", "Multimedia"],
+		"technologies": ["Unity"],
+		"evaluation": ["Theory", "Project"],
+		"isEasy": true
 	},
 	"Вовед во анализа на временските серии": {
 		"subject": "Вовед во анализа на временските серии",
@@ -2499,7 +3026,11 @@
 		"season": "W",
 		"semester": 7,
 		"professors": ["Ефтим Здравевски"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Data Science", "Mathematics", "AI / ML"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Вовед во биоинформатиката": {
 		"subject": "Вовед во биоинформатиката",
@@ -2522,7 +3053,11 @@
 		"season": "W",
 		"semester": 7,
 		"professors": ["Моника Симјаноска", "Невена Ацковска"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Data Science", "AI / ML", "Computer Science", "Databases"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Вовед во когнитивни науки": {
 		"subject": "Вовед во когнитивни науки",
@@ -2541,7 +3076,11 @@
 		"season": "S",
 		"semester": 8,
 		"professors": ["Андреа Кулаков"],
-		"assistants": ["Влатко Спасев"]
+		"assistants": ["Влатко Спасев"],
+		"tags": ["AI / ML", "Computer Science"],
+		"technologies": [],
+		"evaluation": ["Theory", "Project"],
+		"isEasy": true
 	},
 	"Вовед во паметни градови": {
 		"subject": "Вовед во паметни градови",
@@ -2564,7 +3103,11 @@
 		"season": "W",
 		"semester": 7,
 		"professors": ["Александра Каневче Дединец"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Embedded Systems", "Data Science", "Networking", "AI / ML"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Вовед во препознавање на облици": {
 		"subject": "Вовед во препознавање на облици",
@@ -2587,7 +3130,11 @@
 		"season": "W",
 		"semester": 7,
 		"professors": ["Дејан Ѓорѓевиќ"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["AI / ML", "Data Science", "Computer Science"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Дигитална постпродукција": {
 		"subject": "Дигитална постпродукција",
@@ -2609,7 +3156,11 @@
 		"season": "W",
 		"semester": 7,
 		"professors": [],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Multimedia", "UI/UX & Digital Media"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Дизајн на компјутерски мрежи": {
 		"subject": "Дизајн на компјутерски мрежи",
@@ -2628,7 +3179,11 @@
 		"season": "S",
 		"electiveFor": ["IE23", "KI23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Александра Каневче Дединец", "Анастас Мишев"],
-		"assistants": ["Кирил Ќироски"]
+		"assistants": ["Кирил Ќироски"],
+		"tags": ["Networking"],
+		"technologies": [],
+		"evaluation": ["Theory + Practical", "Project"],
+		"isEasy": false
 	},
 	"Дипломска работа": {
 		"subject": "Дипломска работа",
@@ -2647,7 +3202,11 @@
 		"season": "S",
 		"electiveFor": [],
 		"professors": ["Сите професори"],
-		"assistants": []
+		"assistants": [],
+		"tags": [],
+		"technologies": [],
+		"evaluation": ["Project"],
+		"isEasy": false
 	},
 	"Дистрибуирани системи": {
 		"subject": "Дистрибуирани системи",
@@ -2666,7 +3225,16 @@
 		"season": "W",
 		"electiveFor": ["IE23", "KI23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Боро Јакимовски"],
-		"assistants": ["Ненад Анчев"]
+		"assistants": ["Ненад Анчев"],
+		"tags": [
+			"Cloud Engineering & DevOps",
+			"Systems Infrastructure",
+			"Networking",
+			"Software Engineering"
+		],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Дистрибуирано складирање на податоци": {
 		"subject": "Дистрибуирано складирање на податоци",
@@ -2685,7 +3253,15 @@
 		"season": "W",
 		"semester": 7,
 		"professors": [],
-		"assistants": []
+		"assistants": [],
+		"tags": [
+			"Databases",
+			"Cloud Engineering & DevOps",
+			"Systems Infrastructure"
+		],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Етичко хакирање": {
 		"subject": "Етичко хакирање",
@@ -2704,7 +3280,11 @@
 		"season": "S",
 		"semester": 8,
 		"professors": ["Анастас Мишев", "Христина Михајлоска Трпческа"],
-		"assistants": ["Војдан Ќорвезироски"]
+		"assistants": ["Војдан Ќорвезироски"],
+		"tags": ["Cybersecurity", "Networking"],
+		"technologies": [],
+		"evaluation": ["Theory", "Project"],
+		"isEasy": false
 	},
 	"ИКТ за развој": {
 		"subject": "ИКТ за развој",
@@ -2723,7 +3303,11 @@
 		"season": "S",
 		"semester": 8,
 		"professors": [],
-		"assistants": []
+		"assistants": [],
+		"tags": [],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": true
 	},
 	"Имплементација на софтверски системи со слободен и отворен код": {
 		"subject": "Имплементација на софтверски системи со слободен и отворен код",
@@ -2745,7 +3329,15 @@
 		"season": "W",
 		"semester": 7,
 		"professors": ["Иван Чорбев", "Александар Стојменски"],
-		"assistants": ["Ема Пандилова"]
+		"assistants": ["Ема Пандилова"],
+		"tags": [
+			"Software Engineering",
+			"Systems Infrastructure",
+			"Web Development"
+		],
+		"technologies": ["Laravel"],
+		"evaluation": ["Theory + Code", "Project"],
+		"isEasy": false
 	},
 	"Иновации во ИКТ": {
 		"subject": "Иновации во ИКТ",
@@ -2764,7 +3356,11 @@
 		"season": "W",
 		"semester": 7,
 		"professors": ["Магдалена Костоска Ѓорчевска", "Марјан Гушев"],
-		"assistants": ["Димитар Милески"]
+		"assistants": ["Димитар Милески"],
+		"tags": ["Societal Skills", "Computer Science", "Software Engineering"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": true
 	},
 	"Откривање знаење со длабоко учење": {
 		"subject": "Откривање знаење со длабоко учење",
@@ -2787,7 +3383,11 @@
 		"season": "S",
 		"semester": 8,
 		"professors": ["Кире Триводалиев", "Соња Гиевска"],
-		"assistants": ["Мартина Тошевска"]
+		"assistants": ["Мартина Тошевска"],
+		"tags": ["AI / ML", "Data Science"],
+		"technologies": ["Python"],
+		"evaluation": ["Project"],
+		"isEasy": false
 	},
 	"Интелигентни системи": {
 		"subject": "Интелигентни системи",
@@ -2810,7 +3410,11 @@
 		"season": "S",
 		"semester": 8,
 		"professors": ["Ана Мадевска Богданова", "Бојан Илијоски"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["AI / ML", "Software Engineering", "Data Science"],
+		"technologies": ["Python"],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Интернет на нештата": {
 		"subject": "Интернет на нештата",
@@ -2829,7 +3433,17 @@
 		"season": "W",
 		"electiveFor": ["IE23", "IMB23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Игор Мишковски"],
-		"assistants": ["Владислав Бидиков"]
+		"assistants": ["Владислав Бидиков"],
+		"tags": [
+			"Embedded Systems",
+			"Networking",
+			"Cloud Engineering & DevOps",
+			"Cybersecurity",
+			"AI / ML"
+		],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Компјутерска анимација": {
 		"subject": "Компјутерска анимација",
@@ -2851,7 +3465,16 @@
 		"season": "S",
 		"semester": 6,
 		"professors": ["Бобан Јоксимоски"],
-		"assistants": []
+		"assistants": [],
+		"tags": [
+			"UI/UX & Digital Media",
+			"Multimedia",
+			"Game Development",
+			"Software Engineering"
+		],
+		"technologies": ["Blender"],
+		"evaluation": ["Project"],
+		"isEasy": false
 	},
 	"Компјутерски поддржано производство": {
 		"subject": "Компјутерски поддржано производство",
@@ -2873,7 +3496,15 @@
 		"season": "W",
 		"semester": 7,
 		"professors": ["Андреја Наумоски"],
-		"assistants": []
+		"assistants": [],
+		"tags": [
+			"Embedded Systems",
+			"Software Engineering",
+			"Computer Architecture"
+		],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Македонски јазик": {
 		"subject": "Македонски јазик",
@@ -2890,7 +3521,11 @@
 		"season": "S",
 		"electiveFor": ["IMB23", "KI23", "KN23", "PIT23", "SIIS23"],
 		"professors": [],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Societal Skills", "Education"],
+		"technologies": [],
+		"evaluation": ["Theory"],
+		"isEasy": true
 	},
 	"Машинска визија": {
 		"subject": "Машинска визија",
@@ -2909,7 +3544,11 @@
 		"season": "W",
 		"semester": 7,
 		"professors": ["Андреа Кулаков", "Петре Ламески"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["AI / ML", "Multimedia", "Data Science"],
+		"technologies": ["Python"],
+		"evaluation": ["Theory + Practical", "Project"],
+		"isEasy": false
 	},
 	"Менаџмент информациски системи": {
 		"subject": "Менаџмент информациски системи",
@@ -2928,7 +3567,11 @@
 		"season": "W",
 		"electiveFor": ["IE23", "IMB23", "KI23", "KN23", "SIIS23"],
 		"professors": ["Љупчо Антовски", "Горан Велинов"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Software Engineering", "Societal Skills"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": true
 	},
 	"Методика на информатиката": {
 		"subject": "Методика на информатиката",
@@ -2947,7 +3590,11 @@
 		"season": "S",
 		"electiveFor": ["IMB23", "KI23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Ана Мадевска Богданова"],
-		"assistants": ["Ана Мадевска Богданова"]
+		"assistants": ["Ана Мадевска Богданова"],
+		"tags": ["Education", "Computer Science"],
+		"technologies": [],
+		"evaluation": ["Project"],
+		"isEasy": true
 	},
 	"Методологија на истражувањето во ИКТ": {
 		"subject": "Методологија на истражувањето во ИКТ",
@@ -2966,7 +3613,11 @@
 		"season": "W",
 		"electiveFor": ["IE23", "IMB23", "KI23", "PIT23", "SIIS23"],
 		"professors": ["Андреја Наумоски", "Владимир Трајковиќ"],
-		"assistants": ["Мартина Тошевска", "Славе Темков"]
+		"assistants": ["Мартина Тошевска", "Славе Темков"],
+		"tags": ["Societal Skills", "Computer Science"],
+		"technologies": [],
+		"evaluation": ["Theory"],
+		"isEasy": true
 	},
 	"Мобилни апликации": {
 		"subject": "Мобилни апликации",
@@ -2988,7 +3639,11 @@
 		"season": "S",
 		"semester": 8,
 		"professors": ["Љупчо Антовски", "Петре Ламески"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Software Engineering", "UI/UX & Digital Media", "Databases"],
+		"technologies": ["Swift"],
+		"evaluation": ["Project"],
+		"isEasy": false
 	},
 	"Мобилни информациски системи": {
 		"subject": "Мобилни информациски системи",
@@ -3010,7 +3665,11 @@
 		"season": "W",
 		"semester": 7,
 		"professors": ["Петре Ламески"],
-		"assistants": ["Мила Додевска"]
+		"assistants": ["Мила Додевска"],
+		"tags": ["Software Engineering", "UI/UX & Digital Media", "Databases"],
+		"technologies": ["Flutter", "any"],
+		"evaluation": ["Project"],
+		"isEasy": false
 	},
 	"Мобилни платформи и програмирање": {
 		"subject": "Мобилни платформи и програмирање",
@@ -3032,7 +3691,11 @@
 		"season": "W",
 		"semester": 7,
 		"professors": ["Љупчо Антовски", "Костадин Мишев"],
-		"assistants": ["Мила Додевска"]
+		"assistants": ["Мила Додевска"],
+		"tags": ["Software Engineering", "UI/UX & Digital Media", "Databases"],
+		"technologies": ["Kotlin"],
+		"evaluation": ["Project"],
+		"isEasy": false
 	},
 	"Моделирање и менаџирање на бизнис процеси": {
 		"subject": "Моделирање и менаџирање на бизнис процеси",
@@ -3051,7 +3714,11 @@
 		"season": "S",
 		"semester": 8,
 		"professors": ["Георгина Мирчева"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Societal Skills", "Software Engineering"],
+		"technologies": [""],
+		"evaluation": ["Theory"],
+		"isEasy": true
 	},
 	"Моделирање и симулација": {
 		"subject": "Моделирање и симулација",
@@ -3075,7 +3742,11 @@
 		"season": "S",
 		"semester": 8,
 		"professors": ["Ласко Баснарков", "Мирослав Мирчев"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Computer Science", "Software Engineering", "Data Science"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": true
 	},
 	"Модерни трендови во роботика": {
 		"subject": "Модерни трендови во роботика",
@@ -3094,7 +3765,11 @@
 		"season": "S",
 		"electiveFor": ["IE23", "IMB23", "KN23", "PIT23", "SIIS23"],
 		"professors": [],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Embedded Systems", "AI / ML", "Software Engineering"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Мрежна и мобилна форензика": {
 		"subject": "Мрежна и мобилна форензика",
@@ -3113,7 +3788,11 @@
 		"season": "W",
 		"semester": 7,
 		"professors": ["Анастас Мишев", "Соња Филипоска"],
-		"assistants": ["Војдан Ќорвезироски"]
+		"assistants": ["Војдан Ќорвезироски"],
+		"tags": ["Cybersecurity", "Networking", "Embedded Systems"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Напредна интеракција човек компјутер": {
 		"subject": "Напредна интеракција човек компјутер",
@@ -3136,7 +3815,11 @@
 		"season": "W",
 		"semester": 7,
 		"professors": ["Невена Ацковска", "Бојан Илијоски"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["UI/UX & Digital Media", "Software Engineering"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Напредни бази на податоци": {
 		"subject": "Напредни бази на податоци",
@@ -3155,7 +3838,11 @@
 		"season": "S",
 		"electiveFor": ["IE23", "IMB23", "KI23", "KN23", "PIT23"],
 		"professors": ["Горан Велинов"],
-		"assistants": ["Ненад Анчев"]
+		"assistants": ["Ненад Анчев"],
+		"tags": ["Databases", "Software Engineering", "Data Science"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Web3 апликации": {
 		"subject": "Web3 апликации",
@@ -3177,7 +3864,16 @@
 		"season": "S",
 		"semester": 8,
 		"professors": [],
-		"assistants": []
+		"assistants": [],
+		"tags": [
+			"Web Development",
+			"Cybersecurity",
+			"Software Engineering",
+			"Databases"
+		],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Неструктурирани бази на податоци": {
 		"subject": "Неструктурирани бази на податоци",
@@ -3196,7 +3892,11 @@
 		"season": "S",
 		"semester": 8,
 		"professors": ["Слободан Калајџиски"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Databases", "Software Engineering", "Cloud Engineering & DevOps"],
+		"technologies": ["NoSQL"],
+		"evaluation": ["Theory + Code", "Project"],
+		"isEasy": false
 	},
 	"Обработка на природните јазици": {
 		"subject": "Обработка на природните јазици",
@@ -3218,7 +3918,16 @@
 		"season": "W",
 		"semester": 5,
 		"professors": ["Соња Гиевска"],
-		"assistants": ["Мартина Тошевска"]
+		"assistants": ["Мартина Тошевска"],
+		"tags": [
+			"AI / ML",
+			"Data Science",
+			"Software Engineering",
+			"Computer Science"
+		],
+		"technologies": ["Python"],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Операциони истражувања": {
 		"subject": "Операциони истражувања",
@@ -3242,7 +3951,16 @@
 		"season": "S",
 		"semester": 8,
 		"professors": ["Александра Каневче Дединец"],
-		"assistants": []
+		"assistants": [],
+		"tags": [
+			"Mathematics",
+			"Data Science",
+			"Computer Science",
+			"Societal Skills"
+		],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Оптички мрежи": {
 		"subject": "Оптички мрежи",
@@ -3261,7 +3979,11 @@
 		"season": "W",
 		"semester": 7,
 		"professors": ["Мирослав Мирчев"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Networking", "Physics"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Пресметување во облак": {
 		"subject": "Пресметување во облак",
@@ -3280,7 +4002,16 @@
 		"season": "W",
 		"electiveFor": ["IE23", "KI23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Марјан Гушев"],
-		"assistants": ["Владислав Бидиков", "Димитар Милески"]
+		"assistants": ["Владислав Бидиков", "Димитар Милески"],
+		"tags": [
+			"Cloud Engineering & DevOps",
+			"Systems Infrastructure",
+			"Networking",
+			"Software Engineering"
+		],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Претприемништво": {
 		"subject": "Претприемништво",
@@ -3299,7 +4030,11 @@
 		"season": "S",
 		"electiveFor": ["IE23", "IMB23", "KI23", "KN23"],
 		"professors": ["Владимир Трајковиќ", "Ефтим Здравевски"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Societal Skills"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": true
 	},
 	"Програмирање на видео игри": {
 		"subject": "Програмирање на видео игри",
@@ -3321,7 +4056,16 @@
 		"season": "W",
 		"semester": 7,
 		"professors": ["Катарина Тројачанец Динева"],
-		"assistants": ["Славе Темков"]
+		"assistants": ["Славе Темков"],
+		"tags": [
+			"Game Development",
+			"Software Engineering",
+			"UI/UX & Digital Media",
+			"Multimedia"
+		],
+		"technologies": ["Python"],
+		"evaluation": ["Code", "Project"],
+		"isEasy": false
 	},
 	"Програмски јазици и компајлери": {
 		"subject": "Програмски јазици и компајлери",
@@ -3343,7 +4087,11 @@
 		"season": "S",
 		"semester": 8,
 		"professors": ["Миле Јованов"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Computer Science", "Software Engineering", "Mathematics"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Програмски парадигми": {
 		"subject": "Програмски парадигми",
@@ -3365,7 +4113,11 @@
 		"season": "W",
 		"electiveFor": ["IE23", "IMB23", "KI23", "PIT23", "SIIS23"],
 		"professors": ["Емил Станков", "Кире Триводалиев"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Software Engineering", "Computer Science"],
+		"technologies": [],
+		"evaluation": ["Theory + Code"],
+		"isEasy": false
 	},
 	"Вовед во рударење на масивни податоци": {
 		"subject": "Вовед во рударење на масивни податоци",
@@ -3387,7 +4139,11 @@
 		"season": "W",
 		"semester": 7,
 		"professors": ["Ѓорѓи Маџаров"],
-		"assistants": ["Стефан Андонов"]
+		"assistants": ["Стефан Андонов"],
+		"tags": ["Data Science", "AI / ML", "Cloud Engineering & DevOps"],
+		"technologies": [],
+		"evaluation": ["Project"],
+		"isEasy": false
 	},
 	"Самостоен проект": {
 		"subject": "Самостоен проект",
@@ -3406,7 +4162,11 @@
 		"season": "W",
 		"electiveFor": [],
 		"professors": ["Сите професори"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Education"],
+		"technologies": [],
+		"evaluation": ["Project"],
+		"isEasy": true
 	},
 	"Системи за поддршка при одлучувањето": {
 		"subject": "Системи за поддршка при одлучувањето",
@@ -3429,7 +4189,16 @@
 		"season": "W",
 		"semester": 7,
 		"professors": ["Георгина Мирчева"],
-		"assistants": ["Димитар Китановски"]
+		"assistants": ["Димитар Китановски"],
+		"tags": [
+			"Data Science",
+			"AI / ML",
+			"Software Engineering",
+			"Societal Skills"
+		],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": true
 	},
 	"Складови на податоци и аналитичка обработка": {
 		"subject": "Складови на податоци и аналитичка обработка",
@@ -3448,7 +4217,11 @@
 		"season": "S",
 		"electiveFor": ["IE23", "IMB23", "PIT23", "SIIS23"],
 		"professors": ["Ефтим Здравевски"],
-		"assistants": ["Димитар Китановски"]
+		"assistants": ["Димитар Китановски"],
+		"tags": ["Databases", "Data Science", "Software Engineering"],
+		"technologies": ["SQL"],
+		"evaluation": ["Theory + Code"],
+		"isEasy": false
 	},
 	"Софтвер за вградливи системи": {
 		"subject": "Софтвер за вградливи системи",
@@ -3470,7 +4243,15 @@
 		"season": "W",
 		"electiveFor": ["IE23", "IMB23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Моника Симјаноска"],
-		"assistants": ["Моника Симјаноска"]
+		"assistants": ["Моника Симјаноска"],
+		"tags": [
+			"Embedded Systems",
+			"Software Engineering",
+			"Computer Architecture"
+		],
+		"technologies": ["C", "C++"],
+		"evaluation": ["Project"],
+		"isEasy": false
 	},
 	"Софтверски дефинирани мрежи": {
 		"subject": "Софтверски дефинирани мрежи",
@@ -3489,7 +4270,16 @@
 		"season": "S",
 		"semester": 8,
 		"professors": ["Соња Филипоска"],
-		"assistants": []
+		"assistants": [],
+		"tags": [
+			"Networking",
+			"Cloud Engineering & DevOps",
+			"Software Engineering",
+			"Cybersecurity"
+		],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Теорија на графови и социјални мрежи": {
 		"subject": "Теорија на графови и социјални мрежи",
@@ -3511,7 +4301,11 @@
 		"season": "W",
 		"semester": 5,
 		"professors": ["Соња Гиевска"],
-		"assistants": ["Мартина Тошевска"]
+		"assistants": ["Мартина Тошевска"],
+		"tags": ["Mathematics", "Computer Science", "Data Science", "Networking"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Споделување и пресметување во толпа": {
 		"subject": "Споделување и пресметување во толпа",
@@ -3534,7 +4328,11 @@
 		"season": "S",
 		"semester": 8,
 		"professors": [],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Data Science"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Тимски проект": {
 		"subject": "Тимски проект",
@@ -3553,7 +4351,11 @@
 		"season": "W",
 		"electiveFor": [],
 		"professors": ["Сите професори"],
-		"assistants": []
+		"assistants": [],
+		"tags": [],
+		"technologies": ["any"],
+		"evaluation": ["Project"],
+		"isEasy": true
 	},
 	"Управување со ИКТ проекти": {
 		"subject": "Управување со ИКТ проекти",
@@ -3572,7 +4374,11 @@
 		"season": "S",
 		"electiveFor": ["IE23", "IMB23", "KN23"],
 		"professors": ["Љупчо Антовски", "Владимир Здравески", "Димитар Трајанов"],
-		"assistants": ["Милена Трајаноска"]
+		"assistants": ["Милена Трајаноска"],
+		"tags": ["Societal Skills", "Software Engineering"],
+		"technologies": ["Git"],
+		"evaluation": ["Theory"],
+		"isEasy": true
 	},
 	"Примена на алгоритми и податочни структури": {
 		"subject": "Примена на алгоритми и податочни структури",
@@ -3596,7 +4402,11 @@
 			"Слободан Калајџиски",
 			"Христина Михајлоска Трпческа"
 		],
-		"assistants": ["Мартин Динев", "Јана Кузманова"]
+		"assistants": ["Мартин Динев", "Јана Кузманова"],
+		"tags": ["Computer Science", "Software Engineering"],
+		"technologies": ["Java"],
+		"evaluation": ["Theory + Code"],
+		"isEasy": false
 	},
 	"Математика 3": {
 		"subject": "Математика 3",
@@ -3618,7 +4428,11 @@
 			"Наташа Илиевска",
 			"Илинка Иваноска"
 		],
-		"assistants": ["Јована Добрева", "Димитар Пешевски"]
+		"assistants": ["Јована Добрева", "Димитар Пешевски"],
+		"tags": ["Mathematics", "Data Science", "Computer Science"],
+		"technologies": ["R"],
+		"evaluation": ["Theory + Practical", "Code"],
+		"isEasy": false
 	},
 	"Избрани теми од математика": {
 		"subject": "Избрани теми од математика",
@@ -3640,7 +4454,11 @@
 			"Наташа Илиевска",
 			"Дејан Спасов"
 		],
-		"assistants": ["Живко Атанаскоски", "Петар Секулоски"]
+		"assistants": ["Живко Атанаскоски", "Петар Секулоски"],
+		"tags": ["Mathematics"],
+		"technologies": [],
+		"evaluation": ["Theory + Practical"],
+		"isEasy": false
 	},
 	"Математика 2": {
 		"subject": "Математика 2",
@@ -3665,7 +4483,11 @@
 			"Методија Јанчески",
 			"Наташа Илиевска"
 		],
-		"assistants": ["Живко Атанаскоски", "Петар Секулоски", "Сијче Печкова"]
+		"assistants": ["Живко Атанаскоски", "Петар Секулоски", "Сијче Печкова"],
+		"tags": ["Mathematics", "Computer Science"],
+		"technologies": [],
+		"evaluation": ["Theory + Practical"],
+		"isEasy": false
 	},
 	"Тестирање на софтвер": {
 		"subject": "Тестирање на софтвер",
@@ -3682,7 +4504,11 @@
 		"season": "W",
 		"electiveFor": ["IE23", "IMB23", "KI23"],
 		"professors": ["Бојана Котеска"],
-		"assistants": ["Славе Темков"]
+		"assistants": ["Славе Темков"],
+		"tags": ["Software Engineering"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Сензорски системи": {
 		"subject": "Сензорски системи",
@@ -3704,7 +4530,11 @@
 		"season": "W",
 		"semester": 7,
 		"professors": ["Билјана Стојкоска Ристеска"],
-		"assistants": []
+		"assistants": [],
+		"tags": ["Embedded Systems", "Networking", "Data Science"],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Адаптивни и интерактивни веб информациски системи": {
 		"subject": "Адаптивни и интерактивни веб информациски системи",
@@ -3726,7 +4556,16 @@
 		"season": "S",
 		"semester": 8,
 		"professors": ["Вангел Ајановски"],
-		"assistants": []
+		"assistants": [],
+		"tags": [
+			"Web Development",
+			"AI / ML",
+			"Software Engineering",
+			"UI/UX & Digital Media"
+		],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": false
 	},
 	"Спорт и здравје": {
 		"subject": "Спорт и здравје",
@@ -3743,7 +4582,11 @@
 		"season": "W",
 		"electiveFor": [],
 		"professors": [],
-		"assistants": []
+		"assistants": [],
+		"tags": [],
+		"technologies": [],
+		"evaluation": [],
+		"isEasy": true
 	},
 	"Деловна пракса": {
 		"subject": "Деловна пракса",
@@ -3762,6 +4605,10 @@
 		"season": "S",
 		"electiveFor": ["IE23", "IMB23", "KI23", "KN23"],
 		"professors": [],
-		"assistants": []
+		"assistants": [],
+		"tags": [],
+		"technologies": ["any"],
+		"evaluation": ["Project"],
+		"isEasy": false
 	}
 }

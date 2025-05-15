@@ -75,15 +75,15 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
 		} else if (!/^\d{6}$/.test(index)) {
 			errors.index = "Индексот треба да има точно 6 цифри.";
 		}
-		if (!studyTrack) errors.studyTrack = "Избери насока.";
-		if (!year) errors.year = "Избери година.";
-		if (!studyEffort) errors.studyEffort = "Избери пожелен вложен труд.";
+		if (!studyTrack) errors.studyTrack = "Одбери насока.";
+		if (!year) errors.year = "Одбери година.";
+		if (!studyEffort) errors.studyEffort = "Одбери пожелен вложен труд.";
 		if (passedSubjects.length === 0)
-			errors.passedSubjects = "Избери барем еден предмет.";
-		if (domains.length === 0) errors.domains = "Избери барем едно поле.";
+			errors.passedSubjects = "Одбери барем еден предмет.";
+		if (domains.length === 0) errors.domains = "Одбери барем едно поле.";
 		if (technologies.length === 0)
-			errors.technologies = "Избери барем една технологија.";
-		if (!evaluation) errors.evaluation = "Избери тип на оценување.";
+			errors.technologies = "Одбери барем една технологија.";
+		if (!evaluation) errors.evaluation = "Одбери тип на оценување.";
 		return errors;
 	};
 
@@ -174,18 +174,21 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
 	};
 
 	const filteredMandatorySubjects = studyTrack
-		? subjects.filter(
-				(subj) =>
-					subj.subject_info.mandatory_for.includes(studyTrack) &&
-					subj.subject_info.semester <= year * 2
-		  )
+		? subjects
+				.filter(
+					(subj) =>
+						subj.subject_info.mandatory_for.includes(studyTrack) &&
+						subj.subject_info.semester <= year * 2
+				)
+				.sort((a, b) => a.subject_info.semester - b.subject_info.semester)
 		: [];
 	const filteredElectiveSubjects = studyTrack
-		? subjects.filter(
-				(subj) =>
-					subj.subject_info.elective_for.includes(studyTrack) &&
-					subj.subject_info.semester <= year * 2
-		  )
+		? subjects
+				.filter(
+					(subj) => subj.subject_info.elective_for.includes(studyTrack)
+					// subj.subject_info.semester <= year * 2
+				)
+				.sort((a, b) => a.subject_info.semester - b.subject_info.semester)
 		: [];
 
 	return (
@@ -231,7 +234,7 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
 						onChange={(e) => setStudyTrack(e.target.value as Programs | "")}
 						className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
 					>
-						<option value="">Избери смер</option>
+						<option value="">Одбери смер</option>
 						{STUDY_TRACKS.map((track) => (
 							<option key={track} value={track}>
 								{track}
@@ -269,9 +272,32 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
 			</div>
 
 			<div>
+				{/* <div className="flex gap-5 items-center mb-2"> */}
 				<h3 className="text-lg font-medium text-gray-900 mb-2">
 					Положени задолжителни предмети
 				</h3>
+				<button
+					className="mb-2 px-3 py-2 border rounded-md transition-colors duration-200 bg-gray-200 border-gray-700"
+					disabled={filteredMandatorySubjects.length === 0}
+					type="button"
+					onClick={() => {
+						passedSubjects.some((subject) =>
+							filteredMandatorySubjects.includes(subject)
+						)
+							? setPassedSubjects((prev) =>
+									prev.filter(
+										(subject) => !filteredMandatorySubjects.includes(subject)
+									)
+							  )
+							: setPassedSubjects((prev) => [
+									...prev,
+									...filteredMandatorySubjects,
+							  ]);
+					}}
+				>
+					Одбери ги сите
+				</button>
+				{/* </div> */}
 				{filteredMandatorySubjects.length > 0 ? (
 					<div className="flex flex-wrap gap-2">
 						{filteredMandatorySubjects.map((subject) => {
@@ -314,7 +340,7 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
 				) : (
 					<p className="text-gray-500 italic">
 						{!studyTrack
-							? "Избери смер и година за да се прикажат предметите."
+							? "Одбери смер и година за да се прикажат предметите."
 							: "Нема задолжителни предмети за избраниот смер и година."}
 					</p>
 				)}
@@ -371,7 +397,7 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
 				) : (
 					<p className="text-gray-500 italic">
 						{!studyTrack
-							? "Избери смер и година за да се прикажат предметите"
+							? "Одбери смер и година за да се прикажат предметите"
 							: "Нема изборни предмети за избраниот смер и година"}
 					</p>
 				)}
