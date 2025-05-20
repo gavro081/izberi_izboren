@@ -50,7 +50,8 @@
 	{
 		"name": "Е-учење",
 		"tags": ["Education", "Societal Skills"],
-		"isEasy": "yes"
+		"isEasy": "yes",
+		"evaluation": ["Theory", "Project"]
 	},
 	{
 		"name": "Математика 1",
@@ -188,7 +189,8 @@
 	{
 		"name": "Вовед во екоинформатиката",
 		"tags": ["Data Science", "Computer Science", "Societal Skills"],
-		"isEasy": "yes"
+		"isEasy": "yes",
+		"evaluation": ["Theory", "Project"]
 	},
 	{
 		"name": "Вовед во случајни процеси",
@@ -230,7 +232,8 @@
 	},
 	{
 		"name": "Електрични кола",
-		"tags": ["Computer Architecture", "Physics"]
+		"tags": ["Computer Architecture", "Physics"],
+		"evaluation": ["Practical"]
 	},
 	{
 		"name": "Информатичко размислување во образованието",
@@ -378,7 +381,8 @@
 			"Embedded Systems",
 			"Computer Architecture",
 			"Software Engineering"
-		]
+		],
+		"evaluation": ["Theory + Practical", "Project"]
 	},
 	{
 		"name": "Веб програмирање",
@@ -393,7 +397,8 @@
 	},
 	{
 		"name": "Виртуелизација",
-		"tags": ["Cloud Engineering & DevOps", "Systems Infrastructure"]
+		"tags": ["Cloud Engineering & DevOps", "Systems Infrastructure"],
+		"evaluation": ["Theory + Practical", "Project"]
 	},
 	{
 		"name": "Вовед во мрежна наука",
@@ -502,7 +507,9 @@
 	},
 	{
 		"name": "Компјутерска етика",
-		"tags": ["Societal Skills", "Computer Science"],
+		"tags": ["Societal Skills", "Education"],
+		"technologies": [],
+		"evaluation": ["Theory", "Project"],
 		"isEasy": "yes"
 	},
 	{
