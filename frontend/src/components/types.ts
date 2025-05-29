@@ -14,14 +14,17 @@ export interface StudentData {
 	study_track: Programs;
 	current_year: number;
 	passed_subjects: Subject[];
-  	study_effort: string,
-  	preferred_domains: string[],
-  	preferred_technologies: string[],
-  	preferred_evaluation: string[],
-  	favorite_professors: string[]
+	study_effort: string;
+	preferred_domains: string[];
+	preferred_technologies: string[];
+	preferred_evaluation: string[];
+	favorite_professors: string[];
 }
 
-type Prerequisite = { subjects: number[] } | { credits: number } | { none: true };
+type Prerequisite =
+	| { subjects: number[] }
+	| { credits: number }
+	| { none: true };
 
 export interface SubjectInfo {
 	level: number;
@@ -36,6 +39,10 @@ export interface SubjectInfo {
 	elective_for: Programs[];
 	professors: string[];
 	assistants: string[];
+	tags: string[];
+	technologies: string[];
+	evaluation: string[];
+	is_easy: boolean;
 }
 
 export type Filters = {

@@ -7,7 +7,6 @@ from rest_framework.response import Response
 from .serializers import SubjectSerializer
 from .models import Subject_Info, Subject
 
-# Create your views here.
 def index(request):
     return HttpResponse("ok")
 
