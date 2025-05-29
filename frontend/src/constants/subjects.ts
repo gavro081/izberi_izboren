@@ -6,3 +6,14 @@ export const PROGRAMS = [
 	"KI23",
 	"KN23",
 ] as const;
+
+export const STUDY_EFFORT = [1, 2, 3, 4, 5] as const;
+export const YEARS = [1, 2, 3, 4] as const;
+export const EVALUATIONS = ["Теорија", "Практично", "Код", "Проект"];
+
+export const EVALUATIONS_MAP = {
+	Теорија: "Theory",
+	Практично: "Practical",
+	Код: "Code",
+	Проект: "Project",
+};

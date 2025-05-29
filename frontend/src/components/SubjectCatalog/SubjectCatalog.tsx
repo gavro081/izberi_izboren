@@ -16,6 +16,7 @@ const SubjectCatalog = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [randomStaff, setRandomStaff] = useState(["", ""]);
 	const [showModal, setShowModal] = useState(false);
+	const [tags, setTags] = useState<string[]>([]);
 	const [filters, setFilters] = useState<Filters>({
 		season: "",
 		semester: [],
@@ -25,9 +26,9 @@ const SubjectCatalog = () => {
 		electiveFor: [],
 		professors: [],
 		assistants: [],
+		tags: [],
 		hasPrerequisites: false,
 	});
-
 	const filteredSubjects: Subject[] = filterSubjects({
 		subjectData,
 		searchTerm,
@@ -49,6 +50,18 @@ const SubjectCatalog = () => {
 
 	useEffect(() => {
 		getRandomStaff(subjectData, setRandomStaff);
+		setTags(
+			Array.from(
+				new Set(filteredSubjects.flatMap((sub) => sub.subject_info.tags))
+			)
+		);
+		console.log(
+			Array.from(
+				new Set(
+					filteredSubjects.flatMap((sub) => sub.subject_info.technologies)
+				)
+			)
+		);
 	}, [subjectData]);
 
 	const loadMore = () => {
@@ -97,6 +110,7 @@ const SubjectCatalog = () => {
 						setAssistantSearchTerm={setAssistantSearchTerm}
 						setFilters={setFilters}
 						filters={filters}
+						tags={tags}
 					/>
 					<StaffSearch
 						randomStaff={randomStaff}

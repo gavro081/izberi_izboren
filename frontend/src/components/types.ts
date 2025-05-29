@@ -14,7 +14,7 @@ export interface StudentData {
 	study_track: Programs;
 	current_year: number;
 	passed_subjects: Subject[];
-	study_effort: string;
+	study_effort: number;
 	preferred_domains: string[];
 	preferred_technologies: string[];
 	preferred_evaluation: string[];
@@ -55,6 +55,7 @@ export type Filters = {
 	professors: string[];
 	assistants: string[];
 	hasPrerequisites: boolean;
+	tags: string[];
 };
 
 export type Programs = (typeof PROGRAMS)[number];

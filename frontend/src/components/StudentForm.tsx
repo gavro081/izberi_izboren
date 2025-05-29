@@ -1,21 +1,25 @@
 import { useEffect, useState } from "react";
+import {
+	EVALUATIONS,
+	EVALUATIONS_MAP,
+	PROGRAMS,
+	STUDY_EFFORT,
+	YEARS,
+} from "../constants/subjects";
 import { useAuth } from "../hooks/useAuth";
 import { Programs, StudentData, Subject } from "./types";
 
 interface StudentFormProps {
 	formData: StudentData | null;
-	subjects: Subject[];
-	professors: string[];
 }
 
-const STUDY_TRACKS = ["SIIS23", "IE23", "PIT23", "KI23", "KN23", "IMB23"];
-const STUDY_EFFORT = [1, 2, 3, 4, 5];
-const YEARS = [1, 2, 3, 4];
-const DOMAINS = ["Web Dev", "AI", "Data Science", "Немам"];
-const TECHNOLOGIES = ["React", "Django", "Flutter", "Немам"];
-const EVALUATIONS = ["Испити", "Проекти", "Семинарски", "Немам"];
+interface DistinctSubjectData {
+	tags: string[];
+	professors: string[];
+	technologies: string[];
+}
 
-const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
+const StudentForm = ({ formData }: StudentFormProps) => {
 	const { accessToken } = useAuth();
 	const [isSubmitted, setIsSubmitted] = useState(false);
 	const [validationErrors, setValidationErrors] = useState<{
@@ -33,6 +37,8 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
 	const [domains, setDomains] = useState<string[]>(
 		formData?.preferred_domains || []
 	);
+	const [electiveSearchTerm, setElectiveSearchTerm] = useState("");
+	const [professorsSearchTerm, setProfessorSearchTerm] = useState("");
 	const [technologies, setTechnologies] = useState<string[]>(
 		formData?.preferred_technologies || []
 	);
@@ -51,6 +57,15 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
 		message: "",
 		isError: false,
 	});
+	const [showElective, setShowElective] = useState(false);
+	const [showProfessors, setShowProfessors] = useState(false);
+	const [subjects, setSubjects] = useState<Subject[]>([]);
+	const [distinctSubjectData, setDistinctSubjectData] =
+		useState<DistinctSubjectData>({
+			tags: [],
+			professors: [],
+			technologies: [],
+		});
 
 	// Update form when formData changes (e.g., after fetching user data)
 	useEffect(() => {
@@ -67,6 +82,41 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
 		}
 	}, [formData]);
 
+	useEffect(() => {
+		const fetchSubjects = async () => {
+			try {
+				const resSubjects = await fetch("http://localhost:8000/subjects");
+				if (resSubjects.ok) {
+					const subJson: Subject[] = await resSubjects.json();
+					setSubjects(subJson || []);
+					const allProfessors: string[] = subJson
+						.flatMap((subject: Subject) => subject.subject_info.professors)
+						.filter((p): p is string => typeof p === "string");
+					const uniqueProfessors = Array.from(new Set(allProfessors));
+					const allProfessors_ = uniqueProfessors
+						.filter((prof) => prof.trim().toLowerCase() !== "сите професори")
+						.sort((a, b) => a.localeCompare(b));
+					setDistinctSubjectData(() => ({
+						tags: Array.from(
+							new Set(subJson.flatMap((subject) => subject.subject_info.tags))
+						).sort((a, b) => a.localeCompare(b)),
+						technologies: Array.from(
+							new Set(
+								subJson
+									.flatMap((subject) => subject.subject_info.technologies)
+									.filter((tech) => tech != "any" && tech != "")
+							)
+						).sort((a, b) => a.localeCompare(b)),
+						professors: allProfessors_,
+					}));
+				}
+			} catch (error) {
+				console.error("Error fetching subjects:", error);
+			}
+		};
+
+		fetchSubjects();
+	}, []);
 	const validateForm = () => {
 		const errors: { [key: string]: string } = {};
 
@@ -131,14 +181,16 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
 			study_effort: studyEffort,
 			preferred_domains: domains,
 			preferred_technologies: technologies,
-			preferred_evaluation: evaluation,
+			preferred_evaluation: evaluation.map(
+				(ev) => EVALUATIONS_MAP[ev as keyof typeof EVALUATIONS_MAP]
+			),
 			favorite_professors: favoriteProfs,
 		};
-
 		try {
 			// For updating existing form data use PATCH instead of PUT for partial updates
 			const method = formData?.current_year ? "PATCH" : "POST";
 			const endpoint = "http://localhost:8000/auth/form/";
+			console.log(payload);
 			const res = await fetch(endpoint, {
 				method,
 				headers: {
@@ -185,11 +237,22 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
 	const filteredElectiveSubjects = studyTrack
 		? subjects
 				.filter(
-					(subj) => subj.subject_info.elective_for.includes(studyTrack)
+					(subj) =>
+						subj.subject_info.elective_for.includes(studyTrack) &&
+						(electiveSearchTerm == "" ||
+							subj.name
+								.toLowerCase()
+								.includes(electiveSearchTerm.toLowerCase()))
 					// subj.subject_info.semester <= year * 2
 				)
 				.sort((a, b) => a.subject_info.semester - b.subject_info.semester)
 		: [];
+
+	const filteredProfessors = distinctSubjectData.professors.filter(
+		(prof) =>
+			professorsSearchTerm == "" ||
+			prof.toLowerCase().includes(professorsSearchTerm.toLowerCase())
+	);
 
 	return (
 		<form onSubmit={handleSubmit} className="space-y-6 max-w-4xl mx-auto">
@@ -235,7 +298,7 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
 						className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
 					>
 						<option value="">Одбери смер</option>
-						{STUDY_TRACKS.map((track) => (
+						{PROGRAMS.map((track) => (
 							<option key={track} value={track}>
 								{track}
 							</option>
@@ -276,28 +339,46 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
 				<h3 className="text-lg font-medium text-gray-900 mb-2">
 					Положени задолжителни предмети
 				</h3>
-				<button
-					className="mb-2 px-3 py-2 border rounded-md transition-colors duration-200 bg-gray-200 border-gray-700"
-					disabled={filteredMandatorySubjects.length === 0}
-					type="button"
-					onClick={() => {
-						passedSubjects.some((subject) =>
-							filteredMandatorySubjects.includes(subject)
-						)
-							? setPassedSubjects((prev) =>
-									prev.filter(
-										(subject) => !filteredMandatorySubjects.includes(subject)
-									)
-							  )
-							: setPassedSubjects((prev) => [
-									...prev,
-									...filteredMandatorySubjects,
-							  ]);
-					}}
-				>
-					Одбери ги сите
-				</button>
-				{/* </div> */}
+				{studyTrack != "" && (
+					<div className="flex items-center mb-2">
+						<label className="inline-flex items-center p-1 rounded">
+							<input
+								type="checkbox"
+								className="form-checkbox h-5 w-5 accent-green-600"
+								disabled={filteredMandatorySubjects.length === 0}
+								checked={filteredMandatorySubjects.every((subject) =>
+									passedSubjects.some((passed) => passed.id === subject.id)
+								)}
+								onChange={() => {
+									const allSelected = filteredMandatorySubjects.every(
+										(subject) =>
+											passedSubjects.some((passed) => passed.id === subject.id)
+									);
+
+									if (allSelected) {
+										setPassedSubjects((prev) =>
+											prev.filter(
+												(subject) =>
+													!filteredMandatorySubjects.some(
+														(mandatorySubj) => mandatorySubj.id === subject.id
+													)
+											)
+										);
+									} else {
+										setPassedSubjects((prev) => {
+											const newSubjects = filteredMandatorySubjects.filter(
+												(subject) =>
+													!prev.some((passed) => passed.id === subject.id)
+											);
+											return [...prev, ...newSubjects];
+										});
+									}
+								}}
+							/>
+							<span className="ml-2 text-md text-gray-700">Одбери ги сите</span>
+						</label>
+					</div>
+				)}
 				{filteredMandatorySubjects.length > 0 ? (
 					<div className="flex flex-wrap gap-2">
 						{filteredMandatorySubjects.map((subject) => {
@@ -312,8 +393,8 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
 									className={`flex items-center gap-2 px-3 py-2 border rounded-md transition-all duration-200 
                     ${
 											isSelected
-												? "bg-green-500 text-white border-green-600 shadow-md"
-												: "bg-white text-gray-800 border-gray-300 hover:bg-gray-100"
+												? "bg-green-500 border-green-600 text-green-50"
+												: "bg-white hover:bg-gray-50 border-gray-300"
 										}`}
 									aria-pressed={isSelected}
 								>
@@ -341,7 +422,7 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
 					<p className="text-gray-500 italic">
 						{!studyTrack
 							? "Одбери смер и година за да се прикажат предметите."
-							: "Нема задолжителни предмети за избраниот смер и година."}
+							: "Нема такви задолжителни предмети"}
 					</p>
 				)}
 				{validationErrors.passedSubjects && (
@@ -350,55 +431,75 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
 					</p>
 				)}
 			</div>
-
 			<div>
-				<h3 className="text-lg font-medium text-gray-900 mb-2">
-					Положени изборни предмети
-				</h3>
+				<div className="flex items-center mb-2 gap-7">
+					<h3 className="text-lg font-medium text-gray-900">
+						Положени изборни предмети
+					</h3>
+					{studyTrack != "" && (
+						<input
+							onChange={(e) => setElectiveSearchTerm(e.target.value)}
+							value={electiveSearchTerm}
+							type="text"
+							className="w-60 px-3 py-2.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 text-sm"
+							placeholder="Пребарај предмет"
+						/>
+					)}
+				</div>
 				{filteredElectiveSubjects.length > 0 ? (
 					<div className="flex flex-wrap gap-2">
-						{filteredElectiveSubjects.map((subject) => {
-							const isSelected = passedSubjects.some(
-								(s) => s.id === subject.id
-							);
-							return (
-								<button
-									type="button"
-									key={subject.id}
-									onClick={() => toggleSubject(subject)}
-									className={`flex items-center gap-2 px-3 py-2 border rounded-md transition-all duration-200 
-                    ${
-											isSelected
-												? "bg-green-500 text-white border-green-600 shadow-md"
-												: "bg-white text-gray-800 border-gray-300 hover:bg-gray-100"
-										}`}
-									aria-pressed={isSelected}
-								>
-									{isSelected && (
-										<svg
-											className="w-5 h-5"
-											fill="none"
-											stroke="currentColor"
-											viewBox="0 0 24 24"
-										>
-											<path
-												strokeLinecap="round"
-												strokeLinejoin="round"
-												strokeWidth="2"
-												d="M5 13l4 4L19 7"
-											></path>
-										</svg>
-									)}
-									<span>{subject.name}</span>
-								</button>
-							);
-						})}
+						{filteredElectiveSubjects
+							.slice(0, showElective ? undefined : 10)
+							.map((subject) => {
+								const isSelected = passedSubjects.some(
+									(s) => s.id === subject.id
+								);
+								return (
+									<button
+										type="button"
+										key={subject.id}
+										onClick={() => toggleSubject(subject)}
+										className={`flex items-center gap-2 px-3 py-2 border rounded-md transition-all duration-200 
+                    					${
+																isSelected
+																	? "bg-green-500 text-white border-green-600 shadow-md"
+																	: "bg-white text-gray-800 border-gray-300 hover:bg-gray-100"
+															}`}
+										aria-pressed={isSelected}
+									>
+										{isSelected && (
+											<svg
+												className="w-5 h-5"
+												fill="none"
+												stroke="currentColor"
+												viewBox="0 0 24 24"
+											>
+												<path
+													strokeLinecap="round"
+													strokeLinejoin="round"
+													strokeWidth="2"
+													d="M5 13l4 4L19 7"
+												></path>
+											</svg>
+										)}
+										<span>{subject.name}</span>
+									</button>
+								);
+							})}
+						{filteredElectiveSubjects.length > 10 && (
+							<button
+								onClick={() => setShowElective(!showElective)}
+								className="px-3 py-2 rounded-md transition-colors duration-200 bg-blue text-blue-500"
+							>
+								{showElective ? "Прикажи помалку" : "Прикажи повеќе"}
+							</button>
+						)}
 					</div>
 				) : (
 					<p className="text-gray-500 italic">
 						{!studyTrack
 							? "Одбери смер и година за да се прикажат предметите"
-							: "Нема изборни предмети за избраниот смер и година"}
+							: "Нема такви изборни предмети"}
 					</p>
 				)}
 			</div>
@@ -407,18 +508,43 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
 				<h3 className="text-lg font-medium text-gray-900 mb-2">
 					Вложен труд при учење
 				</h3>
-				<select
-					value={studyEffort}
-					onChange={(e) => setStudyEffort(e.target.value)}
-					className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-				>
-					<option value="">Одбери колку труд вложуваш при учење</option>
+				<div className="flex flex-wrap gap-3">
 					{STUDY_EFFORT.map((effort) => (
-						<option key={effort} value={effort}>
-							{effort}
-						</option>
+						<label
+							key={effort}
+							className={`flex items-center px-3 py-2 rounded-md cursor-pointer transition-colors ${
+								studyEffort == effort && "font-bold"
+							}`}
+						>
+							<input
+								type="checkbox"
+								checked={studyEffort == effort}
+								onChange={() =>
+									setStudyEffort(studyEffort == effort ? "" : effort)
+								}
+								className="form-checkbox h-4 w-5 mr-2 accent-green-600"
+							/>
+							<span>{effort}</span>
+						</label>
 					))}
-				</select>
+					{/* tuka */}
+					{/* <div className="w-full mt-4 flex flex-col items-center">
+						<input
+							type="range"
+							min={1}
+							max={5}
+							step={1}
+							value={studyEffort || 1}
+							onChange={(e) => setStudyEffort(Number(e.target.value))}
+							className="w-64 accent-blue-600"
+						/>
+						<div className="flex justify-between w-64 text-xs mt-1 text-gray-500">
+							{STUDY_EFFORT.map((effort) => (
+								<span key={effort}>{effort}</span>
+							))}
+						</div>
+					</div> */}
+				</div>
 				{validationErrors.studyEffort && (
 					<p className="mt-1 text-sm text-red-600 font-bold">
 						{validationErrors.studyEffort}
@@ -431,7 +557,7 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
 					Полиња на интерес
 				</h3>
 				<div className="flex flex-wrap gap-2">
-					{DOMAINS.map((domain) => {
+					{distinctSubjectData.tags.map((domain) => {
 						const isSelected = domains.includes(domain);
 						const isNemamSelected = domains.includes("Немам");
 						const shouldBeDisabled = isNemamSelected && domain !== "Немам";
@@ -475,7 +601,7 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
 					Преферирани технологии
 				</h3>
 				<div className="flex flex-wrap gap-2">
-					{TECHNOLOGIES.map((tech) => {
+					{distinctSubjectData.technologies.map((tech) => {
 						const isSelected = technologies.includes(tech);
 						const isNemamSelected = technologies.includes("Немам");
 						const shouldBeDisabled = isNemamSelected && tech !== "Немам";
@@ -528,6 +654,7 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
 								type="button"
 								key={ev}
 								onClick={() => {
+									// todo: sredi ova
 									if (ev === "Немам") {
 										if (evaluation.includes("Немам")) {
 											setEvaluation([]);
@@ -561,26 +688,50 @@ const StudentForm = ({ formData, subjects, professors }: StudentFormProps) => {
 			</div>
 
 			<div>
-				<h3 className="text-lg font-medium text-gray-900 mb-2">
-					Омилени професори
-				</h3>
+				<div className="flex items-center mb-2 gap-7">
+					<h3 className="text-lg font-medium text-gray-900 mb-2">
+						Омилени професори
+					</h3>
+					{studyTrack != "" && (
+						<input
+							onChange={(e) => setProfessorSearchTerm(e.target.value)}
+							value={professorsSearchTerm}
+							type="text"
+							className="w-60 px-3 py-2.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 text-sm"
+							placeholder="Пребарај професор"
+						/>
+					)}
+				</div>
 				<div className="flex flex-wrap gap-2">
-					{professors.map((prof) => (
+					{filteredProfessors
+						.slice(0, showProfessors ? undefined : 10)
+						.map((prof) => (
+							<button
+								key={prof}
+								type="button"
+								onClick={() =>
+									toggleSelection(prof, setFavoriteProfs, favoriteProfs)
+								}
+								className={`px-3 py-2 border rounded-md transition-colors ${
+									favoriteProfs.includes(prof)
+										? "bg-pink-100 border-pink-300 text-pink-800"
+										: "bg-white hover:bg-gray-50 border-gray-300"
+								}`}
+							>
+								{prof}
+							</button>
+						))}
+					{filteredProfessors.length == 0 && (
+						<p className="text-gray-500 italic">Нема таков професор</p>
+					)}
+					{filteredProfessors.length > 10 && (
 						<button
-							key={prof}
-							type="button"
-							onClick={() =>
-								toggleSelection(prof, setFavoriteProfs, favoriteProfs)
-							}
-							className={`px-3 py-2 border rounded-md transition-colors ${
-								favoriteProfs.includes(prof)
-									? "bg-pink-100 border-pink-300 text-pink-800"
-									: "bg-white hover:bg-gray-50 border-gray-300"
-							}`}
+							onClick={() => setShowProfessors(!showProfessors)}
+							className="px-3 py-2 rounded-md transition-colors duration-200 bg-blue text-blue-500"
 						>
-							{prof}
+							{showProfessors ? "Прикажи помалку" : "Прикажи повеќе"}
 						</button>
-					))}
+					)}
 				</div>
 			</div>
 
