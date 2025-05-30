@@ -16,7 +16,11 @@ class SubjectInfoSerializer(serializers.ModelSerializer):
             'season',
             'elective_for',
             'professors',
-            'assistants'
+            'assistants',
+            'tags',
+            'technologies',
+            'evaluation',
+            'is_easy'
         ]
 class SubjectSerializer(serializers.ModelSerializer):
     subject_info = SubjectInfoSerializer()

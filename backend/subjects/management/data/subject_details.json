@@ -226,7 +226,7 @@
 		"assistants": ["Мартин Динев", "Мартина Тошевска"],
 		"tags": ["Education", "Societal Skills"],
 		"technologies": [],
-		"evaluation": [],
+		"evaluation": ["Theory", "Project"],
 		"isEasy": true
 	},
 	"Математика 1": {
@@ -798,7 +798,7 @@
 		"assistants": [],
 		"tags": ["Data Science", "Computer Science", "Societal Skills"],
 		"technologies": [],
-		"evaluation": [],
+		"evaluation": ["Theory", "Project"],
 		"isEasy": true
 	},
 	"Вовед во случајни процеси": {
@@ -969,7 +969,7 @@
 		"assistants": [],
 		"tags": ["Computer Architecture", "Physics"],
 		"technologies": [],
-		"evaluation": [],
+		"evaluation": ["Practical"],
 		"isEasy": false
 	},
 	"Информатичко размислување во образованието": {
@@ -1618,7 +1618,7 @@
 			"Software Engineering"
 		],
 		"technologies": [],
-		"evaluation": [],
+		"evaluation": ["Theory + Practical", "Project"],
 		"isEasy": false
 	},
 	"Веб програмирање": {
@@ -1703,7 +1703,7 @@
 		"assistants": ["Кирил Ќироски"],
 		"tags": ["Cloud Engineering & DevOps", "Systems Infrastructure"],
 		"technologies": [],
-		"evaluation": [],
+		"evaluation": ["Theory + Practical", "Project"],
 		"isEasy": false
 	},
 	"Вовед во мрежна наука": {
@@ -2089,9 +2089,9 @@
 		"electiveFor": ["IMB23", "KI23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Бојан Илијоски", "Катерина Здравкова"],
 		"assistants": [],
-		"tags": ["Societal Skills", "Computer Science"],
+		"tags": ["Societal Skills", "Education"],
 		"technologies": [],
-		"evaluation": [],
+		"evaluation": ["Theory", "Project"],
 		"isEasy": true
 	},
 	"Компјутерски звук, музика и говор": {
