@@ -2531,8 +2531,8 @@
 		"professors": ["Ласко Баснарков"],
 		"assistants": [],
 		"tags": ["Computer Science", "Mathematics", "Multimedia"],
-		"technologies": [],
-		"evaluation": [],
+		"technologies": ["Python"],
+		"evaluation": ["Theory + Code"],
 		"isEasy": false
 	},
 	"Вештачка интелигенција за игри": {
@@ -2635,8 +2635,8 @@
 			"Cloud Engineering & DevOps",
 			"Web Development"
 		],
-		"technologies": [],
-		"evaluation": [],
+		"technologies": ["Kotlin"],
+		"evaluation": ["Theory", "Project"],
 		"isEasy": false
 	},
 	"Современи компјутерски архитектури": {
@@ -3056,7 +3056,7 @@
 		"assistants": [],
 		"tags": ["Data Science", "AI / ML", "Computer Science", "Databases"],
 		"technologies": [],
-		"evaluation": [],
+		"evaluation": ["Theory + Practical", "Project"],
 		"isEasy": false
 	},
 	"Вовед во когнитивни науки": {
@@ -3926,7 +3926,7 @@
 			"Computer Science"
 		],
 		"technologies": ["Python"],
-		"evaluation": [],
+		"evaluation": ["Project"],
 		"isEasy": false
 	},
 	"Операциони истражувања": {
