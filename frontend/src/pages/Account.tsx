@@ -10,6 +10,7 @@ const Account = () => {
 	const { accessToken, refreshAccessToken } = useAuth();
 	const [tokenChecked, setTokenChecked] = useState(false);
 	const [formData, setFormData] = useState<StudentData | null>(null);
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
 		const checkToken = async () => {
@@ -37,8 +38,11 @@ const Account = () => {
 			try {
 				const resForm = await axiosInstance.get("/auth/form/");
 				setFormData(resForm.data);
+				// waiting for data to render
+				setTimeout(() => setIsLoading(false), 5);
 			} catch (error) {
 				console.error("Error fetching data.", error);
+				setIsLoading(false);
 			}
 		};
 		if (tokenChecked) {
@@ -48,7 +52,11 @@ const Account = () => {
 
 	return (
 		<div className="p-4">
-			<StudentForm formData={formData} />
+			<StudentForm
+				formData={formData}
+				isLoading={isLoading}
+				setIsLoading={setIsLoading}
+			/>
 		</div>
 	);
 };

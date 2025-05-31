@@ -14,6 +14,8 @@ import { LatinToCyrillic } from "./utils";
 
 interface StudentFormProps {
 	formData: StudentData | null;
+	isLoading: boolean;
+	setIsLoading?: (b: boolean) => void;
 }
 
 interface DistinctSubjectData {
@@ -22,7 +24,7 @@ interface DistinctSubjectData {
 	technologies: string[];
 }
 
-const StudentForm = ({ formData }: StudentFormProps) => {
+const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 	const { accessToken } = useAuth();
 	const [isSubmitted, setIsSubmitted] = useState(false);
 	const [validationErrors, setValidationErrors] = useState<{
@@ -76,7 +78,6 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 			professors: [],
 			technologies: [],
 		});
-	const [isLoading, setIsLoading] = useState(true);
 	const [hasExtracurricular, setHasExtracurricular] = useState(false);
 
 	// Update form when formData changes (e.g., after fetching user data)
@@ -121,12 +122,11 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 						).sort((a, b) => a.localeCompare(b)),
 						professors: allProfessors_,
 					}));
-					// todo: no explanation needed
-					setTimeout(() => setIsLoading(false), 900);
+					// setIsLoading(false);
 				}
 			} catch (error) {
 				console.error("Error fetching subjects:", error);
-				setIsLoading(false);
+				// setIsLoading(false);
 			}
 		};
 
@@ -146,9 +146,9 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 		if (!studyEffort) errors.studyEffort = "Одбери пожелен вложен труд.";
 		if (passedSubjects.length === 0)
 			errors.passedSubjects = "Одбери барем еден предмет.";
-		if (domains.length === 0) errors.domains = "Одбери барем едно поле.";
-		if (technologies.length === 0)
-			errors.technologies = "Одбери барем една технологија.";
+		// if (domains.length === 0) errors.domains = "Одбери барем едно поле.";
+		// if (technologies.length === 0)
+		// 	errors.technologies = "Одбери барем една технологија.";
 		if (!evaluation) errors.evaluation = "Одбери тип на оценување.";
 		return errors;
 	};
@@ -180,6 +180,12 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 		const errors = validateForm();
 		if (Object.keys(errors).length > 0) {
 			setValidationErrors(errors);
+			window.scrollTo({ top: 0, behavior: "smooth" });
+			setFormStatus({
+				isSubmitting: false,
+				message: `Пополни ги сите задолжителни полиња`,
+				isError: true,
+			});
 			return;
 		}
 		setValidationErrors({});
@@ -204,7 +210,7 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 		};
 		try {
 			// For updating existing form data use PATCH instead of PUT for partial updates
-			const method = formData?.current_year ? "PATCH" : "POST";
+			const method = formData?.current_year || isSubmitted ? "PATCH" : "POST";
 			const endpoint = "http://localhost:8000/auth/form/";
 			const res = await fetch(endpoint, {
 				method,
@@ -230,6 +236,7 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 				throw new Error(errorData.message || "Error submitting form");
 			}
 			setIsSubmitted(true);
+			window.scrollTo({ top: 0, behavior: "smooth" });
 		} catch (error) {
 			console.error("Form submission error:", error);
 			setFormStatus({
@@ -237,6 +244,7 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 				message: `Грешка при зачувување: ${(error as Error).message}`,
 				isError: true,
 			});
+			window.scrollTo({ top: 0, behavior: "smooth" });
 		}
 	};
 
@@ -281,7 +289,6 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 			</button>
 		);
 	};
-
 	const filteredMandatorySubjects = studyTrack
 		? subjects
 				.filter(
@@ -553,7 +560,7 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 					<h3 className="text-lg font-medium text-gray-900 mb-2">
 						Омилени професори
 					</h3>
-					{studyTrack != "" && (
+					{
 						<input
 							onChange={(e) => setProfessorSearchTerm(e.target.value)}
 							value={professorsSearchTerm}
@@ -562,7 +569,7 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 							className="w-60 px-3 py-2.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 text-sm"
 							placeholder="Пребарај професор"
 						/>
-					)}
+					}
 				</div>
 				<div className="flex flex-wrap gap-2">
 					{["Немам", ...filteredProfessors]

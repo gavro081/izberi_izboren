@@ -47,6 +47,8 @@ function SubjectsSelector({
 			</h3>
 			{studyTrack ? (
 				<div className="grid gap-6">
+					{/* uncomment for displaying 2 semesters side by side on large screens, for now this is good*/}
+					{/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-6"> */}
 					{(() => {
 						const semestersToShow = Array.from(
 							{ length: year * 2 },
