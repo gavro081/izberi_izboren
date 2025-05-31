@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import {
 	EVALUATIONS,
 	EVALUATIONS_MAP,
@@ -9,6 +9,7 @@ import {
 import { useAuth } from "../../hooks/useAuth";
 import { Programs, StudentData, Subject } from "../types";
 import SkeletonForm from "./SkeletonForm";
+import SubjectsSelector from "./SubjectsSelector";
 import { LatinToCyrillic } from "./utils";
 
 interface StudentFormProps {
@@ -39,7 +40,9 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 	const [domains, setDomains] = useState<string[]>(
 		formData?.preferred_domains || []
 	);
-	const [electiveSearchTerm, setElectiveSearchTerm] = useState("");
+	const [semesterSearchTerms, setSemesterSearchTerms] = useState<
+		Record<number, string>
+	>({});
 	const [professorsSearchTerm, setProfessorSearchTerm] = useState("");
 	const [technologies, setTechnologies] = useState<string[]>(
 		formData?.preferred_technologies || []
@@ -50,6 +53,12 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 	const [favoriteProfs, setFavoriteProfs] = useState<string[]>(
 		formData?.favorite_professors || []
 	);
+	const [isNemamSelected, setIsNemamSelected] = useState({
+		domains: false,
+		tech: false,
+		eval: false,
+		prof: false,
+	});
 	const [formStatus, setFormStatus] = useState<{
 		isSubmitting: boolean;
 		message: string;
@@ -59,7 +68,6 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 		message: "",
 		isError: false,
 	});
-	const [showElective, setShowElective] = useState(false);
 	const [showProfessors, setShowProfessors] = useState(false);
 	const [subjects, setSubjects] = useState<Subject[]>([]);
 	const [distinctSubjectData, setDistinctSubjectData] =
@@ -232,6 +240,48 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 		}
 	};
 
+	const FieldButton: React.FC<{
+		keyProp: string | number;
+		state: string[];
+		stateSetter: Dispatch<SetStateAction<any[]>>;
+		field: "prof" | "tech" | "eval" | "domains";
+		isSelected: boolean;
+		isDisabled: boolean;
+	}> = ({ keyProp, state, stateSetter, field, isSelected, isDisabled }) => {
+		const handleClick = () => {
+			if (keyProp === "Немам") {
+				if (state.includes("Немам")) {
+					stateSetter([]);
+				} else {
+					stateSetter(["Немам"]);
+				}
+				setIsNemamSelected((prev) => ({
+					...prev,
+					[field]: !prev[field],
+				}));
+			} else {
+				const new_ = state.filter((t) => t !== "Немам");
+				toggleSelection(keyProp, stateSetter, new_);
+			}
+		};
+
+		return (
+			<button
+				type="button"
+				key={keyProp}
+				onClick={handleClick}
+				disabled={isDisabled}
+				className={`px-3 py-2 border rounded-md transition-colors ${
+					isSelected
+						? "bg-yellow-100 border-yellow-300 text-yellow-800"
+						: "bg-white hover:bg-gray-50 border-gray-300"
+				} ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
+			>
+				{keyProp}
+			</button>
+		);
+	};
+
 	const filteredMandatorySubjects = studyTrack
 		? subjects
 				.filter(
@@ -242,18 +292,12 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 				.sort((a, b) => a.subject_info.semester - b.subject_info.semester)
 		: [];
 	const filteredElectiveSubjects = studyTrack
-		? subjects
-				.filter(
-					(subj) =>
-						subj.subject_info.elective_for.includes(studyTrack) &&
-						(electiveSearchTerm == "" ||
-							subj.name
-								.toLowerCase()
-								.includes(LatinToCyrillic(electiveSearchTerm).toLowerCase()))
-					// subj.subject_info.semester <= year * 2
-				)
-				.sort((a, b) => a.subject_info.semester - b.subject_info.semester)
-		: [];
+		? subjects.filter(
+				(subj) => subj.subject_info.elective_for.includes(studyTrack)
+				// subj.subject_info.semester <= year * 2
+		  )
+		: // .sort((a, b) => a.subject_info.semester - b.subject_info.semester)
+		  [];
 
 	const filteredProfessors = distinctSubjectData.professors.filter(
 		(prof) =>
@@ -274,7 +318,6 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 					? "Ажурирај ги податоците"
 					: "Внеси податоци"}
 			</h2>
-
 			{formStatus.message && (
 				<div
 					className={`px-4 py-3 rounded mb-4 font-bold ${
@@ -324,7 +367,6 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 					)}
 				</div>
 			</div>
-
 			<div>
 				<h3 className="text-lg font-medium text-gray-900 mb-2">
 					Година на студии
@@ -346,177 +388,17 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 					</p>
 				)}
 			</div>
-
-			<div>
-				{/* <div className="flex gap-5 items-center mb-2"> */}
-				<h3 className="text-lg font-medium text-gray-900 mb-2">
-					Положени задолжителни предмети
-				</h3>
-				{studyTrack != "" && (
-					<div className="flex items-center mb-2">
-						<label className="inline-flex items-center p-1 rounded">
-							<input
-								type="checkbox"
-								className="form-checkbox h-5 w-5 accent-green-600"
-								disabled={filteredMandatorySubjects.length === 0}
-								checked={filteredMandatorySubjects.every((subject) =>
-									passedSubjects.some((passed) => passed.id === subject.id)
-								)}
-								onChange={() => {
-									const allSelected = filteredMandatorySubjects.every(
-										(subject) =>
-											passedSubjects.some((passed) => passed.id === subject.id)
-									);
-
-									if (allSelected) {
-										setPassedSubjects((prev) =>
-											prev.filter(
-												(subject) =>
-													!filteredMandatorySubjects.some(
-														(mandatorySubj) => mandatorySubj.id === subject.id
-													)
-											)
-										);
-									} else {
-										setPassedSubjects((prev) => {
-											const newSubjects = filteredMandatorySubjects.filter(
-												(subject) =>
-													!prev.some((passed) => passed.id === subject.id)
-											);
-											return [...prev, ...newSubjects];
-										});
-									}
-								}}
-							/>
-							<span className="ml-2 text-md text-gray-700">Одбери ги сите</span>
-						</label>
-					</div>
-				)}
-				{filteredMandatorySubjects.length > 0 ? (
-					<div className="flex flex-wrap gap-2">
-						{filteredMandatorySubjects.map((subject) => {
-							const isSelected = passedSubjects.some(
-								(s) => s.id === subject.id
-							);
-							return (
-								<button
-									type="button"
-									key={subject.id}
-									onClick={() => toggleSubject(subject)}
-									className={`flex items-center gap-2 px-3 py-2 border rounded-md transition-all duration-200 
-                    ${
-											isSelected
-												? "bg-green-500 border-green-600 text-green-50"
-												: "bg-white hover:bg-gray-50 border-gray-300"
-										}`}
-									aria-pressed={isSelected}
-								>
-									{isSelected && (
-										<svg
-											className="w-5 h-5"
-											fill="none"
-											stroke="currentColor"
-											viewBox="0 0 24 24"
-										>
-											<path
-												strokeLinecap="round"
-												strokeLinejoin="round"
-												strokeWidth="2"
-												d="M5 13l4 4L19 7"
-											></path>
-										</svg>
-									)}
-									<span>{subject.name}</span>
-								</button>
-							);
-						})}
-					</div>
-				) : (
-					<p className="text-gray-500 italic">
-						{!studyTrack
-							? "Одбери смер и година за да се прикажат предметите."
-							: "Нема такви задолжителни предмети"}
-					</p>
-				)}
-				{validationErrors.passedSubjects && (
-					<p className="mt-1 text-sm text-red-600 font-bold">
-						{validationErrors.passedSubjects}
-					</p>
-				)}
-			</div>
-			<div>
-				<div className="flex items-center mb-2 gap-7">
-					<h3 className="text-lg font-medium text-gray-900">
-						Положени изборни предмети
-					</h3>
-					{studyTrack != "" && (
-						<input
-							onChange={(e) => setElectiveSearchTerm(e.target.value)}
-							value={electiveSearchTerm}
-							type="text"
-							className="w-60 px-3 py-2.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 text-sm"
-							placeholder="Пребарај предмет"
-						/>
-					)}
-				</div>
-				{filteredElectiveSubjects.length > 0 ? (
-					<div className="flex flex-wrap gap-2">
-						{filteredElectiveSubjects
-							.slice(0, showElective ? undefined : 10)
-							.map((subject) => {
-								const isSelected = passedSubjects.some(
-									(s) => s.id === subject.id
-								);
-								return (
-									<button
-										type="button"
-										key={subject.id}
-										onClick={() => toggleSubject(subject)}
-										className={`flex items-center gap-2 px-3 py-2 border rounded-md transition-all duration-200 
-                    					${
-																isSelected
-																	? "bg-green-500 text-white border-green-600 shadow-md"
-																	: "bg-white text-gray-800 border-gray-300 hover:bg-gray-100"
-															}`}
-										aria-pressed={isSelected}
-									>
-										{isSelected && (
-											<svg
-												className="w-5 h-5"
-												fill="none"
-												stroke="currentColor"
-												viewBox="0 0 24 24"
-											>
-												<path
-													strokeLinecap="round"
-													strokeLinejoin="round"
-													strokeWidth="2"
-													d="M5 13l4 4L19 7"
-												></path>
-											</svg>
-										)}
-										<span>{subject.name}</span>
-									</button>
-								);
-							})}
-						{filteredElectiveSubjects.length > 10 && (
-							<button
-								onClick={() => setShowElective(!showElective)}
-								className="px-3 py-2 rounded-md transition-colors duration-200 bg-blue text-blue-500"
-							>
-								{showElective ? "Прикажи помалку" : "Прикажи повеќе"}
-							</button>
-						)}
-					</div>
-				) : (
-					<p className="text-gray-500 italic">
-						{!studyTrack
-							? "Одбери смер и година за да се прикажат предметите"
-							: "Нема такви изборни предмети"}
-					</p>
-				)}
-			</div>
-
+			<SubjectsSelector
+				studyTrack={studyTrack}
+				year={year}
+				filteredMandatorySubjects={filteredMandatorySubjects}
+				filteredElectiveSubjects={filteredElectiveSubjects}
+				passedSubjects={passedSubjects}
+				toggleSubject={toggleSubject}
+				semesterSearchTerms={semesterSearchTerms}
+				setSemesterSearchTerms={setSemesterSearchTerms}
+				validationErrors={validationErrors}
+			/>
 			<div>
 				<h3 className="text-lg font-medium text-gray-900 mb-2">
 					Вложен труд при учење
@@ -564,41 +446,25 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 					</p>
 				)}
 			</div>
-
 			<div>
 				<h3 className="text-lg font-medium text-gray-900 mb-2">
 					Полиња на интерес
 				</h3>
 				<div className="flex flex-wrap gap-2">
-					{distinctSubjectData.tags.map((domain) => {
-						const isSelected = domains.includes(domain);
-						const isNemamSelected = domains.includes("Немам");
-						const shouldBeDisabled = isNemamSelected && domain !== "Немам";
+					{["Немам", ...distinctSubjectData.tags].map((item) => {
+						const isSelected = domains.includes(item);
+						const shouldBeDisabled =
+							isNemamSelected["domains"] && item !== "Немам";
 						return (
-							<button
-								type="button"
-								key={domain}
-								onClick={() => {
-									if (domain === "Немам") {
-										if (domains.includes("Немам")) {
-											setDomains([]);
-										} else {
-											setDomains(["Немам"]);
-										}
-									} else {
-										const newDomains = domains.filter((t) => t !== "Немам");
-										toggleSelection(domain, setDomains, newDomains);
-									}
-								}}
-								disabled={shouldBeDisabled}
-								className={`px-3 py-2 border rounded-md transition-colors ${
-									isSelected
-										? "bg-green-100 border-green-300 text-green-800"
-										: "bg-white hover:bg-gray-50 border-gray-300"
-								} ${shouldBeDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
-							>
-								{domain}
-							</button>
+							<FieldButton
+								key={item}
+								keyProp={item}
+								state={domains}
+								stateSetter={setDomains}
+								field="domains"
+								isSelected={isSelected}
+								isDisabled={shouldBeDisabled}
+							/>
 						);
 					})}
 				</div>
@@ -608,41 +474,25 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 					</p>
 				)}
 			</div>
-
 			<div>
 				<h3 className="text-lg font-medium text-gray-900 mb-2">
 					Преферирани технологии
 				</h3>
 				<div className="flex flex-wrap gap-2">
-					{distinctSubjectData.technologies.map((tech) => {
-						const isSelected = technologies.includes(tech);
-						const isNemamSelected = technologies.includes("Немам");
-						const shouldBeDisabled = isNemamSelected && tech !== "Немам";
+					{["Немам", ...distinctSubjectData.technologies].map((item) => {
+						const isSelected = technologies.includes(item);
+						const shouldBeDisabled =
+							isNemamSelected["tech"] && item !== "Немам";
 						return (
-							<button
-								type="button"
-								key={tech}
-								onClick={() => {
-									if (tech === "Немам") {
-										if (technologies.includes("Немам")) {
-											setTechnologies([]);
-										} else {
-											setTechnologies(["Немам"]);
-										}
-									} else {
-										const newTechs = technologies.filter((t) => t !== "Немам");
-										toggleSelection(tech, setTechnologies, newTechs);
-									}
-								}}
-								disabled={shouldBeDisabled}
-								className={`px-3 py-2 border rounded-md transition-colors ${
-									isSelected
-										? "bg-yellow-100 border-yellow-300 text-yellow-800"
-										: "bg-white hover:bg-gray-50 border-gray-300"
-								} ${shouldBeDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
-							>
-								{tech}
-							</button>
+							<FieldButton
+								key={item}
+								keyProp={item}
+								state={technologies}
+								stateSetter={setTechnologies}
+								field="tech"
+								isSelected={isSelected}
+								isDisabled={shouldBeDisabled}
+							/>
 						);
 					})}
 				</div>
@@ -652,44 +502,25 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 					</p>
 				)}
 			</div>
-
 			<div>
 				<h3 className="text-lg font-medium text-gray-900 mb-2">
 					Преферирани начин на оценување
 				</h3>
 				<div className="flex flex-wrap gap-2">
-					{EVALUATIONS.map((ev) => {
-						const isSelected = evaluation.includes(ev);
-						const isNemamSelected = evaluation.includes("Немам");
-						const shouldBeDisabled = isNemamSelected && ev !== "Немам";
+					{["Немам", ...EVALUATIONS].map((item) => {
+						const isSelected = evaluation.includes(item);
+						const shouldBeDisabled =
+							isNemamSelected["eval"] && item !== "Немам";
 						return (
-							<button
-								type="button"
-								key={ev}
-								onClick={() => {
-									// todo: sredi ova
-									if (ev === "Немам") {
-										if (evaluation.includes("Немам")) {
-											setEvaluation([]);
-										} else {
-											setEvaluation(["Немам"]);
-										}
-									} else {
-										const newEvaluation = evaluation.filter(
-											(t) => t !== "Немам"
-										);
-										toggleSelection(ev, setEvaluation, newEvaluation);
-									}
-								}}
-								disabled={shouldBeDisabled}
-								className={`px-3 py-2 border rounded-md transition-colors ${
-									isSelected
-										? "bg-green-100 border-green-300 text-green-800"
-										: "bg-white hover:bg-gray-50 border-gray-300"
-								} ${shouldBeDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
-							>
-								{ev}
-							</button>
+							<FieldButton
+								key={item}
+								keyProp={item}
+								state={evaluation}
+								stateSetter={setEvaluation}
+								field="eval"
+								isSelected={isSelected}
+								isDisabled={shouldBeDisabled}
+							/>
 						);
 					})}
 				</div>
@@ -699,7 +530,6 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 					</p>
 				)}
 			</div>
-
 			<div>
 				<div className="flex items-center mb-2 gap-7">
 					<h3 className="text-lg font-medium text-gray-900 mb-2">
@@ -709,6 +539,7 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 						<input
 							onChange={(e) => setProfessorSearchTerm(e.target.value)}
 							value={professorsSearchTerm}
+							disabled={isNemamSelected["prof"]}
 							type="text"
 							className="w-60 px-3 py-2.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 text-sm"
 							placeholder="Пребарај професор"
@@ -716,24 +547,24 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 					)}
 				</div>
 				<div className="flex flex-wrap gap-2">
-					{filteredProfessors
+					{["Немам", ...filteredProfessors]
 						.slice(0, showProfessors ? undefined : 10)
-						.map((prof) => (
-							<button
-								key={prof}
-								type="button"
-								onClick={() =>
-									toggleSelection(prof, setFavoriteProfs, favoriteProfs)
-								}
-								className={`px-3 py-2 border rounded-md transition-colors ${
-									favoriteProfs.includes(prof)
-										? "bg-pink-100 border-pink-300 text-pink-800"
-										: "bg-white hover:bg-gray-50 border-gray-300"
-								}`}
-							>
-								{prof}
-							</button>
-						))}
+						.map((item) => {
+							const isSelected = favoriteProfs.includes(item);
+							const shouldBeDisabled =
+								isNemamSelected["prof"] && item !== "Немам";
+							return (
+								<FieldButton
+									key={item}
+									keyProp={item}
+									state={favoriteProfs}
+									stateSetter={setFavoriteProfs}
+									field="prof"
+									isSelected={isSelected}
+									isDisabled={shouldBeDisabled}
+								/>
+							);
+						})}
 					{filteredProfessors.length == 0 && (
 						<p className="text-gray-500 italic">Нема таков професор</p>
 					)}
@@ -747,7 +578,6 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 					)}
 				</div>
 			</div>
-
 			<div className="pt-4">
 				<button
 					type="submit"

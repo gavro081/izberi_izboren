@@ -1,0 +1,233 @@
+import { Subject } from "../types";
+import { LatinToCyrillic } from "./utils";
+
+interface SubjectsSelectorProps {
+	studyTrack: string;
+	year: number;
+	filteredMandatorySubjects: Subject[];
+	filteredElectiveSubjects: Subject[];
+	passedSubjects: Subject[];
+	toggleSubject: (subject: Subject) => void;
+	semesterSearchTerms: Record<number, string>;
+	setSemesterSearchTerms: (term: any) => void;
+	validationErrors: { [key: string]: string };
+}
+
+const TickSvg = () => (
+	<svg
+		className="w-4 h-4"
+		fill="none"
+		stroke="currentColor"
+		viewBox="0 0 24 24"
+	>
+		<path
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			strokeWidth="2"
+			d="M5 13l4 4L19 7"
+		></path>
+	</svg>
+);
+
+function SubjectsSelector({
+	studyTrack,
+	year,
+	filteredMandatorySubjects,
+	filteredElectiveSubjects,
+	passedSubjects,
+	toggleSubject,
+	semesterSearchTerms,
+	setSemesterSearchTerms,
+	validationErrors,
+}: SubjectsSelectorProps) {
+	return (
+		<div>
+			<h3 className="text-lg font-medium text-gray-900 mb-4">
+				Положени предмети по семестри
+			</h3>
+
+			{studyTrack ? (
+				<div className="grid gap-6">
+					{(() => {
+						const semestersToShow = Array.from(
+							{ length: year * 2 },
+							(_, i) => i + 1
+						);
+
+						return semestersToShow.map((semester) => {
+							const semesterMandatory = filteredMandatorySubjects.filter(
+								(subject) => subject.subject_info.semester === semester
+							);
+
+							const semesterElectives = filteredElectiveSubjects.filter(
+								(subject) => subject.subject_info.semester === semester
+							);
+
+							// const semesterElectives = filteredElectiveSubjects;
+
+							const totalSlots = semester === 1 ? 5 : 6;
+							const electiveSlots = totalSlots - semesterMandatory.length;
+
+							const selectedElectivesForSemester = passedSubjects.filter(
+								(subject) =>
+									subject.subject_info.semester === semester &&
+									semesterElectives.some(
+										(elective) => elective.id === subject.id
+									)
+							);
+
+							return (
+								<div
+									key={semester}
+									className="border border-gray-200 rounded-lg p-4 bg-gray-50"
+								>
+									<h4 className="text-md font-medium text-gray-800 mb-3">
+										Семестар {semester}
+									</h4>
+
+									<div className="space-y-4">
+										{semesterMandatory.length > 0 && (
+											<div>
+												<h5 className="text-sm font-medium text-gray-700 mb-2">
+													Задолжителни предмети
+												</h5>
+												<div className="flex flex-wrap gap-2">
+													{semesterMandatory.map((subject) => {
+														const isSelected = passedSubjects.some(
+															(s) => s.id === subject.id
+														);
+														return (
+															<button
+																type="button"
+																key={subject.id}
+																onClick={() => toggleSubject(subject)}
+																className={`flex items-center gap-2 px-3 py-2 border rounded-md transition-all duration-200 text-sm
+                                  ${
+																		isSelected
+																			? "bg-green-500 border-green-600 text-green-50"
+																			: "bg-white hover:bg-gray-50 border-gray-300"
+																	}`}
+																aria-pressed={isSelected}
+															>
+																{isSelected && <TickSvg />}
+																<span>{subject.name}</span>
+															</button>
+														);
+													})}
+												</div>
+											</div>
+										)}
+
+										{electiveSlots > 0 && (
+											<div>
+												<h5 className="text-sm font-medium text-gray-700 mb-2">
+													Изборни предмети (
+													{selectedElectivesForSemester.length}/{electiveSlots})
+												</h5>
+
+												<input
+													type="text"
+													placeholder={`Пребарај изборни предмети за семестар ${semester}`}
+													value={semesterSearchTerms[semester] || ""}
+													className="w-full px-3 py-2 mb-2 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+													onChange={(e) => {
+														setSemesterSearchTerms((prev: any) => ({
+															...prev,
+															[semester]: e.target.value,
+														}));
+													}}
+												/>
+
+												{selectedElectivesForSemester.length > 0 && (
+													<div className="mb-3">
+														<div className="flex flex-wrap gap-2">
+															{selectedElectivesForSemester.map((subject) => (
+																<button
+																	type="button"
+																	key={subject.id}
+																	onClick={() => toggleSubject(subject)}
+																	className="flex items-center gap-2 px-3 py-2 border rounded-md transition-all duration-200 text-sm bg-green-500 text-white border-green-600 shadow-md"
+																	aria-pressed={true}
+																>
+																	<TickSvg />
+																	<span>{subject.name}</span>
+																</button>
+															))}
+														</div>
+													</div>
+												)}
+
+												{selectedElectivesForSemester.length <
+													electiveSlots && (
+													<div>
+														<p className="text-xs text-gray-600 mb-2">
+															Избери од достапните:
+														</p>
+														<div className="flex flex-wrap gap-2 max-h-32 overflow-y-auto">
+															{semesterElectives
+																.filter(
+																	(subject) =>
+																		!selectedElectivesForSemester.some(
+																			(selected) => selected.id === subject.id
+																		) &&
+																		((semesterSearchTerms[semester] || "") ===
+																			"" ||
+																			subject.name
+																				.toLowerCase()
+																				.includes(
+																					(
+																						LatinToCyrillic(
+																							semesterSearchTerms[semester]
+																						) || ""
+																					).toLowerCase()
+																				))
+																)
+																.slice(0, 8)
+																.map((subject) => (
+																	<button
+																		type="button"
+																		key={subject.id}
+																		onClick={() => {
+																			if (
+																				selectedElectivesForSemester.length <
+																				electiveSlots
+																			) {
+																				toggleSubject(subject);
+																			}
+																		}}
+																		disabled={
+																			selectedElectivesForSemester.length >=
+																			electiveSlots
+																		}
+																		className="flex items-center gap-2 px-3 py-2 border rounded-md transition-all duration-200 text-sm bg-white text-gray-800 border-gray-300 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+																	>
+																		<span>{subject.name}</span>
+																	</button>
+																))}
+														</div>
+													</div>
+												)}
+											</div>
+										)}
+									</div>
+								</div>
+							);
+						});
+					})()}
+				</div>
+			) : (
+				<p className="text-gray-500 italic">
+					Одбери смер и година за да се прикажат предметите.
+				</p>
+			)}
+
+			{validationErrors.passedSubjects && (
+				<p className="mt-3 text-sm text-red-600 font-bold">
+					{validationErrors.passedSubjects}
+				</p>
+			)}
+		</div>
+	);
+}
+
+export default SubjectsSelector;
