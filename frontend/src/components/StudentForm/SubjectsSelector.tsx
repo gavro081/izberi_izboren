@@ -45,7 +45,6 @@ function SubjectsSelector({
 			<h3 className="text-lg font-medium text-gray-900 mb-4">
 				Положени предмети по семестри
 			</h3>
-
 			{studyTrack ? (
 				<div className="grid gap-6">
 					{(() => {
@@ -63,18 +62,33 @@ function SubjectsSelector({
 								(subject) => subject.subject_info.semester === semester
 							);
 
+							const seasonElectives = filteredElectiveSubjects.filter(
+								(subject) => subject.subject_info.semester % 2 === semester % 2
+							);
+
 							// const semesterElectives = filteredElectiveSubjects;
 
 							const totalSlots = semester === 1 ? 5 : 6;
 							const electiveSlots = totalSlots - semesterMandatory.length;
 
-							const selectedElectivesForSemester = passedSubjects.filter(
-								(subject) =>
-									subject.subject_info.semester === semester &&
-									semesterElectives.some(
-										(elective) => elective.id === subject.id
-									)
-							);
+							const electivesSource =
+								(semesterSearchTerms[semester] || "") === ""
+									? semesterElectives
+									: seasonElectives;
+
+							const selectedElectivesForSemester = passedSubjects
+								.filter(
+									(subject) =>
+										subject.subject_info.semester === semester &&
+										semesterElectives.some(
+											(elective) => elective.id === subject.id
+										)
+								)
+								.sort(
+									(a, b) =>
+										b.subject_info.participants[0] -
+										a.subject_info.participants[0]
+								);
 
 							return (
 								<div
@@ -127,7 +141,9 @@ function SubjectsSelector({
 
 												<input
 													type="text"
-													placeholder={`Пребарај изборни предмети за семестар ${semester}`}
+													placeholder={`Пребарај ${
+														semester % 2 === 0 ? "летни" : "зимски"
+													} изборни предмети`}
 													value={semesterSearchTerms[semester] || ""}
 													className="w-full px-3 py-2 mb-2 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
 													onChange={(e) => {
@@ -163,8 +179,8 @@ function SubjectsSelector({
 														<p className="text-xs text-gray-600 mb-2">
 															Избери од достапните:
 														</p>
-														<div className="flex flex-wrap gap-2 max-h-32 overflow-y-auto">
-															{semesterElectives
+														<div className="flex flex-wrap gap-2 h-max">
+															{electivesSource
 																.filter(
 																	(subject) =>
 																		!selectedElectivesForSemester.some(
@@ -181,6 +197,11 @@ function SubjectsSelector({
 																						) || ""
 																					).toLowerCase()
 																				))
+																)
+																.sort(
+																	(a, b) =>
+																		b.subject_info.participants[0] -
+																		a.subject_info.participants[0]
 																)
 																.slice(0, 8)
 																.map((subject) => (
@@ -205,6 +226,9 @@ function SubjectsSelector({
 																	</button>
 																))}
 														</div>
+														<p className="mt-3 text-xs text-gray-500 px-2 py-1">
+															Не можеш да го најдеш твојот предмет? Пребарај го.
+														</p>
 													</div>
 												)}
 											</div>

@@ -77,6 +77,7 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 			technologies: [],
 		});
 	const [isLoading, setIsLoading] = useState(true);
+	const [hasExtracurricular, setHasExtracurricular] = useState(false);
 
 	// Update form when formData changes (e.g., after fetching user data)
 	useEffect(() => {
@@ -205,7 +206,6 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 			// For updating existing form data use PATCH instead of PUT for partial updates
 			const method = formData?.current_year ? "PATCH" : "POST";
 			const endpoint = "http://localhost:8000/auth/form/";
-			console.log(payload);
 			const res = await fetch(endpoint, {
 				method,
 				headers: {
@@ -250,10 +250,10 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 	}> = ({ keyProp, state, stateSetter, field, isSelected, isDisabled }) => {
 		const handleClick = () => {
 			if (keyProp === "Немам") {
-				if (state.includes("Немам")) {
+				if (state.includes("None")) {
 					stateSetter([]);
 				} else {
-					stateSetter(["Немам"]);
+					stateSetter(["None"]);
 				}
 				setIsNemamSelected((prev) => ({
 					...prev,
@@ -351,7 +351,7 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 					<select
 						value={studyTrack}
 						onChange={(e) => setStudyTrack(e.target.value as Programs | "")}
-						className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+						className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 custom-select"
 					>
 						<option value="">Одбери смер</option>
 						{PROGRAMS.map((track) => (
@@ -374,7 +374,7 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 				<select
 					value={year}
 					onChange={(e) => setYear(Number(e.target.value))}
-					className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+					className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 custom-select"
 				>
 					{YEARS.map((y) => (
 						<option key={y} value={y}>
@@ -399,6 +399,18 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 				setSemesterSearchTerms={setSemesterSearchTerms}
 				validationErrors={validationErrors}
 			/>
+			<div>
+				<label className="flex items-center gap-2 text-lg font-medium text-gray-900 mb-2">
+					<input
+						type="checkbox"
+						checked={hasExtracurricular}
+						onChange={() => setHasExtracurricular(!hasExtracurricular)}
+						className="form-checkbox h-4 w-5 mr-2 accent-green-600"
+					/>
+					Имам завршено HPC курсеви, или некои други екстракурикуларни
+					активности кои носат вкупно 6 кредити.
+				</label>
+			</div>
 			<div>
 				<h3 className="text-lg font-medium text-gray-900 mb-2">
 					Вложен труд при учење
@@ -452,7 +464,9 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 				</h3>
 				<div className="flex flex-wrap gap-2">
 					{["Немам", ...distinctSubjectData.tags].map((item) => {
-						const isSelected = domains.includes(item);
+						const isSelected =
+							domains.includes(item) ||
+							(item === "Немам" && isNemamSelected["domains"]);
 						const shouldBeDisabled =
 							isNemamSelected["domains"] && item !== "Немам";
 						return (
@@ -480,7 +494,9 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 				</h3>
 				<div className="flex flex-wrap gap-2">
 					{["Немам", ...distinctSubjectData.technologies].map((item) => {
-						const isSelected = technologies.includes(item);
+						const isSelected =
+							technologies.includes(item) ||
+							(item === "Немам" && isNemamSelected["tech"]);
 						const shouldBeDisabled =
 							isNemamSelected["tech"] && item !== "Немам";
 						return (
@@ -508,7 +524,9 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 				</h3>
 				<div className="flex flex-wrap gap-2">
 					{["Немам", ...EVALUATIONS].map((item) => {
-						const isSelected = evaluation.includes(item);
+						const isSelected =
+							evaluation.includes(item) ||
+							(item === "Немам" && isNemamSelected["eval"]);
 						const shouldBeDisabled =
 							isNemamSelected["eval"] && item !== "Немам";
 						return (
@@ -550,7 +568,11 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 					{["Немам", ...filteredProfessors]
 						.slice(0, showProfessors ? undefined : 10)
 						.map((item) => {
-							const isSelected = favoriteProfs.includes(item);
+							// hides "Nemam" when searching
+							if (item == "Немам" && professorsSearchTerm !== "") return;
+							const isSelected =
+								favoriteProfs.includes(item) ||
+								(item === "Немам" && isNemamSelected["prof"]);
 							const shouldBeDisabled =
 								isNemamSelected["prof"] && item !== "Немам";
 							return (

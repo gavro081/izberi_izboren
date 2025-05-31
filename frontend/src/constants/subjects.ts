@@ -12,6 +12,7 @@ export const YEARS = [1, 2, 3, 4] as const;
 export const EVALUATIONS = ["Теорија", "Практично", "Код", "Проект"];
 
 export const EVALUATIONS_MAP = {
+	Немам: "None",
 	Теорија: "Theory",
 	Практично: "Practical",
 	Код: "Code",
