@@ -1,3 +1,4 @@
+import { LatinToCyrillic } from "../StudentForm/utils";
 import { Filters, Programs, Subject } from "../types";
 
 interface filteredSubjectsParams {
@@ -27,7 +28,9 @@ export const filterSubjects = ({
 	filters,
 }: filteredSubjectsParams) =>
 	subjectData.filter((subject) => {
+		if (searchTerm !== "") searchTerm = LatinToCyrillic(searchTerm);
 		const searchMatches =
+			searchTerm === "" ||
 			subject.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
 			subject.code.toLowerCase().includes(searchTerm.toLowerCase()) ||
 			subject.abstract?.toLowerCase().includes(searchTerm.toLowerCase());
@@ -63,13 +66,17 @@ export const filterSubjects = ({
 		const professorsMatches =
 			professorSearchTerm == "" ||
 			subject.subject_info.professors.some((item) =>
-				item.toLowerCase().includes(professorSearchTerm.toLowerCase())
+				item
+					.toLowerCase()
+					.includes(LatinToCyrillic(professorSearchTerm).toLowerCase())
 			);
 
 		const assistantsMatches =
 			assistantSearchTerm == "" ||
 			subject.subject_info.assistants.some((item) =>
-				item.toLowerCase().includes(assistantSearchTerm.toLowerCase())
+				item
+					.toLowerCase()
+					.includes(LatinToCyrillic(assistantSearchTerm).toLowerCase())
 			);
 
 		const prerequisitesMatch =

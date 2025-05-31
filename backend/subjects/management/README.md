@@ -31,4 +31,4 @@ the template for running commands is:
 
 - `format_prereqs.py` - reads data from prerequisites.json, and writes the formatted output to `data/formatted_prereqs.json`
 - `subjects_by_program.py` - reads data from mandatory.json, and writes the relevant information to `data/subjects_by_program.json`.
-- `subject_details.py` - aggregates data from multiple JSON files, and writes the combined information in `backend/subjects/management/commands/subject_details.json`. Modify this script to modify the initial data that is used to populate the db.
+- `subject_details.py` - aggregates data from multiple JSON files, and writes the combined information in `/data/subject_details.json`. Modify this script to modify the initial data that is used to populate the db.

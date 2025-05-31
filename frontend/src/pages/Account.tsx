@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
-import StudentForm from "../components/StudentForm";
+import StudentForm from "../components/StudentForm/StudentForm";
 import { StudentData } from "../components/types";
 import { useAuth } from "../hooks/useAuth";
 

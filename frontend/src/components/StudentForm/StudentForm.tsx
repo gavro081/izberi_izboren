@@ -5,9 +5,11 @@ import {
 	PROGRAMS,
 	STUDY_EFFORT,
 	YEARS,
-} from "../constants/subjects";
-import { useAuth } from "../hooks/useAuth";
-import { Programs, StudentData, Subject } from "./types";
+} from "../../constants/subjects";
+import { useAuth } from "../../hooks/useAuth";
+import { Programs, StudentData, Subject } from "../types";
+import SkeletonForm from "./SkeletonForm";
+import { LatinToCyrillic } from "./utils";
 
 interface StudentFormProps {
 	formData: StudentData | null;
@@ -66,6 +68,7 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 			professors: [],
 			technologies: [],
 		});
+	const [isLoading, setIsLoading] = useState(true);
 
 	// Update form when formData changes (e.g., after fetching user data)
 	useEffect(() => {
@@ -109,14 +112,18 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 						).sort((a, b) => a.localeCompare(b)),
 						professors: allProfessors_,
 					}));
+					// todo: no explanation needed
+					setTimeout(() => setIsLoading(false), 900);
 				}
 			} catch (error) {
 				console.error("Error fetching subjects:", error);
+				setIsLoading(false);
 			}
 		};
 
 		fetchSubjects();
 	}, []);
+
 	const validateForm = () => {
 		const errors: { [key: string]: string } = {};
 
@@ -242,7 +249,7 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 						(electiveSearchTerm == "" ||
 							subj.name
 								.toLowerCase()
-								.includes(electiveSearchTerm.toLowerCase()))
+								.includes(LatinToCyrillic(electiveSearchTerm).toLowerCase()))
 					// subj.subject_info.semester <= year * 2
 				)
 				.sort((a, b) => a.subject_info.semester - b.subject_info.semester)
@@ -251,8 +258,14 @@ const StudentForm = ({ formData }: StudentFormProps) => {
 	const filteredProfessors = distinctSubjectData.professors.filter(
 		(prof) =>
 			professorsSearchTerm == "" ||
-			prof.toLowerCase().includes(professorsSearchTerm.toLowerCase())
+			prof
+				.toLowerCase()
+				.includes(LatinToCyrillic(professorsSearchTerm).toLowerCase())
 	);
+
+	if (isLoading) {
+		return <SkeletonForm />;
+	}
 
 	return (
 		<form onSubmit={handleSubmit} className="space-y-6 max-w-4xl mx-auto">
