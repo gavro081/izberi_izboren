@@ -2394,7 +2394,7 @@
 			"Software Engineering"
 		],
 		"technologies": [],
-		"evaluation": [],
+		"evaluation": ["Theory + Code", "Project"],
 		"isEasy": false
 	},
 	"Паралелно и дистрибуирано процесирање": {
@@ -2423,8 +2423,8 @@
 			"Computer Science",
 			"Software Engineering"
 		],
-		"technologies": [],
-		"evaluation": [],
+		"technologies": ["C++"],
+		"evaluation": ["Project"],
 		"isEasy": false
 	},
 	"Паралелно програмирање": {
@@ -2870,8 +2870,8 @@
 		"professors": ["Владимир Трајковиќ"],
 		"assistants": ["Јана Кузманова"],
 		"tags": ["Software Engineering", "Societal Skills"],
-		"technologies": [],
-		"evaluation": [],
+		"technologies": ["any"],
+		"evaluation": ["Theory + Practical"],
 		"isEasy": false
 	},
 	"Биолошки инспирирано пресметување": {
@@ -3132,8 +3132,8 @@
 		"professors": ["Дејан Ѓорѓевиќ"],
 		"assistants": [],
 		"tags": ["AI / ML", "Data Science", "Computer Science"],
-		"technologies": [],
-		"evaluation": [],
+		"technologies": ["any"],
+		"evaluation": ["Theory + Code", "Project"],
 		"isEasy": false
 	},
 	"Дигитална постпродукција": {
@@ -3232,8 +3232,8 @@
 			"Networking",
 			"Software Engineering"
 		],
-		"technologies": [],
-		"evaluation": [],
+		"technologies": ["Java"],
+		"evaluation": ["Theory + Code"],
 		"isEasy": false
 	},
 	"Дистрибуирано складирање на податоци": {
@@ -3359,7 +3359,7 @@
 		"assistants": ["Димитар Милески"],
 		"tags": ["Societal Skills", "Computer Science", "Software Engineering"],
 		"technologies": [],
-		"evaluation": [],
+		"evaluation": ["Theory", "Project"],
 		"isEasy": true
 	},
 	"Откривање знаење со длабоко учење": {
@@ -3570,7 +3570,7 @@
 		"assistants": [],
 		"tags": ["Software Engineering", "Societal Skills"],
 		"technologies": [],
-		"evaluation": [],
+		"evaluation": ["Theory", "Project"],
 		"isEasy": true
 	},
 	"Методика на информатиката": {
@@ -3716,8 +3716,8 @@
 		"professors": ["Георгина Мирчева"],
 		"assistants": [],
 		"tags": ["Societal Skills", "Software Engineering"],
-		"technologies": [""],
-		"evaluation": ["Theory"],
+		"technologies": [],
+		"evaluation": ["Theory", "Project"],
 		"isEasy": true
 	},
 	"Моделирање и симулација": {
@@ -3791,7 +3791,7 @@
 		"assistants": ["Војдан Ќорвезироски"],
 		"tags": ["Cybersecurity", "Networking", "Embedded Systems"],
 		"technologies": [],
-		"evaluation": [],
+		"evaluation": ["Project"],
 		"isEasy": false
 	},
 	"Напредна интеракција човек компјутер": {
@@ -3817,8 +3817,8 @@
 		"professors": ["Невена Ацковска", "Бојан Илијоски"],
 		"assistants": [],
 		"tags": ["UI/UX & Digital Media", "Software Engineering"],
-		"technologies": [],
-		"evaluation": [],
+		"technologies": ["any"],
+		"evaluation": ["Theory + Code", "Project"],
 		"isEasy": false
 	},
 	"Напредни бази на податоци": {
@@ -3840,8 +3840,8 @@
 		"professors": ["Горан Велинов"],
 		"assistants": ["Ненад Анчев"],
 		"tags": ["Databases", "Software Engineering", "Data Science"],
-		"technologies": [],
-		"evaluation": [],
+		"technologies": ["SQL"],
+		"evaluation": ["Theory + Code", "Project"],
 		"isEasy": false
 	},
 	"Web3 апликации": {
@@ -3982,7 +3982,7 @@
 		"assistants": [],
 		"tags": ["Networking", "Physics"],
 		"technologies": [],
-		"evaluation": [],
+		"evaluation": ["Project"],
 		"isEasy": false
 	},
 	"Пресметување во облак": {
@@ -4009,8 +4009,8 @@
 			"Networking",
 			"Software Engineering"
 		],
-		"technologies": [],
-		"evaluation": [],
+		"technologies": ["Java"],
+		"evaluation": ["Theory + Code", "Project"],
 		"isEasy": false
 	},
 	"Претприемништво": {
@@ -4196,8 +4196,8 @@
 			"Software Engineering",
 			"Societal Skills"
 		],
-		"technologies": [],
-		"evaluation": [],
+		"technologies": ["Python"],
+		"evaluation": ["Theory"],
 		"isEasy": true
 	},
 	"Складови на податоци и аналитичка обработка": {
