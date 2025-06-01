@@ -75,9 +75,9 @@ function SubjectsSelector({
 									? semesterElectives
 									: seasonElectives;
 
-							const selectedElectivesForSemester = passedSubjectsPerSemester[
-								semester
-							].filter((subject) =>
+							const selectedElectivesForSemester = (
+								passedSubjectsPerSemester[semester] || []
+							).filter((subject) =>
 								subject.subject_info.elective_for.includes(studyTrack)
 							);
 							return (
@@ -97,9 +97,9 @@ function SubjectsSelector({
 												</h5>
 												<div className="flex flex-wrap gap-2">
 													{semesterMandatory.map((subject) => {
-														const isSelected = passedSubjectsPerSemester[
-															semester
-														].some((s) => s.id === subject.id);
+														const isSelected = (
+															passedSubjectsPerSemester[semester] || []
+														).some((s) => s.id === subject.id);
 														return (
 															<button
 																type="button"

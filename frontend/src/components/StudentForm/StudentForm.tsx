@@ -168,7 +168,7 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 	}, []);
 
 	const toggleSubject = (subject: Subject, semester: number) => {
-		const exists = passedSubjectsPerSemester[semester].some(
+		const exists = (passedSubjectsPerSemester[semester] || []).some(
 			(s) => s.id === subject.id
 		);
 		if (exists) {
@@ -339,14 +339,17 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 							const newTrack = e.target.value as Programs;
 							const filteredPassedSubjectsPerSemester = Object.fromEntries(
 								Object.entries(passedSubjectsPerSemester).map(
-									([semester, subjects]) => [
-										semester,
-										subjects.filter(
+									([semester, subjects]) => {
+										const filteredSubjects = subjects.filter(
 											(subj) =>
 												subj.subject_info.mandatory_for.includes(newTrack) ||
 												subj.subject_info.elective_for.includes(newTrack)
-										),
-									]
+										);
+										return [
+											semester,
+											filteredSubjects.length > 0 ? filteredSubjects : [],
+										];
+									}
 								)
 							);
 							setPassedSubjectsPerSemester(filteredPassedSubjectsPerSemester);
