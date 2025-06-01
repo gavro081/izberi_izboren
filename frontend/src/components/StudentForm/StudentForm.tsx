@@ -599,6 +599,7 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 					)}
 					{filteredProfessors.length > 10 && (
 						<button
+							type="button"
 							onClick={() => setShowProfessors(!showProfessors)}
 							className="px-3 py-2 rounded-md transition-colors duration-200 bg-blue text-blue-500"
 						>
