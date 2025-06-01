@@ -11,6 +11,7 @@ interface SubjectsSelectorProps {
 	setSemesterSearchTerms: (term: any) => void;
 	validationErrors: { [key: string]: string };
 	passedSubjectsPerSemester: Record<number, Subject[]>;
+	invalidSubjects: Subject[];
 }
 
 const TickSvg = () => (
@@ -28,6 +29,7 @@ const TickSvg = () => (
 		></path>
 	</svg>
 );
+
 function SubjectsSelector({
 	studyTrack,
 	year,
@@ -38,6 +40,7 @@ function SubjectsSelector({
 	setSemesterSearchTerms,
 	validationErrors,
 	passedSubjectsPerSemester,
+	invalidSubjects,
 }: SubjectsSelectorProps) {
 	return (
 		<div>
@@ -80,6 +83,13 @@ function SubjectsSelector({
 							).filter((subject) =>
 								subject.subject_info.elective_for.includes(studyTrack)
 							);
+
+							const semesterInvalid = invalidSubjects.filter(
+								(subject: Subject) =>
+									(passedSubjectsPerSemester[semester] || []).some(
+										(s) => s.id === subject.id
+									)
+							);
 							return (
 								<div
 									key={semester}
@@ -100,20 +110,27 @@ function SubjectsSelector({
 														const isSelected = (
 															passedSubjectsPerSemester[semester] || []
 														).some((s) => s.id === subject.id);
+														const isInvalid = semesterInvalid.some(
+															(s) => s.id === subject.id
+														);
 														return (
 															<button
 																type="button"
 																key={subject.id}
 																onClick={() => toggleSubject(subject, semester)}
 																className={`flex items-center gap-2 px-3 py-2 border rounded-md transition-all duration-200 text-sm
-                                  ${
-																		isSelected
+                                  									// TODO
+																	//prettier-ignore
+																	${
+																		isInvalid
+																			? "bg-red-300 border-red-400 text-red-700"
+																			: isSelected
 																			? "bg-green-500 border-green-600 text-green-50"
 																			: "bg-white hover:bg-gray-50 border-gray-300"
 																	}`}
 																aria-pressed={isSelected}
 															>
-																{isSelected && <TickSvg />}
+																{isSelected && !isInvalid && <TickSvg />}
 																<span>{subject.name}</span>
 															</button>
 														);
@@ -151,20 +168,30 @@ function SubjectsSelector({
 												{selectedElectivesForSemester.length > 0 && (
 													<div className="mb-3">
 														<div className="flex flex-wrap gap-2">
-															{selectedElectivesForSemester.map((subject) => (
-																<button
-																	type="button"
-																	key={subject.id}
-																	onClick={() =>
-																		toggleSubject(subject, semester)
-																	}
-																	className="flex items-center gap-2 px-3 py-2 border rounded-md transition-all duration-200 text-sm bg-green-500 text-white border-green-600 shadow-md"
-																	aria-pressed={true}
-																>
-																	<TickSvg />
-																	<span>{subject.name}</span>
-																</button>
-															))}
+															{selectedElectivesForSemester.map((subject) => {
+																const isInvalid = semesterInvalid.some(
+																	(s) => s.id === subject.id
+																);
+																return (
+																	<button
+																		type="button"
+																		key={subject.id}
+																		onClick={() =>
+																			toggleSubject(subject, semester)
+																		}
+																		className={`flex items-center gap-2 px-3 py-2 border rounded-md transition-all duration-200 text-sm  shadow-md
+       																 	${
+																					isInvalid
+																						? "bg-red-300 border-red-400 text-red-700"
+																						: "bg-green-500 text-white border-green-600"
+																				}`}
+																		aria-pressed={true}
+																	>
+																		{!isInvalid && <TickSvg />}
+																		<span>{subject.name}</span>
+																	</button>
+																);
+															})}
 														</div>
 													</div>
 												)}
@@ -203,31 +230,39 @@ function SubjectsSelector({
 																		a.subject_info.participants[0]
 																)
 																.slice(0, 8)
-																.map((subject) => (
-																	<button
-																		type="button"
-																		key={subject.id}
-																		onClick={() => {
-																			if (
-																				selectedElectivesForSemester.length <
+																.map((subject) => {
+																	const isInvalid = semesterInvalid.some(
+																		(s) => s.id === subject.id
+																	);
+																	return (
+																		<button
+																			type="button"
+																			key={subject.id}
+																			onClick={() => {
+																				if (
+																					selectedElectivesForSemester.length <
+																					electiveSlots
+																				) {
+																					setSemesterSearchTerms(
+																						(prev: any) => ({
+																							...prev,
+																							[semester]: "",
+																						})
+																					);
+																					toggleSubject(subject, semester);
+																				}
+																			}}
+																			disabled={
+																				selectedElectivesForSemester.length >=
 																				electiveSlots
-																			) {
-																				setSemesterSearchTerms((prev: any) => ({
-																					...prev,
-																					[semester]: "",
-																				}));
-																				toggleSubject(subject, semester);
 																			}
-																		}}
-																		disabled={
-																			selectedElectivesForSemester.length >=
-																			electiveSlots
-																		}
-																		className="flex items-center gap-2 px-3 py-2 border rounded-md transition-all duration-200 text-sm bg-white text-gray-800 border-gray-300 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
-																	>
-																		<span>{subject.name}</span>
-																	</button>
-																))}
+																			className={`flex items-center gap-2 px-3 py-2 border rounded-md transition-all duration-200 text-sm bg-white text-gray-800 border-gray-300 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed
+          																		${isInvalid ? "bg-red-300 border-red-400 text-red-700" : ""}`}
+																		>
+																			<span>{subject.name}</span>
+																		</button>
+																	);
+																})}
 														</div>
 														<p className="mt-3 text-xs text-gray-500 px-2 py-1">
 															Не можеш да го најдеш твојот предмет? Пребарај го.

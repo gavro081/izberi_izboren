@@ -7,7 +7,7 @@ import {
 	YEARS,
 } from "../../constants/subjects";
 import { useAuth } from "../../hooks/useAuth";
-import { Programs, StudentData, Subject } from "../types";
+import { Programs, StudentData, Subject, SubjectID } from "../types";
 import FieldButton from "./FieldButton";
 import SkeletonForm from "./SkeletonForm";
 import SubjectsSelector from "./SubjectsSelector";
@@ -88,6 +88,7 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 			technologies: [],
 		});
 	const [hasExtracurricular, setHasExtracurricular] = useState(false);
+	const [invalidSubjects, setInvalidSubjects] = useState<Subject[]>([]);
 
 	// Update form when formData changes (e.g., after fetching user data)
 	useEffect(() => {
@@ -248,18 +249,31 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 					message: "Формата е успешно зачувана!",
 					isError: false,
 				});
-
+				setInvalidSubjects([]);
 				setTimeout(() => {
 					setFormStatus((prev) => ({ ...prev, message: "" }));
 				}, 5000);
 			} else {
 				const errorData = await res.json();
-				throw new Error(errorData.message || "Error submitting form");
+				if (errorData.prereqs) {
+					const invalidSubjects_: Subject[] = errorData.prereqs.map(
+						(sub_id: SubjectID) =>
+							subjects.find((item: Subject) => item.id == sub_id)
+					);
+					console.log("invalid: ", invalidSubjects_);
+					setInvalidSubjects(invalidSubjects_);
+					setFormStatus({
+						isSubmitting: false,
+						message: `Грешка при зачувување: Проверете кој предмети не ги исполнуваат предусловите`,
+						isError: true,
+					});
+				} else throw new Error(errorData.message || "Error submitting form");
 			}
 			setIsSubmitted(true);
 			window.scrollTo({ top: 0, behavior: "smooth" });
 		} catch (error) {
 			console.error("Form submission error:", error);
+
 			setFormStatus({
 				isSubmitting: false,
 				message: `Грешка при зачувување: ${(error as Error).message}`,
@@ -402,6 +416,7 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 				setSemesterSearchTerms={setSemesterSearchTerms}
 				validationErrors={validationErrors}
 				passedSubjectsPerSemester={passedSubjectsPerSemester}
+				invalidSubjects={invalidSubjects}
 			/>
 			<div>
 				<label className="flex items-center gap-2 text-lg font-medium text-gray-900 mb-2">
