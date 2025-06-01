@@ -1,16 +1,16 @@
-import { Subject } from "../types";
+import { Programs, Subject } from "../types";
 import { LatinToCyrillic } from "./utils";
 
 interface SubjectsSelectorProps {
-	studyTrack: string;
+	studyTrack: Programs | "";
 	year: number;
 	filteredMandatorySubjects: Subject[];
 	filteredElectiveSubjects: Subject[];
-	passedSubjects: Subject[];
-	toggleSubject: (subject: Subject) => void;
+	toggleSubject: (id: Subject, semester: number) => void;
 	semesterSearchTerms: Record<number, string>;
 	setSemesterSearchTerms: (term: any) => void;
 	validationErrors: { [key: string]: string };
+	passedSubjectsPerSemester: Record<number, Subject[]>;
 }
 
 const TickSvg = () => (
@@ -28,17 +28,16 @@ const TickSvg = () => (
 		></path>
 	</svg>
 );
-
 function SubjectsSelector({
 	studyTrack,
 	year,
 	filteredMandatorySubjects,
 	filteredElectiveSubjects,
-	passedSubjects,
 	toggleSubject,
 	semesterSearchTerms,
 	setSemesterSearchTerms,
 	validationErrors,
+	passedSubjectsPerSemester,
 }: SubjectsSelectorProps) {
 	return (
 		<div>
@@ -68,8 +67,6 @@ function SubjectsSelector({
 								(subject) => subject.subject_info.semester % 2 === semester % 2
 							);
 
-							// const semesterElectives = filteredElectiveSubjects;
-
 							const totalSlots = semester === 1 ? 5 : 6;
 							const electiveSlots = totalSlots - semesterMandatory.length;
 
@@ -78,20 +75,11 @@ function SubjectsSelector({
 									? semesterElectives
 									: seasonElectives;
 
-							const selectedElectivesForSemester = passedSubjects
-								.filter(
-									(subject) =>
-										subject.subject_info.semester === semester &&
-										semesterElectives.some(
-											(elective) => elective.id === subject.id
-										)
-								)
-								.sort(
-									(a, b) =>
-										b.subject_info.participants[0] -
-										a.subject_info.participants[0]
-								);
-
+							const selectedElectivesForSemester = passedSubjectsPerSemester[
+								semester
+							].filter((subject) =>
+								subject.subject_info.elective_for.includes(studyTrack)
+							);
 							return (
 								<div
 									key={semester}
@@ -109,14 +97,14 @@ function SubjectsSelector({
 												</h5>
 												<div className="flex flex-wrap gap-2">
 													{semesterMandatory.map((subject) => {
-														const isSelected = passedSubjects.some(
-															(s) => s.id === subject.id
-														);
+														const isSelected = passedSubjectsPerSemester[
+															semester
+														].some((s) => s.id === subject.id);
 														return (
 															<button
 																type="button"
 																key={subject.id}
-																onClick={() => toggleSubject(subject)}
+																onClick={() => toggleSubject(subject, semester)}
 																className={`flex items-center gap-2 px-3 py-2 border rounded-md transition-all duration-200 text-sm
                                   ${
 																		isSelected
@@ -147,7 +135,11 @@ function SubjectsSelector({
 														semester % 2 === 0 ? "летни" : "зимски"
 													} изборни предмети`}
 													value={semesterSearchTerms[semester] || ""}
-													className="w-full px-3 py-2 mb-2 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+													disabled={
+														selectedElectivesForSemester.length >= electiveSlots
+													}
+													className="w-full px-3 py-2 mb-2 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none 
+														focus:ring-blue-500 focus:border-blue-500  disabled:opacity-50 disabled:cursor-not-allowed"
 													onChange={(e) => {
 														setSemesterSearchTerms((prev: any) => ({
 															...prev,
@@ -163,7 +155,9 @@ function SubjectsSelector({
 																<button
 																	type="button"
 																	key={subject.id}
-																	onClick={() => toggleSubject(subject)}
+																	onClick={() =>
+																		toggleSubject(subject, semester)
+																	}
 																	className="flex items-center gap-2 px-3 py-2 border rounded-md transition-all duration-200 text-sm bg-green-500 text-white border-green-600 shadow-md"
 																	aria-pressed={true}
 																>
@@ -185,9 +179,12 @@ function SubjectsSelector({
 															{electivesSource
 																.filter(
 																	(subject) =>
-																		!selectedElectivesForSemester.some(
-																			(selected) => selected.id === subject.id
+																		!Object.values(
+																			passedSubjectsPerSemester
+																		).some((arr) =>
+																			arr.some((s) => s.id === subject.id)
 																		) &&
+																		!semesterMandatory.includes(subject) &&
 																		((semesterSearchTerms[semester] || "") ===
 																			"" ||
 																			subject.name
@@ -215,7 +212,11 @@ function SubjectsSelector({
 																				selectedElectivesForSemester.length <
 																				electiveSlots
 																			) {
-																				toggleSubject(subject);
+																				setSemesterSearchTerms((prev: any) => ({
+																					...prev,
+																					[semester]: "",
+																				}));
+																				toggleSubject(subject, semester);
 																			}
 																		}}
 																		disabled={
@@ -247,9 +248,9 @@ function SubjectsSelector({
 				</p>
 			)}
 
-			{validationErrors.passedSubjects && (
+			{validationErrors.passedSubjectsPerSemester && (
 				<p className="mt-3 text-sm text-red-600 font-bold">
-					{validationErrors.passedSubjects}
+					{validationErrors.passedSubjectsPerSemester}
 				</p>
 			)}
 		</div>

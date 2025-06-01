@@ -72,9 +72,16 @@ class StudentFormSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Student
-        exclude = ['user', 'has_filled_form']
+        exclude = ['user', 'has_filled_form', 'id']
     
     def to_representation(self, instance):
         rep = super().to_representation(instance)
         rep['passed_subjects'] = SubjectSerializer(instance.passed_subjects.all(), many=True).data
+        # Fix: fetch Subject objects for each semester's subject IDs
+        rep['passed_subjects_per_semester'] = {
+            str(sem): SubjectSerializer(
+                Subject.objects.filter(id__in=subjects), many=True
+            ).data
+            for sem, subjects in (instance.passed_subjects_per_semester or {}).items()
+        }
         return rep

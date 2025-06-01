@@ -19,7 +19,6 @@ function SubjectModal({
 	const truncateText = (text: string) => {
 		if (!text) return "";
 		const words = text.split(/\s+/);
-		console.log(words.slice(0, WORD_LIMIT).join(" ") + "...");
 		return words.length <= WORD_LIMIT
 			? text
 			: words.slice(0, WORD_LIMIT).join(" ") + "...";

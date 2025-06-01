@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
 	EVALUATIONS,
 	EVALUATIONS_MAP,
@@ -8,9 +8,15 @@ import {
 } from "../../constants/subjects";
 import { useAuth } from "../../hooks/useAuth";
 import { Programs, StudentData, Subject } from "../types";
+import FieldButton from "./FieldButton";
 import SkeletonForm from "./SkeletonForm";
 import SubjectsSelector from "./SubjectsSelector";
-import { LatinToCyrillic } from "./utils";
+import {
+	getPassedSubjectsByID,
+	LatinToCyrillic,
+	mapToID,
+	validateForm,
+} from "./utils";
 
 interface StudentFormProps {
 	formData: StudentData | null;
@@ -35,8 +41,11 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 		(formData?.study_track as Programs) || ""
 	);
 	const [year, setYear] = useState(formData?.current_year || 1);
-	const [passedSubjects, setPassedSubjects] = useState<Subject[]>(
-		formData?.passed_subjects || []
+	const [passedSubjectsPerSemester, setPassedSubjectsPerSemester] = useState<
+		Record<number, Subject[]>
+	>(
+		formData?.passed_subjects_per_semester ??
+			Object.fromEntries(Array.from({ length: 8 }, (_, i) => [[i + 1], []]))
 	);
 	const [studyEffort, setStudyEffort] = useState(formData?.study_effort || "");
 	const [domains, setDomains] = useState<string[]>(
@@ -86,12 +95,39 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 			setIndex(formData.index || "");
 			setStudyTrack((formData.study_track as Programs) || "");
 			setYear(formData.current_year || 1);
-			setPassedSubjects(formData.passed_subjects || []);
 			setStudyEffort(formData.study_effort || "");
-			setDomains(formData.preferred_domains || []);
-			setTechnologies(formData.preferred_technologies || []);
-			setEvaluation(formData.preferred_evaluation || []);
-			setFavoriteProfs(formData.favorite_professors || []);
+
+			const domains_ = (formData.preferred_domains || []).includes("None")
+				? []
+				: formData.preferred_domains || [];
+			setDomains(domains_);
+
+			const technologies_ = (formData.preferred_technologies || []).includes(
+				"None"
+			)
+				? []
+				: formData.preferred_technologies || [];
+			setTechnologies(technologies_);
+
+			const eval_ = (formData.preferred_evaluation || []).map(
+				(val: string) =>
+					Object.keys(EVALUATIONS_MAP).find(
+						(key) =>
+							EVALUATIONS_MAP[key as keyof typeof EVALUATIONS_MAP] === val
+					) || val
+			);
+			setEvaluation(
+				eval_.includes("Немам") || eval_.includes("None") ? [] : eval_
+			);
+
+			const favoriteProfs_ = (formData.favorite_professors || []).includes(
+				"None"
+			)
+				? []
+				: formData.favorite_professors || [];
+			setFavoriteProfs(favoriteProfs_);
+
+			setPassedSubjectsPerSemester(formData.passed_subjects_per_semester || []);
 		}
 	}, [formData]);
 
@@ -122,62 +158,44 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 						).sort((a, b) => a.localeCompare(b)),
 						professors: allProfessors_,
 					}));
-					// setIsLoading(false);
 				}
 			} catch (error) {
 				console.error("Error fetching subjects:", error);
-				// setIsLoading(false);
 			}
 		};
 
 		fetchSubjects();
 	}, []);
 
-	const validateForm = () => {
-		const errors: { [key: string]: string } = {};
-
-		if (!index.trim()) {
-			errors.index = "Индексот e задолжителен.";
-		} else if (!/^\d{6}$/.test(index)) {
-			errors.index = "Индексот треба да има точно 6 цифри.";
-		}
-		if (!studyTrack) errors.studyTrack = "Одбери насока.";
-		if (!year) errors.year = "Одбери година.";
-		if (!studyEffort) errors.studyEffort = "Одбери пожелен вложен труд.";
-		if (passedSubjects.length === 0)
-			errors.passedSubjects = "Одбери барем еден предмет.";
-		// if (domains.length === 0) errors.domains = "Одбери барем едно поле.";
-		// if (technologies.length === 0)
-		// 	errors.technologies = "Одбери барем една технологија.";
-		if (!evaluation) errors.evaluation = "Одбери тип на оценување.";
-		return errors;
-	};
-
-	const toggleSelection = (
-		value: string | number,
-		setter: React.Dispatch<React.SetStateAction<any[]>>,
-		current: any[]
-	) => {
-		if (current.includes(value)) {
-			setter(current.filter((v) => v !== value));
-		} else {
-			setter([...current, value]);
-		}
-	};
-
-	const toggleSubject = (subject: Subject) => {
-		const exists = passedSubjects.some((s) => s.id === subject.id);
+	const toggleSubject = (subject: Subject, semester: number) => {
+		const exists = passedSubjectsPerSemester[semester].some(
+			(s) => s.id === subject.id
+		);
 		if (exists) {
-			setPassedSubjects(passedSubjects.filter((s) => s.id !== subject.id));
+			setPassedSubjectsPerSemester({
+				...passedSubjectsPerSemester,
+				[semester]: passedSubjectsPerSemester[semester].filter(
+					(s) => s.id != subject.id
+				),
+			});
 		} else {
-			setPassedSubjects([...passedSubjects, subject]);
+			setPassedSubjectsPerSemester({
+				...passedSubjectsPerSemester,
+				[semester]: [...(passedSubjectsPerSemester[semester] || []), subject],
+			});
 		}
 	};
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 
-		const errors = validateForm();
+		const errors = validateForm({
+			index,
+			studyTrack,
+			year,
+			studyEffort,
+			passedSubjectsPerSemester,
+		});
 		if (Object.keys(errors).length > 0) {
 			setValidationErrors(errors);
 			window.scrollTo({ top: 0, behavior: "smooth" });
@@ -199,16 +217,19 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 			index,
 			study_track: studyTrack,
 			current_year: year,
-			passed_subjects: passedSubjects.map((subject) => subject.id),
+			passed_subjects: getPassedSubjectsByID(passedSubjectsPerSemester),
 			study_effort: studyEffort,
 			preferred_domains: domains,
 			preferred_technologies: technologies,
 			preferred_evaluation: evaluation.map(
-				(ev) => EVALUATIONS_MAP[ev as keyof typeof EVALUATIONS_MAP]
+				(ev) => EVALUATIONS_MAP[ev as keyof typeof EVALUATIONS_MAP] ?? ev
 			),
 			favorite_professors: favoriteProfs,
+			passed_subjects_per_semester: mapToID(passedSubjectsPerSemester),
+			has_extracurricular: hasExtracurricular,
 		};
 		try {
+			console.log(payload);
 			// For updating existing form data use PATCH instead of PUT for partial updates
 			const method = formData?.current_year || isSubmitted ? "PATCH" : "POST";
 			const endpoint = "http://localhost:8000/auth/form/";
@@ -248,47 +269,6 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 		}
 	};
 
-	const FieldButton: React.FC<{
-		keyProp: string | number;
-		state: string[];
-		stateSetter: Dispatch<SetStateAction<any[]>>;
-		field: "prof" | "tech" | "eval" | "domains";
-		isSelected: boolean;
-		isDisabled: boolean;
-	}> = ({ keyProp, state, stateSetter, field, isSelected, isDisabled }) => {
-		const handleClick = () => {
-			if (keyProp === "Немам") {
-				if (state.includes("None")) {
-					stateSetter([]);
-				} else {
-					stateSetter(["None"]);
-				}
-				setIsNemamSelected((prev) => ({
-					...prev,
-					[field]: !prev[field],
-				}));
-			} else {
-				const new_ = state.filter((t) => t !== "Немам");
-				toggleSelection(keyProp, stateSetter, new_);
-			}
-		};
-
-		return (
-			<button
-				type="button"
-				key={keyProp}
-				onClick={handleClick}
-				disabled={isDisabled}
-				className={`px-3 py-2 border rounded-md transition-colors ${
-					isSelected
-						? "bg-yellow-100 border-yellow-300 text-yellow-800"
-						: "bg-white hover:bg-gray-50 border-gray-300"
-				} ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
-			>
-				{keyProp}
-			</button>
-		);
-	};
 	const filteredMandatorySubjects = studyTrack
 		? subjects
 				.filter(
@@ -299,12 +279,10 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 				.sort((a, b) => a.subject_info.semester - b.subject_info.semester)
 		: [];
 	const filteredElectiveSubjects = studyTrack
-		? subjects.filter(
-				(subj) => subj.subject_info.elective_for.includes(studyTrack)
-				// subj.subject_info.semester <= year * 2
+		? subjects.filter((subj) =>
+				subj.subject_info.elective_for.includes(studyTrack)
 		  )
-		: // .sort((a, b) => a.subject_info.semester - b.subject_info.semester)
-		  [];
+		: [];
 
 	const filteredProfessors = distinctSubjectData.professors.filter(
 		(prof) =>
@@ -357,7 +335,23 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 					<h3 className="text-lg font-medium text-gray-900 mb-2">Смер</h3>
 					<select
 						value={studyTrack}
-						onChange={(e) => setStudyTrack(e.target.value as Programs | "")}
+						onChange={(e) => {
+							const newTrack = e.target.value as Programs;
+							const filteredPassedSubjectsPerSemester = Object.fromEntries(
+								Object.entries(passedSubjectsPerSemester).map(
+									([semester, subjects]) => [
+										semester,
+										subjects.filter(
+											(subj) =>
+												subj.subject_info.mandatory_for.includes(newTrack) ||
+												subj.subject_info.elective_for.includes(newTrack)
+										),
+									]
+								)
+							);
+							setPassedSubjectsPerSemester(filteredPassedSubjectsPerSemester);
+							setStudyTrack(newTrack);
+						}}
 						className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 custom-select"
 					>
 						<option value="">Одбери смер</option>
@@ -400,11 +394,11 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 				year={year}
 				filteredMandatorySubjects={filteredMandatorySubjects}
 				filteredElectiveSubjects={filteredElectiveSubjects}
-				passedSubjects={passedSubjects}
 				toggleSubject={toggleSubject}
 				semesterSearchTerms={semesterSearchTerms}
 				setSemesterSearchTerms={setSemesterSearchTerms}
 				validationErrors={validationErrors}
+				passedSubjectsPerSemester={passedSubjectsPerSemester}
 			/>
 			<div>
 				<label className="flex items-center gap-2 text-lg font-medium text-gray-900 mb-2">
@@ -441,23 +435,6 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 							<span>{effort}</span>
 						</label>
 					))}
-					{/* tuka */}
-					{/* <div className="w-full mt-4 flex flex-col items-center">
-						<input
-							type="range"
-							min={1}
-							max={5}
-							step={1}
-							value={studyEffort || 1}
-							onChange={(e) => setStudyEffort(Number(e.target.value))}
-							className="w-64 accent-blue-600"
-						/>
-						<div className="flex justify-between w-64 text-xs mt-1 text-gray-500">
-							{STUDY_EFFORT.map((effort) => (
-								<span key={effort}>{effort}</span>
-							))}
-						</div>
-					</div> */}
 				</div>
 				{validationErrors.studyEffort && (
 					<p className="mt-1 text-sm text-red-600 font-bold">
@@ -485,6 +462,7 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 								field="domains"
 								isSelected={isSelected}
 								isDisabled={shouldBeDisabled}
+								setIsNemamSelected={setIsNemamSelected}
 							/>
 						);
 					})}
@@ -515,6 +493,7 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 								field="tech"
 								isSelected={isSelected}
 								isDisabled={shouldBeDisabled}
+								setIsNemamSelected={setIsNemamSelected}
 							/>
 						);
 					})}
@@ -545,6 +524,7 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 								field="eval"
 								isSelected={isSelected}
 								isDisabled={shouldBeDisabled}
+								setIsNemamSelected={setIsNemamSelected}
 							/>
 						);
 					})}
@@ -591,6 +571,7 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 									field="prof"
 									isSelected={isSelected}
 									isDisabled={shouldBeDisabled}
+									setIsNemamSelected={setIsNemamSelected}
 								/>
 							);
 						})}
@@ -599,6 +580,7 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 					)}
 					{filteredProfessors.length > 10 && (
 						<button
+							type="button"
 							onClick={() => setShowProfessors(!showProfessors)}
 							className="px-3 py-2 rounded-md transition-colors duration-200 bg-blue text-blue-500"
 						>

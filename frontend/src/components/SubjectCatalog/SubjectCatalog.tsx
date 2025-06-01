@@ -41,7 +41,6 @@ const SubjectCatalog = () => {
 		const fetchData = async () => {
 			const response = await fetch("http://localhost:8000/subjects");
 			const data = await response.json();
-			console.log(data);
 			setSubjectData(data);
 			setIsLoaded(true);
 		};
@@ -55,13 +54,13 @@ const SubjectCatalog = () => {
 				new Set(filteredSubjects.flatMap((sub) => sub.subject_info.tags))
 			)
 		);
-		console.log(
-			Array.from(
-				new Set(
-					filteredSubjects.flatMap((sub) => sub.subject_info.technologies)
-				)
-			)
-		);
+		// console.log(
+		// 	Array.from(
+		// 		new Set(
+		// 			filteredSubjects.flatMap((sub) => sub.subject_info.technologies)
+		// 		)
+		// 	)
+		// );
 	}, [subjectData]);
 
 	const loadMore = () => {

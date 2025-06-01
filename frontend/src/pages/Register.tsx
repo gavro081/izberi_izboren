@@ -44,7 +44,6 @@ const Register: React.FC = () => {
 		setLoading(true);
 
 		try {
-			console.log(formData);
 			const response = await axios.post<{
 				access: string;
 				refresh: string;
@@ -54,9 +53,7 @@ const Register: React.FC = () => {
 				confirm_password: formData.confirmPassword,
 				full_name: formData.fullName,
 			});
-			console.log(response);
 			const { access, refresh } = response.data;
-			console.log(access, refresh);
 			login(access, refresh);
 			navigate("/");
 		} catch (err: unknown) {

@@ -13,6 +13,7 @@ export const EVALUATIONS = ["Теорија", "Практично", "Код", "�
 
 export const EVALUATIONS_MAP = {
 	Немам: "None",
+	None: "None",
 	Теорија: "Theory",
 	Практично: "Practical",
 	Код: "Code",
