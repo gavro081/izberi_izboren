@@ -77,7 +77,6 @@ class StudentFormSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         rep = super().to_representation(instance)
         rep['passed_subjects'] = SubjectSerializer(instance.passed_subjects.all(), many=True).data
-        # Fix: fetch Subject objects for each semester's subject IDs
         rep['passed_subjects_per_semester'] = {
             str(sem): SubjectSerializer(
                 Subject.objects.filter(id__in=subjects), many=True

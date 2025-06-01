@@ -1,3 +1,4 @@
+from .models import Student
 from .serializers import RegistrationSerializer, LoginSerializer, StudentFormSerializer
 from rest_framework import serializers, status, views
 from rest_framework.views import APIView
@@ -63,22 +64,30 @@ class StudentFormView(APIView):
         return Response(serializer.data)
     
     def post(self, request):
-        print(request.data)
         if hasattr(request.user, 'student') and request.user.student.has_filled_form:
             return Response({"detail": "Student profile already exists."}, status=status.HTTP_400_BAD_REQUEST)
-        
         serializer = StudentFormSerializer(instance=request.user.student, data=request.data)
         if serializer.is_valid():
             serializer.save()
             request.user.student.has_filled_form = True
             request.user.student.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
+        index_match = Student.objects.filter(index=request.data['index'])
+        if index_match.exists():
+           return Response({'message': "Постои студент со тој индекс."}, status=status.HTTP_400_BAD_REQUEST)
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     def patch(self, request):
         if not hasattr(request.user, 'student'):
             return Response({"detail": "No student profile found."}, status=status.HTTP_404_NOT_FOUND)
         serializer = StudentFormSerializer(instance=request.user.student, data=request.data)
+
+        index = request.data['index']
+        index_match = Student.objects.filter(index=index).exclude(pk=request.user.student.pk)
+        if index_match.exists():
+            return Response({'message': "Постои студент со тој индекс."}, status=status.HTTP_400_BAD_REQUEST)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
