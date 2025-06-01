@@ -7,7 +7,7 @@ import {
 	YEARS,
 } from "../../constants/subjects";
 import { useAuth } from "../../hooks/useAuth";
-import { Programs, StudentData, Subject } from "../types";
+import { Programs, StudentData, Subject, SubjectID } from "../types";
 import SkeletonForm from "./SkeletonForm";
 import SubjectsSelector from "./SubjectsSelector";
 import { LatinToCyrillic } from "./utils";
@@ -37,6 +37,14 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 	const [year, setYear] = useState(formData?.current_year || 1);
 	const [passedSubjects, setPassedSubjects] = useState<Subject[]>(
 		formData?.passed_subjects || []
+	);
+	const [passedSubjectsPerSemester, setPassedSubjectsPerSemester] = useState<
+		Record<number, SubjectID[]>
+	>(
+		formData?.passed_subjects_per_semester ??
+			Object.fromEntries(
+				Array.from({ length: 8 }, (_, i) => [i + 1, [] as SubjectID[]])
+			)
 	);
 	const [studyEffort, setStudyEffort] = useState(formData?.study_effort || "");
 	const [domains, setDomains] = useState<string[]>(
@@ -92,6 +100,10 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 			setTechnologies(formData.preferred_technologies || []);
 			setEvaluation(formData.preferred_evaluation || []);
 			setFavoriteProfs(formData.favorite_professors || []);
+			setPassedSubjectsPerSemester(
+				formData.passed_subjects_per_semester ||
+					Object.fromEntries(Array.from({ length: 8 }, (_, i) => [i + 1, []]))
+			);
 		}
 	}, [formData]);
 
@@ -165,13 +177,63 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 		}
 	};
 
-	const toggleSubject = (subject: Subject) => {
-		const exists = passedSubjects.some((s) => s.id === subject.id);
-		if (exists) {
-			setPassedSubjects(passedSubjects.filter((s) => s.id !== subject.id));
-		} else {
-			setPassedSubjects([...passedSubjects, subject]);
+	// const toggleSubject = (subject: Subject) => {
+	// 	const exists = passedSubjects.some((s) => s.id === subject.id);
+	// 	if (exists) {
+	// 		setPassedSubjects(passedSubjects.filter((s) => s.id !== subject.id));
+	// 	} else {
+	// 		setPassedSubjects([...passedSubjects, subject]);
+	// 	}
+	// };
+
+	const toggleSubjectByID = (id: SubjectID, semester: number) => {
+		const exists_table1 = passedSubjects.some((s) => s.id === id);
+		const exists_table2 = passedSubjectsPerSemester[semester]?.includes(id);
+		if (exists_table1 !== exists_table2) {
+			alert("ABSDSAADSKNDSAKNASADSNADSKNDASKADSN");
+			throw Error;
 		}
+		if (exists_table1) {
+			setPassedSubjects(passedSubjects.filter((s) => s.id !== id));
+			setPassedSubjectsPerSemester({
+				...passedSubjectsPerSemester,
+				[semester]: passedSubjectsPerSemester[semester].filter(
+					(id_: SubjectID) => id_ != id
+				),
+			});
+		} else {
+			const subject = subjects.find((s) => s.id == id);
+			if (subject) {
+				setPassedSubjects([...passedSubjects, subject]);
+				setPassedSubjectsPerSemester({
+					...passedSubjectsPerSemester,
+					[semester]: [...(passedSubjectsPerSemester[semester] || []), id],
+				});
+			}
+		}
+	};
+	const getLevelCredits = () => {
+		return passedSubjects.reduce(
+			(acc, subject) => {
+				if (
+					studyTrack &&
+					!subject.subject_info.mandatory_for.includes(studyTrack)
+				) {
+					const level = subject.subject_info.level;
+					acc[level - 1] += 6;
+				}
+				return acc;
+			},
+			[0, 0, 0]
+		);
+	};
+
+	const getCredits = () => {
+		const credits = (passedSubjects.length + Number(hasExtracurricular)) * 6;
+		return passedSubjects.some((s) => s.name == "Професионални вештини") &&
+			passedSubjects.some((s) => s.name == "Спорт и здравје")
+			? credits - 6
+			: credits;
 	};
 
 	const handleSubmit = async (e: React.FormEvent) => {
@@ -194,7 +256,6 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 			message: "",
 			isError: false,
 		});
-
 		const payload = {
 			index,
 			study_track: studyTrack,
@@ -207,6 +268,9 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 				(ev) => EVALUATIONS_MAP[ev as keyof typeof EVALUATIONS_MAP]
 			),
 			favorite_professors: favoriteProfs,
+			passed_subjects_per_semester: passedSubjectsPerSemester,
+			total_credits: getCredits(),
+			level_credits: getLevelCredits(),
 		};
 		try {
 			// For updating existing form data use PATCH instead of PUT for partial updates
@@ -401,10 +465,13 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 				filteredMandatorySubjects={filteredMandatorySubjects}
 				filteredElectiveSubjects={filteredElectiveSubjects}
 				passedSubjects={passedSubjects}
-				toggleSubject={toggleSubject}
+				// toggleSubject={toggleSubject}
+				toggleSubjectByID={toggleSubjectByID}
 				semesterSearchTerms={semesterSearchTerms}
 				setSemesterSearchTerms={setSemesterSearchTerms}
 				validationErrors={validationErrors}
+				passedSubjectsPerSemester={passedSubjectsPerSemester}
+				setPassedSubjectsPerSemester={setPassedSubjectsPerSemester}
 			/>
 			<div>
 				<label className="flex items-center gap-2 text-lg font-medium text-gray-900 mb-2">

@@ -8,6 +8,8 @@ export interface Subject {
 	subject_info: SubjectInfo;
 }
 
+export type SubjectID = Subject["id"];
+
 export interface StudentData {
 	id: number;
 	index: string;
@@ -19,6 +21,7 @@ export interface StudentData {
 	preferred_technologies: string[];
 	preferred_evaluation: string[];
 	favorite_professors: string[];
+	passed_subjects_per_semester: Record<number, SubjectID[] | []>;
 }
 
 type Prerequisite =
