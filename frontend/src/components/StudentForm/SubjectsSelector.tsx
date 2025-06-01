@@ -1,5 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
-import { Programs, Subject, SubjectID } from "../types";
+import { Programs, Subject } from "../types";
 import { LatinToCyrillic } from "./utils";
 
 interface SubjectsSelectorProps {
@@ -7,15 +6,11 @@ interface SubjectsSelectorProps {
 	year: number;
 	filteredMandatorySubjects: Subject[];
 	filteredElectiveSubjects: Subject[];
-	passedSubjects: Subject[];
-	toggleSubjectByID: (id: SubjectID, semester: number) => void;
+	toggleSubject: (id: Subject, semester: number) => void;
 	semesterSearchTerms: Record<number, string>;
 	setSemesterSearchTerms: (term: any) => void;
 	validationErrors: { [key: string]: string };
-	passedSubjectsPerSemester: Record<number, SubjectID[]>;
-	setPassedSubjectsPerSemester: Dispatch<
-		SetStateAction<Record<number, SubjectID[]>>
-	>;
+	passedSubjectsPerSemester: Record<number, Subject[]>;
 }
 
 const TickSvg = () => (
@@ -38,14 +33,12 @@ function SubjectsSelector({
 	year,
 	filteredMandatorySubjects,
 	filteredElectiveSubjects,
-	passedSubjects,
-	toggleSubjectByID,
+	toggleSubject,
 	semesterSearchTerms,
 	setSemesterSearchTerms,
 	validationErrors,
 	passedSubjectsPerSemester,
-}: // setPassedSubjectsPerSemester,
-SubjectsSelectorProps) {
+}: SubjectsSelectorProps) {
 	return (
 		<div>
 			<h3 className="text-lg font-medium text-gray-900 mb-4">
@@ -74,8 +67,6 @@ SubjectsSelectorProps) {
 								(subject) => subject.subject_info.semester % 2 === semester % 2
 							);
 
-							// const semesterElectives = filteredElectiveSubjects;
-
 							const totalSlots = semester === 1 ? 5 : 6;
 							const electiveSlots = totalSlots - semesterMandatory.length;
 
@@ -84,13 +75,11 @@ SubjectsSelectorProps) {
 									? semesterElectives
 									: seasonElectives;
 
-							const selectedElectivesForSemester = passedSubjects
-								.filter(
-									(subject) =>
-										passedSubjectsPerSemester[semester]?.includes(subject.id) &&
-										!subject.subject_info.mandatory_for.includes(studyTrack)
-								)
-								.map((subject) => subject.id);
+							const selectedElectivesForSemester = passedSubjectsPerSemester[
+								semester
+							].filter((subject) =>
+								subject.subject_info.elective_for.includes(studyTrack)
+							);
 							return (
 								<div
 									key={semester}
@@ -110,14 +99,12 @@ SubjectsSelectorProps) {
 													{semesterMandatory.map((subject) => {
 														const isSelected = passedSubjectsPerSemester[
 															semester
-														].some((s) => s === subject.id);
+														].some((s) => s.id === subject.id);
 														return (
 															<button
 																type="button"
 																key={subject.id}
-																onClick={() =>
-																	toggleSubjectByID(subject.id, semester)
-																}
+																onClick={() => toggleSubject(subject, semester)}
 																className={`flex items-center gap-2 px-3 py-2 border rounded-md transition-all duration-200 text-sm
                                   ${
 																		isSelected
@@ -164,24 +151,18 @@ SubjectsSelectorProps) {
 												{selectedElectivesForSemester.length > 0 && (
 													<div className="mb-3">
 														<div className="flex flex-wrap gap-2">
-															{selectedElectivesForSemester.map((id) => (
+															{selectedElectivesForSemester.map((subject) => (
 																<button
 																	type="button"
-																	key={id}
+																	key={subject.id}
 																	onClick={() =>
-																		toggleSubjectByID(id, semester)
+																		toggleSubject(subject, semester)
 																	}
 																	className="flex items-center gap-2 px-3 py-2 border rounded-md transition-all duration-200 text-sm bg-green-500 text-white border-green-600 shadow-md"
 																	aria-pressed={true}
 																>
 																	<TickSvg />
-																	<span>
-																		{
-																			passedSubjects.find(
-																				(item) => item.id == id
-																			)?.name
-																		}
-																	</span>
+																	<span>{subject.name}</span>
 																</button>
 															))}
 														</div>
@@ -198,11 +179,12 @@ SubjectsSelectorProps) {
 															{electivesSource
 																.filter(
 																	(subject) =>
-																		!passedSubjects.some(
-																			(s) =>
-																				s.id === subject.id &&
-																				!semesterMandatory.includes(subject)
+																		!Object.values(
+																			passedSubjectsPerSemester
+																		).some((arr) =>
+																			arr.some((s) => s.id === subject.id)
 																		) &&
+																		!semesterMandatory.includes(subject) &&
 																		((semesterSearchTerms[semester] || "") ===
 																			"" ||
 																			subject.name
@@ -234,7 +216,7 @@ SubjectsSelectorProps) {
 																					...prev,
 																					[semester]: "",
 																				}));
-																				toggleSubjectByID(subject.id, semester);
+																				toggleSubject(subject, semester);
 																			}
 																		}}
 																		disabled={
@@ -266,9 +248,9 @@ SubjectsSelectorProps) {
 				</p>
 			)}
 
-			{validationErrors.passedSubjects && (
+			{validationErrors.passedSubjectsPerSemester && (
 				<p className="mt-3 text-sm text-red-600 font-bold">
-					{validationErrors.passedSubjects}
+					{validationErrors.passedSubjectsPerSemester}
 				</p>
 			)}
 		</div>

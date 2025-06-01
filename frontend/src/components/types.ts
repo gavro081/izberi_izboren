@@ -11,17 +11,17 @@ export interface Subject {
 export type SubjectID = Subject["id"];
 
 export interface StudentData {
-	id: number;
+	// id: number;
 	index: string;
 	study_track: Programs;
 	current_year: number;
-	passed_subjects: Subject[];
+	// passed_subjects: Subject[];
 	study_effort: number;
 	preferred_domains: string[];
 	preferred_technologies: string[];
 	preferred_evaluation: string[];
 	favorite_professors: string[];
-	passed_subjects_per_semester: Record<number, SubjectID[] | []>;
+	passed_subjects_per_semester: Record<number, Subject[] | []>;
 }
 
 type Prerequisite =
