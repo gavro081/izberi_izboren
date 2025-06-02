@@ -1,4 +1,5 @@
-import { Programs, Subject } from "../types";
+import { Dispatch, SetStateAction } from "react";
+import { Programs, Subject, SubjectID } from "../types";
 
 // NOTE: there is not a single match for the letter 'ѕ' (ѕ како ѕвонче) in the entire db, so both dz and dj are mapped to 'џ'
 // this way you can search for "Menadzment", instead of having to write "Menadjment"
@@ -66,12 +67,16 @@ export const validateForm = ({
 	year,
 	studyEffort,
 	passedSubjectsPerSemester,
+	hasExtracurricular,
+	setInvalidSubjects,
 }: {
 	index: string;
 	studyTrack: Programs | "";
 	year: number;
 	studyEffort: number | string;
 	passedSubjectsPerSemester: Record<number, Subject[]>;
+	hasExtracurricular: boolean;
+	setInvalidSubjects: Dispatch<SetStateAction<Subject[]>>;
 }) => {
 	const errors: { [key: string]: string } = {};
 
@@ -84,7 +89,17 @@ export const validateForm = ({
 	if (!year) errors.year = "Одбери година.";
 	if (!studyEffort) errors.studyEffort = "Одбери пожелен вложен труд.";
 	if (passedSubjectsPerSemester[1].length === 0)
-		errors.passedSubjectsPerSemester = "Одбери барем еден предмет.";
+		errors.passedSubjectsPerSemester =
+			"Одбери барем еден предмет од прв семестар.";
+
+	const passedSubjects = getPassedSubjects(passedSubjectsPerSemester);
+	const invalid = checkPrerequisites(passedSubjects, hasExtracurricular);
+	if (invalid.length != 0) {
+		setInvalidSubjects(invalid);
+		errors.invalidSubjects =
+			"За еден или повеќе предмети не се исполнети условите";
+	} else setInvalidSubjects([]);
+
 	return errors;
 };
 
@@ -108,4 +123,48 @@ export const getPassedSubjectsByID = (
 	passedSubjects: Record<number, Subject[]>
 ) => {
 	return getPassedSubjects(passedSubjects).map((sub) => sub.id);
+};
+
+export const checkPrerequisites = (
+	passedSubjects: Subject[],
+	hasExtracurricular: boolean
+) => {
+	passedSubjects.sort(
+		(a, b) => a.subject_info.semester - b.subject_info.semester
+	);
+	const passedSubjectIds = new Set(passedSubjects.map((s) => s.id));
+	const invalidSubjects: Subject[] = [];
+
+	for (const subject of passedSubjects) {
+		const prereqs = subject.subject_info.prerequisite;
+		const prereqIDs = (prereqs["subjects"] as SubjectID[]) || [];
+
+		if (prereqIDs.length > 0) {
+			const hasAnyPrereq = prereqIDs.some((id) => passedSubjectIds.has(id));
+			if (!hasAnyPrereq) {
+				passedSubjectIds.delete(subject.id);
+				invalidSubjects.push(subject);
+			}
+		}
+	}
+
+	let totalCredits = passedSubjectIds.size * 6 + (hasExtracurricular ? 1 : 0);
+	if (
+		passedSubjects.some((s) => s.name === "Професионални вештини") &&
+		passedSubjects.some((s) => s.name === "Спорт и здравје")
+	) {
+		totalCredits -= 6;
+	}
+
+	for (const subject of passedSubjects) {
+		if (!passedSubjectIds.has(subject.id)) continue;
+		const prereqs = subject.subject_info.prerequisite;
+		// subtracting 6 because the current subject is counted in the total as well
+		if (prereqs["credits"] && prereqs["credits"] > totalCredits - 6) {
+			passedSubjectIds.delete(subject.id);
+			totalCredits -= 6;
+			invalidSubjects.push(subject);
+		}
+	}
+	return invalidSubjects;
 };

@@ -1,4 +1,4 @@
-from .utils import check_prerequisites
+# from .utils import check_prerequisites
 from .models import Student
 from .serializers import RegistrationSerializer, LoginSerializer, StudentFormSerializer
 from rest_framework import serializers, status, views
@@ -68,13 +68,6 @@ class StudentFormView(APIView):
         if hasattr(request.user, 'student') and request.user.student.has_filled_form:
             return Response({"detail": "Student profile already exists."}, status=status.HTTP_400_BAD_REQUEST)
         
-        has_extracurricular = request.data['has_extracurricular']
-        passed_subjects = request.data['passed_subjects']    
-        is_valid, invalid_subjects = check_prerequisites(has_extracurricular, passed_subjects)
-        
-        if not is_valid:
-            return Response({"prereqs": invalid_subjects}, status=status.HTTP_400_BAD_REQUEST)
-
         index_match = Student.objects.filter(index=request.data['index'])
         
         if index_match.exists():
@@ -93,15 +86,8 @@ class StudentFormView(APIView):
     def patch(self, request):
         if not hasattr(request.user, 'student'):
             return Response({"detail": "No student profile found."}, status=status.HTTP_404_NOT_FOUND)
-
-        has_extracurricular = request.data['has_extracurricular']
-        passed_subjects = request.data['passed_subjects']
-        is_valid, invalid_subjects = check_prerequisites(has_extracurricular, passed_subjects)
-        if not is_valid:
-            return Response({"prereqs": invalid_subjects}, status=status.HTTP_400_BAD_REQUEST)
         
         index_match = Student.objects.filter(index=request.data['index'])
-
 
         index = request.data['index']
         index_match = Student.objects.filter(index=index).exclude(pk=request.user.student.pk)

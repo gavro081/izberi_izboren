@@ -24,10 +24,11 @@ export interface StudentData {
 	passed_subjects_per_semester: Record<number, Subject[] | []>;
 }
 
-type Prerequisite =
-	| { subjects: number[] }
-	| { credits: number }
-	| { none: true };
+export type Prerequisite = {
+	subjects?: number[];
+	credits?: number;
+	none?: true;
+};
 
 export interface SubjectInfo {
 	level: number;

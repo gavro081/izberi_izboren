@@ -7,7 +7,7 @@ import {
 	YEARS,
 } from "../../constants/subjects";
 import { useAuth } from "../../hooks/useAuth";
-import { Programs, StudentData, Subject, SubjectID } from "../types";
+import { Programs, StudentData, Subject } from "../types";
 import FieldButton from "./FieldButton";
 import SkeletonForm from "./SkeletonForm";
 import SubjectsSelector from "./SubjectsSelector";
@@ -196,15 +196,24 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 			year,
 			studyEffort,
 			passedSubjectsPerSemester,
+			hasExtracurricular,
+			setInvalidSubjects,
 		});
 		if (Object.keys(errors).length > 0) {
 			setValidationErrors(errors);
 			window.scrollTo({ top: 0, behavior: "smooth" });
-			setFormStatus({
-				isSubmitting: false,
-				message: `Пополни ги сите задолжителни полиња`,
-				isError: true,
-			});
+			if (errors.invalidSubjects)
+				setFormStatus({
+					isSubmitting: false,
+					message: errors.invalidSubjects,
+					isError: true,
+				});
+			else
+				setFormStatus({
+					isSubmitting: false,
+					message: `Пополни ги сите задолжителни полиња`,
+					isError: true,
+				});
 			return;
 		}
 		setValidationErrors({});
@@ -230,7 +239,6 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 			has_extracurricular: hasExtracurricular,
 		};
 		try {
-			console.log(payload);
 			// For updating existing form data use PATCH instead of PUT for partial updates
 			const method = formData?.current_year || isSubmitted ? "PATCH" : "POST";
 			const endpoint = "http://localhost:8000/auth/form/";
@@ -249,25 +257,12 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 					message: "Формата е успешно зачувана!",
 					isError: false,
 				});
-				setInvalidSubjects([]);
 				setTimeout(() => {
 					setFormStatus((prev) => ({ ...prev, message: "" }));
 				}, 5000);
 			} else {
 				const errorData = await res.json();
-				if (errorData.prereqs) {
-					const invalidSubjects_: Subject[] = errorData.prereqs.map(
-						(sub_id: SubjectID) =>
-							subjects.find((item: Subject) => item.id == sub_id)
-					);
-					console.log("invalid: ", invalidSubjects_);
-					setInvalidSubjects(invalidSubjects_);
-					setFormStatus({
-						isSubmitting: false,
-						message: `Грешка при зачувување: Проверете кој предмети не ги исполнуваат предусловите`,
-						isError: true,
-					});
-				} else throw new Error(errorData.message || "Error submitting form");
+				throw new Error(errorData.message || "Error submitting form");
 			}
 			setIsSubmitted(true);
 			window.scrollTo({ top: 0, behavior: "smooth" });
