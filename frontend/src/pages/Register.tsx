@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PasswordInput from "../components/PasswordInput";
 import { useAuth } from "../hooks/useAuth";
 
@@ -125,6 +125,12 @@ const Register: React.FC = () => {
 					placeholder="Име презиме"
 					className="w-full mb-3 p-2 border rounded"
 				/>
+				<p className="text-sm text-center mb-4">
+					Имаш профил?{" "}
+					<Link to="/login" className="text-blue-600 hover:underline">
+						Најави се
+					</Link>
+				</p>
 				<button
 					type="submit"
 					disabled={loading}

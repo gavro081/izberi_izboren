@@ -272,6 +272,12 @@ function SubjectsSelector({
 											</div>
 										)}
 									</div>
+									{semester == 1 &&
+										validationErrors.passedSubjectsPerSemester && (
+											<p className="mt-5 ml-1 text-sm text-red-600 font-bold">
+												{validationErrors.passedSubjectsPerSemester}
+											</p>
+										)}
 								</div>
 							);
 						});
@@ -280,12 +286,6 @@ function SubjectsSelector({
 			) : (
 				<p className="text-gray-500 italic">
 					Одбери смер и година за да се прикажат предметите.
-				</p>
-			)}
-
-			{validationErrors.passedSubjectsPerSemester && (
-				<p className="mt-3 text-sm text-red-600 font-bold">
-					{validationErrors.passedSubjectsPerSemester}
 				</p>
 			)}
 		</div>
