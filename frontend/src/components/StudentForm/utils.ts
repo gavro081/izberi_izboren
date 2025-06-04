@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
+import { L1_LIMIT, L2_LIMIT } from "../../constants/subjects";
 import { StudyTrack, Subject, SubjectID } from "../types";
 
 // NOTE: there is not a single match for the letter 'ѕ' (ѕ како ѕвонче) in the entire db, so both dz and dj are mapped to 'џ'
@@ -70,6 +71,7 @@ export const validateForm = ({
 	hasExtracurricular,
 	setInvalidSubjects,
 	setTotalCredits,
+	setCreditsByLevel,
 }: {
 	index: string;
 	studyTrack: StudyTrack | "";
@@ -79,6 +81,7 @@ export const validateForm = ({
 	hasExtracurricular: boolean;
 	setInvalidSubjects: Dispatch<SetStateAction<Subject[]>>;
 	setTotalCredits: Dispatch<SetStateAction<number>>;
+	setCreditsByLevel: Dispatch<SetStateAction<number[]>>;
 }) => {
 	const errors: { [key: string]: string } = {};
 
@@ -99,13 +102,17 @@ export const validateForm = ({
 	const invalid = checkPrerequisites(
 		passedSubjects,
 		hasExtracurricular,
-		setTotalCredits
+		setTotalCredits,
+		studyTrack,
+		setCreditsByLevel
 	);
 	if (invalid.length != 0) {
 		setInvalidSubjects(invalid);
 		errors.invalidSubjects =
 			"За еден или повеќе предмети не се исполнети условите";
-	} else setInvalidSubjects([]);
+	} else {
+		setInvalidSubjects([]);
+	}
 
 	return errors;
 };
@@ -135,7 +142,9 @@ export const getPassedSubjectsByID = (
 export const checkPrerequisites = (
 	passedSubjects: Subject[],
 	hasExtracurricular: boolean,
-	setTotalCredits: Dispatch<SetStateAction<number>>
+	setTotalCredits: Dispatch<SetStateAction<number>>,
+	studyTrack: StudyTrack | "",
+	setCreditsByLevel: Dispatch<SetStateAction<number[]>>
 ) => {
 	passedSubjects.sort(
 		(a, b) => a.subject_info.semester - b.subject_info.semester
@@ -156,7 +165,7 @@ export const checkPrerequisites = (
 		}
 	}
 
-	let totalCredits = passedSubjectIds.size * 6 + (hasExtracurricular ? 1 : 0);
+	let totalCredits = (passedSubjectIds.size + Number(hasExtracurricular)) * 6;
 	if (
 		passedSubjects.some((s) => s.name === "Професионални вештини") &&
 		passedSubjects.some((s) => s.name === "Спорт и здравје")
@@ -175,7 +184,37 @@ export const checkPrerequisites = (
 		}
 	}
 
-	if (invalidSubjects.length == 0) setTotalCredits(totalCredits);
+	if (invalidSubjects.length == 0) {
+		setTotalCredits(totalCredits);
+		const newPassedSubjects = passedSubjects.filter((subject) =>
+			passedSubjectIds.has(subject.id)
+		);
+		setCreditsByLevel(getCreditsByLevel(newPassedSubjects, studyTrack));
+	}
 
 	return invalidSubjects;
+};
+
+const getCreditsByLevel = (
+	passedSubjects: Subject[],
+	studyTrack: StudyTrack | ""
+) => {
+	return passedSubjects
+		.reduce(
+			(acc, subject) => {
+				const level = subject.subject_info.level;
+				if (
+					studyTrack &&
+					!subject.subject_info.mandatory_for.includes(studyTrack) &&
+					((level == 1 && acc[0] < L1_LIMIT) ||
+						(level == 2 && acc[1] < L2_LIMIT) ||
+						level == 3)
+				) {
+					acc[level - 1]++;
+				}
+				return acc;
+			},
+			[0, 0, 0]
+		)
+		.map((i) => i * 6);
 };

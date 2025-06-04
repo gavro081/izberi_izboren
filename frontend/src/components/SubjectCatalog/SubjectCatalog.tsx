@@ -7,7 +7,7 @@ import SubjectList from "./SubjectList";
 import SubjectModal from "./SubjectModal";
 import { filterSubjects, getRandomStaff, resetFilters } from "./utils";
 const SubjectCatalog = () => {
-	const [visibleCourses, setVisibleCourses] = useState<number>(10);
+	const [visibleCourses, setVisibleCourses] = useState<number>(12);
 	const [searchTerm, setSearchTerm] = useState<string>("");
 	const [professorSearchTerm, setProfessorSearchTerm] = useState<string>("");
 	const [assistantSearchTerm, setAssistantSearchTerm] = useState<string>("");
@@ -54,17 +54,10 @@ const SubjectCatalog = () => {
 				new Set(filteredSubjects.flatMap((sub) => sub.subject_info.tags))
 			)
 		);
-		// console.log(
-		// 	Array.from(
-		// 		new Set(
-		// 			filteredSubjects.flatMap((sub) => sub.subject_info.technologies)
-		// 		)
-		// 	)
-		// );
 	}, [subjectData]);
 
 	const loadMore = () => {
-		setVisibleCourses((prev) => prev + 10);
+		setVisibleCourses((prev) => prev + 12);
 	};
 
 	const openSubjectDetails = (subject: Subject) => {
@@ -119,9 +112,8 @@ const SubjectCatalog = () => {
 						setAssistantSearchTerm={setAssistantSearchTerm}
 					/>
 				</div>
-				{/* Main content */}
+
 				<div className="flex-1">
-					{/* Search bar */}
 					<div className="mb-6 relative">
 						<input
 							type="text"
@@ -132,8 +124,6 @@ const SubjectCatalog = () => {
 							focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 						/>
 					</div>
-
-					{/* Course grid */}
 
 					{!isLoaded ? (
 						<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
@@ -149,7 +139,6 @@ const SubjectCatalog = () => {
 						/>
 					)}
 
-					{/* Load more button */}
 					{isLoaded && filteredSubjects.length > visibleCourses && (
 						<div className="mt-5 text-center">
 							<button
@@ -161,7 +150,6 @@ const SubjectCatalog = () => {
 						</div>
 					)}
 
-					{/* No results message */}
 					{isLoaded && filteredSubjects.length === 0 && (
 						<div className="text-center py-12">
 							<p className="text-gray-500 text-lg">

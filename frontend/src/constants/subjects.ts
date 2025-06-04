@@ -7,6 +7,9 @@ export const STUDY_TRACKS = [
 	"KN23",
 ] as const;
 
+export const L1_LIMIT = 1;
+export const L2_LIMIT = 6;
+
 export const STUDY_EFFORT = [1, 2, 3, 4, 5] as const;
 export const YEARS = [1, 2, 3, 4] as const;
 export const EVALUATIONS = ["Теорија", "Практично", "Код", "Проект"];

@@ -55,7 +55,7 @@ const Register: React.FC = () => {
 			});
 			const { access, refresh } = response.data;
 			login(access, refresh);
-			navigate("/");
+			navigate("/account");
 		} catch (err: unknown) {
 			const axiosError = err as AxiosError<{
 				[key: string]: string[] | string;
