@@ -245,7 +245,6 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 			level_credits: creditsByLevel,
 		};
 		try {
-			console.log(payload);
 			// For updating existing form data use PATCH instead of PUT for partial updates
 			const method = formData?.current_year || isSubmitted ? "PATCH" : "POST";
 			const endpoint = "http://localhost:8000/auth/form/";

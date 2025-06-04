@@ -42,7 +42,6 @@ const Navbar: React.FC = () => {
 						/>
 					</Link>
 				</div>
-
 				<button
 					onClick={() => setMenuOpen(!menuOpen)}
 					className="sm:hidden focus:outline-none"
@@ -75,6 +74,9 @@ const Navbar: React.FC = () => {
 					<button onClick={testAccountLogin}>quick login</button>
 					<Link to="/subjects" className="hover:underline">
 						Предмети
+					</Link>
+					<Link to="/recommendations" className="hover:underline">
+						Препораки
 					</Link>
 					{isAuthenticated && (
 						<Link to="/account" className="hover:underline">

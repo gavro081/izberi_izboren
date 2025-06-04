@@ -1,41 +1,32 @@
 from subjects.models import Subject
 
+def get_eligible_subjects(student):
+    passed_ids = set(student.passed_subjects.values_list('id', flat=True))
 
-# def check_prerequisites(has_extracurricular, passed_subjects):
-#     """
-#     Checks if all prerequisite requirements are fulfilled based on passed subjects and extracurricular credits.
-#     """
-    
-#     invalid_subjects = []
+    total_credits = student.total_credits
+    level_credits = student.level_credits
+    study_track = student.study_track
 
-#     # Track valid subjects as we go
-#     valid_subject_ids = set(id for id in passed_subjects)
-#     for subject_id in passed_subjects:
-#         prereqs = Subject.objects.get(id=subject_id).subject_info.prerequisite
-#         if 'subjects' in prereqs:
-#             if not any(prereq in valid_subject_ids for prereq in prereqs['subjects']):
-#                 invalid_subjects.append(subject_id)
-#                 valid_subject_ids.discard(subject_id)
-    
-#     total_credits = len(valid_subject_ids) * 6
-    
-#     pv = Subject.objects.get(name="Професионални вештини").id
-#     sport = Subject.objects.get(name="Спорт и здравје").id
+    all_subjects = (Subject.objects
+        .exclude(id__in=passed_ids)
+        .select_related('subject_info')
+    )
 
-#     if pv in valid_subject_ids or sport in valid_subject_ids:
-#         total_credits -= 6
-#     if has_extracurricular:
-#         total_credits += 6
-    
-#     for subject_id in passed_subjects:
-#         prereqs = Subject.objects.get(id=subject_id).subject_info.prerequisite
-#         if 'credits' in prereqs:
-#             if total_credits < prereqs['credits']:
-#                 invalid_subjects.append(subject_id)
-#                 valid_subject_ids.discard(subject_id)
-#                 total_credits -= 6
-#     return (True, []) if len(invalid_subjects) == 0 else (False, invalid_subjects)
+    if level_credits[0] >= 6:
+        all_subjects = all_subjects.exclude(subject_info__level=1)
+    if level_credits[1] >= 36:
+        all_subjects = all_subjects.exclude(subject_info__level=2)
 
-# b = Subject.objects.get(name="Вештачка интелигенција").id
-# a = Subject.objects.get(name="Бизнис и менаџмент").id
-# check_prerequisites(False, [a,b])
+    valid_subjects = []
+    for subject in all_subjects:
+        subject_info_ = subject.subject_info
+        prereqs = subject_info_.prerequisite or {}
+        if prereqs.get('credits') and total_credits < prereqs['credits']:
+            continue
+        if prereqs.get('subjects') and not any(subj_id in passed_ids for subj_id in prereqs['subjects']):
+            continue
+        if study_track not in subject_info_.elective_for:
+            continue
+        valid_subjects.append(subject)
+
+    return valid_subjects
