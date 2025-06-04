@@ -1,8 +1,8 @@
-import { Programs, Subject } from "../types";
+import { StudyTrack, Subject } from "../types";
 import { LatinToCyrillic } from "./utils";
 
 interface SubjectsSelectorProps {
-	studyTrack: Programs | "";
+	studyTrack: StudyTrack | "";
 	year: number;
 	filteredMandatorySubjects: Subject[];
 	filteredElectiveSubjects: Subject[];

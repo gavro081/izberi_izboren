@@ -89,6 +89,7 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 		});
 	const [hasExtracurricular, setHasExtracurricular] = useState(false);
 	const [invalidSubjects, setInvalidSubjects] = useState<Subject[]>([]);
+	const [totalCredits, setTotalCredits] = useState(-1);
 
 	// Update form when formData changes (e.g., after fetching user data)
 	useEffect(() => {
@@ -198,6 +199,7 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 			passedSubjectsPerSemester,
 			hasExtracurricular,
 			setInvalidSubjects,
+			setTotalCredits,
 		});
 		if (Object.keys(errors).length > 0) {
 			setValidationErrors(errors);
@@ -237,6 +239,7 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 			favorite_professors: favoriteProfs,
 			passed_subjects_per_semester: mapToID(passedSubjectsPerSemester),
 			has_extracurricular: hasExtracurricular,
+			total_credits: totalCredits,
 		};
 		try {
 			// For updating existing form data use PATCH instead of PUT for partial updates

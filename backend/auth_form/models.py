@@ -64,7 +64,7 @@ class Student(models.Model):
     favorite_professors = ArrayField(models.CharField(max_length=64), null=True, blank=True)
     passed_subjects = models.ManyToManyField('subjects.subject', related_name="passed_subjects", blank=True)
     has_extracurricular = models.BooleanField(default=False, null=True)
-    # total_credits = models.PositiveIntegerField(null=True)
+    total_credits = models.PositiveIntegerField(null=True)
     # level_credits = ArrayField(models.PositiveIntegerField(null=True), null=True, blank=True)
     
     # {1: [s1, s2, s3...], 2: [....], ...}

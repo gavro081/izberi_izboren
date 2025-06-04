@@ -69,6 +69,7 @@ export const validateForm = ({
 	passedSubjectsPerSemester,
 	hasExtracurricular,
 	setInvalidSubjects,
+	setTotalCredits,
 }: {
 	index: string;
 	studyTrack: StudyTrack | "";
@@ -77,6 +78,7 @@ export const validateForm = ({
 	passedSubjectsPerSemester: Record<number, Subject[]>;
 	hasExtracurricular: boolean;
 	setInvalidSubjects: Dispatch<SetStateAction<Subject[]>>;
+	setTotalCredits: Dispatch<SetStateAction<number>>;
 }) => {
 	const errors: { [key: string]: string } = {};
 
@@ -94,7 +96,11 @@ export const validateForm = ({
 			"Одбери барем еден предмет од прв семестар.";
 
 	const passedSubjects = getPassedSubjects(passedSubjectsPerSemester);
-	const invalid = checkPrerequisites(passedSubjects, hasExtracurricular);
+	const invalid = checkPrerequisites(
+		passedSubjects,
+		hasExtracurricular,
+		setTotalCredits
+	);
 	if (invalid.length != 0) {
 		setInvalidSubjects(invalid);
 		errors.invalidSubjects =
@@ -128,7 +134,8 @@ export const getPassedSubjectsByID = (
 
 export const checkPrerequisites = (
 	passedSubjects: Subject[],
-	hasExtracurricular: boolean
+	hasExtracurricular: boolean,
+	setTotalCredits: Dispatch<SetStateAction<number>>
 ) => {
 	passedSubjects.sort(
 		(a, b) => a.subject_info.semester - b.subject_info.semester
@@ -167,5 +174,8 @@ export const checkPrerequisites = (
 			invalidSubjects.push(subject);
 		}
 	}
+
+	if (invalidSubjects.length == 0) setTotalCredits(totalCredits);
+
 	return invalidSubjects;
 };
