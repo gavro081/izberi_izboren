@@ -5,7 +5,7 @@ from django.core.management.base import BaseCommand
 from pathlib import Path
 
 class Command(BaseCommand):
-    help = "Scrape elective subjects for all programs from FINKI page"
+    help = "Scrape elective subjects for all study tracks from FINKI page"
 
     def handle(self, *args, **options):
         base_dir = Path(__file__).resolve().parent.parent

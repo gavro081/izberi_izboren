@@ -1,4 +1,4 @@
-export const PROGRAMS = [
+export const STUDY_TRACKS = [
 	"SIIS23",
 	"IMB23",
 	"PIT23",

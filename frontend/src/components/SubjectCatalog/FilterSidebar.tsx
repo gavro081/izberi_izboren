@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { PROGRAMS } from "../../constants/subjects";
+import { STUDY_TRACKS } from "../../constants/subjects";
 import { Filters } from "../types";
 import { resetFilters } from "./utils";
 interface FilterSidebarProps {
@@ -175,30 +175,30 @@ const FilterSidebar = ({
 				<div className="space-y-1 mb-4">
 					<h3 className="font-medium mb-2">Задолжителен за:</h3>
 					<div className="grid grid-cols-3 gap-2">
-						{PROGRAMS.map((program) => {
-							const programName = program.replace(/\d+$/, "");
+						{STUDY_TRACKS.map((track) => {
+							const studyTrack = track.replace(/\d+$/, "");
 							return (
-								<div key={program} className="flex items-center space-x-2">
+								<div key={track} className="flex items-center space-x-2">
 									<input
 										type="checkbox"
 										name="level"
-										id={program}
+										id={track}
 										onChange={() =>
 											setFilters((prev) => ({
 												...prev,
-												mandatoryFor: prev.mandatoryFor.includes(program)
-													? prev.mandatoryFor.filter((item) => item !== program)
-													: [...prev.mandatoryFor, program],
+												mandatoryFor: prev.mandatoryFor.includes(track)
+													? prev.mandatoryFor.filter((item) => item !== track)
+													: [...prev.mandatoryFor, track],
 											}))
 										}
-										checked={filters.mandatoryFor.includes(program)}
+										checked={filters.mandatoryFor.includes(track)}
 										className="h-4 w-4 rounded border-gray-300 text-blue-600"
 									/>
 									<label
-										htmlFor={`s${program}`}
+										htmlFor={`s${track}`}
 										className="text-sm text-gray-700"
 									>
-										{programName}
+										{studyTrack}
 									</label>
 								</div>
 							);
@@ -209,30 +209,30 @@ const FilterSidebar = ({
 				<div className="space-y-1 mb-6">
 					<h3 className="font-medium mb-2">Изборен за:</h3>
 					<div className="grid grid-cols-3 gap-2">
-						{PROGRAMS.map((program) => {
-							const programName = program.replace(/\d+$/, "");
+						{STUDY_TRACKS.map((track) => {
+							const studyTrack = track.replace(/\d+$/, "");
 							return (
-								<div key={program} className="flex items-center space-x-2">
+								<div key={track} className="flex items-center space-x-2">
 									<input
 										type="checkbox"
 										name="level"
-										id={program}
+										id={track}
 										onChange={() =>
 											setFilters((prev) => ({
 												...prev,
-												electiveFor: prev.electiveFor.includes(program)
-													? prev.electiveFor.filter((item) => item !== program)
-													: [...prev.electiveFor, program],
+												electiveFor: prev.electiveFor.includes(track)
+													? prev.electiveFor.filter((item) => item !== track)
+													: [...prev.electiveFor, track],
 											}))
 										}
-										checked={filters.electiveFor.includes(program)}
+										checked={filters.electiveFor.includes(track)}
 										className="h-4 w-4 rounded border-gray-300 text-blue-600"
 									/>
 									<label
-										htmlFor={`s${program}`}
+										htmlFor={`s${track}`}
 										className="text-sm text-gray-700"
 									>
-										{programName}
+										{studyTrack}
 									</label>
 								</div>
 							);

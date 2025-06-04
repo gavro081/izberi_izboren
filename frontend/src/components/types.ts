@@ -1,4 +1,4 @@
-import { PROGRAMS } from "../constants/subjects";
+import { STUDY_TRACKS } from "../constants/subjects";
 
 export interface Subject {
 	id: number;
@@ -13,7 +13,7 @@ export type SubjectID = Subject["id"];
 export interface StudentData {
 	// id: number;
 	index: string;
-	study_track: Programs;
+	study_track: StudyTrack;
 	current_year: number;
 	// passed_subjects: Subject[];
 	study_effort: number;
@@ -37,10 +37,10 @@ export interface SubjectInfo {
 	activated: boolean;
 	participants: number[];
 	mandatory: boolean;
-	mandatory_for: Programs[];
+	mandatory_for: StudyTrack[];
 	semester: number;
 	season: string;
-	elective_for: Programs[];
+	elective_for: StudyTrack[];
 	professors: string[];
 	assistants: string[];
 	tags: string[];
@@ -54,12 +54,12 @@ export type Filters = {
 	semester: number[];
 	level: number[];
 	activated: "activated" | "not_activated" | "";
-	mandatoryFor: Programs[];
-	electiveFor: Programs[];
+	mandatoryFor: StudyTrack[];
+	electiveFor: StudyTrack[];
 	professors: string[];
 	assistants: string[];
 	hasPrerequisites: boolean;
 	tags: string[];
 };
 
-export type Programs = (typeof PROGRAMS)[number];
+export type StudyTrack = (typeof STUDY_TRACKS)[number];

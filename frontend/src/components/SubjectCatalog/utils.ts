@@ -1,5 +1,5 @@
 import { LatinToCyrillic } from "../StudentForm/utils";
-import { Filters, Programs, Subject } from "../types";
+import { Filters, StudyTrack, Subject } from "../types";
 
 interface filteredSubjectsParams {
 	subjectData: Subject[];
@@ -11,8 +11,8 @@ interface filteredSubjectsParams {
 		semester: number[];
 		level: number[];
 		activated: "activated" | "not_activated" | "";
-		mandatoryFor: Programs[];
-		electiveFor: Programs[];
+		mandatoryFor: StudyTrack[];
+		electiveFor: StudyTrack[];
 		professors: string[];
 		assistants: string[];
 		hasPrerequisites: boolean;

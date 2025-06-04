@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { Programs, Subject, SubjectID } from "../types";
+import { StudyTrack, Subject, SubjectID } from "../types";
 
 // NOTE: there is not a single match for the letter 'ѕ' (ѕ како ѕвонче) in the entire db, so both dz and dj are mapped to 'џ'
 // this way you can search for "Menadzment", instead of having to write "Menadjment"
@@ -71,7 +71,7 @@ export const validateForm = ({
 	setInvalidSubjects,
 }: {
 	index: string;
-	studyTrack: Programs | "";
+	studyTrack: StudyTrack | "";
 	year: number;
 	studyEffort: number | string;
 	passedSubjectsPerSemester: Record<number, Subject[]>;

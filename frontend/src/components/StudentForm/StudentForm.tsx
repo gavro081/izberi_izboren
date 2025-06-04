@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import {
 	EVALUATIONS,
 	EVALUATIONS_MAP,
-	PROGRAMS,
 	STUDY_EFFORT,
+	STUDY_TRACKS,
 	YEARS,
 } from "../../constants/subjects";
 import { useAuth } from "../../hooks/useAuth";
-import { Programs, StudentData, Subject } from "../types";
+import { StudentData, StudyTrack, Subject } from "../types";
 import FieldButton from "./FieldButton";
 import SkeletonForm from "./SkeletonForm";
 import SubjectsSelector from "./SubjectsSelector";
@@ -37,8 +37,8 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 		[key: string]: string;
 	}>({});
 	const [index, setIndex] = useState(formData?.index || "");
-	const [studyTrack, setStudyTrack] = useState<Programs | "">(
-		(formData?.study_track as Programs) || ""
+	const [studyTrack, setStudyTrack] = useState<StudyTrack | "">(
+		(formData?.study_track as StudyTrack) || ""
 	);
 	const [year, setYear] = useState(formData?.current_year || 1);
 	const [passedSubjectsPerSemester, setPassedSubjectsPerSemester] = useState<
@@ -94,7 +94,7 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 	useEffect(() => {
 		if (formData) {
 			setIndex(formData.index || "");
-			setStudyTrack((formData.study_track as Programs) || "");
+			setStudyTrack((formData.study_track as StudyTrack) || "");
 			setYear(formData.current_year || 1);
 			setStudyEffort(formData.study_effort || "");
 
@@ -345,7 +345,7 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 					<select
 						value={studyTrack}
 						onChange={(e) => {
-							const newTrack = e.target.value as Programs;
+							const newTrack = e.target.value as StudyTrack;
 							const filteredPassedSubjectsPerSemester = Object.fromEntries(
 								Object.entries(passedSubjectsPerSemester).map(
 									([semester, subjects]) => {
@@ -367,7 +367,7 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 						className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 custom-select"
 					>
 						<option value="">Одбери смер</option>
-						{PROGRAMS.map((track) => (
+						{STUDY_TRACKS.map((track) => (
 							<option key={track} value={track}>
 								{track}
 							</option>
