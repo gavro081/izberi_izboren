@@ -89,8 +89,6 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 		});
 	const [hasExtracurricular, setHasExtracurricular] = useState(false);
 	const [invalidSubjects, setInvalidSubjects] = useState<Subject[]>([]);
-	const [totalCredits, setTotalCredits] = useState(-1);
-	const [creditsByLevel, setCreditsByLevel] = useState([0, 0, 0]);
 
 	// Update form when formData changes (e.g., after fetching user data)
 	useEffect(() => {
@@ -191,7 +189,8 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-
+		let totalCredits = { value: -1 };
+		let creditsByLevel = { value: [0, 0, 0] };
 		const errors = validateForm({
 			index,
 			studyTrack,
@@ -200,8 +199,8 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 			passedSubjectsPerSemester,
 			hasExtracurricular,
 			setInvalidSubjects,
-			setTotalCredits,
-			setCreditsByLevel,
+			totalCredits,
+			creditsByLevel,
 		});
 		if (Object.keys(errors).length > 0) {
 			setValidationErrors(errors);
@@ -241,11 +240,12 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 			favorite_professors: favoriteProfs,
 			passed_subjects_per_semester: mapToID(passedSubjectsPerSemester),
 			has_extracurricular: hasExtracurricular,
-			total_credits: totalCredits,
-			level_credits: creditsByLevel,
+			total_credits: totalCredits.value,
+			level_credits: creditsByLevel.value,
 		};
 		try {
-			console.log(payload);
+			console.log(totalCredits.value);
+			console.log(creditsByLevel.value);
 			// For updating existing form data use PATCH instead of PUT for partial updates
 			const method = formData?.current_year || isSubmitted ? "PATCH" : "POST";
 			const endpoint = "http://localhost:8000/auth/form/";
