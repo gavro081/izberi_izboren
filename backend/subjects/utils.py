@@ -30,3 +30,4 @@ def get_eligible_subjects(student):
         valid_subjects.append(subject)
 
     return valid_subjects
+

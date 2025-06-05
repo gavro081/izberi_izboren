@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from auth_form.serializers import StudentFormSerializer
-from auth_form.utils import get_eligible_subjects
+from subjects.utils import get_eligible_subjects
 from .serializers import SubjectSerializer
 from .models import Subject_Info, Subject
 
