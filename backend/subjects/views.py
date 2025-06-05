@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from auth_form.serializers import StudentFormSerializer
-from subjects.utils import get_eligible_subjects
+from subjects.utils import get_eligible_subjects, student_vector
 from .serializers import SubjectSerializer
 from .models import Subject_Info, Subject
 
@@ -27,5 +27,6 @@ def get_suggestions(request):
         return Response({"message": "Could not find student"}, status=status.HTTP_400_BAD_REQUEST)
 
     subjects = get_eligible_subjects(student)
+    vector = student_vector(student)
     serializer = SubjectSerializer(subjects, many=True)
     return Response({"data": serializer.data}, status=status.HTTP_200_OK)
