@@ -1,64 +1,50 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axiosInstance from "../api/axiosInstance";
 import StudentForm from "../components/StudentForm/StudentForm";
 import { StudentData } from "../components/types";
-import { useAuth } from "../hooks/useAuth";
+import useAxiosAuth from "../hooks/useAxiosAuth";
 
 const Account = () => {
-	const navigate = useNavigate();
-	const { accessToken, refreshAccessToken } = useAuth();
-	const [tokenChecked, setTokenChecked] = useState(false);
-	const [formData, setFormData] = useState<StudentData | null>(null);
-	const [isLoading, setIsLoading] = useState(true);
+    const axiosAuth = useAxiosAuth();
+    const navigate = useNavigate();
 
-	useEffect(() => {
-		const checkToken = async () => {
-			let accessToken = localStorage.getItem("access_token");
+    const [formData, setFormData] = useState<StudentData | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
 
-			if (!accessToken) {
-				accessToken = await refreshAccessToken();
-				if (accessToken) {
-					localStorage.setItem("access_token", accessToken);
-				} else {
-					navigate("/login");
-					return;
-				}
-			}
-			setTokenChecked(true);
-		};
-		checkToken();
-	}, [refreshAccessToken, navigate]);
+    useEffect(() => {
+        // This function will run once when the component mounts
+        const fetchData = async () => {
+            try {
+                // Simply ask for the data.
+                // If the token is expired/missing, the interceptor will
+                // automatically refresh it and retry this request.
+                // This 'await' will just pause until the whole process is complete.
+                const resForm = await axiosAuth.get("/auth/form/");
+                setFormData(resForm.data);
+            } catch (error) {
+                // This catch block will only be triggered if the token refresh
+                // fails and the interceptor gives up. In that case, we should
+                // probably navigate the user away.
+                console.error("Could not fetch form data after retries.", error);
+                navigate("/login");
+            } finally {
+                // This will run whether the request succeeded or failed.
+                setIsLoading(false);
+            }
+        };
 
-	useEffect(() => {
-		const fetchData = async () => {
-			if (!accessToken) {
-				return;
-			}
-			try {
-				const resForm = await axiosInstance.get("/auth/form/");
-				setFormData(resForm.data);
-				// waiting for data to render
-				setTimeout(() => setIsLoading(false), 5);
-			} catch (error) {
-				console.error("Error fetching data.", error);
-				setIsLoading(false);
-			}
-		};
-		if (tokenChecked) {
-			fetchData();
-		}
-	}, [tokenChecked, accessToken]);
+        fetchData();
+    }, [axiosAuth, navigate]); 
 
-	return (
-		<div className="p-4">
-			<StudentForm
-				formData={formData}
-				isLoading={isLoading}
-				setIsLoading={setIsLoading}
-			/>
-		</div>
-	);
+    return (
+        <div className="p-4">
+            <StudentForm
+                formData={formData}
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
+            />
+        </div>
+    );
 };
 
 export default Account;

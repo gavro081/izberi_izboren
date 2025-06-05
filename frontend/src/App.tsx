@@ -12,39 +12,46 @@ import Recommendations from "./pages/Recommendations";
 import Register from "./pages/Register";
 
 const Layout = () => (
-	<div className="flex flex-col min-h-screen">
-		<Navbar />
-		<main className="flex-grow">
-			<Outlet />
-		</main>
-		<Footer />
-	</div>
+  <div className="flex flex-col min-h-screen">
+    <Navbar />
+    <main className="flex-grow">
+      <Outlet />
+    </main>
+    <Footer />
+  </div>
 );
 const router = createBrowserRouter([
-	{
-		path: "/",
-		element: <Layout />,
-		children: [
-			{ path: "", element: <Home /> },
-			{ path: "subjects", element: <CourseCatalog /> },
-			{ path: "login", element: <Login /> },
-			{ path: "register", element: <Register /> },
-			{ path: "recommendations", element: <Recommendations /> },
-			{
-				path: "account",
-				element: (
-					<PrivateRoute>
-						<Account />
-					</PrivateRoute>
-				),
-			},
-		],
-	},
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      { path: "", element: <Home /> },
+      { path: "subjects", element: <CourseCatalog /> },
+      { path: "login", element: <Login /> },
+      { path: "register", element: <Register /> },
+      {
+        path: "recommendations",
+        element: (
+          <PrivateRoute>
+            <Recommendations />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "account",
+        element: (
+          <PrivateRoute>
+            <Account />
+          </PrivateRoute>
+        ),
+      },
+    ],
+  },
 ]);
 
 function App() {
-	useAxiosAuth();
-	return <RouterProvider router={router} />;
+  useAxiosAuth();
+  return <RouterProvider router={router} />;
 }
 
 export default App;

@@ -1,6 +1,6 @@
-import React, { useState, useEffect, ReactNode } from "react";
+import React, { useState, ReactNode } from "react";
 import AuthContext, { AuthContextType } from "./AuthContext";
-import axios from "axios";
+import axiosInstance from "../api/axiosInstance";
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   children,
@@ -11,13 +11,15 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const [refreshToken, setRefreshToken] = useState<string | null>(
     localStorage.getItem("refresh_token")
   );
+
   const refreshAccessToken = async (): Promise<string | null> => {
-    const refreshToken = localStorage.getItem("refresh_token")
+    const refreshToken = localStorage.getItem("refresh_token");
     if (!refreshToken) {
+      logout();
       return null;
     }
     try {
-      const response = await axios.post<{ access: string; refresh?: string }>(
+      const response = await axiosInstance.post<{ access: string; refresh?: string }>(
         "http://localhost:8000/auth/refresh/",
         { refresh: refreshToken }
       );
@@ -25,6 +27,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       const newAccessToken = response.data.access;
       localStorage.setItem("access_token", newAccessToken);
       setAccessToken(newAccessToken);
+
       if (response.data.refresh) {
         const newRefreshToken = response.data.refresh;
         localStorage.setItem("refresh_token", newRefreshToken);
@@ -33,25 +36,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
       return newAccessToken;
     } catch (error) {
-      console.error("Error refrershing access token:", error);
-      return null;
+      console.error("Error refreshing access token:", error);
+      return Promise.reject(error); // Propagate the error
     }
   };
-  useEffect(() => {
-    const storedAccessToken = localStorage.getItem("access_token");
-    const storedRefreshToken = localStorage.getItem("refresh_token");
 
-    if (storedAccessToken !== accessToken) {
-      setAccessToken(storedAccessToken);
-    }
-
-    if (storedRefreshToken !== refreshToken) {
-      setRefreshToken(storedRefreshToken);
-    }
-  }, [accessToken, refreshToken]);
   const login = (newAccessToken: string, newRefreshToken: string) => {
-    console.log("Logging in with access token:", newAccessToken);
-    console.log("Refresh token:", newRefreshToken);
     localStorage.setItem("access_token", newAccessToken);
     localStorage.setItem("refresh_token", newRefreshToken);
     setAccessToken(newAccessToken);
@@ -75,6 +65,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     isAuthenticated,
     refreshAccessToken,
   };
+
   return (
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
