@@ -10,6 +10,7 @@ class Command(BaseCommand):
         base_dir = Path(__file__).resolve().parent.parent
         information_file_path = base_dir / 'data' / 'subject_details.json'
         output_file_path = base_dir / 'data' / 'subjects_vector.json'
+        vocab_file_path = base_dir / 'data' / 'vocabulary.json'
         try:
             with open(information_file_path, 'r', encoding='utf-8') as f:
                 subject_details_file_data = json.load(f)
@@ -50,8 +51,19 @@ class Command(BaseCommand):
                 distinct_evaluations.update(evaluation)
 
 
-        vocabulary = list(sorted(distinct_professors)) + list(sorted(distinct_assistants)) + list(sorted(distinct_technologies)) \
-            + list(sorted(distinct_tags)) + list(sorted(distinct_evaluations)) + ['isEasy', 'activated', 'participants'] 
+        # vocabulary = list(sorted(distinct_professors)) + list(sorted(distinct_assistants)) + list(sorted(distinct_technologies)) \
+            # + list(sorted(distinct_tags)) + list(sorted(distinct_evaluations)) + ['isEasy', 'activated', 'participants'] 
+
+        vocabulary = {
+            "professors": list(sorted(distinct_professors)),
+            "assistants": list(sorted(distinct_assistants)),
+            "technologies": list(sorted(distinct_technologies)),
+            "tags": list(sorted(distinct_tags)),
+            "evaluation": list(sorted(distinct_evaluations)),
+            # "isEasy": [],
+            # "activated": [],
+            # "participants": []
+        }
 
         vectors = {}
 
@@ -93,3 +105,8 @@ class Command(BaseCommand):
         with open(output_file_path, "w", encoding='utf-8') as f:
             json.dump(vectors, f, ensure_ascii=False, indent=4)
             self.stdout.write(self.style.SUCCESS(f"Data successfully stored in {output_file_path}"))
+
+
+        with open(vocab_file_path, "w", encoding='utf-8') as f:
+            json.dump(vocabulary, f, ensure_ascii=False, indent=4)
+            self.stdout.write(self.style.SUCCESS(f"Data successfully stored in {vocab_file_path}"))

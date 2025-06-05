@@ -1,0 +1,37 @@
+[
+	{
+		"id": 33,
+		"index": "213113",
+		"study_track": "SIIS23",
+		"current_year": 4,
+		"study_effort": 3,
+		"tags": [
+			"Cloud Engineering & DevOps",
+			"Societal Skills",
+			"Software Engineering"
+		],
+		"technologies": ["Vue", "C", "Kotlin", "Kubernetes", "Laravel"],
+		"evaluation": ["Code", "Practical"],
+		"professors": [
+			"Катарина Тројачанец Динева",
+			"Александар Стојменски",
+			"Ана Мадевска Богданова",
+			"Андреа Кулаков"
+		],
+		"user_id": 41,
+		"has_filled_form": true,
+		"passed_subjects_per_semester": {
+			"1": [529, 531],
+			"2": [],
+			"3": [],
+			"4": [],
+			"5": [],
+			"6": [],
+			"7": [],
+			"8": []
+		},
+		"has_extracurricular": false,
+		"total_credits": 12,
+		"level_credits": [0, 0, 0]
+	}
+]

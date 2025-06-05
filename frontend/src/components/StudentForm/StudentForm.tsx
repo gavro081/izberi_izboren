@@ -48,21 +48,17 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 			Object.fromEntries(Array.from({ length: 8 }, (_, i) => [[i + 1], []]))
 	);
 	const [studyEffort, setStudyEffort] = useState(formData?.study_effort || "");
-	const [domains, setDomains] = useState<string[]>(
-		formData?.preferred_domains || []
-	);
+	const [domains, setDomains] = useState<string[]>(formData?.tags || []);
 	const [semesterSearchTerms, setSemesterSearchTerms] = useState<
 		Record<number, string>
 	>({});
 	const [professorsSearchTerm, setProfessorSearchTerm] = useState("");
 	const [technologies, setTechnologies] = useState<string[]>(
-		formData?.preferred_technologies || []
+		formData?.technologies || []
 	);
-	const [evaluation, setEvaluation] = useState(
-		formData?.preferred_evaluation || []
-	);
+	const [evaluation, setEvaluation] = useState(formData?.evaluation || []);
 	const [favoriteProfs, setFavoriteProfs] = useState<string[]>(
-		formData?.favorite_professors || []
+		formData?.professors || []
 	);
 	const [isNemamSelected, setIsNemamSelected] = useState({
 		domains: false,
@@ -98,19 +94,17 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 			setYear(formData.current_year || 1);
 			setStudyEffort(formData.study_effort || "");
 
-			const domains_ = (formData.preferred_domains || []).includes("None")
+			const domains_ = (formData.tags || []).includes("None")
 				? []
-				: formData.preferred_domains || [];
+				: formData.tags || [];
 			setDomains(domains_);
 
-			const technologies_ = (formData.preferred_technologies || []).includes(
-				"None"
-			)
+			const technologies_ = (formData.technologies || []).includes("None")
 				? []
-				: formData.preferred_technologies || [];
+				: formData.technologies || [];
 			setTechnologies(technologies_);
 
-			const eval_ = (formData.preferred_evaluation || []).map(
+			const eval_ = (formData.evaluation || []).map(
 				(val: string) =>
 					Object.keys(EVALUATIONS_MAP).find(
 						(key) =>
@@ -121,11 +115,9 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 				eval_.includes("Немам") || eval_.includes("None") ? [] : eval_
 			);
 
-			const favoriteProfs_ = (formData.favorite_professors || []).includes(
-				"None"
-			)
+			const favoriteProfs_ = (formData.professors || []).includes("None")
 				? []
-				: formData.favorite_professors || [];
+				: formData.professors || [];
 			setFavoriteProfs(favoriteProfs_);
 
 			setPassedSubjectsPerSemester(formData.passed_subjects_per_semester || []);
@@ -232,12 +224,12 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 			current_year: year,
 			passed_subjects: getPassedSubjectsByID(passedSubjectsPerSemester),
 			study_effort: studyEffort,
-			preferred_domains: domains,
-			preferred_technologies: technologies,
-			preferred_evaluation: evaluation.map(
+			tags: domains,
+			technologies: technologies,
+			evaluation: evaluation.map(
 				(ev) => EVALUATIONS_MAP[ev as keyof typeof EVALUATIONS_MAP] ?? ev
 			),
-			favorite_professors: favoriteProfs,
+			professors: favoriteProfs,
 			passed_subjects_per_semester: mapToID(passedSubjectsPerSemester),
 			has_extracurricular: hasExtracurricular,
 			total_credits: totalCredits.value,

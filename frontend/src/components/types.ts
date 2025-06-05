@@ -17,10 +17,10 @@ export interface StudentData {
 	current_year: number;
 	// passed_subjects: Subject[];
 	study_effort: number;
-	preferred_domains: string[];
-	preferred_technologies: string[];
-	preferred_evaluation: string[];
-	favorite_professors: string[];
+	tags: string[];
+	technologies: string[];
+	evaluation: string[];
+	professors: string[];
 	passed_subjects_per_semester: Record<number, Subject[] | []>;
 }
 
