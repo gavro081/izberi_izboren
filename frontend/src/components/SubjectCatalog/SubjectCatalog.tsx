@@ -5,7 +5,12 @@ import SkeletonCard from "./SkeletonCard";
 import StaffSearch from "./StaffSearch";
 import SubjectList from "./SubjectList";
 import SubjectModal from "./SubjectModal";
-import { filterSubjects, getRandomStaff, resetFilters } from "./utils";
+import {
+	filterSubjects,
+	getRandomStaff,
+	getSubjectPrerequisites,
+	resetFilters,
+} from "./utils";
 const SubjectCatalog = () => {
 	const [visibleCourses, setVisibleCourses] = useState<number>(12);
 	const [searchTerm, setSearchTerm] = useState<string>("");
@@ -69,26 +74,6 @@ const SubjectCatalog = () => {
 
 	const closeModal = () => {
 		setShowModal(false);
-	};
-
-	const getSubjectPrerequisites = (): "Нема предуслов" | number | string[] => {
-		const prerequisite = selectedSubject?.subject_info?.prerequisite;
-
-		if (!prerequisite) return "Нема предуслов";
-
-		if ("subjects" in prerequisite && Array.isArray(prerequisite.subjects)) {
-			const names = prerequisite.subjects.map(
-				(item) =>
-					subjectData.find((subject) => subject.id === item)?.name || "/"
-			);
-			return names.length > 0 ? names : "Нема предуслов";
-		}
-
-		if ("credits" in prerequisite && typeof prerequisite.credits === "number") {
-			return prerequisite.credits;
-		}
-
-		return "Нема предуслов";
 	};
 
 	return (
@@ -176,7 +161,7 @@ const SubjectCatalog = () => {
 				<SubjectModal
 					selectedSubject={selectedSubject}
 					closeModal={closeModal}
-					subjectPrerequisites={getSubjectPrerequisites()}
+					subjectPrerequisites={getSubjectPrerequisites(selectedSubject)}
 				/>
 			)}
 		</div>

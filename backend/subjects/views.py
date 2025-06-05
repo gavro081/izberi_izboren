@@ -14,6 +14,13 @@ from .models import Subject_Info, Subject
 def index(request):
     return HttpResponse("ok")
 
+
+@api_view(['GET'])
+def subject_view(reuest, pk):
+    subject = Subject.objects.get(pk=pk)
+    serializer = SubjectSerializer(subject)
+    return Response(serializer.data)
+
 @api_view(['GET'])
 def all_subjects(request):
     subjects = Subject.objects.select_related('subject_info').filter(subject_info__isnull=False).order_by('id')
@@ -37,3 +44,4 @@ def get_suggestions(request):
 
     # serializer = SubjectSerializer(sorted_subjects, many=True)
     return Response({"data": final_subjects}, status=status.HTTP_200_OK)
+

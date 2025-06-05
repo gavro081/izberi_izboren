@@ -119,8 +119,6 @@ WEIGHTS = {
     "participant_score": 0.1,
 }
 
-pnvi = "Програмирање на видео игри"
-
 def get_recommendations(filtered_subjects_vector):
     subject_scores = {}
     max_ = -1
@@ -128,10 +126,6 @@ def get_recommendations(filtered_subjects_vector):
         keys = filtered_subjects_vector[subject]
         score = 0
         for key in keys:
-            if subject == pnvi:
-                print(key)
-                print(WEIGHTS[key])
-                print(keys[key])
             score += WEIGHTS[key] * keys[key]
         
         max_ = max(score, max_)

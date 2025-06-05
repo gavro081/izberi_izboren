@@ -21,7 +21,7 @@ const FilterSidebar = ({
 }: FilterSidebarProps) => {
 	const [showTags, setShowTags] = useState(false);
 	return (
-		<div className="">
+		<div className="max-w-sm mx-auto">
 			<div className="flex justify-between items-center mb-4">
 				<h2 className="text-lg font-semibold">Филтри</h2>
 				<button
@@ -105,7 +105,7 @@ const FilterSidebar = ({
 				{/* filter by level */}
 				<div className="space-y-1 mb-4">
 					<h3 className="font-medium mb-2">Ниво</h3>
-					<div className="grid grid-cols-3">
+					<div className="flex gap-4 sm:grid sm:grid-cols-3">
 						{Array.from(Array(3)).map((_, index) => {
 							const i = index + 1;
 							const level = `L${i}`;
@@ -128,7 +128,7 @@ const FilterSidebar = ({
 									/>
 									<label
 										htmlFor={`s${level}`}
-										className="text-sm text-gray-700"
+										className="text-sm text-gray-700 whitespace-nowrap"
 									>
 										{level}
 									</label>
