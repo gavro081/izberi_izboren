@@ -31,9 +31,11 @@ const Recommendations = () => {
 			</button>
 			<div>
 				{recommendations &&
-					recommendations.map((subject) => (
-						<div>
-							<p>{subject.name}</p>
+					Object.entries(recommendations).map(([key, value]) => (
+						<div key={key}>
+							<p>
+								<strong>{key}:</strong> {String(value)}
+							</p>
 						</div>
 					))}
 			</div>

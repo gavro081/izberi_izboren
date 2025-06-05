@@ -54,12 +54,18 @@ class Command(BaseCommand):
         # vocabulary = list(sorted(distinct_professors)) + list(sorted(distinct_assistants)) + list(sorted(distinct_technologies)) \
             # + list(sorted(distinct_tags)) + list(sorted(distinct_evaluations)) + ['isEasy', 'activated', 'participants'] 
 
+        distinct_professors = sorted(distinct_professors)
+        distinct_assistants = sorted(distinct_assistants)
+        distinct_technologies = sorted(distinct_technologies)
+        distinct_tags = sorted(distinct_tags)
+        distinct_evaluations = sorted(distinct_evaluations)
+
         vocabulary = {
-            "professors": list(sorted(distinct_professors)),
-            "assistants": list(sorted(distinct_assistants)),
-            "technologies": list(sorted(distinct_technologies)),
-            "tags": list(sorted(distinct_tags)),
-            "evaluation": list(sorted(distinct_evaluations)),
+            "professors": list(distinct_professors),
+            "assistants": list(distinct_assistants),
+            "technologies": list(distinct_technologies),
+            "tags": list(distinct_tags),
+            "evaluation": list(distinct_evaluations),
             # "isEasy": [],
             # "activated": [],
             # "participants": []
@@ -75,6 +81,8 @@ class Command(BaseCommand):
             subject_vector['tags'] = []
             subject_vector['evaluation'] = []
             subject_vector['technologies'] = []
+            if subject_name == "Дигитална форензика":
+                print(values['tags'])
             for word in distinct_professors:
                 subject_vector['professors'].append(0 if word not in values['professors'] else 1)
             for word in distinct_assistants:
@@ -84,7 +92,7 @@ class Command(BaseCommand):
             for word in distinct_evaluations:
                 subject_vector['evaluation'].append(0 if word not in values['evaluation'] else 1)
             for word in distinct_technologies:
-                subject_vector['technologies'].append(0 if word not in values['technologies'] else 1)
+                subject_vector['technolosgies'].append(0 if word not in values['technologies'] else 1)
             
             subject_vector['isEasy'] = 1 if values['isEasy'] else 0
             subject_vector['activated'] = 1 if values['activated'] else 0

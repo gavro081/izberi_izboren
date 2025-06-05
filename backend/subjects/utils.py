@@ -1,7 +1,8 @@
+from subjects.consts import SUBJECTS_VECTOR
+from subjects.management.commands import subjects_vector
 from subjects.models import Subject
 from pathlib import Path
 import json
-from django.core.management.base import BaseCommand
 from numpy import average
 
 def get_eligible_subjects(student):
@@ -43,13 +44,11 @@ def student_vector(student):
             vocabulary = json.load(f)
     except FileNotFoundError:
         print("file not found")
-        exit(1)
+        return -1
 
     student_vector = {}
     student_vector['index'] = student.index
-    print(student.professors)
     for key in vocabulary:
-        print(key)
         if key == "assistants": continue
         student_values = getattr(student, key, [])
 
@@ -62,4 +61,87 @@ def student_vector(student):
     student_vector['current_year'] = student.current_year
 
     return student_vector
+
+
+def map_to_subjects_vector(subjects):
+    filtered_subject_vectors = {}
+    for subject in subjects:
+        vector = SUBJECTS_VECTOR.get(subject.name)
+        if vector:
+            filtered_subject_vectors[subject.name] = vector
     
+    return filtered_subject_vectors
+    
+
+def score_for_preferences(student_vector, eligible_subjects):
+    K = 1
+    filtered_subjects_vector = {}
+    for subject in eligible_subjects:
+        filtered_subjects_vector[subject] = {}
+        values = eligible_subjects[subject]
+        for key in student_vector:
+            if key in ["index", "study_effort", "current_year"]: continue
+            student_values = student_vector[key]
+            subject_values = values[key]
+            tot_count = 0
+            match_count = 0
+            if key == "tags" and subject == "Дигитална форензика":
+                print(student_values)
+                print(subject_values)
+
+            for i in range(len(student_values)):
+                if student_values[i] == 1:
+                    tot_count += 1
+                    if subject_values[i] == 1:
+                        match_count += 1
+            
+            # score = (match_count + K) / (tot_count + K * len(student_values))
+            score = match_count / tot_count if tot_count != 0 else 0
+            filtered_subjects_vector[subject][key] = score
+        
+        study_effort = student_vector["study_effort"]
+        # current_year = student_vector["current_year"]
+
+        # TODO: add something for people who want to study more!
+        filtered_subjects_vector[subject]['easiness'] = (1 - study_effort) * values['isEasy']
+        filtered_subjects_vector[subject]['activated'] = values['activated']
+        filtered_subjects_vector[subject]['participant_score'] = values['participants']
+
+    return filtered_subjects_vector
+
+WEIGHTS = {
+    "professors": 0.05,
+    "technologies": 0.05,
+    "tags": 0.4,
+    "evaluation": 0.1, 
+    "easiness": 0.3,
+    "activated": 1,
+    "participant_score": 0.1,
+}
+
+pnvi = "Програмирање на видео игри"
+
+def get_recommendations(filtered_subjects_vector):
+    subject_scores = {}
+    max_ = -1
+    for subject in filtered_subjects_vector:
+        keys = filtered_subjects_vector[subject]
+        score = 0
+        for key in keys:
+            if subject == pnvi:
+                print(key)
+                print(WEIGHTS[key])
+                print(keys[key])
+            score += WEIGHTS[key] * keys[key]
+        
+        max_ = max(score, max_)
+        subject_scores[subject] = score
+    
+    if max_ == 0: return filtered_subjects_vector.keys()
+    for subject in subject_scores:
+        subject_scores[subject] /= max_
+    
+
+    N = 7
+    top_subjects = dict(sorted(subject_scores.items(), key=lambda item: item[1], reverse=True))
+    return top_subjects
