@@ -1,9 +1,8 @@
-import { useState } from "react";
 import { Subject } from "../types";
 
 interface SubjectModalProps {
 	selectedSubject: Subject;
-	subjectPrerequisites: string[] | number | "Нема предуслов";
+	subjectPrerequisites: string | number | "Нема предуслов";
 	closeModal: () => void;
 }
 
@@ -12,31 +11,14 @@ function SubjectModal({
 	closeModal,
 	subjectPrerequisites,
 }: SubjectModalProps) {
-	const [isExpanded, setIsExpanded] = useState(false);
-
-	const WORD_LIMIT = 40;
-
-	const truncateText = (text: string) => {
-		if (!text) return "";
-		const words = text.split(/\s+/);
-		return words.length <= WORD_LIMIT
-			? text
-			: words.slice(0, WORD_LIMIT).join(" ") + "...";
-	};
-
-	const canToggle = selectedSubject.abstract.split(/\s+/).length > WORD_LIMIT;
-	const abstractText = isExpanded
-		? selectedSubject.abstract
-		: truncateText(selectedSubject.abstract);
 	return (
 		<>
 			<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-				<div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+				<div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[93vh] overflow-y-auto">
 					<div className="p-6">
 						<div className="flex justify-between items-start mb-4">
 							<div>
 								<h2 className="text-2xl font-bold">{selectedSubject.name}</h2>
-								<p className="text-gray-600">{selectedSubject.code}</p>
 							</div>
 							<button
 								onClick={closeModal}
@@ -57,20 +39,6 @@ function SubjectModal({
 									/>
 								</svg>
 							</button>
-						</div>
-
-						<div className="mb-4">
-							<span className="inline">
-								<span className="">{abstractText}</span>
-								{canToggle && (
-									<button
-										className="text-blue-500 hover:underline ml-1 inline"
-										onClick={() => setIsExpanded(!isExpanded)}
-									>
-										{isExpanded ? "Прочитај помалку" : "Прочитај повеќе"}
-									</button>
-								)}
-							</span>
 						</div>
 
 						<div className="mb-2">
@@ -155,11 +123,11 @@ function SubjectModal({
 										<div>
 											<p className="text-sm text-gray-500">Предуслови:</p>
 											<p className="font-medium">
-												{Array.isArray(subjectPrerequisites)
-													? subjectPrerequisites.join(" или ")
+												{typeof subjectPrerequisites === "string"
+													? subjectPrerequisites
 													: typeof subjectPrerequisites === "number"
 													? `${subjectPrerequisites} кредити`
-													: subjectPrerequisites}
+													: "Нема предуслов"}
 											</p>
 										</div>
 									</div>
@@ -175,19 +143,6 @@ function SubjectModal({
 								<p>{`Овој предмет минатиот семестар бил запишан од
 									${selectedSubject.subject_info.participants[0]} студенти.`}</p>
 							)}
-						</div>
-						<div className="mt-6">
-							<h3 className="text-lg font-medium mb-2">Тагови</h3>
-							<div className="flex flex-wrap gap-2">
-								{selectedSubject.subject_info.tags.map((tag) => (
-									<span
-										key={tag}
-										className="bg-gray-100 text-gray-800 px-3 py-1 rounded-full"
-									>
-										{tag}
-									</span>
-								))}
-							</div>
 						</div>
 
 						<div className="mt-8 flex justify-end space-x-3">

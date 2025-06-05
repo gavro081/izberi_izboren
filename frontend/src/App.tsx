@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Recommendations from "./pages/Recommendations";
 import Register from "./pages/Register";
+import SubjectView from "./pages/SubjectView";
 
 const Layout = () => (
 	<div className="flex flex-col min-h-screen">
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
 						<Account />
 					</PrivateRoute>
 				),
+			},
+			{
+				path: "subjects/:id",
+				element: <SubjectView />,
 			},
 		],
 	},

@@ -150,3 +150,24 @@ export const getRandomStaff = (
 
 	setRandomStaff([randomProfessor, randomAssistant]);
 };
+
+export const getSubjectPrerequisites = (
+	subject: Subject
+): "Нема предуслов" | number | string => {
+	const prerequisite = subject?.subject_info?.prerequisite;
+
+	if (!prerequisite) return "Нема предуслов";
+
+	if ("subjects" in prerequisite && Array.isArray(prerequisite.subjects)) {
+		return (
+			(subject && subject.subject_info.prerequisite.subjects?.join(" или ")) ||
+			"Нема предуслов"
+		);
+	}
+
+	if ("credits" in prerequisite && typeof prerequisite.credits === "number") {
+		return prerequisite.credits;
+	}
+
+	return "Нема предуслов";
+};
