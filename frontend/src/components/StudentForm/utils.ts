@@ -70,8 +70,8 @@ export const validateForm = ({
 	passedSubjectsPerSemester,
 	hasExtracurricular,
 	setInvalidSubjects,
-	setTotalCredits,
-	setCreditsByLevel,
+	totalCredits,
+	creditsByLevel,
 }: {
 	index: string;
 	studyTrack: StudyTrack | "";
@@ -80,8 +80,8 @@ export const validateForm = ({
 	passedSubjectsPerSemester: Record<number, Subject[]>;
 	hasExtracurricular: boolean;
 	setInvalidSubjects: Dispatch<SetStateAction<Subject[]>>;
-	setTotalCredits: Dispatch<SetStateAction<number>>;
-	setCreditsByLevel: Dispatch<SetStateAction<number[]>>;
+	totalCredits: Record<string, number>;
+	creditsByLevel: Record<string, number[]>;
 }) => {
 	const errors: { [key: string]: string } = {};
 
@@ -102,9 +102,9 @@ export const validateForm = ({
 	const invalid = checkPrerequisites(
 		passedSubjects,
 		hasExtracurricular,
-		setTotalCredits,
+		totalCredits,
 		studyTrack,
-		setCreditsByLevel
+		creditsByLevel
 	);
 	if (invalid.length != 0) {
 		setInvalidSubjects(invalid);
@@ -142,9 +142,9 @@ export const getPassedSubjectsByID = (
 export const checkPrerequisites = (
 	passedSubjects: Subject[],
 	hasExtracurricular: boolean,
-	setTotalCredits: Dispatch<SetStateAction<number>>,
+	totalCredits: Record<string, number>,
 	studyTrack: StudyTrack | "",
-	setCreditsByLevel: Dispatch<SetStateAction<number[]>>
+	creditsByLevel: Record<string, number[]>
 ) => {
 	passedSubjects.sort(
 		(a, b) => a.subject_info.semester - b.subject_info.semester
@@ -165,31 +165,30 @@ export const checkPrerequisites = (
 		}
 	}
 
-	let totalCredits = (passedSubjectIds.size + Number(hasExtracurricular)) * 6;
+	totalCredits.value = (passedSubjectIds.size + Number(hasExtracurricular)) * 6;
 	if (
 		passedSubjects.some((s) => s.name === "Професионални вештини") &&
 		passedSubjects.some((s) => s.name === "Спорт и здравје")
 	) {
-		totalCredits -= 6;
+		totalCredits.value -= 6;
 	}
 
 	for (const subject of passedSubjects) {
 		if (!passedSubjectIds.has(subject.id)) continue;
 		const prereqs = subject.subject_info.prerequisite;
 		// subtracting 6 because the current subject is counted in the total as well
-		if (prereqs["credits"] && prereqs["credits"] > totalCredits - 6) {
+		if (prereqs["credits"] && prereqs["credits"] > totalCredits.value - 6) {
 			passedSubjectIds.delete(subject.id);
-			totalCredits -= 6;
+			totalCredits.value -= 6;
 			invalidSubjects.push(subject);
 		}
 	}
 
 	if (invalidSubjects.length == 0) {
-		setTotalCredits(totalCredits);
 		const newPassedSubjects = passedSubjects.filter((subject) =>
 			passedSubjectIds.has(subject.id)
 		);
-		setCreditsByLevel(getCreditsByLevel(newPassedSubjects, studyTrack));
+		creditsByLevel.value = getCreditsByLevel(newPassedSubjects, studyTrack);
 	}
 
 	return invalidSubjects;
