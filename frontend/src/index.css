@@ -15,3 +15,8 @@
 		cursor: pointer;
 	}
 }
+
+.custom-toast-container {
+  /* This overrides the default 'top' value from the library */
+  top: 8em !important; 
+}

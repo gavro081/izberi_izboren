@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import IOimage from "../assets/IOLogo.png";
 import { useAuth } from "../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const Navbar: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -13,6 +14,7 @@ const Navbar: React.FC = () => {
   const handleLogout = () => {
     logout();
     navigate("/");
+    toast.success("Успешно сте одјавени!");
   };
 
   const testAccountLogin = async () => {
@@ -31,7 +33,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="bg-gray-800 text-white p-4">
+    <nav className="bg-blue-600 text-white p-4">
       <div className="flex justify-between items-center">
         <div className="flex items-center space-x-4">
           <Link to="/">
@@ -113,6 +115,11 @@ const Navbar: React.FC = () => {
           {isAuthenticated && (
             <Link to="/account" className="hover:underline">
               Профил
+            </Link>
+          )}
+          {isAuthenticated && (
+            <Link to="/recommendations" className="hover:underline">
+              Препораки
             </Link>
           )}
           {isAuthenticated ? (

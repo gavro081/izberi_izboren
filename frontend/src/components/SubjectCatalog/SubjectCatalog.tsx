@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Filters, Subject } from "../types";
 import FilterSidebar from "./FilterSidebar";
 import SkeletonCard from "./SkeletonCard";
@@ -60,6 +60,14 @@ const SubjectCatalog = () => {
 			)
 		);
 	}, [subjectData]);
+
+	const subjectIdToNameMap = useMemo(() => {
+		const map = new Map<number, string>();
+		subjectData.forEach((subject) => {
+		  map.set(subject.id, subject.name);
+		});
+		return map;
+	  }, [subjectData]);
 
 	const loadMore = () => {
 		setVisibleCourses((prev) => prev + 12);
@@ -161,7 +169,7 @@ const SubjectCatalog = () => {
 				<SubjectModal
 					selectedSubject={selectedSubject}
 					closeModal={closeModal}
-					subjectPrerequisites={getSubjectPrerequisites(selectedSubject)}
+					subjectPrerequisites={getSubjectPrerequisites(selectedSubject, subjectIdToNameMap)}
 				/>
 			)}
 		</div>

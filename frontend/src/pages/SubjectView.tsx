@@ -44,7 +44,7 @@ function SubjectView() {
 			.then((res) => res.json())
 			.then((data) => {
 				setSelectedSubject(data);
-				setSubjectPrerequisites(getSubjectPrerequisites(selectedSubject));
+				setSubjectPrerequisites(getSubjectPrerequisites(selectedSubject, data));
 				setIsLoading(false);
 			});
 	}, []);

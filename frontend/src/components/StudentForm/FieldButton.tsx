@@ -50,7 +50,7 @@ const FieldButton: React.FC<{
 			disabled={isDisabled}
 			className={`px-3 py-2 border rounded-md transition-colors ${
 				isSelected
-					? "bg-yellow-100 border-yellow-300 text-yellow-800"
+					? "bg-green-100 border-green-300 text-green-800"
 					: "bg-white hover:bg-gray-50 border-gray-300"
 			} ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
 		>

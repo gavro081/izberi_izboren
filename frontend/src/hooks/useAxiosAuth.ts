@@ -35,7 +35,9 @@ const useAxiosAuth = () => {
             const newAccessToken = await refreshAccessToken();
 
             if (newAccessToken) {
-              // The request interceptor will handle adding the new header
+              accessTokenRef.current = newAccessToken;
+              originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+              // Retry the original request with the new access token
               return axiosInstance(originalRequest);
             } else {
               logout();

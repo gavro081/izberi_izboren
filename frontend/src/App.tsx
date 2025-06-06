@@ -11,10 +11,25 @@ import Login from "./pages/Login";
 import Recommendations from "./pages/Recommendations";
 import Register from "./pages/Register";
 import SubjectView from "./pages/SubjectView";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Layout = () => (
   <div className="flex flex-col min-h-screen">
     <Navbar />
+    <ToastContainer
+      className="custom-toast-container"
+      position="top-right"
+      autoClose={2000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+    />
     <main className="flex-grow">
       <Outlet />
     </main>

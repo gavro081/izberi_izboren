@@ -46,7 +46,7 @@ const Login: React.FC = () => {
 			const axiosError = err as AxiosError<{
 				[key: string]: string[] | string;
 			}>;
-			console.log("Error response data:", axiosError.response?.data);
+			console.error("Error response data:", axiosError.response?.data);
 
 			if (axiosError.response && axiosError.response.data) {
 				const errorData = axiosError.response.data;

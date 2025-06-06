@@ -181,8 +181,8 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		let totalCredits = { value: -1 };
-		let creditsByLevel = { value: [0, 0, 0] };
+		const totalCredits = { value: -1 };
+		const creditsByLevel = { value: [0, 0, 0] };
 		const errors = validateForm({
 			index,
 			studyTrack,
@@ -412,7 +412,8 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 							</text>
 						</svg>
 						<span className="absolute left-1/2 -translate-x-1/2 mt-2 w-64 bg-gray-800 text-white text-xs rounded px-3 py-2 opacity-0 group-hover:opacity-100 group-focus:opacity-100 pointer-events-none transition-opacity z-10">
-							TODO
+							Ако моментално е јуни/јули/август/септември, за да добиеш препораки одбери дека си твојата година + 1.
+							Пример ако си 2 година и е јуни, избери дека си 3 година.
 						</span>
 					</span>
 				</h3>
@@ -470,12 +471,12 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 							}`}
 						>
 							<input
-								type="checkbox"
+								type="radio"
 								checked={studyEffort == effort}
 								onChange={() =>
 									setStudyEffort(studyEffort == effort ? "" : effort)
 								}
-								className="form-checkbox h-4 w-5 mr-2 accent-green-600"
+								className="h-4 w-5 mr-2 accent-green-600"
 							/>
 							<span>{effort}</span>
 						</label>

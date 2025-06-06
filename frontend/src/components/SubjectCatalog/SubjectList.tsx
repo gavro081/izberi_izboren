@@ -39,7 +39,7 @@ const SubjectList = ({
 							{subject.subject_info.tags.map((tag) => (
 								<span
 									key={tag}
-									className="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded"
+									className="bg-green-100 border-green-300 text-green-800 text-xs px-2 py-1 rounded"
 								>
 									{tag}
 								</span>
@@ -51,11 +51,11 @@ const SubjectList = ({
 								className="flex items-center text-sm text-gray-600 hover:text-gray-800 transition-colors"
 							>
 								<img src="src/assets/eye.svg" className="w-4 h-4 mr-1" />
-								Брз преглед
+								Краток преглед
 							</button>
 							<button
 								onClick={() => openSubjectView(subject)}
-								className="flex items-center px-3 py-2 bg-gray-700 hover:bg-gray-900 text-white text-sm font-medium rounded-md transition-colors"
+								className="flex items-center px-3 py-2 bg-blue-600 hover:bg-blue-900 text-white text-sm font-medium rounded-md transition-colors"
 							>
 								<svg
 									className="w-4 h-4 mr-1"

@@ -1,20 +1,22 @@
 import React, { useState, ReactNode } from "react";
 import AuthContext, { AuthContextType } from "./AuthContext";
 import axiosInstance from "../api/axiosInstance";
+import { toast } from "react-toastify";
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [accessToken, setAccessToken] = useState<string | null>(
-    localStorage.getItem("access_token")
+    localStorage.getItem("access")
   );
   const [refreshToken, setRefreshToken] = useState<string | null>(
-    localStorage.getItem("refresh_token")
+    localStorage.getItem("refresh")
   );
   const refreshAccessToken = async (): Promise<string | null> => {
-    const refreshToken = localStorage.getItem("refresh_token");
+    const refreshToken = localStorage.getItem("refresh");
     if (!refreshToken) {
       logout();
+      toast.error("Session expired. Please log in again.");
       return null;
     }
     try {
@@ -24,12 +26,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       );
 
       const newAccessToken = response.data.access;
-      localStorage.setItem("access_token", newAccessToken);
+      localStorage.setItem("access", newAccessToken);
       setAccessToken(newAccessToken);
 
       if (response.data.refresh) {
         const newRefreshToken = response.data.refresh;
-        localStorage.setItem("refresh_token", newRefreshToken);
+        localStorage.setItem("refresh", newRefreshToken);
         setRefreshToken(newRefreshToken);
       }
 
@@ -42,15 +44,15 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   const login = (newAccessToken: string, newRefreshToken: string) => {
-    localStorage.setItem("access_token", newAccessToken);
-    localStorage.setItem("refresh_token", newRefreshToken);
+    localStorage.setItem("access", newAccessToken);
+    localStorage.setItem("refresh", newRefreshToken);
     setAccessToken(newAccessToken);
     setRefreshToken(newRefreshToken);
   };
 
   const logout = () => {
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("refresh_token");
+    localStorage.removeItem("access");
+    localStorage.removeItem("refresh");
     setAccessToken(null);
     setRefreshToken(null);
   };
