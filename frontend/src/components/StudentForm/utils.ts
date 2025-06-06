@@ -93,7 +93,7 @@ export const validateForm = ({
 	if (!studyTrack) errors.studyTrack = "Одбери насока.";
 	if (!year) errors.year = "Одбери година.";
 	if (!studyEffort) errors.studyEffort = "Одбери пожелен вложен труд.";
-	// passedSubjectsPerSemester e mapa ne e array, zatoa 1 ne 0
+	// passedSubjectsPerSemester is a map, not an array, that's why index 1 is needed, not 0
 	if (passedSubjectsPerSemester[1].length === 0)
 		errors.passedSubjectsPerSemester =
 			"Одбери барем еден предмет од прв семестар.";

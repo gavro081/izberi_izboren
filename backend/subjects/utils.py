@@ -93,6 +93,10 @@ def map_to_subjects_vector(subjects):
     
     return filtered_subject_vectors
 
+
+BIAS_SUBJECT_HAS_ONE = 0.75
+BIAS_STUDENT_HAS_ONE = 0.9
+
 def score_tags(student_vector, subject_vector):
     TAG_GRAPH_PATH = os.path.join(os.path.dirname(__file__), 'tag_graph.json')
 
@@ -103,8 +107,6 @@ def score_tags(student_vector, subject_vector):
     subject_tags = subject_vector['tags']
     score = 0
     tot_count = 0
-    BIAS_SUBJECT_HAS_ONE = 0.75
-    BIAS_STUDENT_HAS_ONE = 0.9
     for i in range(len(student_tags)):
         if student_tags[i] == 1 or subject_tags[i] == 1: tot_count += 1
         
@@ -123,16 +125,15 @@ def score_tags(student_vector, subject_vector):
     return score / tot_count
 
 def score_for_preferences(student_vector, eligible_subjects):
-    # K = 1
     filtered_subjects_vector = {}
     for subject in eligible_subjects:
         filtered_subjects_vector[subject] = {}
         values = eligible_subjects[subject]
         for key in student_vector:
             if key in ["index", "study_effort", "current_year"]: continue
-            # if key == "tags":
-            #     filtered_subjects_vector[subject][key] = score_tags(student_vector, values)
-            #     continue
+            if key == "tags":
+                filtered_subjects_vector[subject][key] = score_tags(student_vector, values)
+                continue
 
             student_values = student_vector[key]
             subject_values = values[key]
@@ -145,19 +146,14 @@ def score_for_preferences(student_vector, eligible_subjects):
                     if subject_values[i] == 1:
                         match_count += 1
             
-            
-            # score = (match_count + K) / (tot_count + K * len(student_values))
             score = match_count / tot_count if tot_count != 0 else 0
             filtered_subjects_vector[subject][key] = score
         
         study_effort = student_vector["study_effort"]
-        # current_year = student_vector["current_year"]
 
-        filtered_subjects_vector[subject]['effort'] = (1 - study_effort) * values['isEasy'] # 0 0.2 0.4 0.6 0.8 1
+        filtered_subjects_vector[subject]['effort'] = (1 - study_effort) * values['isEasy']
         filtered_subjects_vector[subject]['activated'] = values['activated']
         filtered_subjects_vector[subject]['participant_score'] = values['participants']
-
-
 
     return filtered_subjects_vector
 
@@ -170,6 +166,8 @@ WEIGHTS = {
     "activated": 0,
     "participant_score": 0.01,
 }
+
+NUMBER_OF_SUGGESTIONS = 7
 
 def get_recommendations(filtered_subjects_vector):
     subject_scores = {}
@@ -186,7 +184,5 @@ def get_recommendations(filtered_subjects_vector):
     for subject in subject_scores:
         subject_scores[subject] /= max_
     
-
-    N = 7
-    top_subjects = list(dict(sorted(subject_scores.items(), key=lambda item: item[1], reverse=True)))[:N]
+    top_subjects = list(dict(sorted(subject_scores.items(), key=lambda item: item[1], reverse=True)))[:NUMBER_OF_SUGGESTIONS]
     return top_subjects
