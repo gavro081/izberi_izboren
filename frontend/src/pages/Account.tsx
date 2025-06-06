@@ -26,7 +26,7 @@ const Account = () => {
                 // fails and the interceptor gives up. In that case, we should
                 // probably navigate the user away.
                 console.error("Could not fetch form data after retries.", error);
-                navigate("/login");
+                //navigate("/login");
             } finally {
                 // This will run whether the request succeeded or failed.
                 setIsLoading(false);

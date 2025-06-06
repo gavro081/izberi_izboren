@@ -55,7 +55,7 @@ class StudentFormView(APIView):
     def get_permissions(self):
         if self.request.method=='POST':
             return [IsAuthenticated(), CanSubmitForm(), IsStudent()]
-        elif self.request.method == 'PUT':
+        elif self.request.method == 'PATCH':
             return [IsAuthenticated(), IsStudent(), CanUpdateForm()]
         return [IsAuthenticated(), IsStudent()]
     

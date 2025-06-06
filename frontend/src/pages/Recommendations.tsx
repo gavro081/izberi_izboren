@@ -1,26 +1,18 @@
 import { useState } from "react";
 import { Subject } from "../components/types";
-import { useAuth } from "../hooks/useAuth";
+import useAxiosAuth from "../hooks/useAxiosAuth";
 
 const Recommendations = () => {
-	const { accessToken } = useAuth();
+	const axiosAuth  = useAxiosAuth();
 	const [recommendations, setRecommendations] = useState<Subject[]>([]);
 	const testAPI = async () => {
-		const start = performance.now();
-		console.log("fetching...");
-		fetch("http://localhost:8000/suggestion/", {
-			method: "GET",
-			headers: {
-				Authorization: `Bearer ${accessToken}`,
-				"Content-Type": "application/json",
-			},
-		})
-			.then((res) => res.json())
-			.then((data) => {
-				console.log(data.data);
-				setRecommendations(data.data);
-				console.log((performance.now() - start) / 1000);
-			});
+		try {
+			const response = await axiosAuth.get("/suggestion");
+			setRecommendations(response.data.data);
+		}
+		catch (error) {
+			console.error("Error fetching recommendations:", error);
+		}
 	};
 
 	return (

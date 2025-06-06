@@ -11,7 +11,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const [refreshToken, setRefreshToken] = useState<string | null>(
     localStorage.getItem("refresh_token")
   );
-
   const refreshAccessToken = async (): Promise<string | null> => {
     const refreshToken = localStorage.getItem("refresh_token");
     if (!refreshToken) {
@@ -20,7 +19,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     }
     try {
       const response = await axiosInstance.post<{ access: string; refresh?: string }>(
-        "http://localhost:8000/auth/refresh/",
+        "/auth/refresh/",
         { refresh: refreshToken }
       );
 
@@ -37,7 +36,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       return newAccessToken;
     } catch (error) {
       console.error("Error refreshing access token:", error);
-      return Promise.reject(error); // Propagate the error
+      logout();
+      return null;
     }
   };
 

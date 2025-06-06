@@ -65,7 +65,7 @@ class LoginSerializer(serializers.Serializer):
             data['user'] = user
             return data
         else:
-            serializers.ValidationError('Must include "email" and "password"')
+            raise serializers.ValidationError('Must include "email" and "password"')
 
 class StudentFormSerializer(serializers.ModelSerializer):
     passed_subjects = serializers.PrimaryKeyRelatedField(queryset=Subject.objects.all(), many=True)
