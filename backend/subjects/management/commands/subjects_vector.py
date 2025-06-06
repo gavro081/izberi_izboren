@@ -1,3 +1,4 @@
+from math import ceil
 from pathlib import Path
 import json
 from django.core.management.base import BaseCommand
@@ -20,7 +21,7 @@ class Command(BaseCommand):
 
         keys_to_extract = [
             "subject", "level", "activated", "participants", "semester",
-            "professors", "assistants", "tags", "technologies", "evaluation", "isEasy"
+            "professors", "assistants", "tags", "technologies", "evaluation", "isEasy", "season"
         ]
         subject_details = {}
 
@@ -51,8 +52,6 @@ class Command(BaseCommand):
                 distinct_evaluations.update(evaluation)
 
 
-        # vocabulary = list(sorted(distinct_professors)) + list(sorted(distinct_assistants)) + list(sorted(distinct_technologies)) \
-            # + list(sorted(distinct_tags)) + list(sorted(distinct_evaluations)) + ['isEasy', 'activated', 'participants'] 
 
         distinct_professors = sorted(distinct_professors)
         distinct_assistants = sorted(distinct_assistants)
@@ -81,8 +80,6 @@ class Command(BaseCommand):
             subject_vector['tags'] = []
             subject_vector['evaluation'] = []
             subject_vector['technologies'] = []
-            if subject_name == "Дигитална форензика":
-                print(values['tags'])
             for word in distinct_professors:
                 subject_vector['professors'].append(0 if word not in values['professors'] else 1)
             for word in distinct_assistants:
@@ -92,10 +89,13 @@ class Command(BaseCommand):
             for word in distinct_evaluations:
                 subject_vector['evaluation'].append(0 if word not in values['evaluation'] else 1)
             for word in distinct_technologies:
-                subject_vector['technolosgies'].append(0 if word not in values['technologies'] else 1)
-            
+                subject_vector['technologies'].append(0 if word not in values['technologies'] else 1)
+
             subject_vector['isEasy'] = 1 if values['isEasy'] else 0
             subject_vector['activated'] = 1 if values['activated'] else 0
+            # 0 - leten, 1 - zimski
+            subject_vector['season'] = 1 if values['season'] == 'W' else 0
+            subject_vector['year'] = ceil(values['semester'] / 2)
             participants = average(values['participants'])
             val = -1
             if participants < 100:

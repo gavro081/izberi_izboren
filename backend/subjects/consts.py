@@ -17,6 +17,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 1,
 		"participants": 1
 	},
 	"Бизнис и менаџмент": {
@@ -37,6 +39,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 1,
+		"year": 1,
 		"participants": 1
 	},
 	"Бизнис статистика": {
@@ -57,6 +61,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 1,
 		"participants": 1
 	},
 	"Вовед во компјутерските науки": {
@@ -77,6 +83,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 1,
 		"participants": 1
 	},
 	"Дизајн на дигитални кола": {
@@ -97,6 +105,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 1,
 		"participants": 0
 	},
 	"Дискретна математика": {
@@ -117,6 +127,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 1,
 		"participants": 1
 	},
 	"Дискретни структури 1": {
@@ -137,6 +149,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 1,
 		"participants": 0.5
 	},
 	"Дискретни структури 2": {
@@ -157,6 +171,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 1,
 		"participants": 0.5
 	},
 	"Е-учење": {
@@ -177,6 +193,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 0,
+		"year": 1,
 		"participants": 0
 	},
 	"Математика 1": {
@@ -197,6 +215,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 1,
 		"participants": 1
 	},
 	"Калкулус 1": {
@@ -217,6 +237,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 1,
 		"participants": 0.5
 	},
 	"Калкулус 2": {
@@ -237,6 +259,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 1,
 		"participants": 0.5
 	},
 	"Компјутерски архитектури": {
@@ -257,6 +281,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 1,
 		"participants": 0.5
 	},
 	"Компјутерски компоненти": {
@@ -277,6 +303,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 0,
+		"year": 1,
 		"participants": 0
 	},
 	"Креативни вештини за решавање проблеми": {
@@ -297,6 +325,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 0,
+		"year": 1,
 		"participants": 0
 	},
 	"Маркетинг": {
@@ -317,6 +347,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 0,
+		"year": 2,
 		"participants": 1
 	},
 	"Објектно ориентирана анализа и дизајн": {
@@ -337,6 +369,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 1,
 		"participants": 1
 	},
 	"Објектно-ориентирано програмирање": {
@@ -357,6 +391,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 1,
 		"participants": 1
 	},
 	"Основи на Веб дизајн": {
@@ -377,6 +413,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 1,
 		"participants": 1
 	},
 	"Основи на сајбер безбедноста": {
@@ -397,6 +435,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 0,
+		"year": 1,
 		"participants": 1
 	},
 	"Педагогија": {
@@ -417,6 +457,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 1,
+		"year": 1,
 		"participants": 0
 	},
 	"Професионални вештини": {
@@ -437,6 +479,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 1,
+		"year": 1,
 		"participants": 1
 	},
 	"Структурно програмирање": {
@@ -457,6 +501,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 1,
 		"participants": 1
 	},
 	"Физика": {
@@ -477,6 +523,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 1,
 		"participants": 0
 	},
 	"Алгоритми и податочни структури": {
@@ -497,6 +545,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 2,
 		"participants": 1
 	},
 	"Анализа на софтверските барања": {
@@ -517,6 +567,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 0,
+		"year": 2,
 		"participants": 1
 	},
 	"Безжични и мобилни системи": {
@@ -537,6 +589,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 2,
 		"participants": 0.5
 	},
 	"Веројатност и статистика": {
@@ -557,6 +611,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 2,
 		"participants": 1
 	},
 	"Вештачка интелигенција": {
@@ -577,6 +633,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 2,
 		"participants": 1
 	},
 	"Визуелно програмирање": {
@@ -597,6 +655,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 2,
 		"participants": 0.5
 	},
 	"Вовед во екоинформатиката": {
@@ -617,6 +677,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 0,
+		"year": 2,
 		"participants": 0
 	},
 	"Вовед во случајни процеси": {
@@ -637,6 +699,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 2,
 		"participants": 0
 	},
 	"Дигитално процесирање на слика": {
@@ -657,6 +721,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 0,
+		"year": 2,
 		"participants": 0.5
 	},
 	"Дигитизација": {
@@ -677,6 +743,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 1,
+		"year": 2,
 		"participants": 0.5
 	},
 	"Дизајн на алгоритми": {
@@ -697,6 +765,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 2,
 		"participants": 0
 	},
 	"Е-влада": {
@@ -717,6 +787,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 0,
+		"year": 2,
 		"participants": 1
 	},
 	"Економија за ИКТ инженери": {
@@ -737,6 +809,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 1,
+		"year": 2,
 		"participants": 1
 	},
 	"Електрични кола": {
@@ -757,6 +831,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 2,
 		"participants": 0
 	},
 	"Информатичко размислување во образованието": {
@@ -777,6 +853,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 0,
+		"year": 2,
 		"participants": 0
 	},
 	"Инженерска математика": {
@@ -797,6 +875,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 2,
 		"participants": 0
 	},
 	"Интернет програмирање на клиентска страна": {
@@ -817,6 +897,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 2,
 		"participants": 1
 	},
 	"Интернет технологии": {
@@ -837,6 +919,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 2,
 		"participants": 1
 	},
 	"Компјутерска графика": {
@@ -857,6 +941,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 2,
 		"participants": 0
 	},
 	"Компјутерски мрежи": {
@@ -877,6 +963,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 2,
 		"participants": 0.5
 	},
 	"Компјутерски мрежи и безбедност": {
@@ -897,6 +985,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 2,
 		"participants": 1
 	},
 	"Концепти на информатичко општество": {
@@ -917,6 +1007,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 0,
+		"year": 2,
 		"participants": 1
 	},
 	"Медиуми и комуникации": {
@@ -937,6 +1029,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 0,
+		"year": 2,
 		"participants": 1
 	},
 	"Мултимедијални технологии": {
@@ -957,6 +1051,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 1,
+		"year": 2,
 		"participants": 0.5
 	},
 	"Напредно програмирање": {
@@ -977,6 +1073,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 3,
 		"participants": 1
 	},
 	"Квантно пресметување": {
@@ -997,6 +1095,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 0,
+		"season": 1,
+		"year": 4,
 		"participants": 0
 	},
 	"Оперативни системи": {
@@ -1017,6 +1117,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 2,
 		"participants": 1
 	},
 	"Основи на комуникациски системи": {
@@ -1037,6 +1139,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 2,
 		"participants": 0
 	},
 	"Основи на теоријата на информации": {
@@ -1057,6 +1161,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 2,
 		"participants": 0
 	},
 	"Софтверско инженерство": {
@@ -1077,6 +1183,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 2,
 		"participants": 1
 	},
 	"Теорија на информации со дигитални комуникации": {
@@ -1097,6 +1205,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 2,
 		"participants": 0
 	},
 	"Управување со техничка поддршка": {
@@ -1117,6 +1227,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 2,
 		"participants": 1
 	},
 	"Шаблони за дизајн на кориснички интерфејси": {
@@ -1137,6 +1249,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 2,
 		"participants": 1
 	},
 	"Агентно-базирани системи": {
@@ -1157,6 +1271,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 3,
 		"participants": 0
 	},
 	"Администрација на мрежи": {
@@ -1177,6 +1293,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 3,
 		"participants": 0
 	},
 	"Администрација на системи": {
@@ -1197,6 +1315,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 3,
 		"participants": 0.5
 	},
 	"Бази на податоци": {
@@ -1217,6 +1337,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 3,
 		"participants": 1
 	},
 	"Вградливи микропроцесорски системи": {
@@ -1237,6 +1359,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 3,
 		"participants": 0
 	},
 	"Веб програмирање": {
@@ -1257,6 +1381,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 3,
 		"participants": 1
 	},
 	"Визуелизација": {
@@ -1277,6 +1403,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 1,
+		"year": 3,
 		"participants": 0.5
 	},
 	"Виртуелизација": {
@@ -1297,6 +1425,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 3,
 		"participants": 0
 	},
 	"Вовед во мрежна наука": {
@@ -1317,6 +1447,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 0,
+		"year": 3,
 		"participants": 0
 	},
 	"Вовед во науката за податоци": {
@@ -1337,6 +1469,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 3,
 		"participants": 1
 	},
 	"Географски информациски системи": {
@@ -1357,6 +1491,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 0,
+		"year": 3,
 		"participants": 0
 	},
 	"Дигитална форензика": {
@@ -1377,6 +1513,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 0,
+		"year": 3,
 		"participants": 0.5
 	},
 	"Дигитални библиотеки": {
@@ -1397,6 +1535,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 0,
+		"year": 3,
 		"participants": 0.5
 	},
 	"Дизајн и архитектура на софтвер": {
@@ -1417,6 +1557,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 3,
 		"participants": 1
 	},
 	"Дизајн на интеракцијата човек-компјутер": {
@@ -1437,6 +1579,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 3,
 		"participants": 1
 	},
 	"Дизајн на образовен софтвер": {
@@ -1457,6 +1601,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 1,
+		"year": 3,
 		"participants": 0.5
 	},
 	"Електронска и мобилна трговија": {
@@ -1477,6 +1623,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 3,
 		"participants": 1
 	},
 	"Интегрирани системи": {
@@ -1497,6 +1645,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 3,
 		"participants": 1
 	},
 	"Информациска безбедност": {
@@ -1517,6 +1667,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 3,
 		"participants": 0
 	},
 	"Инфраструктурно програмирање": {
@@ -1537,6 +1689,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 0,
+		"season": 0,
+		"year": 4,
 		"participants": 0
 	},
 	"Компјутерска електроника": {
@@ -1557,6 +1711,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 3,
 		"participants": 0
 	},
 	"Компјутерска етика": {
@@ -1577,6 +1733,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 1,
+		"year": 3,
 		"participants": 0.5
 	},
 	"Компјутерски звук, музика и говор": {
@@ -1597,6 +1755,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 3,
 		"participants": 0
 	},
 	"Континуирана интеграција и испорака": {
@@ -1617,6 +1777,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 3,
 		"participants": 0.5
 	},
 	"Криптографија": {
@@ -1637,6 +1799,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 3,
 		"participants": 0
 	},
 	"Линеарна алгебра и примени": {
@@ -1657,6 +1821,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 3,
 		"participants": 0.5
 	},
 	"Машинско учење": {
@@ -1677,6 +1843,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 3,
 		"participants": 0.5
 	},
 	"Мерење и анализа на сообраќај": {
@@ -1697,6 +1865,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 0,
+		"season": 0,
+		"year": 3,
 		"participants": 0
 	},
 	"Сајбер безбедност": {
@@ -1717,6 +1887,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 3,
 		"participants": 0.5
 	},
 	"Мултимедиски мрежи": {
@@ -1737,6 +1909,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 3,
 		"participants": 0.5
 	},
 	"Мултимедиски системи": {
@@ -1757,6 +1931,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 0,
+		"year": 3,
 		"participants": 1
 	},
 	"Напреден веб дизајн": {
@@ -1777,6 +1953,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 3,
 		"participants": 0.5
 	},
 	"Основи на роботиката": {
@@ -1797,6 +1975,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 3,
 		"participants": 0.5
 	},
 	"Паралелно и дистрибуирано процесирање": {
@@ -1817,6 +1997,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 3,
 		"participants": 0
 	},
 	"Паралелно програмирање": {
@@ -1837,6 +2019,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 3,
 		"participants": 0
 	},
 	"Персонализирано учење": {
@@ -1857,6 +2041,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 0,
+		"season": 1,
+		"year": 3,
 		"participants": 0
 	},
 	"Податочно рударење": {
@@ -1877,6 +2063,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 3,
 		"participants": 0
 	},
 	"Процесирање на сигналите": {
@@ -1897,6 +2085,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 3,
 		"participants": 0
 	},
 	"Вештачка интелигенција за игри": {
@@ -1917,6 +2107,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 0,
+		"season": 0,
+		"year": 3,
 		"participants": 0
 	},
 	"Психологија на училишна возраст": {
@@ -1937,6 +2129,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 0,
+		"year": 3,
 		"participants": 1
 	},
 	"Работа со надарени ученици": {
@@ -1957,6 +2151,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 0,
+		"year": 3,
 		"participants": 0
 	},
 	"Сервисно ориентирани архитектури": {
@@ -1977,6 +2173,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 3,
 		"participants": 0
 	},
 	"Современи компјутерски архитектури": {
@@ -1997,6 +2195,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 0,
+		"season": 1,
+		"year": 3,
 		"participants": 0
 	},
 	"Софтверски дефинирана безбедност": {
@@ -2017,6 +2217,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 3,
 		"participants": 0
 	},
 	"Софтверски квалитет и тестирање": {
@@ -2037,6 +2239,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 3,
 		"participants": 1
 	},
 	"Автоматизирање на процеси во машинско учење": {
@@ -2057,6 +2261,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 3,
 		"participants": 0
 	},
 	"Учење на далечина": {
@@ -2077,6 +2283,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 0,
+		"year": 3,
 		"participants": 0.5
 	},
 	"Основи на теоријата на компјутерските науки": {
@@ -2097,6 +2305,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 3,
 		"participants": 0.5
 	},
 	"Автономна роботика": {
@@ -2117,6 +2327,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 0,
+		"season": 1,
+		"year": 4,
 		"participants": 0
 	},
 	"Администрација на бази податоци": {
@@ -2137,6 +2349,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 4,
 		"participants": 0
 	},
 	"Анализа и дизајн на ИС": {
@@ -2157,6 +2371,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 4,
 		"participants": 0.5
 	},
 	"Биолошки инспирирано пресметување": {
@@ -2177,6 +2393,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 4,
 		"participants": 0
 	},
 	"Блоковски вериги и криптовалути": {
@@ -2197,6 +2415,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 0,
+		"season": 1,
+		"year": 4,
 		"participants": 0
 	},
 	"Веб базирани системи": {
@@ -2217,6 +2437,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 4,
 		"participants": 0.5
 	},
 	"Веб пребарувачки системи": {
@@ -2237,6 +2459,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 4,
 		"participants": 0
 	},
 	"Виртуелна реалност": {
@@ -2257,6 +2481,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 0,
+		"year": 4,
 		"participants": 0.5
 	},
 	"Вовед во анализа на временските серии": {
@@ -2277,6 +2503,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 4,
 		"participants": 0
 	},
 	"Вовед во биоинформатиката": {
@@ -2297,6 +2525,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 4,
 		"participants": 0
 	},
 	"Вовед во когнитивни науки": {
@@ -2317,6 +2547,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 0,
+		"year": 4,
 		"participants": 0
 	},
 	"Вовед во паметни градови": {
@@ -2337,6 +2569,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 0,
+		"season": 1,
+		"year": 4,
 		"participants": 0
 	},
 	"Вовед во препознавање на облици": {
@@ -2357,6 +2591,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 4,
 		"participants": 0
 	},
 	"Дигитална постпродукција": {
@@ -2377,6 +2613,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 0,
+		"season": 1,
+		"year": 4,
 		"participants": 0
 	},
 	"Дизајн на компјутерски мрежи": {
@@ -2397,6 +2635,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 4,
 		"participants": 0
 	},
 	"Дипломска работа": {
@@ -2417,6 +2657,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 0,
+		"season": 0,
+		"year": 4,
 		"participants": 0
 	},
 	"Дистрибуирани системи": {
@@ -2437,6 +2679,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 4,
 		"participants": 0
 	},
 	"Дистрибуирано складирање на податоци": {
@@ -2457,6 +2701,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 0,
+		"season": 1,
+		"year": 4,
 		"participants": 0
 	},
 	"Етичко хакирање": {
@@ -2477,6 +2723,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 4,
 		"participants": 0
 	},
 	"ИКТ за развој": {
@@ -2497,6 +2745,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 0,
+		"year": 4,
 		"participants": 0
 	},
 	"Имплементација на софтверски системи со слободен и отворен код": {
@@ -2517,6 +2767,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 4,
 		"participants": 0.5
 	},
 	"Иновации во ИКТ": {
@@ -2537,6 +2789,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 1,
+		"year": 4,
 		"participants": 0
 	},
 	"Откривање знаење со длабоко учење": {
@@ -2557,6 +2811,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 4,
 		"participants": 0
 	},
 	"Интелигентни системи": {
@@ -2577,6 +2833,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 4,
 		"participants": 0
 	},
 	"Интернет на нештата": {
@@ -2597,6 +2855,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 4,
 		"participants": 0
 	},
 	"Компјутерска анимација": {
@@ -2617,6 +2877,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 0,
+		"season": 0,
+		"year": 3,
 		"participants": 0
 	},
 	"Компјутерски поддржано производство": {
@@ -2637,6 +2899,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 4,
 		"participants": 0
 	},
 	"Македонски јазик": {
@@ -2657,6 +2921,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 0,
+		"season": 0,
+		"year": 4,
 		"participants": 0
 	},
 	"Машинска визија": {
@@ -2677,6 +2943,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 0,
+		"season": 1,
+		"year": 4,
 		"participants": 0
 	},
 	"Менаџмент информациски системи": {
@@ -2697,6 +2965,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 1,
+		"year": 4,
 		"participants": 1
 	},
 	"Методика на информатиката": {
@@ -2717,6 +2987,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 0,
+		"year": 4,
 		"participants": 0
 	},
 	"Методологија на истражувањето во ИКТ": {
@@ -2737,6 +3009,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 1,
+		"year": 4,
 		"participants": 0.5
 	},
 	"Мобилни апликации": {
@@ -2757,6 +3031,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 4,
 		"participants": 0
 	},
 	"Мобилни информациски системи": {
@@ -2777,6 +3053,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 4,
 		"participants": 0.5
 	},
 	"Мобилни платформи и програмирање": {
@@ -2797,6 +3075,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 4,
 		"participants": 0
 	},
 	"Моделирање и менаџирање на бизнис процеси": {
@@ -2817,6 +3097,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 0,
+		"year": 4,
 		"participants": 0
 	},
 	"Моделирање и симулација": {
@@ -2837,6 +3119,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 0,
+		"season": 0,
+		"year": 4,
 		"participants": 0
 	},
 	"Модерни трендови во роботика": {
@@ -2857,6 +3141,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 0,
+		"season": 0,
+		"year": 4,
 		"participants": 0
 	},
 	"Мрежна и мобилна форензика": {
@@ -2877,6 +3163,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 4,
 		"participants": 0
 	},
 	"Напредна интеракција човек компјутер": {
@@ -2897,6 +3185,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 4,
 		"participants": 0
 	},
 	"Напредни бази на податоци": {
@@ -2917,6 +3207,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 3,
 		"participants": 0
 	},
 	"Web3 апликации": {
@@ -2937,6 +3229,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 0,
+		"season": 0,
+		"year": 4,
 		"participants": 0
 	},
 	"Неструктурирани бази на податоци": {
@@ -2957,6 +3251,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 4,
 		"participants": 0
 	},
 	"Обработка на природните јазици": {
@@ -2977,6 +3273,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 3,
 		"participants": 0
 	},
 	"Операциони истражувања": {
@@ -2997,6 +3295,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 0,
+		"season": 0,
+		"year": 4,
 		"participants": 0
 	},
 	"Оптички мрежи": {
@@ -3017,6 +3317,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 0,
+		"season": 1,
+		"year": 4,
 		"participants": 0
 	},
 	"Пресметување во облак": {
@@ -3037,6 +3339,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 4,
 		"participants": 0
 	},
 	"Претприемништво": {
@@ -3057,6 +3361,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 0,
+		"year": 4,
 		"participants": 0.5
 	},
 	"Програмирање на видео игри": {
@@ -3077,6 +3383,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 4,
 		"participants": 1
 	},
 	"Програмски јазици и компајлери": {
@@ -3097,6 +3405,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 0,
+		"season": 0,
+		"year": 4,
 		"participants": 0
 	},
 	"Програмски парадигми": {
@@ -3117,6 +3427,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 4,
 		"participants": 0
 	},
 	"Вовед во рударење на масивни податоци": {
@@ -3137,6 +3449,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 4,
 		"participants": 0
 	},
 	"Самостоен проект": {
@@ -3157,6 +3471,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 0,
+		"season": 1,
+		"year": 4,
 		"participants": 0
 	},
 	"Системи за поддршка при одлучувањето": {
@@ -3177,6 +3493,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 1,
+		"year": 4,
 		"participants": 0.5
 	},
 	"Складови на податоци и аналитичка обработка": {
@@ -3197,6 +3515,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 3,
 		"participants": 0
 	},
 	"Софтвер за вградливи системи": {
@@ -3217,6 +3537,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 4,
 		"participants": 0
 	},
 	"Софтверски дефинирани мрежи": {
@@ -3237,6 +3559,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 4,
 		"participants": 0
 	},
 	"Теорија на графови и социјални мрежи": {
@@ -3257,6 +3581,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 3,
 		"participants": 0
 	},
 	"Споделување и пресметување во толпа": {
@@ -3277,6 +3603,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 0,
+		"season": 0,
+		"year": 4,
 		"participants": 0
 	},
 	"Тимски проект": {
@@ -3297,6 +3625,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 1,
+		"year": 4,
 		"participants": 1
 	},
 	"Управување со ИКТ проекти": {
@@ -3317,6 +3647,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 1,
+		"season": 0,
+		"year": 4,
 		"participants": 1
 	},
 	"Примена на алгоритми и податочни структури": {
@@ -3337,6 +3669,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 2,
 		"participants": 0.5
 	},
 	"Математика 3": {
@@ -3357,6 +3691,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 2,
 		"participants": 0.5
 	},
 	"Избрани теми од математика": {
@@ -3377,6 +3713,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 1,
 		"participants": 1
 	},
 	"Математика 2": {
@@ -3397,6 +3735,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 0,
+		"year": 1,
 		"participants": 1
 	},
 	"Тестирање на софтвер": {
@@ -3417,6 +3757,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 1,
+		"season": 1,
+		"year": 4,
 		"participants": 0
 	},
 	"Сензорски системи": {
@@ -3437,6 +3779,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 0,
+		"season": 1,
+		"year": 4,
 		"participants": 0
 	},
 	"Адаптивни и интерактивни веб информациски системи": {
@@ -3457,6 +3801,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 0,
+		"season": 0,
+		"year": 4,
 		"participants": 0
 	},
 	"Спорт и здравје": {
@@ -3477,6 +3823,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 1,
 		"activated": 0,
+		"season": 1,
+		"year": 1,
 		"participants": 0
 	},
 	"Деловна пракса": {
@@ -3497,6 +3845,8 @@ SUBJECTS_VECTOR = {
 		],
 		"isEasy": 0,
 		"activated": 0,
+		"season": 0,
+		"year": 2,
 		"participants": 0
 	}
 }
