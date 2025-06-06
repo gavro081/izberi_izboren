@@ -4597,7 +4597,7 @@
 		"prerequisite": {
 			"credits": 36
 		},
-		"activated": false,
+		"activated": true,
 		"participants": [0, 0, 0],
 		"mandatory": true,
 		"mandatoryFor": ["SIIS23", "PIT23"],

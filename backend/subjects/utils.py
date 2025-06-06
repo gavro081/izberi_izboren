@@ -3,7 +3,6 @@ from subjects.management.commands import subjects_vector
 from subjects.models import Subject
 from pathlib import Path
 import json
-from numpy import average
 from django.db.models import Q
 import os
 
@@ -22,11 +21,14 @@ def get_eligible_subjects(student, season = 2):
         .exclude(id__in=passed_ids)
         .select_related('subject_info')
     )
+
+
     if season != 2:
         if season == 0:
             all_subjects = all_subjects.exclude(subject_info__season='W')
         elif season == 1:
             all_subjects = all_subjects.exclude(subject_info__season='S')
+
 
     if study_effort < 3:
         all_subjects = all_subjects.exclude(subject_info__semester__gt=current_year * 2)
@@ -122,7 +124,7 @@ def score_tags(student_vector, subject_vector):
                 for neighbor in neighbors:
                     if student_tags[neighbor] == 1: score += 1 / len(neighbors) * BIAS_SUBJECT_HAS_ONE
     
-    return score / tot_count
+    return score / tot_count if tot_count != 0 else 0
 
 def score_for_preferences(student_vector, eligible_subjects):
     filtered_subjects_vector = {}
@@ -150,20 +152,28 @@ def score_for_preferences(student_vector, eligible_subjects):
             filtered_subjects_vector[subject][key] = score
         
         study_effort = student_vector["study_effort"]
+        if 0 < study_effort < 1:
+            filtered_subjects_vector[subject]['effort'] = (1 - study_effort) * values['isEasy']
+        
+        # ako on se zamara (study_effort == 1) i predmetot ima isEasy e true onda 0 (ne ni e gajle za vakvite), 
+        # ako on ne se zaamra (study_effort == 0) i predmetot ima isEasy e false onda pak 0 (ne ni e gajle za vakvite),
+        # vo sprotivno 1 deka se zamara i e tezok i obratno ne se zamara i e lesen 
+        else:
+            filtered_subjects_vector[subject]['effort'] = 1 * (1 - values['isEasy'])
 
-        filtered_subjects_vector[subject]['effort'] = (1 - study_effort) * values['isEasy']
-        filtered_subjects_vector[subject]['activated'] = values['activated']
+        filtered_subjects_vector[subject]['activated'] = 1
+
         filtered_subjects_vector[subject]['participant_score'] = values['participants']
 
     return filtered_subjects_vector
 
 WEIGHTS = {
-    "professors": 0.02,
-    "technologies": 0.02,
-    "tags": 0.55,
+    "professors": 0.04,
+    "technologies": 0.04,
+    "tags": 0.5,
     "evaluation": 0.1, 
     "effort": 0.3,
-    "activated": 0,
+    "activated": 0.01,
     "participant_score": 0.01,
 }
 
@@ -179,10 +189,9 @@ def get_recommendations(filtered_subjects_vector):
             score += WEIGHTS[key] * keys[key]
         max_ = max(score, max_)
         subject_scores[subject] = score
-    
     if max_ == 0: return filtered_subjects_vector.keys()
     for subject in subject_scores:
         subject_scores[subject] /= max_
-    
+
     top_subjects = list(dict(sorted(subject_scores.items(), key=lambda item: item[1], reverse=True)))[:NUMBER_OF_SUGGESTIONS]
     return top_subjects

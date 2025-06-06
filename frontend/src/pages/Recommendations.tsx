@@ -49,7 +49,7 @@ const Recommendations = () => {
     subjectData.forEach((subject) => {
       map.set(subject.id, subject.name);
     });
-	return map;
+    return map;
   }, [subjectData]);
 
   const cycleSeason = () => {
@@ -67,9 +67,7 @@ const Recommendations = () => {
   const [selectedSubject, setSelectedSubject] = useState<Subject | null>(null);
 
   const openSubjectDetails = (subject: Subject) => {
-    setSelectedSubject(
-      subjectData.find((item) => item.id == subject.id) ?? null
-    );
+    setSelectedSubject(subject);
     setShowModal(true);
   };
 
@@ -95,7 +93,11 @@ const Recommendations = () => {
         <div className="text-center">
           <h1 className="text-4xl font-bold text-gray-800 mb-2">Препораки</h1>
           <p className="text-gray-600 text-lg">
-            Откријте ги вашите идеални предмети!
+            Предметите што ќе ги добиете од алгоритамот се базирани на она што
+            сте го пополниле во формата.
+            <br />
+            Тие се подредени според тоа колку вашите интереси се совпаѓаат со
+            она што го нудат предметите.
           </p>
         </div>
 
@@ -150,7 +152,8 @@ const Recommendations = () => {
               {recommendations.map((subject, index) => (
                 <div
                   key={subject.id}
-                  className={`border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 relative ${
+                  // Added the `group` class here to enable group-hover functionality.
+                  className={`group border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 relative ${
                     index % 2 === 0 ? "self-start" : "self-end"
                   }`}
                   style={{
@@ -159,6 +162,24 @@ const Recommendations = () => {
                     animation: "fadeInUp 0.6s ease-out forwards",
                   }}
                 >
+                  {/* Badge Logic: Prioritizes the warning, and shows the selected badge only on hover. */}
+
+                  {/* 1. First, check for the most critical warning. */}
+                  {subject.subject_info.activated === false ? (
+                    <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                      <span className="bg-red-500 text-white font-bold px-3 py-1 rounded-full shadow-lg text-xs">
+                        ⚠️ Никогаш не бил активиран!
+                      </span>
+                    </div>
+                  ) : index === 0 ? (
+                    // 2. Only if the first check is false, check for the "best fit" condition.
+                    <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                      <span className="bg-blue-600 text-white font-bold px-3 py-1 rounded-full shadow-lg text-xs">
+                        ⭐ Најсоодветен!
+                      </span>
+                    </div>
+                  ) : null}
+
                   <div className="p-4 min-h-full flex flex-col gap-1">
                     <div className="flex justify-between items-start mb-2">
                       <div>
