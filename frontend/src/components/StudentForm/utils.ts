@@ -48,8 +48,6 @@ export function LatinToCyrillic(text: string): string {
 	return result;
 }
 
-// console.log(LatinToCyrillic("abvgdGjezhzijklLjmnnjOprstkjufhcchdjsh"));
-
 export const toggleSelection = (
 	value: string | number,
 	setter: React.Dispatch<React.SetStateAction<any[]>>,

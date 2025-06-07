@@ -292,13 +292,13 @@ function SubjectView() {
 						<div className="bg-white rounded-lg shadow-sm p-6">
 							<h2 className="text-xl font-semibold mb-4 flex items-center">
 								<Tag className="w-5 h-5 mr-2" />
-								Тагови
+								Домени
 							</h2>
 							<div className="flex flex-wrap gap-3">
 								{selectedSubject.subject_info.tags.map((tag, index) => (
 									<span
 										key={index}
-										className="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium"
+										className="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium"
 									>
 										{tag}
 									</span>

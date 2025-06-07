@@ -35,7 +35,8 @@ const Recommendations = () => {
     }
   };
 
-  // need to fetch subject data so that we can compare the subject IDs (prerequisites store IDs, but we need names) in the modals for the recommendations
+  // need to fetch subject data so that we can compare the subject IDs (prerequisites store IDs, but we need names)
+  //  in the modals for the recommendations
   useEffect(() => {
     const fetchData = async () => {
       const response = await axiosAuth.get("/subjects");
@@ -162,24 +163,6 @@ const Recommendations = () => {
                     animation: "fadeInUp 0.6s ease-out forwards",
                   }}
                 >
-                  {/* Badge Logic: Prioritizes the warning, and shows the selected badge only on hover. */}
-
-                  {/* 1. First, check for the most critical warning. */}
-                  {subject.subject_info.activated === false ? (
-                    <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-                      <span className="bg-red-500 text-white font-bold px-3 py-1 rounded-full shadow-lg text-xs">
-                        ⚠️ Никогаш не бил активиран!
-                      </span>
-                    </div>
-                  ) : index === 0 ? (
-                    // 2. Only if the first check is false, check for the "best fit" condition.
-                    <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-                      <span className="bg-blue-600 text-white font-bold px-3 py-1 rounded-full shadow-lg text-xs">
-                        ⭐ Најсоодветен!
-                      </span>
-                    </div>
-                  ) : null}
-
                   <div className="p-4 min-h-full flex flex-col gap-1">
                     <div className="flex justify-between items-start mb-2">
                       <div>
@@ -190,18 +173,19 @@ const Recommendations = () => {
                       </div>
                     </div>
 
-                    {subject.subject_info?.tags && (
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {subject.subject_info.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="bg-green-100 border-green-300 text-green-800 text-xs px-2 py-1 rounded"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    )}
+                    {/* Badge Logic: Prioritizes the warning, and shows the selected badge only on hover. */}
+                    {/* 1. First, check for the most critical warning. */}
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      {subject.subject_info.activated === false ? (
+                        <span className="bg-red-500 text-white font-bold px-3 py-1 rounded-full shadow-lg text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                          ⚠️ Никогаш не бил активиран!
+                        </span>
+                      ) : index === 0 ? (
+                        <span className="bg-blue-600 text-white font-bold px-3 py-1 rounded-full shadow-lg text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                          ⭐ Најсоодветен!
+                        </span>
+                      ) : null}
+                    </div>
 
                     <div className="flex justify-between mt-auto gap-3">
                       <button
