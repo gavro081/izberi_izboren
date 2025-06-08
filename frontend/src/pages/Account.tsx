@@ -19,7 +19,7 @@ const Account = () => {
                 const resForm = await axiosAuth.get("/auth/form/");
                 setFormData(resForm.data);
             } catch (error) {
-                console.error("Error fetching form data:", error);
+                console.error(error);
                 toast.error("Could not fetch form data after retries.");
                 logout()
                 navigate("/login");

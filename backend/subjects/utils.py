@@ -152,14 +152,18 @@ def score_for_preferences(student_vector, eligible_subjects):
             filtered_subjects_vector[subject][key] = score
         
         study_effort = student_vector["study_effort"]
-        if 0 < study_effort < 1:
-            filtered_subjects_vector[subject]['effort'] = (1 - study_effort) * values['isEasy']
+
+        filtered_subjects_vector[subject]['effort'] = (1 - study_effort) * values['isEasy']
+
+        # sorry about this!!!
+        # if 0 < study_effort < 1:
+        #     filtered_subjects_vector[subject]['effort'] = (1 - study_effort) * values['isEasy']
         
         # ako on se zamara (study_effort == 1) i predmetot ima isEasy e true onda 0 (ne ni e gajle za vakvite), 
         # ako on ne se zaamra (study_effort == 0) i predmetot ima isEasy e false onda pak 0 (ne ni e gajle za vakvite),
         # vo sprotivno 1 deka se zamara i e tezok i obratno ne se zamara i e lesen 
-        else:
-            filtered_subjects_vector[subject]['effort'] = 1 * (1 - values['isEasy'])
+        # else:
+        #     filtered_subjects_vector[subject]['effort'] = study_effort * (1 - values['isEasy'])
 
         filtered_subjects_vector[subject]['activated'] = 1
 

@@ -99,9 +99,6 @@ const Navbar: React.FC = () => {
 							<Link to="/login" className="hover:underline">
 								Најави се
 							</Link>
-							<Link to="/register" className="hover:underline">
-								Регистрирај се
-							</Link>
 						</>
 					)}
 				</div>
@@ -136,9 +133,6 @@ const Navbar: React.FC = () => {
 						<>
 							<Link to="/login" onClick={() => setMenuOpen(false)}>
 								Најави се
-							</Link>
-							<Link to="/register" onClick={() => setMenuOpen(false)}>
-								Регистрирај се
 							</Link>
 						</>
 					)}
