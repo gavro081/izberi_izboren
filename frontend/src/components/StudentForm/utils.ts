@@ -88,13 +88,13 @@ export const validateForm = ({
 	} else if (!/^\d{6}$/.test(index)) {
 		errors.index = "Индексот треба да има точно 6 цифри.";
 	}
-	if (!studyTrack) errors.studyTrack = "Одбери насока.";
-	if (!year) errors.year = "Одбери година.";
-	if (!studyEffort) errors.studyEffort = "Одбери пожелен вложен труд.";
+	if (!studyTrack) errors.studyTrack = "Избери насока.";
+	if (!year) errors.year = "Избери година.";
+	if (!studyEffort) errors.studyEffort = "Избери пожелен вложен труд.";
 	// passedSubjectsPerSemester is a map, not an array, that's why index 1 is needed, not 0
 	if (passedSubjectsPerSemester[1].length === 0)
 		errors.passedSubjectsPerSemester =
-			"Одбери барем еден предмет од прв семестар.";
+			"Избери барем еден предмет од прв семестар.";
 
 	const passedSubjects = getPassedSubjects(passedSubjectsPerSemester);
 	const invalid = checkPrerequisites(
