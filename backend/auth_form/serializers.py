@@ -72,7 +72,7 @@ class StudentFormSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Student
-        exclude = ['user', 'has_filled_form', 'id']
+        exclude = ['user', 'id']
     
     def to_representation(self, instance):
         rep = super().to_representation(instance)

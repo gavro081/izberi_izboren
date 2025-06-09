@@ -5,6 +5,7 @@ import eyeOffIcon from "../assets/eye-off.svg";
 interface PasswordInputProps {
   name: string;
   value: string;
+  placeholder: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   error?: string;
 }
@@ -12,6 +13,7 @@ interface PasswordInputProps {
 const PasswordInput: React.FC<PasswordInputProps> = ({
   name,
   value,
+  placeholder,
   onChange,
   error,
 }) => {
@@ -29,7 +31,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
         value={value}
         onChange={onChange}
         className="w-full mb-3 p-2 border rounded"
-        placeholder="Password"
+        placeholder={placeholder}
         required
       />
       <button

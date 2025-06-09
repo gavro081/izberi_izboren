@@ -34,6 +34,10 @@ const Recommendations = () => {
 		} finally {
 			setIsLoading(false);
 			setHasSearched(true);
+			const container = document.querySelector(".flex-1.p-8.overflow-y-auto");
+			if (container) {
+				container.scrollTo({ top: 0, behavior: "smooth" });
+			}
 		}
 	};
 
@@ -107,7 +111,9 @@ const Recommendations = () => {
 
 				<button onClick={cycleSeason}>
 					<div className="bg-blue-500 border border-blue-200 rounded-lg p-6 font-semibold text-white text-center hover:bg-blue-800 transition-colors duration-200">
-						<p className="text-white mb-3">Избран семестар: </p>
+						<p className="text-white mb-3">
+							{season_ === "all" ? "Избрани семестри:" : "Избран семестар:"}
+						</p>
 						<p className="text-2xl">{getSeasonText()}</p>
 					</div>
 				</button>
@@ -152,13 +158,15 @@ const Recommendations = () => {
 							{recommendations.map((subject, index) => (
 								<div
 									key={subject.id}
-									// Added the `group` class here to enable group-hover functionality.
 									className={`h-56 border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 relative ${
 										index % 2 === 0 ? "self-start" : "self-end"
 									}`}
 									style={{
+										animationName: "fadeInUp",
+										animationDuration: "0.6s",
+										animationTimingFunction: "ease-out",
+										animationFillMode: "forwards",
 										animationDelay: `${index * 100}ms`,
-										animation: "fadeInUp 0.6s ease-out forwards",
 									}}
 								>
 									<div className="p-4 min-h-full flex flex-col gap-1">

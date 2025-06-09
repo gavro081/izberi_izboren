@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import PasswordInput from "../components/PasswordInput";
 import { useAuth } from "../hooks/useAuth";
+import { toast } from "react-toastify";
 
 interface LoginForm {
   email: string;
@@ -42,6 +43,7 @@ const Login: React.FC = () => {
       const { access, refresh } = response.data;
       login(access, refresh);
       navigate("/");
+      toast.success("Успешно сте најавени!");
     } catch (err: unknown) {
       const axiosError = err as AxiosError<{
         [key: string]: string[] | string;

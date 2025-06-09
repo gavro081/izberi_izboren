@@ -104,11 +104,13 @@ const Register: React.FC = () => {
 					name="password"
 					value={formData.password}
 					onChange={handleChange}
+					placeholder="Лозинка"
 					error={errors.password ? errors.password[0] : undefined}
 				/>
 				<PasswordInput
 					name="confirmPassword"
 					value={formData.confirmPassword}
+					placeholder="Потврди ја лозинката"
 					onChange={handleChange}
 				/>
 				{errors.confirmPassword && (

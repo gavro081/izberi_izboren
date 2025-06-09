@@ -6,7 +6,6 @@ import {
 	STUDY_TRACKS,
 	YEARS,
 } from "../../constants/subjects";
-import { useAuth } from "../../hooks/useAuth";
 import { StudentData, StudyTrack, Subject } from "../types";
 import FieldButton from "./FieldButton";
 import SkeletonForm from "./SkeletonForm";
@@ -17,6 +16,7 @@ import {
 	mapToID,
 	validateForm,
 } from "./utils";
+import useAxiosAuth from "../../hooks/useAxiosAuth";
 
 interface StudentFormProps {
 	formData: StudentData | null;
@@ -31,8 +31,8 @@ interface DistinctSubjectData {
 }
 
 const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
-	const { accessToken } = useAuth();
-	const [isSubmitted, setIsSubmitted] = useState(false);
+	const axiosAuth = useAxiosAuth();
+	const [hasSubmitted, setHasSubmitted] = useState(false);
 	const [validationErrors, setValidationErrors] = useState<{
 		[key: string]: string;
 	}>({});
@@ -245,35 +245,23 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 		};
 		try {
 			// For updating existing form data use PATCH instead of PUT for partial updates
-			const method = formData?.current_year || isSubmitted ? "PATCH" : "POST";
-			const endpoint = "http://localhost:8000/auth/form/";
-			const res = await fetch(endpoint, {
+			const method = formData?.has_filled_form  ? "PATCH" : "POST";
+			await axiosAuth({
+				url: "/auth/form/",
 				method,
-				headers: {
-					"Content-Type": "application/json",
-					Authorization: `Bearer ${accessToken}`,
-				},
-				body: JSON.stringify(payload),
+				data: payload,
+			});	
+			setHasSubmitted(true);
+			setFormStatus({
+				isSubmitting: false,
+				message: "Формата е успешно зачувана!",
+				isError: false,
 			});
-
-			if (res.ok) {
-				setFormStatus({
-					isSubmitting: false,
-					message: "Формата е успешно зачувана!",
-					isError: false,
-				});
-				setTimeout(() => {
-					setFormStatus((prev) => ({ ...prev, message: "" }));
-				}, 5000);
-			} else {
-				const errorData = await res.json();
-				throw new Error(errorData.message || "Error submitting form");
-			}
-			setIsSubmitted(true);
+			setTimeout(() => {
+				setFormStatus((prev) => ({ ...prev, message: "" }));
+			}, 5000);
 			window.scrollTo({ top: 0, behavior: "smooth" });
 		} catch (error) {
-			console.error("Form submission error:", error);
-
 			setFormStatus({
 				isSubmitting: false,
 				message: `Грешка при зачувување: ${(error as Error).message}`,
@@ -325,7 +313,7 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 	return (
 		<form onSubmit={handleSubmit} className="space-y-6 max-w-4xl mx-auto">
 			<h2 className="text-2xl font-bold mb-4 text-center">
-				{isSubmitted || formData?.current_year
+				{formData?.has_filled_form || hasSubmitted
 					? "Ажурирај ги податоците"
 					: "Внеси податоци"}
 			</h2>
@@ -630,7 +618,7 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 				>
 					{formStatus.isSubmitting
 						? "Се зачувува..."
-						: formData?.current_year
+						: formData?.has_filled_form || hasSubmitted
 						? "Ажурирај"
 						: "Зачувај"}
 				</button>

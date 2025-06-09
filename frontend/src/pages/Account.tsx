@@ -24,12 +24,14 @@ const Account = () => {
                 logout()
                 navigate("/login");
             } finally {
+                // garantira deka nema da dobies za 1/4s (arbitrary) skeletonform iako loadnal data
+                await new Promise((resolve) => setTimeout(resolve, 250));
                 setIsLoading(false);
             }
         };
 
         fetchData();
-    }, [axiosAuth, navigate]); 
+    }, [axiosAuth, logout, navigate]); 
 
     return (
         <div className="p-4">

@@ -21,6 +21,7 @@ export interface StudentData {
 	technologies: string[];
 	evaluation: string[];
 	professors: string[];
+	has_filled_form: boolean;
 	passed_subjects_per_semester: Record<number, Subject[] | []>;
 }
 
