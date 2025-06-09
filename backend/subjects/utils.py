@@ -1,11 +1,11 @@
 from copy import deepcopy
-from subjects.consts import SUBJECTS_VECTOR
 from subjects.management.commands import subjects_vector
 from subjects.models import Subject
 from pathlib import Path
 import json
 from django.db.models import Q
 import os
+from subjects.consts import BIAS_STUDENT_HAS_ONE, BIAS_SUBJECT_HAS_ONE, WEIGHTS, NUMBER_OF_SUGGESTIONS
 
 def get_eligible_subjects(student, season = 2):
     """
@@ -23,13 +23,11 @@ def get_eligible_subjects(student, season = 2):
         .select_related('subject_info')
     )
 
-
     if season != 2:
         if season == 0:
             all_subjects = all_subjects.exclude(subject_info__season='W')
         elif season == 1:
             all_subjects = all_subjects.exclude(subject_info__season='S')
-
 
     if study_effort < 3:
         all_subjects = all_subjects.exclude(subject_info__semester__gt=current_year * 2)
@@ -92,20 +90,22 @@ def student_vector(student):
 
 
 def map_to_subjects_vector(subjects):
+    base_dir = Path(__file__).resolve().parent
+    SUBJECTS_VECTOR_PATH = base_dir / 'management' / 'data' / 'subjects_vector.json'
+    with open(SUBJECTS_VECTOR_PATH, 'r', encoding='utf-8') as f:
+        subjects_vector = json.load(f)
+
     filtered_subject_vectors = {}
     for subject in subjects:
-        vector = SUBJECTS_VECTOR.get(subject.name)
+        vector = subjects_vector.get(subject.name)
         if vector:
             filtered_subject_vectors[subject.name] = vector
     
     return filtered_subject_vectors
 
 
-BIAS_SUBJECT_HAS_ONE = 0.75
-BIAS_STUDENT_HAS_ONE = 0.9
-
 def score_tags(student_vector, subject_vector):
-    TAG_GRAPH_PATH = os.path.join(os.path.dirname(__file__), 'tag_graph.json')
+    TAG_GRAPH_PATH = Path(__file__).resolve().parent / 'management' / 'data' / 'tag_graph.json'
 
     with open(TAG_GRAPH_PATH, 'r', encoding='utf-8') as f:
         tag_graph = json.load(f)
@@ -158,23 +158,10 @@ def score_for_preferences(student_vector, eligible_subjects):
             filtered_subjects_vector[subject][key] = score
         
         study_effort = student_vector["study_effort"]
-
-        # filtered_subjects_vector[subject]['effort'] = (1 - study_effort) * values['isEasy']
-
-        # if 0 < study_effort < 1:
-        #     filtered_subjects_vector[subject]['effort'] = (1 - study_effort) * values['isEasy']
-        
-        # ako on se zamara (study_effort == 1) i predmetot ima isEasy e true onda 0 (ne ni e gajle za vakvite), 
-        # ako on ne se zaamra (study_effort == 0) i predmetot ima isEasy e false onda pak 0 (ne ni e gajle za vakvite),
-        # vo sprotivno 1 deka se zamara i e tezok i obratno ne se zamara i e lesen 
-        # else:
-        #     filtered_subjects_vector[subject]['effort'] = 0
         
         if study_effort == 0.25 and values['isEasy'] or study_effort == 0.75 and not values['isEasy']:
             filtered_subjects_vector[subject]['effort'] = 1
         else:
-            # ova pravi smisla poso za 3 znaci deka mu e seedno, a ako e 1 ili 5 veke se isfiltrirani lesni/nelesni predmeti soodvetno
-            # sto znaci deka toj faktor e veke zemen predvid
             filtered_subjects_vector[subject]['effort'] = 0
             
         filtered_subjects_vector[subject]['activated'] = 1
@@ -182,18 +169,6 @@ def score_for_preferences(student_vector, eligible_subjects):
         filtered_subjects_vector[subject]['participant_score'] = values['participants']
 
     return filtered_subjects_vector
-
-WEIGHTS = {
-    "professors": 0.065,
-    "technologies": 0.065,
-    "tags": 0.4,
-    "evaluation": 0.15, 
-    "effort": 0.3,
-    "activated": 0.01,
-    "participant_score": 0.01,
-}
-
-NUMBER_OF_SUGGESTIONS = 7
 
 def get_recommendations(filtered_subjects_vector):
     subject_scores = {}

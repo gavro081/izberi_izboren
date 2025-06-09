@@ -3054,7 +3054,7 @@
 		"semester": 7,
 		"professors": ["Моника Симјаноска", "Невена Ацковска"],
 		"assistants": [],
-		"tags": ["Data Science", "AI / ML", "Computer Science", "Databases"],
+		"tags": ["Data Science", "Computer Science"],
 		"technologies": [],
 		"evaluation": ["Theory", "Practical", "Project"],
 		"isEasy": false

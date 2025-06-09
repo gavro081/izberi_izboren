@@ -1,4 +1,6 @@
 import json
+from django.core.management.base import BaseCommand
+from pathlib import Path
 
 TAGS = [
     "AI / ML",
@@ -69,36 +71,42 @@ EDGES = [
     ("Mathematics", "Data Science", 3)
 ]
 
-def add(tag1, tag2, weight):
+def add(tag_graph, tag1, tag2, weight):
     tag_graph[tag1].append((tag2, weight))
 
-tag_graph = {}
-for tag in TAGS:
-    tag_graph[tag] = []
 
-for edge in EDGES:
-    add(edge[0], edge[1], edge[2])
-
-tag_to_col_index = {}
-
-for i, tag in enumerate(TAGS):
-    tag_to_col_index[tag] = i
-
-final_tag_graph = {}
-
-for key in tag_graph.keys():
-    key_index = tag_to_col_index[key]
+class Command(BaseCommand):
+    help = "Create a directed, weighted graph of dependencies between all tags present in the vocabulary."
     
-    for i, val in enumerate(tag_graph[key]):
-        n, w = val
-        tag_graph[key][i] = (tag_to_col_index[n], w)
-    
-    final_tag_graph[key_index] = tag_graph[key]
+    def handle(self, *args, **options):
+        base_dir = Path(__file__).resolve().parent.parent
+        output_file_path = base_dir / 'data' / 'tag_graph.json'
+        tag_graph = {}
+        for tag in TAGS:
+            tag_graph[tag] = []
 
+        for edge in EDGES:
+            add(tag_graph, edge[0], edge[1], edge[2])
 
+        tag_to_col_index = {}
 
-with open("tag_graph.json", "w") as f:
-    json.dump(final_tag_graph, f)
+        for i, tag in enumerate(TAGS):
+            tag_to_col_index[tag] = i
+
+        final_tag_graph = {}
+
+        for key in tag_graph.keys():
+            key_index = tag_to_col_index[key]
+            
+            for i, val in enumerate(tag_graph[key]):
+                n, w = val
+                tag_graph[key][i] = (tag_to_col_index[n], w)
+            
+            final_tag_graph[key_index] = tag_graph[key]
+
+        with open(output_file_path, "w") as f:
+            json.dump(final_tag_graph, f)
+            self.stdout.write(self.style.SUCCESS(f"Finished scraping. Data successfully stored in {output_file_path}"))
 
 
 
