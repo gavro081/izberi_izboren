@@ -245,12 +245,12 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 		};
 		try {
 			// For updating existing form data use PATCH instead of PUT for partial updates
-			const method = formData?.has_filled_form  ? "PATCH" : "POST";
+			const method = formData?.has_filled_form ? "PATCH" : "POST";
 			await axiosAuth({
 				url: "/auth/form/",
 				method,
 				data: payload,
-			});	
+			});
 			setHasSubmitted(true);
 			setFormStatus({
 				isSubmitting: false,
@@ -574,6 +574,7 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 					{["Немам", ...filteredProfessors]
 						.slice(0, showProfessors ? undefined : 10)
 						.map((item) => {
+							if (item === "None") return;
 							// hides "Nemam" when searching
 							if (item == "Немам" && professorsSearchTerm !== "") return;
 							const isSelected =
