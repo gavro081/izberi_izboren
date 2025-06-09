@@ -13,6 +13,7 @@ const Recommendations = () => {
 	const [season_, setSeason] = useState<"winter" | "summer" | "all">("all");
 	const [isLoading, setIsLoading] = useState(false);
 	const [showModal, setShowModal] = useState(false);
+	const [hasSearched, setHasSearched] = useState(false);
 
 	const mapToSeasonInt = (season: "winter" | "summer" | "all") => {
 		if (season == "summer") return 0;
@@ -32,11 +33,12 @@ const Recommendations = () => {
 			console.error("Error fetching recommendations:", error);
 		} finally {
 			setIsLoading(false);
+			setHasSearched(true);
 		}
 	};
 
 	// need to fetch subject data so that we can compare the subject IDs (prerequisites store IDs, but we need names)
-	//  in the modals for the recommendations
+	// in the modals for the recommendations
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await axiosAuth.get("/subjects");
@@ -95,26 +97,19 @@ const Recommendations = () => {
 				<div className="text-center">
 					<h1 className="text-4xl font-bold text-gray-800 mb-2">Препораки</h1>
 					<p className="text-gray-600 text-lg">
-						Предметите што ќе ги добиете од алгоритамот се базирани на она што
-						сте го пополниле во формата.
+						Предметите што ќе ги добиеш од алгоритамот се базирани на она што си
+						го пополнил во формата.
 						<br />
-						Тие се подредени според тоа колку вашите интереси се совпаѓаат со
+						Тие се подредени според тоа колку твоите интереси се совпаѓаат со
 						она што го нудат предметите.
 					</p>
 				</div>
 
-				<div className="bg-blue-50 border border-blue-200 rounded-lg p-6 text-center hover:bg-blue-100 transition-colors duration-200">
-					<p className="text-gray-700 mb-3">Избран семестар: </p>
-					<p className="text-2xl font-semibold text-gray-800">
-						{getSeasonText()}
-					</p>
-				</div>
-
-				<button
-					onClick={cycleSeason}
-					className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-medium hover:scale-105 transition-all duration-200 shadow-md hover:shadow-lg"
-				>
-					Промени семестар
+				<button onClick={cycleSeason}>
+					<div className="bg-blue-500 border border-blue-200 rounded-lg p-6 font-semibold text-white text-center hover:bg-blue-800 transition-colors duration-200">
+						<p className="text-white mb-3">Избран семестар: </p>
+						<p className="text-2xl">{getSeasonText()}</p>
+					</div>
 				</button>
 
 				<button
@@ -150,16 +145,18 @@ const Recommendations = () => {
 							<div className="w-24 h-1 bg-blue-500 mx-auto rounded-full"></div>
 						</div>
 
-						<div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:h-[1100px]">
+						<div
+							// className={`grid grid-cols-1 lg:grid-cols-2 gap-3 lg:h-[1150px]`}
+							className={`grid grid-cols-1 lg:grid-cols-2 gap-3 auto-rows-[300px] relative pb-4`}
+						>
 							{recommendations.map((subject, index) => (
 								<div
 									key={subject.id}
 									// Added the `group` class here to enable group-hover functionality.
-									className={`group border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 relative ${
+									className={`h-56 border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 relative ${
 										index % 2 === 0 ? "self-start" : "self-end"
 									}`}
 									style={{
-										height: "70%",
 										animationDelay: `${index * 100}ms`,
 										animation: "fadeInUp 0.6s ease-out forwards",
 									}}
@@ -174,16 +171,14 @@ const Recommendations = () => {
 											</div>
 										</div>
 
-										{/* Badge Logic: Prioritizes the warning, and shows the selected badge only on hover. */}
-										{/* 1. First, check for the most critical warning. */}
 										<div className="absolute inset-0 flex items-center justify-center pointer-events-none">
 											{subject.subject_info.activated === false ? (
-												<span className="bg-red-500 text-white font-bold px-3 py-1 rounded-full shadow-lg text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-													⚠️ Никогаш не бил активиран!
+												<span className="bg-red-500 text-white font-bold px-3 py-1 rounded-full shadow-lg text-xs transition-opacity duration-300 z-10">
+													Никогаш не бил активиран!
 												</span>
 											) : index === 0 ? (
-												<span className="bg-blue-600 text-white font-bold px-3 py-1 rounded-full shadow-lg text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-													⭐ Најсоодветен!
+												<span className="bg-blue-600 text-white font-bold px-3 py-1 rounded-full shadow-lg text-xs transition-opacity duration-300 z-10">
+													Најсоодветен!
 												</span>
 											) : null}
 										</div>
@@ -223,8 +218,10 @@ const Recommendations = () => {
 								</div>
 							))}
 						</div>
+						{/* Fade gradient at bottom-right to signal scrollability */}
+						<div className="absolute bottom-0 right-0 h-24 w-full pointer-events-none bg-gradient-to-t from-gray-50 to-transparent" />
 					</div>
-				) : (
+				) : !hasSearched ? (
 					<div className="flex flex-col items-center justify-center h-full text-center">
 						<div className="text-gray-400 mb-6">
 							<svg
@@ -247,6 +244,15 @@ const Recommendations = () => {
 						<p className="text-gray-500 text-lg max-w-md">
 							Изберете ја саканата сезона и кликнете на "Вчитај препораки" за да
 							ги откриете вашите идеални предмети!
+						</p>
+					</div>
+				) : (
+					<div className="flex flex-col items-center justify-center h-full text-center">
+						<h3 className="text-2xl font-bold text-gray-600 mb-4">
+							Моментално немаме препораки за тебе :(
+						</h3>
+						<p className="text-gray-500 text-lg max-w-md">
+							Направи промени во профилот и обиди се повторно.
 						</p>
 					</div>
 				)}

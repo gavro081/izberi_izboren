@@ -1,3 +1,4 @@
+from copy import deepcopy
 from subjects.consts import SUBJECTS_VECTOR
 from subjects.management.commands import subjects_vector
 from subjects.models import Subject
@@ -32,6 +33,8 @@ def get_eligible_subjects(student, season = 2):
 
     if study_effort < 3:
         all_subjects = all_subjects.exclude(subject_info__semester__gt=current_year * 2)
+        if study_effort == 1:
+            all_subjects = all_subjects.filter(subject_info__is_easy=True)
     elif study_effort == 3:
         all_subjects = all_subjects.filter(
             Q(subject_info__semester=current_year * 2) |
@@ -39,6 +42,8 @@ def get_eligible_subjects(student, season = 2):
         )
     else:
         all_subjects = all_subjects.filter(subject_info__semester__gte=current_year * 2)
+        if study_effort == 5:
+            all_subjects = all_subjects.exclude(subject_info__is_easy=True)
 
     if level_credits[0] >= 6:
         all_subjects = all_subjects.exclude(subject_info__level=1)
@@ -117,12 +122,13 @@ def score_tags(student_vector, subject_vector):
                 score += 1
         else:
             neighbors = tag_graph[str(i)]
+            total_weight = sum(weight for _, weight in neighbors)
             if student_tags[i] == 1:
-                for neighbor in neighbors:
-                    if subject_tags[neighbor] == 1: score += 1 / len(neighbors) * BIAS_STUDENT_HAS_ONE
+                for neighbor in neighbors: 
+                    if subject_tags[neighbor[0]] == 1: score += neighbor[1] / total_weight * BIAS_STUDENT_HAS_ONE
             else:
                 for neighbor in neighbors:
-                    if student_tags[neighbor] == 1: score += 1 / len(neighbors) * BIAS_SUBJECT_HAS_ONE
+                    if student_tags[neighbor[0]] == 1: score += neighbor[1] / total_weight * BIAS_SUBJECT_HAS_ONE
     
     return score / tot_count if tot_count != 0 else 0
 
@@ -153,9 +159,8 @@ def score_for_preferences(student_vector, eligible_subjects):
         
         study_effort = student_vector["study_effort"]
 
-        filtered_subjects_vector[subject]['effort'] = (1 - study_effort) * values['isEasy']
+        # filtered_subjects_vector[subject]['effort'] = (1 - study_effort) * values['isEasy']
 
-        # sorry about this!!!
         # if 0 < study_effort < 1:
         #     filtered_subjects_vector[subject]['effort'] = (1 - study_effort) * values['isEasy']
         
@@ -163,8 +168,15 @@ def score_for_preferences(student_vector, eligible_subjects):
         # ako on ne se zaamra (study_effort == 0) i predmetot ima isEasy e false onda pak 0 (ne ni e gajle za vakvite),
         # vo sprotivno 1 deka se zamara i e tezok i obratno ne se zamara i e lesen 
         # else:
-        #     filtered_subjects_vector[subject]['effort'] = study_effort * (1 - values['isEasy'])
-
+        #     filtered_subjects_vector[subject]['effort'] = 0
+        
+        if study_effort == 0.25 and values['isEasy'] or study_effort == 0.75 and not values['isEasy']:
+            filtered_subjects_vector[subject]['effort'] = 1
+        else:
+            # ova pravi smisla poso za 3 znaci deka mu e seedno, a ako e 1 ili 5 veke se isfiltrirani lesni/nelesni predmeti soodvetno
+            # sto znaci deka toj faktor e veke zemen predvid
+            filtered_subjects_vector[subject]['effort'] = 0
+            
         filtered_subjects_vector[subject]['activated'] = 1
 
         filtered_subjects_vector[subject]['participant_score'] = values['participants']
@@ -172,10 +184,10 @@ def score_for_preferences(student_vector, eligible_subjects):
     return filtered_subjects_vector
 
 WEIGHTS = {
-    "professors": 0.04,
-    "technologies": 0.04,
-    "tags": 0.5,
-    "evaluation": 0.1, 
+    "professors": 0.065,
+    "technologies": 0.065,
+    "tags": 0.4,
+    "evaluation": 0.15, 
     "effort": 0.3,
     "activated": 0.01,
     "participant_score": 0.01,

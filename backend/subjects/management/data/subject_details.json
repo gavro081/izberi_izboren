@@ -712,7 +712,7 @@
 		"mandatoryFor": ["KI23", "KN23"],
 		"semester": 3,
 		"season": "W",
-		"electiveFor": ["IE23", "IMB23", "PIT23", "SIIS23"],
+		"electiveFor": ["IE23", "IMB23", "PIT23"],
 		"professors": [
 			"Александра Поповска Митровиќ",
 			"Билјана Тојтовска Рибарски",
@@ -3183,29 +3183,6 @@
 		"tags": ["Networking"],
 		"technologies": [],
 		"evaluation": ["Theory", "Practical", "Project"],
-		"isEasy": false
-	},
-	"Дипломска работа": {
-		"subject": "Дипломска работа",
-		"code": "F18L3S168, F23L3S168",
-		"level": 3,
-		"abstract": "Во рамките на дипломската работа, студентот се стекнува со вештина за дефинирање на проблем, и примена на стекнатото знаење на факултетот за дизајн и имплементација на решение на дадениот проблем. Дополнително, студентот успешно идентификува потреба од дополнителни знаења за решавање на проблемот. Исто така студнетот ги документира и презентира резултатите од дипломската работа",
-		"short": "ДР",
-		"prerequisite": {
-			"credits": 204
-		},
-		"activated": false,
-		"participants": [0, 0, 0],
-		"mandatory": true,
-		"mandatoryFor": ["SIIS23", "IMB23", "PIT23", "IE23", "KI23", "KN23"],
-		"semester": 8,
-		"season": "S",
-		"electiveFor": [],
-		"professors": ["Сите професори"],
-		"assistants": [],
-		"tags": [],
-		"technologies": [],
-		"evaluation": ["Project"],
 		"isEasy": false
 	},
 	"Дистрибуирани системи": {

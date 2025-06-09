@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import { StudyTrack, Subject } from "../types";
 import { LatinToCyrillic } from "./utils";
 
@@ -11,6 +12,9 @@ interface SubjectsSelectorProps {
 	setSemesterSearchTerms: (term: any) => void;
 	validationErrors: { [key: string]: string };
 	passedSubjectsPerSemester: Record<number, Subject[]>;
+	setPassedSubjectsPerSemester: Dispatch<
+		SetStateAction<Record<number, Subject[]>>
+	>;
 	invalidSubjects: Subject[];
 }
 
@@ -40,6 +44,7 @@ function SubjectsSelector({
 	setSemesterSearchTerms,
 	validationErrors,
 	passedSubjectsPerSemester,
+	setPassedSubjectsPerSemester,
 	invalidSubjects,
 }: SubjectsSelectorProps) {
 	return (
@@ -102,9 +107,61 @@ function SubjectsSelector({
 									<div className="space-y-4">
 										{semesterMandatory.length > 0 && (
 											<div>
-												<h5 className="text-sm font-medium text-gray-700 mb-2">
-													Задолжителни предмети
-												</h5>
+												<div className="flex items-center gap-4">
+													<h5 className="text-sm font-medium text-gray-700 mb-2">
+														Задолжителни предмети
+													</h5>
+													<button
+														className="mb-2 px-3 py-2 border rounded-md transition-colors duration-200 text-sm text-white bg-blue-500 hover:bg-blue-800"
+														disabled={filteredMandatorySubjects.length === 0}
+														type="button"
+														onClick={() => {
+															const semesterMandatory =
+																filteredMandatorySubjects.filter(
+																	(subject) =>
+																		subject.subject_info.semester === semester
+																);
+
+															const allSelected = semesterMandatory.every(
+																(subject) =>
+																	(
+																		passedSubjectsPerSemester[semester] || []
+																	).some((s) => s.id === subject.id)
+															);
+
+															if (allSelected) {
+																// Deselect all semester mandatory subjects
+																setPassedSubjectsPerSemester((prev) => ({
+																	...prev,
+																	[semester]: (prev[semester] || []).filter(
+																		(subject) =>
+																			!semesterMandatory.some(
+																				(mandatory) =>
+																					mandatory.id === subject.id
+																			)
+																	),
+																}));
+															} else {
+																// Add missing semester mandatory subjects
+																setPassedSubjectsPerSemester((prev) => {
+																	const existing = prev[semester] || [];
+																	const newSubjects = semesterMandatory.filter(
+																		(mandatory) =>
+																			!existing.some(
+																				(s) => s.id === mandatory.id
+																			)
+																	);
+																	return {
+																		...prev,
+																		[semester]: [...existing, ...newSubjects],
+																	};
+																});
+															}
+														}}
+													>
+														Одбери ги сите
+													</button>
+												</div>
 												<div className="flex flex-wrap gap-2">
 													{semesterMandatory.map((subject) => {
 														const isSelected = (

@@ -34,7 +34,6 @@ class Command(BaseCommand):
         for entry in prerequisite_data:
             _, val, _, _ = entry.values()
             if val in arr:
-                print(val)
                 self.stdout.write(self.style.ERROR(f"${val} is a duplicate value. Remove it before you rerun this script"))
                 exit(1)
             arr.append(val)
