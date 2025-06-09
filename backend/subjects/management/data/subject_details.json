@@ -34,7 +34,7 @@
 		],
 		"tags": ["Computer Architecture", "Systems Infrastructure"],
 		"technologies": [],
-		"evaluation": ["Theory + Practical"],
+		"evaluation": ["Theory", "Practical"],
 		"isEasy": false
 	},
 	"Бизнис и менаџмент": {
@@ -87,7 +87,7 @@
 		"assistants": ["Петар Секулоски"],
 		"tags": ["Data Science", "Mathematics"],
 		"technologies": [],
-		"evaluation": ["Theory + Practical"],
+		"evaluation": ["Theory", "Practical"],
 		"isEasy": false
 	},
 	"Вовед во компјутерските науки": {
@@ -121,7 +121,7 @@
 		],
 		"tags": ["Computer Science"],
 		"technologies": [],
-		"evaluation": ["Theory + Practical"],
+		"evaluation": ["Theory", "Practical"],
 		"isEasy": false
 	},
 	"Дизајн на дигитални кола": {
@@ -163,7 +163,7 @@
 		"assistants": [],
 		"tags": ["Mathematics", "Computer Science"],
 		"technologies": [],
-		"evaluation": ["Theory + Practical"],
+		"evaluation": ["Theory", "Practical"],
 		"isEasy": false
 	},
 	"Дискретни структури 1": {
@@ -184,7 +184,7 @@
 		"assistants": ["Петар Секулоски"],
 		"tags": ["Mathematics", "Computer Science"],
 		"technologies": [],
-		"evaluation": ["Theory + Practical"],
+		"evaluation": ["Theory", "Practical"],
 		"isEasy": false
 	},
 	"Дискретни структури 2": {
@@ -205,7 +205,7 @@
 		"assistants": ["Петар Секулоски"],
 		"tags": ["Mathematics", "Computer Science"],
 		"technologies": [],
-		"evaluation": ["Theory + Practical"],
+		"evaluation": ["Theory", "Practical"],
 		"isEasy": false
 	},
 	"Е-учење": {
@@ -247,7 +247,7 @@
 		"assistants": ["Весна Димитриевска Ристовска"],
 		"tags": ["Mathematics", "Computer Science"],
 		"technologies": [],
-		"evaluation": ["Theory + Practical"],
+		"evaluation": ["Theory", "Practical"],
 		"isEasy": false
 	},
 	"Калкулус 1": {
@@ -268,7 +268,7 @@
 		"assistants": ["Петар Секулоски"],
 		"tags": ["Mathematics", "Computer Science"],
 		"technologies": [],
-		"evaluation": ["Theory + Practical"],
+		"evaluation": ["Theory", "Practical"],
 		"isEasy": false
 	},
 	"Калкулус 2": {
@@ -293,7 +293,7 @@
 		"assistants": ["Петар Секулоски"],
 		"tags": ["Mathematics", "Computer Science"],
 		"technologies": [],
-		"evaluation": ["Theory + Practical"],
+		"evaluation": ["Theory", "Practical"],
 		"isEasy": false
 	},
 	"Компјутерски архитектури": {
@@ -314,7 +314,7 @@
 		"assistants": ["Јована Добрева"],
 		"tags": ["Computer Architecture"],
 		"technologies": [],
-		"evaluation": ["Theory + Practical"],
+		"evaluation": ["Theory", "Practical"],
 		"isEasy": false
 	},
 	"Компјутерски компоненти": {
@@ -406,7 +406,7 @@
 		"assistants": ["Мартина Тошевска", "Славе Темков"],
 		"tags": ["Software Engineering"],
 		"technologies": [],
-		"evaluation": ["Theory + Practical"],
+		"evaluation": ["Theory", "Practical"],
 		"isEasy": false
 	},
 	"Објектно-ориентирано програмирање": {
@@ -446,7 +446,7 @@
 		],
 		"tags": ["Software Engineering", "Computer Science"],
 		"technologies": ["C++"],
-		"evaluation": ["Theory + Code"],
+		"evaluation": ["Theory", "Code"],
 		"isEasy": false
 	},
 	"Основи на Веб дизајн": {
@@ -474,7 +474,7 @@
 		"assistants": ["Влатко Спасев", "Димитар Китановски"],
 		"tags": ["Web Development", "UI/UX & Digital Media"],
 		"technologies": ["HTML", "CSS"],
-		"evaluation": ["Theory + Code"],
+		"evaluation": ["Theory", "Code"],
 		"isEasy": false
 	},
 	"Основи на сајбер безбедноста": {
@@ -588,7 +588,7 @@
 		],
 		"tags": ["Software Engineering", "Computer Science"],
 		"technologies": ["C++"],
-		"evaluation": ["Theory + Code"],
+		"evaluation": ["Theory", "Code"],
 		"isEasy": false
 	},
 	"Физика": {
@@ -609,7 +609,7 @@
 		"assistants": ["Зорица Карапанчева"],
 		"tags": ["Physics"],
 		"technologies": [],
-		"evaluation": ["Theory + Practical"],
+		"evaluation": ["Theory", "Practical"],
 		"isEasy": false
 	},
 	"Алгоритми и податочни структури": {
@@ -645,7 +645,7 @@
 		],
 		"tags": ["Computer Science", "Software Engineering"],
 		"technologies": ["Java"],
-		"evaluation": ["Theory + Code"],
+		"evaluation": ["Theory", "Code"],
 		"isEasy": false
 	},
 	"Анализа на софтверските барања": {
@@ -694,7 +694,7 @@
 		"assistants": ["Војдан Ќорвезироски"],
 		"tags": ["Networking", "Cybersecurity", "Embedded Systems"],
 		"technologies": [],
-		"evaluation": ["Theory + Practical"],
+		"evaluation": ["Theory", "Practical"],
 		"isEasy": false
 	},
 	"Веројатност и статистика": {
@@ -724,7 +724,7 @@
 		"assistants": ["Јована Добрева", "Петар Секулоски"],
 		"tags": ["Mathematics", "Data Science", "Computer Science"],
 		"technologies": ["R"],
-		"evaluation": ["Theory + Practical", "Code"],
+		"evaluation": ["Theory", "Practical", "Code"],
 		"isEasy": false
 	},
 	"Вештачка интелигенција": {
@@ -752,7 +752,7 @@
 		"assistants": ["Јана Кузманова", "Мартин Динев", "Мартина Тошевска"],
 		"tags": ["AI / ML", "Computer Science"],
 		"technologies": ["Python"],
-		"evaluation": ["Theory + Code"],
+		"evaluation": ["Theory", "Code"],
 		"isEasy": false
 	},
 	"Визуелно програмирање": {
@@ -821,7 +821,7 @@
 		"assistants": [],
 		"tags": ["Mathematics", "Data Science", "Computer Science"],
 		"technologies": [],
-		"evaluation": ["Theory + Practical"],
+		"evaluation": ["Theory", "Practical"],
 		"isEasy": false
 	},
 	"Дигитално процесирање на слика": {
@@ -849,7 +849,7 @@
 		"assistants": [],
 		"tags": ["Multimedia", "AI / ML", "Data Science", "Computer Science"],
 		"technologies": ["Python"],
-		"evaluation": ["Theory + Code", "Project"],
+		"evaluation": ["Theory", "Code", "Project"],
 		"isEasy": true
 	},
 	"Дигитизација": {
@@ -900,7 +900,7 @@
 		"assistants": ["Мартин Динев"],
 		"tags": ["Computer Science", "Software Engineering", "Mathematics"],
 		"technologies": ["any"],
-		"evaluation": ["Theory + Code", "Project"],
+		"evaluation": ["Theory", "Code", "Project"],
 		"isEasy": false
 	},
 	"Е-влада": {
@@ -1015,7 +1015,7 @@
 		"assistants": [],
 		"tags": ["Mathematics"],
 		"technologies": [],
-		"evaluation": ["Theory + Practical", "Project"],
+		"evaluation": ["Theory", "Practical", "Project"],
 		"isEasy": false
 	},
 	"Интернет програмирање на клиентска страна": {
@@ -1038,7 +1038,7 @@
 		"assistants": ["Влатко Спасев", "Марко Петров"],
 		"tags": ["Web Development", "Software Engineering"],
 		"technologies": ["HTML", "CSS", "JavaScript"],
-		"evaluation": ["Theory + Code", "Project"],
+		"evaluation": ["Theory", "Code", "Project"],
 		"isEasy": false
 	},
 	"Интернет технологии": {
@@ -1065,7 +1065,7 @@
 		"assistants": ["Димитар Китановски"],
 		"tags": ["Web Development", "Software Engineering"],
 		"technologies": [".NET", "any", "HTML", "CSS"],
-		"evaluation": ["Theory + Code", "Project"],
+		"evaluation": ["Theory", "Code", "Project"],
 		"isEasy": false
 	},
 	"Компјутерска графика": {
@@ -1088,7 +1088,7 @@
 		"assistants": [],
 		"tags": ["UI/UX & Digital Media", "Multimedia", "Software Engineering"],
 		"technologies": ["C++"],
-		"evaluation": ["Theory + Code", "Project"],
+		"evaluation": ["Theory", "Code", "Project"],
 		"isEasy": false
 	},
 	"Компјутерски мрежи": {
@@ -1111,7 +1111,7 @@
 		"assistants": ["Ненад Анчев"],
 		"tags": ["Networking"],
 		"technologies": [],
-		"evaluation": ["Theory + Practical"],
+		"evaluation": ["Theory", "Practical"],
 		"isEasy": false
 	},
 	"Компјутерски мрежи и безбедност": {
@@ -1148,7 +1148,7 @@
 		],
 		"tags": ["Networking", "Cybersecurity"],
 		"technologies": [],
-		"evaluation": ["Theory + Practical"],
+		"evaluation": ["Theory", "Practical"],
 		"isEasy": false
 	},
 	"Концепти на информатичко општество": {
@@ -1223,7 +1223,7 @@
 		"assistants": ["Живко Атанаскоски"],
 		"tags": ["Multimedia"],
 		"technologies": [],
-		"evaluation": ["Theory + Practical"],
+		"evaluation": ["Theory", "Practical"],
 		"isEasy": true
 	},
 	"Напредно програмирање": {
@@ -1246,7 +1246,7 @@
 		"assistants": ["Ана Тодоровска", "Стефан Андонов"],
 		"tags": ["Software Engineering", "Computer Science"],
 		"technologies": ["Kotlin"],
-		"evaluation": ["Theory + Code"],
+		"evaluation": ["Theory", "Code"],
 		"isEasy": false
 	},
 	"Квантно пресметување": {
@@ -1317,7 +1317,7 @@
 			"Computer Architecture"
 		],
 		"technologies": ["Docker", "Java"],
-		"evaluation": ["Theory + Practical"],
+		"evaluation": ["Theory", "Practical"],
 		"isEasy": false
 	},
 	"Основи на комуникациски системи": {
@@ -1363,7 +1363,7 @@
 		"assistants": [],
 		"tags": ["Computer Science", "Mathematics"],
 		"technologies": [],
-		"evaluation": ["Theory + Practical"],
+		"evaluation": ["Theory", "Practical"],
 		"isEasy": false
 	},
 	"Софтверско инженерство": {
@@ -1391,7 +1391,7 @@
 		"assistants": ["Јана Кузманова", "Стефан Андонов"],
 		"tags": ["Software Engineering", "Cloud Engineering & DevOps"],
 		"technologies": ["Git", "Docker"],
-		"evaluation": ["Theory + Practical"],
+		"evaluation": ["Theory", "Practical"],
 		"isEasy": false
 	},
 	"Теорија на информации со дигитални комуникации": {
@@ -1418,7 +1418,7 @@
 		"assistants": [],
 		"tags": ["Computer Science", "Mathematics"],
 		"technologies": [],
-		"evaluation": ["Theory + Practical"],
+		"evaluation": ["Theory", "Practical"],
 		"isEasy": false
 	},
 	"Управување со техничка поддршка": {
@@ -1441,7 +1441,7 @@
 		"assistants": ["Војдан Ќорвезироски", "Евгенија Крајчевска"],
 		"tags": ["Societal Skills", "Systems Infrastructure"],
 		"technologies": [],
-		"evaluation": ["Theory + Practical", "Project"],
+		"evaluation": ["Theory", "Practical", "Project"],
 		"isEasy": false
 	},
 	"Шаблони за дизајн на кориснички интерфејси": {
@@ -1473,7 +1473,7 @@
 			"Software Engineering"
 		],
 		"technologies": ["jQuery", "Figma"],
-		"evaluation": ["Theory + Code"],
+		"evaluation": ["Theory", "Code"],
 		"isEasy": false
 	},
 	"Агентно-базирани системи": {
@@ -1547,7 +1547,7 @@
 		"assistants": ["Кирил Ќироски"],
 		"tags": ["Systems Infrastructure", "Networking", "Cybersecurity"],
 		"technologies": [],
-		"evaluation": ["Theory + Practical"],
+		"evaluation": ["Theory", "Practical"],
 		"isEasy": false
 	},
 	"Бази на податоци": {
@@ -1588,7 +1588,7 @@
 		],
 		"tags": ["Databases", "Software Engineering"],
 		"technologies": [],
-		"evaluation": ["Theory + Code", "Project"],
+		"evaluation": ["Theory", "Code", "Project"],
 		"isEasy": false
 	},
 	"Вградливи микропроцесорски системи": {
@@ -1618,7 +1618,7 @@
 			"Software Engineering"
 		],
 		"technologies": [],
-		"evaluation": ["Theory + Practical", "Project"],
+		"evaluation": ["Theory", "Practical", "Project"],
 		"isEasy": false
 	},
 	"Веб програмирање": {
@@ -1654,7 +1654,7 @@
 		],
 		"tags": ["Web Development", "Software Engineering"],
 		"technologies": ["Spring"],
-		"evaluation": ["Theory + Code", "Project"],
+		"evaluation": ["Theory", "Code", "Project"],
 		"isEasy": false
 	},
 	"Визуелизација": {
@@ -1703,7 +1703,7 @@
 		"assistants": ["Кирил Ќироски"],
 		"tags": ["Cloud Engineering & DevOps", "Systems Infrastructure"],
 		"technologies": [],
-		"evaluation": ["Theory + Practical", "Project"],
+		"evaluation": ["Theory", "Practical", "Project"],
 		"isEasy": false
 	},
 	"Вовед во мрежна наука": {
@@ -1769,7 +1769,7 @@
 		],
 		"tags": ["Data Science", "Computer Science", "AI / ML"],
 		"technologies": ["Python"],
-		"evaluation": ["Theory + Code", "Project"],
+		"evaluation": ["Theory", "Code", "Project"],
 		"isEasy": false
 	},
 	"Географски информациски системи": {
@@ -1907,7 +1907,7 @@
 			"Web Development"
 		],
 		"technologies": ["Figma", "Django", "HTML", "CSS"],
-		"evaluation": ["Theory + Code", "Project"],
+		"evaluation": ["Theory", "Code", "Project"],
 		"isEasy": false
 	},
 	"Дизајн на образовен софтвер": {
@@ -1964,7 +1964,7 @@
 			"UI/UX & Digital Media"
 		],
 		"technologies": ["React"],
-		"evaluation": ["Theory + Code", "Project", "PROVERI"],
+		"evaluation": ["Theory", "Code", "Project"],
 		"isEasy": false
 	},
 	"Интегрирани системи": {
@@ -1992,7 +1992,7 @@
 			"Software Engineering"
 		],
 		"technologies": [".NET"],
-		"evaluation": ["Theory + Practical", "Project"],
+		"evaluation": ["Theory", "Practical", "Project"],
 		"isEasy": false
 	},
 	"Информациска безбедност": {
@@ -2015,7 +2015,7 @@
 		"assistants": [],
 		"tags": ["Cybersecurity", "Networking"],
 		"technologies": ["any"],
-		"evaluation": ["Theory + Practical", "Project"],
+		"evaluation": ["Theory", "Practical", "Project"],
 		"isEasy": false
 	},
 	"Инфраструктурно програмирање": {
@@ -2144,7 +2144,7 @@
 			"Systems Infrastructure"
 		],
 		"technologies": ["Git", "Docker", "Jenkins", "Kubernetes"],
-		"evaluation": ["Theory + Practical", "Project"],
+		"evaluation": ["Theory", "Practical", "Project"],
 		"isEasy": false
 	},
 	"Криптографија": {
@@ -2200,7 +2200,7 @@
 		"assistants": [],
 		"tags": ["Mathematics", "Computer Science", "Data Science"],
 		"technologies": [],
-		"evaluation": ["Theory + Practical"],
+		"evaluation": ["Theory", "Practical"],
 		"isEasy": false
 	},
 	"Машинско учење": {
@@ -2231,7 +2231,7 @@
 		"assistants": [],
 		"tags": ["AI / ML", "Data Science", "Computer Science"],
 		"technologies": ["Python"],
-		"evaluation": ["Theory + Practical", "Project"],
+		"evaluation": ["Theory", "Practical", "Project"],
 		"isEasy": false
 	},
 	"Мерење и анализа на сообраќај": {
@@ -2305,7 +2305,7 @@
 		"assistants": [],
 		"tags": ["Multimedia", "Networking"],
 		"technologies": [],
-		"evaluation": ["Theory + Practical", "Project"],
+		"evaluation": ["Theory", "Practical", "Project"],
 		"isEasy": false
 	},
 	"Мултимедиски системи": {
@@ -2363,7 +2363,7 @@
 			"Software Engineering"
 		],
 		"technologies": ["Vue", "HTML", "CSS"],
-		"evaluation": ["Theory + Code", "Project"],
+		"evaluation": ["Theory", "Code", "Project"],
 		"isEasy": false
 	},
 	"Основи на роботиката": {
@@ -2394,7 +2394,7 @@
 			"Software Engineering"
 		],
 		"technologies": [],
-		"evaluation": ["Theory + Code", "Project"],
+		"evaluation": ["Theory", "Code", "Project"],
 		"isEasy": false
 	},
 	"Паралелно и дистрибуирано процесирање": {
@@ -2509,7 +2509,7 @@
 		"assistants": [],
 		"tags": ["Data Science", "AI / ML", "Computer Science"],
 		"technologies": ["Python"],
-		"evaluation": ["Project", "Theory + Code"],
+		"evaluation": ["Project", "Theory", "Code"],
 		"isEasy": false
 	},
 	"Процесирање на сигналите": {
@@ -2532,7 +2532,7 @@
 		"assistants": [],
 		"tags": ["Computer Science", "Mathematics", "Multimedia"],
 		"technologies": ["Python"],
-		"evaluation": ["Theory + Code"],
+		"evaluation": ["Theory", "Code"],
 		"isEasy": false
 	},
 	"Вештачка интелигенција за игри": {
@@ -2712,7 +2712,7 @@
 		"assistants": ["Ана Тодоровска", "Славе Темков"],
 		"tags": ["Software Engineering"],
 		"technologies": ["Java"],
-		"evaluation": ["Theory + Code", "Project"],
+		"evaluation": ["Theory", "Code", "Project"],
 		"isEasy": false
 	},
 	"Автоматизирање на процеси во машинско учење": {
@@ -2797,7 +2797,7 @@
 		"assistants": [],
 		"tags": ["Computer Science", "Mathematics"],
 		"technologies": [],
-		"evaluation": ["Theory + Practical"],
+		"evaluation": ["Theory", "Practical"],
 		"isEasy": false
 	},
 	"Автономна роботика": {
@@ -2871,7 +2871,7 @@
 		"assistants": ["Јана Кузманова"],
 		"tags": ["Software Engineering", "Societal Skills"],
 		"technologies": ["any"],
-		"evaluation": ["Theory + Practical"],
+		"evaluation": ["Theory", "Practical"],
 		"isEasy": false
 	},
 	"Биолошки инспирирано пресметување": {
@@ -3056,7 +3056,7 @@
 		"assistants": [],
 		"tags": ["Data Science", "AI / ML", "Computer Science", "Databases"],
 		"technologies": [],
-		"evaluation": ["Theory + Practical", "Project"],
+		"evaluation": ["Theory", "Practical", "Project"],
 		"isEasy": false
 	},
 	"Вовед во когнитивни науки": {
@@ -3133,7 +3133,7 @@
 		"assistants": [],
 		"tags": ["AI / ML", "Data Science", "Computer Science"],
 		"technologies": ["any"],
-		"evaluation": ["Theory + Code", "Project"],
+		"evaluation": ["Theory", "Code", "Project"],
 		"isEasy": false
 	},
 	"Дигитална постпродукција": {
@@ -3182,7 +3182,7 @@
 		"assistants": ["Кирил Ќироски"],
 		"tags": ["Networking"],
 		"technologies": [],
-		"evaluation": ["Theory + Practical", "Project"],
+		"evaluation": ["Theory", "Practical", "Project"],
 		"isEasy": false
 	},
 	"Дипломска работа": {
@@ -3233,7 +3233,7 @@
 			"Software Engineering"
 		],
 		"technologies": ["Java"],
-		"evaluation": ["Theory + Code"],
+		"evaluation": ["Theory", "Code"],
 		"isEasy": false
 	},
 	"Дистрибуирано складирање на податоци": {
@@ -3336,7 +3336,7 @@
 			"Web Development"
 		],
 		"technologies": ["Laravel"],
-		"evaluation": ["Theory + Code", "Project"],
+		"evaluation": ["Theory", "Code", "Project"],
 		"isEasy": false
 	},
 	"Иновации во ИКТ": {
@@ -3547,7 +3547,7 @@
 		"assistants": [],
 		"tags": ["AI / ML", "Multimedia", "Data Science"],
 		"technologies": ["Python"],
-		"evaluation": ["Theory + Practical", "Project"],
+		"evaluation": ["Theory", "Practical", "Project"],
 		"isEasy": false
 	},
 	"Менаџмент информациски системи": {
@@ -3818,7 +3818,7 @@
 		"assistants": [],
 		"tags": ["UI/UX & Digital Media", "Software Engineering"],
 		"technologies": ["any"],
-		"evaluation": ["Theory + Code", "Project"],
+		"evaluation": ["Theory", "Code", "Project"],
 		"isEasy": false
 	},
 	"Напредни бази на податоци": {
@@ -3841,7 +3841,7 @@
 		"assistants": ["Ненад Анчев"],
 		"tags": ["Databases", "Software Engineering", "Data Science"],
 		"technologies": ["SQL"],
-		"evaluation": ["Theory + Code", "Project"],
+		"evaluation": ["Theory", "Code", "Project"],
 		"isEasy": false
 	},
 	"Web3 апликации": {
@@ -3895,7 +3895,7 @@
 		"assistants": [],
 		"tags": ["Databases", "Software Engineering", "Cloud Engineering & DevOps"],
 		"technologies": ["NoSQL"],
-		"evaluation": ["Theory + Code", "Project"],
+		"evaluation": ["Theory", "Code", "Project"],
 		"isEasy": false
 	},
 	"Обработка на природните јазици": {
@@ -4010,7 +4010,7 @@
 			"Software Engineering"
 		],
 		"technologies": ["Java"],
-		"evaluation": ["Theory + Code", "Project"],
+		"evaluation": ["Theory", "Code", "Project"],
 		"isEasy": false
 	},
 	"Претприемништво": {
@@ -4116,7 +4116,7 @@
 		"assistants": [],
 		"tags": ["Software Engineering", "Computer Science"],
 		"technologies": [],
-		"evaluation": ["Theory + Code"],
+		"evaluation": ["Theory", "Code"],
 		"isEasy": false
 	},
 	"Вовед во рударење на масивни податоци": {
@@ -4220,7 +4220,7 @@
 		"assistants": ["Димитар Китановски"],
 		"tags": ["Databases", "Data Science", "Software Engineering"],
 		"technologies": ["SQL"],
-		"evaluation": ["Theory + Code"],
+		"evaluation": ["Theory", "Code"],
 		"isEasy": false
 	},
 	"Софтвер за вградливи системи": {
@@ -4405,7 +4405,7 @@
 		"assistants": ["Мартин Динев", "Јана Кузманова"],
 		"tags": ["Computer Science", "Software Engineering"],
 		"technologies": ["Java"],
-		"evaluation": ["Theory + Code"],
+		"evaluation": ["Theory", "Code"],
 		"isEasy": false
 	},
 	"Математика 3": {
@@ -4431,7 +4431,7 @@
 		"assistants": ["Јована Добрева", "Димитар Пешевски"],
 		"tags": ["Mathematics", "Data Science", "Computer Science"],
 		"technologies": ["R"],
-		"evaluation": ["Theory + Practical", "Code"],
+		"evaluation": ["Theory", "Practical", "Code"],
 		"isEasy": false
 	},
 	"Избрани теми од математика": {
@@ -4457,7 +4457,7 @@
 		"assistants": ["Живко Атанаскоски", "Петар Секулоски"],
 		"tags": ["Mathematics"],
 		"technologies": [],
-		"evaluation": ["Theory + Practical"],
+		"evaluation": ["Theory", "Practical"],
 		"isEasy": false
 	},
 	"Математика 2": {
@@ -4486,7 +4486,7 @@
 		"assistants": ["Живко Атанаскоски", "Петар Секулоски", "Сијче Печкова"],
 		"tags": ["Mathematics", "Computer Science"],
 		"technologies": [],
-		"evaluation": ["Theory + Practical"],
+		"evaluation": ["Theory", "Practical"],
 		"isEasy": false
 	},
 	"Тестирање на софтвер": {

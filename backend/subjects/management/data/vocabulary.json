@@ -153,13 +153,5 @@
 		"UI/UX & Digital Media",
 		"Web Development"
 	],
-	"evaluation": [
-		"Code",
-		"PROVERI",
-		"Practical",
-		"Project",
-		"Theory",
-		"Theory + Code",
-		"Theory + Practical"
-	]
+	"evaluation": ["Code", "Practical", "Project", "Theory"]
 }
