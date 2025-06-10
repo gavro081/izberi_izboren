@@ -27,6 +27,19 @@
 	}
 }
 
+@keyframes skeleton-pulse {
+	0%,
+	100% {
+		background-color: #ffffff; /* white */
+	}
+	50% {
+		background-color: #f9fafb; /* gray-50 */
+	}
+}
+.skeleton-pulse {
+	animation: skeleton-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
 .custom-toast-container {
 	/* This overrides the default 'top' value from the library */
 	top: 8em !important;
