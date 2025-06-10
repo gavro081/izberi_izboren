@@ -22,3 +22,11 @@ export const EVALUATIONS_MAP = {
 	Код: "Code",
 	Проект: "Project",
 };
+
+export const EVALUATION_MAP_TO_MK = {
+	None: "Нема",
+	Theory: "Теорија",
+	Practical: "Практично",
+	Code: "Код",
+	Project: "Проект",
+};

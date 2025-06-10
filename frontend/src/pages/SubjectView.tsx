@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { getSubjectPrerequisites } from "../components/SubjectCatalog/utils";
 import { Subject } from "../components/types";
+import { EVALUATION_MAP_TO_MK } from "../constants/subjects";
 
 function SubjectView() {
 	const [selectedSubject, setSelectedSubject] = useState<Subject>(
@@ -13,6 +14,7 @@ function SubjectView() {
 	>("Нема предуслов");
 	const [isLoading, setIsLoading] = useState(true);
 	const [isExpanded, setIsExpanded] = useState(false);
+	const [filteredTechonologies, setFilteredTechnologies] = useState([]);
 	const { id } = useParams();
 	const navigate = useNavigate();
 	const location = useLocation();
@@ -44,6 +46,16 @@ function SubjectView() {
 			.then((res) => res.json())
 			.then((data) => {
 				setSelectedSubject(data);
+				const technologies = data.subject_info.technologies.map(
+					(tech: string) => (tech === "any" ? "По избор" : tech)
+				);
+				const filtered = technologies.filter(
+					(tech: string) => tech !== "По избор"
+				);
+				if (technologies.includes("По избор")) {
+					filtered.push("По избор");
+				}
+				setFilteredTechnologies(filtered);
 				setSubjectPrerequisites(getSubjectPrerequisites(selectedSubject, data));
 				setIsLoading(false);
 			});
@@ -352,9 +364,27 @@ function SubjectView() {
 								<div>
 									<p className="text-sm text-gray-500 mb-1">Технологии</p>
 									<p className="font-medium">
-										{selectedSubject.subject_info.technologies.length
-											? selectedSubject.subject_info.technologies.join(", ")
+										{filteredTechonologies.length
+											? filteredTechonologies.join(", ")
 											: "Нема одредени технологии"}
+									</p>
+								</div>
+
+								<div>
+									<p className="text-sm text-gray-500 mb-1">
+										Начин на евалуација
+									</p>
+									<p className="font-medium">
+										{selectedSubject.subject_info.evaluation.length
+											? selectedSubject.subject_info.evaluation
+													.map(
+														(ev) =>
+															EVALUATION_MAP_TO_MK[
+																ev as keyof typeof EVALUATION_MAP_TO_MK
+															]
+													)
+													.join(", ")
+											: "Нема одредена евалуација"}
 									</p>
 								</div>
 							</div>

@@ -5,7 +5,7 @@ const FieldButton: React.FC<{
 	keyProp: string | number;
 	state: string[];
 	stateSetter: Dispatch<SetStateAction<any[]>>;
-	field: "prof" | "tech" | "eval" | "domains";
+	field: "prof" | "tech" | "eval" | "domains" | "ass";
 	isSelected: boolean;
 	isDisabled: boolean;
 	setIsNemamSelected: Dispatch<
@@ -14,6 +14,7 @@ const FieldButton: React.FC<{
 			tech: boolean;
 			eval: boolean;
 			prof: boolean;
+			ass: boolean;
 		}>
 	>;
 }> = ({

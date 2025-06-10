@@ -134,7 +134,7 @@ function SubjectModal({
 								</div>
 							</div>
 						</div>
-						<div>
+						{/* <div>
 							{selectedSubject.subject_info.participants[0] == 0 ? (
 								<div className="bg-red-500 py-3 pl-2 rounded-md">
 									Овој предмет не бил активиран минатиот семестар.
@@ -143,9 +143,15 @@ function SubjectModal({
 								<p>{`Овој предмет минатиот семестар бил запишан од
 									${selectedSubject.subject_info.participants[0]} студенти.`}</p>
 							)}
+						</div> */}
+
+						<div className="mt-4 bg-blue-50 border-l-4 border-blue-400 p-4 rounded">
+							<p className="text-blue-800">
+								Отвори го предметот за да ги видиш сите информации
+							</p>
 						</div>
 
-						<div className="mt-8 flex justify-end space-x-3">
+						<div className="mt-4 flex justify-end space-x-3">
 							<button
 								onClick={closeModal}
 								className="w-full md:w-auto px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-normal rounded-md shadow focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"

@@ -6,6 +6,7 @@ import {
 	STUDY_TRACKS,
 	YEARS,
 } from "../../constants/subjects";
+import useAxiosAuth from "../../hooks/useAxiosAuth";
 import { StudentData, StudyTrack, Subject } from "../types";
 import FieldButton from "./FieldButton";
 import SkeletonForm from "./SkeletonForm";
@@ -16,7 +17,6 @@ import {
 	mapToID,
 	validateForm,
 } from "./utils";
-import useAxiosAuth from "../../hooks/useAxiosAuth";
 
 interface StudentFormProps {
 	formData: StudentData | null;
@@ -27,6 +27,7 @@ interface StudentFormProps {
 interface DistinctSubjectData {
 	tags: string[];
 	professors: string[];
+	assistants: string[];
 	technologies: string[];
 }
 
@@ -53,6 +54,7 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 		Record<number, string>
 	>({});
 	const [professorsSearchTerm, setProfessorSearchTerm] = useState("");
+	const [assistantsSearchTerm, setAssistantsSearchTerm] = useState("");
 	const [technologies, setTechnologies] = useState<string[]>(
 		formData?.technologies || []
 	);
@@ -60,11 +62,15 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 	const [favoriteProfs, setFavoriteProfs] = useState<string[]>(
 		formData?.professors || []
 	);
+	const [favoriteAssistants, setFavoriteAssistants] = useState<string[]>(
+		formData?.assistants || []
+	);
 	const [isNemamSelected, setIsNemamSelected] = useState({
 		domains: false,
 		tech: false,
 		eval: false,
 		prof: false,
+		ass: false,
 	});
 	const [formStatus, setFormStatus] = useState<{
 		isSubmitting: boolean;
@@ -76,11 +82,13 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 		isError: false,
 	});
 	const [showProfessors, setShowProfessors] = useState(false);
+	const [showAssistants, setShowAssistants] = useState(false);
 	const [subjects, setSubjects] = useState<Subject[]>([]);
 	const [distinctSubjectData, setDistinctSubjectData] =
 		useState<DistinctSubjectData>({
 			tags: [],
 			professors: [],
+			assistants: [],
 			technologies: [],
 		});
 	const [hasExtracurricular, setHasExtracurricular] = useState(false);
@@ -120,6 +128,11 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 				: formData.professors || [];
 			setFavoriteProfs(favoriteProfs_);
 
+			const favoriteAssistants_ = (formData.assistants || []).includes("None")
+				? []
+				: formData.assistants || [];
+			setFavoriteAssistants(favoriteAssistants_);
+
 			setPassedSubjectsPerSemester(formData.passed_subjects_per_semester || []);
 		}
 	}, [formData]);
@@ -131,12 +144,21 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 				if (resSubjects.ok) {
 					const subJson: Subject[] = await resSubjects.json();
 					setSubjects(subJson || []);
+
 					const allProfessors: string[] = subJson
 						.flatMap((subject: Subject) => subject.subject_info.professors)
 						.filter((p): p is string => typeof p === "string");
 					const uniqueProfessors = Array.from(new Set(allProfessors));
 					const allProfessors_ = uniqueProfessors
 						.filter((prof) => prof.trim().toLowerCase() !== "сите професори")
+						.sort((a, b) => a.localeCompare(b));
+
+					const allAssistants: string[] = subJson
+						.flatMap((subject: Subject) => subject.subject_info.assistants)
+						.filter((p): p is string => typeof p === "string");
+					const uniqueAssistants = Array.from(new Set(allAssistants));
+					const allAssistants_ = uniqueAssistants
+						.filter((ass) => ass.trim().toLowerCase() !== "сите асистенти")
 						.sort((a, b) => a.localeCompare(b));
 					setDistinctSubjectData(() => ({
 						tags: Array.from(
@@ -150,6 +172,7 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 							)
 						).sort((a, b) => a.localeCompare(b)),
 						professors: allProfessors_,
+						assistants: allAssistants_,
 					}));
 				}
 			} catch (error) {
@@ -238,6 +261,7 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 				(ev) => EVALUATIONS_MAP[ev as keyof typeof EVALUATIONS_MAP] ?? ev
 			),
 			professors: favoriteProfs,
+			assistants: favoriteAssistants,
 			passed_subjects_per_semester: mapToID(passedSubjectsPerSemester),
 			has_extracurricular: hasExtracurricular,
 			total_credits: totalCredits.value,
@@ -302,6 +326,26 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 						prof
 							.toLowerCase()
 							.includes(LatinToCyrillic(professorsSearchTerm).toLowerCase()))
+			)
+			.sort((a, b) => a.localeCompare(b)),
+	];
+
+	const filteredAssistants = [
+		...favoriteAssistants.filter(
+			(ass) =>
+				assistantsSearchTerm === "" ||
+				ass
+					.toLowerCase()
+					.includes(LatinToCyrillic(assistantsSearchTerm).toLowerCase())
+		),
+		...distinctSubjectData.assistants
+			.filter(
+				(ass) =>
+					!favoriteAssistants.includes(ass) &&
+					(assistantsSearchTerm === "" ||
+						ass
+							.toLowerCase()
+							.includes(LatinToCyrillic(assistantsSearchTerm).toLowerCase()))
 			)
 			.sort((a, b) => a.localeCompare(b)),
 	];
@@ -605,6 +649,62 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 							className="px-3 py-2 rounded-md transition-colors duration-200 bg-blue text-blue-500"
 						>
 							{showProfessors ? "Прикажи помалку" : "Прикажи повеќе"}
+						</button>
+					)}
+				</div>
+			</div>
+
+			<div>
+				<div className="flex items-center mb-2 gap-7">
+					<h3 className="text-lg font-medium text-gray-900 mb-2">
+						Омилени асистенти
+					</h3>
+					{
+						<input
+							onChange={(e) => setAssistantsSearchTerm(e.target.value)}
+							value={assistantsSearchTerm}
+							disabled={isNemamSelected["ass"]}
+							type="text"
+							className="w-60 px-3 py-2.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-900 text-sm"
+							placeholder="Пребарај асистент"
+						/>
+					}
+				</div>
+				<div className="flex flex-wrap gap-2">
+					{["Немам", ...filteredAssistants]
+						.slice(0, showAssistants ? undefined : 10)
+						.map((item) => {
+							if (item === "None") return;
+							// hides "Nemam" when searching
+							if (item == "Немам" && assistantsSearchTerm !== "") return;
+							const isSelected =
+								favoriteAssistants.includes(item) ||
+								(item === "Немам" && isNemamSelected["ass"]);
+							const shouldBeDisabled =
+								isNemamSelected["ass"] && item !== "Немам";
+							return (
+								<FieldButton
+									key={item}
+									keyProp={item}
+									state={favoriteAssistants}
+									stateSetter={setFavoriteAssistants}
+									field="ass"
+									isSelected={isSelected}
+									isDisabled={shouldBeDisabled}
+									setIsNemamSelected={setIsNemamSelected}
+								/>
+							);
+						})}
+					{filteredAssistants.length == 0 && (
+						<p className="text-gray-500 italic">Нема таков асистент</p>
+					)}
+					{filteredAssistants.length > 10 && (
+						<button
+							type="button"
+							onClick={() => setShowAssistants(!showAssistants)}
+							className="px-3 py-2 rounded-md transition-colors duration-200 bg-blue text-blue-500"
+						>
+							{showAssistants ? "Прикажи помалку" : "Прикажи повеќе"}
 						</button>
 					)}
 				</div>

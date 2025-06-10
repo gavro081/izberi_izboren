@@ -75,7 +75,6 @@ def student_vector(student):
     student_vector = {}
     student_vector['index'] = student.index
     for key in vocabulary:
-        if key == "assistants": continue
         student_values = getattr(student, key, [])
 
         student_vector[key] = []
