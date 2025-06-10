@@ -17,17 +17,20 @@
 }
 
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 .custom-toast-container {
-  /* This overrides the default 'top' value from the library */
-  top: 8em !important; 
+	/* This overrides the default 'top' value from the library */
+	top: 8em !important;
+}
+:root {
+	background: rgb(37 99 235 / var(--tw-bg-opacity, 1));
 }

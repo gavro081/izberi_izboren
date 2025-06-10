@@ -32,7 +32,7 @@ const Account = () => {
 	}, [axiosAuth, logout, navigate]);
 
 	return (
-		<div className="p-4">
+		<div className="p-4 bg-white">
 			<StudentForm
 				formData={formData}
 				isLoading={isLoading}

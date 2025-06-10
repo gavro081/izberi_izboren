@@ -77,12 +77,12 @@ const Register: React.FC = () => {
 		}
 	};
 	return (
-		<div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
+		<div className="flex flex-col items-center justify-center h-[85vh] bg-white">
 			<form
 				onSubmit={handleRegister}
 				className="bg-white p-6 rounded-lg h-auto shadow-md w-80"
 			>
-				<h2 className="text-xl font-semibold mb-4 text-center">Register</h2>
+				<h2 className="text-xl font-semibold mb-4 text-center">Регистрација</h2>
 				{errors.non_field_errors && (
 					<div className="text-red-500 mb-3 text-sm">
 						{errors.non_field_errors[0]}
@@ -140,7 +140,7 @@ const Register: React.FC = () => {
 						loading ? "opacity-50 cursor-not-allowed" : ""
 					}`}
 				>
-					{loading ? "Registering..." : "Register"}
+					{loading ? "Се регистрира..." : "Регистрирај се"}
 				</button>
 			</form>
 		</div>

@@ -65,12 +65,12 @@ const Login: React.FC = () => {
 		}
 	};
 	return (
-		<div className="flex flex-col items-center justify-center h-screen bg-gray-50">
+		<div className="flex flex-col items-center justify-center h-[85vh] bg-white">
 			<form
 				onSubmit={handleLogin}
 				className="bg-white p-6 rounded-lg shadow-md w-80"
 			>
-				<h2 className="text-xl font-semibold mb-4 text-center">Login</h2>
+				<h2 className="text-xl font-semibold mb-4 text-center">Најава</h2>
 				{errors.detail && (
 					<div className="text-red-500 mb-3 text-sm">{errors.detail[0]}.</div>
 				)}
@@ -103,7 +103,7 @@ const Login: React.FC = () => {
 					type="submit"
 					className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
 				>
-					Login
+					Најави се
 				</button>
 			</form>
 		</div>
