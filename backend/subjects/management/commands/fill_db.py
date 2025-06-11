@@ -34,6 +34,7 @@ class Command(BaseCommand):
 
         subjects = []
         for item in subject_details.values():
+            # only get the 23 accreditation code
             code = item["code"] if "," not in item["code"] else item["code"].split(",")[1].strip()
             subject = Subject(
                 name=item["subject"],

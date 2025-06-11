@@ -349,7 +349,7 @@
 		"participants": [98, 88, 44],
 		"mandatory": true,
 		"mandatoryFor": ["IE23"],
-		"semester": 2,
+		"semester": 4,
 		"season": "S",
 		"electiveFor": ["IMB23", "KI23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Владимир Трајковиќ", "Соња Филипоска"],
@@ -2193,7 +2193,7 @@
 		"participants": [137, 138, 102],
 		"mandatory": true,
 		"mandatoryFor": ["KN23"],
-		"semester": 5,
+		"semester": 3,
 		"season": "W",
 		"electiveFor": ["IE23", "IMB23", "KI23", "PIT23", "SIIS23"],
 		"professors": ["Марија Михова"],
@@ -4574,7 +4574,7 @@
 		"prerequisite": {
 			"credits": 36
 		},
-		"activated": true,
+		"activated": false,
 		"participants": [0, 0, 0],
 		"mandatory": true,
 		"mandatoryFor": ["SIIS23", "PIT23"],

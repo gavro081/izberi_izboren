@@ -61,7 +61,6 @@ class Command(BaseCommand):
                             if subject_text == "F23L2S026 Маркетинг": subject_text = "Маркетинг"
                             if subject_text == "F23L1S066 Основи на сајбер безбедноста": subject_text = "Основи на сајбер безбедноста"
                             if subject_text == "Автоматизирање на процеси во  машинско учење": subject_text = "Автоматизирање на процеси во машинско учење"
-
                             subjects[subject_text] = {}
                             subjects[subject_text]["subject"] = subject_text
                     else:
@@ -80,7 +79,9 @@ class Command(BaseCommand):
                 self.stdout.write(f"{round(table_index/5 * 100)}% scraped...")
                 table_index += 1
 
-            if semesters_dict:  
+            if semesters_dict:
+                if program_name == 'SIIS23':
+                    del semesters_dict['W']['Веројатност и статистика']  
                 programs_dict[program_name] = semesters_dict
             
             self.stdout.write(self.style.SUCCESS(f"{program_name} finished scraping."))

@@ -9,7 +9,7 @@ class Command(BaseCommand):
         base_dir = Path(__file__).resolve().parent.parent
         file_path = base_dir / 'data' / 'mandatory.json'
 
-        output_path = base_dir / 'data' / 'subjects_by_program1.json'
+        output_path = base_dir / 'data' / 'subjects_by_program.json'
 
         try:
             with open(file_path, 'r', encoding='utf-8') as f:

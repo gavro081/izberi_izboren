@@ -133,11 +133,13 @@ class Command(BaseCommand):
                 # for handling data inconsistencies due to oudated data
                 if subject in elective_data[program][WINTER]:
                     subject_data[subject]['season'] = WINTER
-                    subject_data[subject]['semester'] = elective_data[program][WINTER][subject]['semester']
+                    if 'semester' not in subject_data[subject]:
+                        subject_data[subject]['semester'] = elective_data[program][WINTER][subject]['semester']
                     subject_data[subject]['electiveFor'].append(program)
                 elif subject in elective_data[program][SUMMER]:
                     subject_data[subject]['season'] = SUMMER
-                    subject_data[subject]['semester'] = elective_data[program][SUMMER][subject]['semester']
+                    if 'semester' not in subject_data[subject]:
+                        subject_data[subject]['semester'] = elective_data[program][SUMMER][subject]['semester']
                     subject_data[subject]['electiveFor'].append(program)
         
         self.stdout.write(self.style.SUCCESS("Mandatory and elective data collected..."))
@@ -176,8 +178,7 @@ class Command(BaseCommand):
                 else:
                     subject_data[name]["evaluation"] = []            
 
-                subject_data[name]["isEasy"] = True if "isEasy" in course else False
-
+                subject_data[name]["isEasy"] = course["isEasy"]
             else:
                 if with_warnings:
                     self.stdout.write(self.style.WARNING(f"Course {course} is not in subject data"))
