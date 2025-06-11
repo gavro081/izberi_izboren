@@ -91,7 +91,9 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 			assistants: [],
 			technologies: [],
 		});
-	const [hasExtracurricular, setHasExtracurricular] = useState(false);
+	const [hasExtracurricular, setHasExtracurricular] = useState(
+		formData?.has_extracurricular || false
+	);
 	const [invalidSubjects, setInvalidSubjects] = useState<Subject[]>([]);
 
 	// Update form when formData changes (e.g., after fetching user data)
@@ -134,6 +136,8 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 			setFavoriteAssistants(favoriteAssistants_);
 
 			setPassedSubjectsPerSemester(formData.passed_subjects_per_semester || []);
+
+			setHasExtracurricular(formData.has_extracurricular || false);
 		}
 	}, [formData]);
 

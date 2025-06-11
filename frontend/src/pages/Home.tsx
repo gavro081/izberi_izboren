@@ -7,8 +7,8 @@ export default function Homepage() {
 	return (
 		<div className="min-h-screen bg-white">
 			<main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-				<div className="text-center mb-16">
-					<h2 className="text-4xl font-bold text-gray-900 mb-4">
+				<div className="text-center mb-16 bg-gray-50 rounded-xl border border-gray-200 shadow-md py-10 px-6">
+					<h2 className="text-4xl font-bold text-gray-900 mb-4 drop-shadow-sm">
 						Најди го изборниот предмет за тебе
 					</h2>
 					<p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -18,7 +18,7 @@ export default function Homepage() {
 					</p>
 				</div>
 
-				<section className="bg-white rounded-2xl p-8 shadow-sm mb-8">
+				<section className="p-8 shadow-md mb-8 bg-gray-50 rounded-xl border border-gray-200 ">
 					<div className="flex items-start space-x-4">
 						<div className="flex-shrink-0">
 							<div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
@@ -43,7 +43,7 @@ export default function Homepage() {
 					</div>
 				</section>
 
-				<section className="bg-white rounded-2xl p-8 shadow-sm mb-8">
+				<section className="p-8 shadow-md mb-8 bg-gray-50 rounded-xl border border-gray-200 ">
 					<div className="flex items-start space-x-4">
 						<div className="flex-shrink-0">
 							<div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
@@ -74,7 +74,7 @@ export default function Homepage() {
 									<ArrowRight className="h-4 w-4" />
 								</Link>
 							) : (
-								<div className="bg-gray-50 rounded-lg p-4">
+								<div className="bg-gray-100 rounded-lg p-4">
 									<p className="text-gray-600 font-medium">
 										<Link
 											to="/login"
@@ -94,7 +94,7 @@ export default function Homepage() {
 					</div>
 				</section>
 
-				<section className="bg-white rounded-2xl p-8 shadow-sm">
+				<section className=" p-8 shadow-md bg-gray-50 rounded-xl border border-gray-200">
 					<div className="flex items-start space-x-4">
 						<div className="flex-shrink-0">
 							<div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
