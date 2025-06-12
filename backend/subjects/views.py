@@ -17,8 +17,8 @@ def index(request):
 
 
 @api_view(['GET'])
-def subject_view(request, pk):
-    subject = Subject.objects.get(pk=pk)
+def subject_view(request, code):
+    subject = Subject.objects.get(code=code)
     serializer = SubjectSerializer(subject)
     return Response(serializer.data)
 

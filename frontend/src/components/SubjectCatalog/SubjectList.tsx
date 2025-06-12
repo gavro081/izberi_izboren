@@ -14,7 +14,7 @@ const SubjectList = ({
 }: SubjectListProps) => {
 	const navigate = useNavigate();
 	const openSubjectView = (subject: Subject) => {
-		navigate(`/subjects/${subject.id}`, {
+		navigate(`/subjects/${subject.code}`, {
 			state: { from: "/subjects" },
 		});
 	};

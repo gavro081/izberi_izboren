@@ -22,7 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('subjects/', all_subjects),
     path('suggestion/', get_suggestions),
-    path('subjects/<int:pk>/', subject_view),
+    path('subjects/<str:code>/', subject_view),
     path('auth/', include('auth_form.urls')),
     path('', index),
 ]

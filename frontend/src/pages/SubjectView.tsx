@@ -16,7 +16,7 @@ function SubjectView() {
 	const [isLoading, setIsLoading] = useState(true);
 	const [isExpanded, setIsExpanded] = useState(false);
 	const [filteredTechonologies, setFilteredTechnologies] = useState([]);
-	const { id } = useParams();
+	const { code } = useParams();
 	const navigate = useNavigate();
 	const location = useLocation();
 	const WORD_LIMIT = 40;
@@ -43,7 +43,7 @@ function SubjectView() {
 	};
 
 	useEffect(() => {
-		fetch(`http://localhost:8000/subjects/${id}/`)
+		fetch(`http://localhost:8000/subjects/${code}/`)
 			.then((res) => res.json())
 			.then((data) => {
 				setSelectedSubject(data);

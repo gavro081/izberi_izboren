@@ -66,7 +66,7 @@ const Recommendations = () => {
 	};
 
 	const openSubjectView = (subject: Subject) => {
-		navigate(`/subjects/${subject.id}`, {
+		navigate(`/subjects/${subject.code}`, {
 			state: { from: "/recommendations" },
 		});
 	};
