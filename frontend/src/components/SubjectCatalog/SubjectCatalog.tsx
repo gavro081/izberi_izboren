@@ -1,4 +1,5 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useSubjects } from "../../context/SubjectsContext";
 import { Filters, Subject } from "../types";
 import FilterSidebar from "./FilterSidebar";
 import SkeletonCard from "./SkeletonCard";
@@ -12,12 +13,12 @@ import {
 	resetFilters,
 } from "./utils";
 const SubjectCatalog = () => {
+	const [subjects, setSubjects] = useSubjects();
 	const [visibleCourses, setVisibleCourses] = useState<number>(12);
 	const [searchTerm, setSearchTerm] = useState<string>("");
 	const [professorSearchTerm, setProfessorSearchTerm] = useState<string>("");
 	const [assistantSearchTerm, setAssistantSearchTerm] = useState<string>("");
 	const [selectedSubject, setSelectedSubject] = useState<Subject | null>(null);
-	const [subjectData, setSubjectData] = useState<Subject[]>([]);
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [randomStaff, setRandomStaff] = useState(["", ""]);
 	const [showModal, setShowModal] = useState(false);
@@ -35,48 +36,47 @@ const SubjectCatalog = () => {
 		hasPrerequisites: false,
 	});
 	const filteredSubjects: Subject[] = filterSubjects({
-		subjectData,
 		searchTerm,
 		professorSearchTerm,
 		assistantSearchTerm,
 		filters,
+		subjects,
 	});
 
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await fetch("http://localhost:8000/subjects");
 			const data = await response.json();
-			setSubjectData(data);
+			setSubjects(data);
 			setIsLoaded(true);
 		};
-		fetchData();
+		if (subjects.length == 0) fetchData();
+		else setIsLoaded(true);
 	}, []);
 
 	useEffect(() => {
-		getRandomStaff(subjectData, setRandomStaff);
+		getRandomStaff(subjects, setRandomStaff);
 		setTags(
 			Array.from(
 				new Set(filteredSubjects.flatMap((sub) => sub.subject_info.tags))
 			)
 		);
-	}, [subjectData]);
+	}, [subjects]);
 
 	const subjectIdToNameMap = useMemo(() => {
 		const map = new Map<number, string>();
-		subjectData.forEach((subject) => {
-		  map.set(subject.id, subject.name);
+		subjects.forEach((subject) => {
+			map.set(subject.id, subject.name);
 		});
 		return map;
-	  }, [subjectData]);
+	}, [subjects]);
 
 	const loadMore = () => {
 		setVisibleCourses((prev) => prev + 12);
 	};
 
 	const openSubjectDetails = (subject: Subject) => {
-		setSelectedSubject(
-			subjectData.find((item) => item.id == subject.id) ?? null
-		);
+		setSelectedSubject(subjects.find((item) => item.id == subject.id) ?? null);
 		setShowModal(true);
 	};
 
@@ -169,7 +169,10 @@ const SubjectCatalog = () => {
 				<SubjectModal
 					selectedSubject={selectedSubject}
 					closeModal={closeModal}
-					subjectPrerequisites={getSubjectPrerequisites(selectedSubject, subjectIdToNameMap)}
+					subjectPrerequisites={getSubjectPrerequisites(
+						selectedSubject,
+						subjectIdToNameMap
+					)}
 				/>
 			)}
 		</div>

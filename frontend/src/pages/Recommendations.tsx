@@ -3,13 +3,14 @@ import { useNavigate } from "react-router-dom";
 import SubjectModal from "../components/SubjectCatalog/SubjectModal";
 import { getSubjectPrerequisites } from "../components/SubjectCatalog/utils";
 import { Subject } from "../components/types";
+import { useRecommendations } from "../context/RecommendationsContext";
 import useAxiosAuth from "../hooks/useAxiosAuth";
 
 const Recommendations = () => {
 	const axiosAuth = useAxiosAuth();
 	const navigate = useNavigate();
 	const [subjectData, setSubjectData] = useState<Subject[]>([]);
-	const [recommendations, setRecommendations] = useState<Subject[]>([]);
+	const [recommendations, setRecommendations] = useRecommendations();
 	const [season_, setSeason] = useState<"winter" | "summer" | "all">("all");
 	const [isLoading, setIsLoading] = useState(false);
 	const [showModal, setShowModal] = useState(false);
