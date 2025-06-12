@@ -32,7 +32,7 @@
 		"tags": ["Computer Architecture", "Embedded Systems"],
 		"technologies": [],
 		"isEasy": false,
-		"evaluation": []
+		"evaluation": ["Theory", "Practical"]
 	},
 	{
 		"name": "Дискретна математика",
@@ -267,10 +267,10 @@
 	},
 	{
 		"name": "Информатичко размислување во образованието",
-		"tags": ["Education", "Computer Science", "Societal Skills"],
+		"tags": ["Education", "Societal Skills"],
 		"technologies": [],
 		"isEasy": true,
-		"evaluation": []
+		"evaluation": ["Project"]
 	},
 	{
 		"name": "Инженерска математика",
@@ -457,7 +457,7 @@
 		"tags": ["UI/UX & Digital Media", "Data Science", "Multimedia"],
 		"technologies": [],
 		"isEasy": true,
-		"evaluation": []
+		"evaluation": ["Project"]
 	},
 	{
 		"name": "Виртуелизација",
@@ -469,9 +469,9 @@
 	{
 		"name": "Вовед во мрежна наука",
 		"tags": ["Networking", "Data Science", "Computer Science"],
-		"technologies": [],
+		"technologies": ["Python"],
 		"isEasy": true,
-		"evaluation": []
+		"evaluation": ["Project"]
 	},
 	{
 		"name": "Вовед во науката за податоци",
@@ -484,8 +484,8 @@
 		"name": "Географски информациски системи",
 		"tags": ["Data Science"],
 		"technologies": [],
-		"isEasy": true,
-		"evaluation": []
+		"isEasy": false,
+		"evaluation": ["Project"]
 	},
 	{
 		"name": "Дигитална форензика",
@@ -499,7 +499,7 @@
 		"tags": ["Computer Science"],
 		"technologies": [],
 		"isEasy": true,
-		"evaluation": []
+		"evaluation": ["Theory"]
 	},
 	{
 		"name": "Дизајн и архитектура на софтвер",
@@ -577,7 +577,7 @@
 		"tags": ["Computer Architecture", "Embedded Systems", "Physics"],
 		"technologies": [],
 		"isEasy": false,
-		"evaluation": []
+		"evaluation": ["Practical", "Project"]
 	},
 	{
 		"name": "Компјутерска етика",
@@ -591,7 +591,7 @@
 		"tags": ["Multimedia", "Software Engineering", "UI/UX & Digital Media"],
 		"technologies": [],
 		"isEasy": false,
-		"evaluation": []
+		"evaluation": ["Project"]
 	},
 	{
 		"name": "Континуирана интеграција и испорака",
@@ -609,7 +609,7 @@
 		"tags": ["Cybersecurity", "Mathematics", "Computer Science"],
 		"technologies": [],
 		"isEasy": false,
-		"evaluation": []
+		"evaluation": ["Theory", "Practical"]
 	},
 	{
 		"name": "Линеарна алгебра и примени",
@@ -637,7 +637,7 @@
 		"tags": ["Cybersecurity", "Networking"],
 		"technologies": [],
 		"isEasy": false,
-		"evaluation": []
+		"evaluation": ["Theory", "Practical", "Project"]
 	},
 	{
 		"name": "Мултимедиски мрежи",
@@ -888,10 +888,10 @@
 	},
 	{
 		"name": "Вовед во паметни градови",
-		"tags": ["Embedded Systems", "Data Science", "Networking", "AI / ML"],
-		"technologies": [],
+		"tags": ["Data Science", "AI / ML"],
+		"technologies": ["Python"],
 		"isEasy": false,
-		"evaluation": []
+		"evaluation": ["Theory", "Project"]
 	},
 	{
 		"name": "Вовед во препознавање на облици",

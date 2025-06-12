@@ -142,7 +142,7 @@
 		"assistants": ["Јована Добрева"],
 		"tags": ["Computer Architecture", "Embedded Systems"],
 		"technologies": [],
-		"evaluation": [],
+		"evaluation": ["Theory", "Practical"],
 		"isEasy": false
 	},
 	"Дискретна математика": {
@@ -990,9 +990,9 @@
 		"electiveFor": ["IMB23", "KI23", "KN23", "PIT23", "SIIS23"],
 		"professors": ["Миле Јованов", "Емил Станков"],
 		"assistants": [],
-		"tags": ["Education", "Computer Science", "Societal Skills"],
+		"tags": ["Education", "Societal Skills"],
 		"technologies": [],
-		"evaluation": [],
+		"evaluation": ["Project"],
 		"isEasy": true
 	},
 	"Инженерска математика": {
@@ -1680,7 +1680,7 @@
 		"assistants": ["Евгенија Крајчевска"],
 		"tags": ["UI/UX & Digital Media", "Data Science", "Multimedia"],
 		"technologies": [],
-		"evaluation": [],
+		"evaluation": ["Project"],
 		"isEasy": true
 	},
 	"Виртуелизација": {
@@ -1730,8 +1730,8 @@
 		"professors": ["Мирослав Мирчев"],
 		"assistants": [],
 		"tags": ["Networking", "Data Science", "Computer Science"],
-		"technologies": [],
-		"evaluation": [],
+		"technologies": ["Python"],
+		"evaluation": ["Project"],
 		"isEasy": true
 	},
 	"Вовед во науката за податоци": {
@@ -1792,8 +1792,8 @@
 		"assistants": [],
 		"tags": ["Data Science"],
 		"technologies": [],
-		"evaluation": [],
-		"isEasy": true
+		"evaluation": ["Project"],
+		"isEasy": false
 	},
 	"Дигитална форензика": {
 		"subject": "Дигитална форензика",
@@ -1842,7 +1842,7 @@
 		"assistants": ["Ана Тодоровска", "Мила Додевска"],
 		"tags": ["Computer Science"],
 		"technologies": [],
-		"evaluation": [],
+		"evaluation": ["Theory"],
 		"isEasy": true
 	},
 	"Дизајн и архитектура на софтвер": {
@@ -2065,7 +2065,7 @@
 		"assistants": [],
 		"tags": ["Computer Architecture", "Embedded Systems", "Physics"],
 		"technologies": [],
-		"evaluation": [],
+		"evaluation": ["Practical", "Project"],
 		"isEasy": false
 	},
 	"Компјутерска етика": {
@@ -2117,7 +2117,7 @@
 		"assistants": [],
 		"tags": ["Multimedia", "Software Engineering", "UI/UX & Digital Media"],
 		"technologies": [],
-		"evaluation": [],
+		"evaluation": ["Project"],
 		"isEasy": false
 	},
 	"Континуирана интеграција и испорака": {
@@ -2172,7 +2172,7 @@
 		"assistants": [],
 		"tags": ["Cybersecurity", "Mathematics", "Computer Science"],
 		"technologies": [],
-		"evaluation": [],
+		"evaluation": ["Theory", "Practical"],
 		"isEasy": false
 	},
 	"Линеарна алгебра и примени": {
@@ -2282,7 +2282,7 @@
 		"assistants": ["Војдан Ќорвезироски"],
 		"tags": ["Cybersecurity", "Networking"],
 		"technologies": [],
-		"evaluation": [],
+		"evaluation": ["Theory", "Practical", "Project"],
 		"isEasy": false
 	},
 	"Мултимедиски мрежи": {
@@ -3104,9 +3104,9 @@
 		"semester": 7,
 		"professors": ["Александра Каневче Дединец"],
 		"assistants": [],
-		"tags": ["Embedded Systems", "Data Science", "Networking", "AI / ML"],
-		"technologies": [],
-		"evaluation": [],
+		"tags": ["Data Science", "AI / ML"],
+		"technologies": ["Python"],
+		"evaluation": ["Theory", "Project"],
 		"isEasy": false
 	},
 	"Вовед во препознавање на облици": {
