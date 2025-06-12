@@ -133,13 +133,16 @@ def score_tags(student_vector, subject_vector):
 
 def score_for_preferences(student_vector, eligible_subjects):
     filtered_subjects_vector = {}
+    max_tag_score = 0
     for subject in eligible_subjects:
         filtered_subjects_vector[subject] = {}
         values = eligible_subjects[subject]
         for key in student_vector:
             if key in ["index", "study_effort", "current_year"]: continue
             if key == "tags":
-                filtered_subjects_vector[subject][key] = score_tags(student_vector, values)
+                tag_score = score_tags(student_vector, values)
+                filtered_subjects_vector[subject][key] = tag_score
+                max_tag_score = max(tag_score, max_tag_score)
                 continue
 
             student_values = student_vector[key]
@@ -148,9 +151,9 @@ def score_for_preferences(student_vector, eligible_subjects):
             match_count = 0
 
             for i in range(len(student_values)):
-                if student_values[i] == 1:
+                if subject_values[i] == 1:
                     tot_count += 1
-                    if subject_values[i] == 1:
+                    if student_values[i] == 1:
                         match_count += 1
             
             score = match_count / tot_count if tot_count != 0 else 0
@@ -158,7 +161,7 @@ def score_for_preferences(student_vector, eligible_subjects):
         
         study_effort = student_vector["study_effort"]
         
-        if study_effort == 0.25 and values['isEasy'] or study_effort == 0.75 and not values['isEasy']:
+        if (study_effort == 0.4 and values['isEasy']) or (study_effort == 0.8 and not values['isEasy']):
             filtered_subjects_vector[subject]['effort'] = 1
         else:
             filtered_subjects_vector[subject]['effort'] = 0
@@ -166,6 +169,9 @@ def score_for_preferences(student_vector, eligible_subjects):
         filtered_subjects_vector[subject]['activated'] = 1
 
         filtered_subjects_vector[subject]['participant_score'] = values['participants']
+    
+    for subject in eligible_subjects:
+        filtered_subjects_vector[subject]['tags'] /= max_tag_score
 
     return filtered_subjects_vector
 
