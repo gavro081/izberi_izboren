@@ -16,11 +16,11 @@ def index(request):
     return HttpResponse("ok")
 
 
-@api_view(['GET'])
-def subject_view(request, code):
-    subject = Subject.objects.get(code=code)
-    serializer = SubjectSerializer(subject)
-    return Response(serializer.data)
+# @api_view(['GET'])
+# def subject_view(request, code):
+#     subject = Subject.objects.get(code=code)
+#     serializer = SubjectSerializer(subject)
+#     return Response(serializer.data)
 
 @api_view(['GET'])
 def all_subjects(request):

@@ -16,13 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from subjects.views import index, all_subjects, get_suggestions, subject_view
+from subjects.views import index, all_subjects, get_suggestions
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('subjects/', all_subjects),
     path('suggestion/', get_suggestions),
-    path('subjects/<str:code>/', subject_view),
+    # path('subjects/<str:code>/', subject_view),
     path('auth/', include('auth_form.urls')),
     path('', index),
 ]

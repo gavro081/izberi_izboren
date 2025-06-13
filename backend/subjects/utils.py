@@ -170,8 +170,9 @@ def score_for_preferences(student_vector, eligible_subjects):
 
         filtered_subjects_vector[subject]['participant_score'] = values['participants']
     
-    for subject in eligible_subjects:
-        filtered_subjects_vector[subject]['tags'] /= max_tag_score
+    if max_tag_score != 0:
+        for subject in eligible_subjects:
+            filtered_subjects_vector[subject]['tags'] /= max_tag_score 
 
     return filtered_subjects_vector
 

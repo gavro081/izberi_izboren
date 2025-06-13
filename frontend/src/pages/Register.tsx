@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import PasswordInput from "../components/PasswordInput";
 import { useAuth } from "../hooks/useAuth";
+import { toast } from "react-toastify";
 
 interface RegisterForm {
 	email: string;
@@ -55,6 +56,7 @@ const Register: React.FC = () => {
 			});
 			const { access, refresh } = response.data;
 			login(access, refresh);
+			toast.success("Успешна регистрација!");
 			navigate("/account");
 		} catch (err: unknown) {
 			const axiosError = err as AxiosError<{
@@ -98,14 +100,14 @@ const Register: React.FC = () => {
 					className="w-full mb-3 p-2 border rounded"
 				/>
 				{errors.email && (
-					<p className="text-red-500 text-sm mb-2">{errors.email[0]}</p>
+					<p className="text-red-500 text-sm mb-2">Постои user со овој mail.</p>
 				)}
 				<PasswordInput
 					name="password"
 					value={formData.password}
 					onChange={handleChange}
 					placeholder="Лозинка"
-					error={errors.password ? errors.password[0] : undefined}
+					error={errors.password ? "Пасвордот е прелесен. Треба да содржи барем 8 карактери и еден специјален знак." : undefined}
 				/>
 				<PasswordInput
 					name="confirmPassword"
@@ -115,7 +117,7 @@ const Register: React.FC = () => {
 				/>
 				{errors.confirmPassword && (
 					<p className="text-red-500 text-sm mb-2">
-						{errors.confirmPassword[0]}
+						Лозинките не се совпаѓаат
 					</p>
 				)}
 				<input

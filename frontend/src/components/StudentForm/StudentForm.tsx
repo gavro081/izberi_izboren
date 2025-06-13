@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
 	EVALUATIONS,
 	EVALUATIONS_MAP,
@@ -19,11 +19,11 @@ import {
 	mapToID,
 	validateForm,
 } from "./utils";
+import { useAuth } from "../../hooks/useAuth";
 
 interface StudentFormProps {
 	formData: StudentData | null;
 	isLoading: boolean;
-	setIsLoading?: (b: boolean) => void;
 }
 
 interface DistinctSubjectData {
@@ -86,7 +86,7 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 	});
 	const [showProfessors, setShowProfessors] = useState(false);
 	const [showAssistants, setShowAssistants] = useState(false);
-	const [subjects, setSubjects] = useSubjects();
+	const [subjects] = useSubjects();
 	const [distinctSubjectData, setDistinctSubjectData] =
 		useState<DistinctSubjectData>({
 			tags: [],
@@ -98,6 +98,7 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 		formData?.has_extracurricular || false
 	);
 	const [invalidSubjects, setInvalidSubjects] = useState<Subject[]>([]);
+	const { setFormData } = useAuth();
 
 	// Update form when formData changes (e.g., after fetching user data)
 	useEffect(() => {
@@ -144,8 +145,8 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 		}
 	}, [formData]);
 
-	const setUniqueValues = (subJson: Subject[]) => {
-		const allProfessors: string[] = subJson
+	const setUniqueValues = useCallback((subjects: Subject[]) => {
+		const allProfessors: string[] = subjects
 			.flatMap((subject: Subject) => subject.subject_info.professors)
 			.filter((p): p is string => typeof p === "string");
 		const uniqueProfessors = Array.from(new Set(allProfessors));
@@ -153,7 +154,7 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 			.filter((prof) => prof.trim().toLowerCase() !== "сите професори")
 			.sort((a, b) => a.localeCompare(b));
 
-		const allAssistants: string[] = subJson
+		const allAssistants: string[] = subjects
 			.flatMap((subject: Subject) => subject.subject_info.assistants)
 			.filter((p): p is string => typeof p === "string");
 		const uniqueAssistants = Array.from(new Set(allAssistants));
@@ -162,11 +163,11 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 			.sort((a, b) => a.localeCompare(b));
 		setDistinctSubjectData(() => ({
 			tags: Array.from(
-				new Set(subJson.flatMap((subject) => subject.subject_info.tags))
+				new Set(subjects.flatMap((subject) => subject.subject_info.tags))
 			).sort((a, b) => a.localeCompare(b)),
 			technologies: Array.from(
 				new Set(
-					subJson
+					subjects
 						.flatMap((subject) => subject.subject_info.technologies)
 						.filter((tech) => tech != "any" && tech != "")
 				)
@@ -174,25 +175,13 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 			professors: allProfessors_,
 			assistants: allAssistants_,
 		}));
-	};
+	}, []);
 
 	useEffect(() => {
-		const fetchSubjects = async () => {
-			try {
-				const resSubjects = await fetch("http://localhost:8000/subjects");
-				if (resSubjects.ok) {
-					const subJson: Subject[] = await resSubjects.json();
-					setSubjects(subJson || []);
-					setUniqueValues(subJson);
-				}
-			} catch (error) {
-				console.error("Error fetching subjects:", error);
-			}
-		};
-
-		if (subjects.length == 0) fetchSubjects();
-		else setUniqueValues(subjects);
-	}, []);
+    if (subjects && subjects.length > 0) {
+        setUniqueValues(subjects);
+    }
+}, [subjects, setUniqueValues]); 
 
 	const toggleSubject = (subject: Subject, semester: number) => {
 		const exists = (passedSubjectsPerSemester[semester] || []).some(
@@ -282,11 +271,12 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 		try {
 			// For updating existing form data use PATCH instead of PUT for partial updates
 			const method = formData?.has_filled_form ? "PATCH" : "POST";
-			await axiosAuth({
+			const response = await axiosAuth({
 				url: "/auth/form/",
 				method,
 				data: payload,
 			});
+			setFormData(response.data);
 			setHasSubmitted(true);
 			setFormStatus({
 				isSubmitting: false,

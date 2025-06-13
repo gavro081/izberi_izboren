@@ -13,7 +13,7 @@ import {
 	resetFilters,
 } from "./utils";
 const SubjectCatalog = () => {
-	const [subjects, setSubjects] = useSubjects();
+	const [subjects] = useSubjects();
 	const [visibleCourses, setVisibleCourses] = useState<number>(12);
 	const [searchTerm, setSearchTerm] = useState<string>("");
 	const [professorSearchTerm, setProfessorSearchTerm] = useState<string>("");
@@ -44,15 +44,10 @@ const SubjectCatalog = () => {
 	});
 
 	useEffect(() => {
-		const fetchData = async () => {
-			const response = await fetch("http://localhost:8000/subjects");
-			const data = await response.json();
-			setSubjects(data);
+		if (subjects && subjects.length > 0) {
 			setIsLoaded(true);
-		};
-		if (subjects.length == 0) fetchData();
-		else setIsLoaded(true);
-	}, []);
+		}
+	}, [subjects]);
 
 	useEffect(() => {
 		getRandomStaff(subjects, setRandomStaff);
