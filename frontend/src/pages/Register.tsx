@@ -1,9 +1,9 @@
 import axios, { AxiosError } from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import PasswordInput from "../components/PasswordInput";
 import { useAuth } from "../hooks/useAuth";
-import { toast } from "react-toastify";
 
 interface RegisterForm {
 	email: string;
@@ -100,14 +100,20 @@ const Register: React.FC = () => {
 					className="w-full mb-3 p-2 border rounded"
 				/>
 				{errors.email && (
-					<p className="text-red-500 text-sm mb-2">Постои user со овој mail.</p>
+					<p className="text-red-500 text-sm mb-2">
+						Постои корисник со оваа адреса.
+					</p>
 				)}
 				<PasswordInput
 					name="password"
 					value={formData.password}
 					onChange={handleChange}
 					placeholder="Лозинка"
-					error={errors.password ? "Пасвордот е прелесен. Треба да содржи барем 8 карактери и еден специјален знак." : undefined}
+					error={
+						errors.password
+							? "Лозинката е едноставна. Треба да содржи барем 8 карактери и еден специјален знак."
+							: undefined
+					}
 				/>
 				<PasswordInput
 					name="confirmPassword"
@@ -116,9 +122,7 @@ const Register: React.FC = () => {
 					onChange={handleChange}
 				/>
 				{errors.confirmPassword && (
-					<p className="text-red-500 text-sm mb-2">
-						Лозинките не се совпаѓаат
-					</p>
+					<p className="text-red-500 text-sm mb-2">Лозинките не се совпаѓаат</p>
 				)}
 				<input
 					type="text"

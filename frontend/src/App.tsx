@@ -65,6 +65,10 @@ const router = createBrowserRouter([
 				path: "subjects/:code",
 				element: <SubjectView />,
 			},
+			{
+				path: "*",
+				element: <Home />,
+			},
 		],
 	},
 ]);

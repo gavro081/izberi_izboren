@@ -1,83 +1,91 @@
 import { ArrowLeft, Tag, Users } from "lucide-react";
-import { useEffect, useState, useMemo } from "react"; 
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { getSubjectPrerequisites } from "../components/SubjectCatalog/utils";
 import SkeletonSubjectView from "../components/SubjectView/SkeletonSubjectView";
 import { EVALUATION_MAP_TO_MK } from "../constants/subjects";
-import { useSubjects } from "../context/SubjectsContext"; 
+import { useSubjects } from "../context/SubjectsContext";
 
 function SubjectView() {
-    const [subjectPrerequisites, setSubjectPrerequisites] = useState<
-        "Нема предуслов" | number | string
-    >("Нема предуслов");
-    const [isExpanded, setIsExpanded] = useState(false);
-    const [filteredTechonologies, setFilteredTechnologies] = useState<string[]>([]);
-    const { code } = useParams();
-    const navigate = useNavigate();
-    const location = useLocation();
+	const [subjectPrerequisites, setSubjectPrerequisites] = useState<
+		"Нема предуслов" | number | string
+	>("Нема предуслов");
+	const [isExpanded, setIsExpanded] = useState(false);
+	const [filteredTechonologies, setFilteredTechnologies] = useState<string[]>(
+		[]
+	);
+	const { code } = useParams();
+	const navigate = useNavigate();
+	const location = useLocation();
 
-    const [subjects] = useSubjects();
+	const [subjects] = useSubjects();
 
-    // useMemo makes this efficient, so it only re-calculates when subjects or code changes.
-    const selectedSubject = useMemo(() => {
-        return subjects.find((subject) => subject.code === code);
-    }, [subjects, code]);
+	// useMemo makes this efficient, so it only re-calculates when subjects or code changes.
+	const selectedSubject = useMemo(() => {
+		return subjects.find((subject) => subject.code === code);
+	}, [subjects, code]);
 
-    const WORD_LIMIT = 40;
-    const from = location.state?.from || "/";
+	const WORD_LIMIT = 40;
+	const from = location.state?.from || "/";
 
-    const truncateText = (text: string) => {
-        if (!text) return "";
-        const words = text.split(/\s+/);
-        return words.length <= WORD_LIMIT
-            ? text
-            : words.slice(0, WORD_LIMIT).join(" ") + "...";
-    };
+	const truncateText = (text: string) => {
+		if (!text) return "";
+		const words = text.split(/\s+/);
+		return words.length <= WORD_LIMIT
+			? text
+			: words.slice(0, WORD_LIMIT).join(" ") + "...";
+	};
 
-    const abstractText = isExpanded
-        ? selectedSubject?.abstract
-        : truncateText(selectedSubject?.abstract ?? "");
-    
-    const canToggle =
-        selectedSubject &&
-        selectedSubject.abstract.split(/\s+/).length > WORD_LIMIT;
+	const abstractText = isExpanded
+		? selectedSubject?.abstract
+		: truncateText(selectedSubject?.abstract ?? "");
 
-    const handleGoBack = () => {
-        navigate(from);
-    };
+	const canToggle =
+		selectedSubject &&
+		selectedSubject.abstract.split(/\s+/).length > WORD_LIMIT;
 
-    useEffect(() => {
-        if (selectedSubject) {
-            const technologies = selectedSubject.subject_info.technologies.map(
-                (tech: string) => (tech === "any" ? "По избор" : tech)
-            );
-            const filtered = technologies.filter(
-                (tech: string) => tech !== "По избор"
-            );
-            if (technologies.includes("По избор")) {
-                filtered.push("По избор");
-            }
-            setFilteredTechnologies(filtered);
-            const subjectIdToNameMap = new Map(subjects.map(s => [s.id, s.name]));
-            setSubjectPrerequisites(
-                getSubjectPrerequisites(selectedSubject, subjectIdToNameMap)
-            );
-        }
-    }, [selectedSubject, subjects]); 
+	const handleGoBack = () => {
+		navigate(from);
+	};
 
-    // We are "loading" if the global subjects context hasn't populated yet.
-    if (subjects.length === 0) {
-        return <SkeletonSubjectView />;
-    }
+	useEffect(() => {
+		if (selectedSubject) {
+			const technologies = selectedSubject.subject_info.technologies.map(
+				(tech: string) => (tech === "any" ? "По избор" : tech)
+			);
+			const filtered = technologies.filter(
+				(tech: string) => tech !== "По избор"
+			);
+			if (technologies.includes("По избор")) {
+				filtered.push("По избор");
+			}
+			setFilteredTechnologies(filtered);
+			const subjectIdToNameMap = new Map(subjects.map((s) => [s.id, s.name]));
+			setSubjectPrerequisites(
+				getSubjectPrerequisites(selectedSubject, subjectIdToNameMap)
+			);
+		}
+	}, [selectedSubject, subjects]);
 
-    // Handle case where the subject code is not found in our global list
-    if (!selectedSubject) {
-        return (
-            <div className="flex items-center justify-center min-h-screen">
-                Предметот со код '{code}' не е пронајден.
-            </div>
-        );
-    }
+	// We are "loading" if the global subjects context hasn't populated yet.
+	if (subjects.length === 0) {
+		return <SkeletonSubjectView />;
+	}
+
+	// Handle case where the subject code is not found in our global list
+	if (!selectedSubject) {
+		return (
+			<div className="flex flex-col items-center justify-center min-h-[85vh] bg-white text-center">
+				<p className="block">Предметот со код '{code}' не е пронајден.</p>
+				<p>
+					Не си сигурен кој е кодот на предметот? Најди го{" "}
+					<Link to="/subjects" className="text-blue-600 underline">
+						тука
+					</Link>
+				</p>
+			</div>
+		);
+	}
 
 	return (
 		<div className="min-h-screen bg-gray-50">

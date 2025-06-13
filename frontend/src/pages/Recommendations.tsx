@@ -4,9 +4,9 @@ import SubjectModal from "../components/SubjectCatalog/SubjectModal";
 import { getSubjectPrerequisites } from "../components/SubjectCatalog/utils";
 import { Subject } from "../components/types";
 import { useRecommendations } from "../context/RecommendationsContext";
-import useAxiosAuth from "../hooks/useAxiosAuth";
 import { useSubjects } from "../context/SubjectsContext";
 import { useAuth } from "../hooks/useAuth";
+import useAxiosAuth from "../hooks/useAxiosAuth";
 
 const Recommendations = () => {
 	const axiosAuth = useAxiosAuth();
@@ -97,7 +97,7 @@ const Recommendations = () => {
 			case "summer":
 				return "Летен";
 			case "all":
-				return "Двата";
+				return "Зимски + Летен";
 		}
 	};
 
@@ -161,7 +161,7 @@ const Recommendations = () => {
 								<div className="text-center mb-8">
 									<h2 className="text-3xl font-bold text-gray-800 mb-2">
 										Вашите препораки за {getSeasonText().toLowerCase()}{" "}
-										{getSeasonText().toLowerCase() === "двата"
+										{getSeasonText().toLowerCase() === "Зимски + Летен"
 											? "семестри"
 											: "семестар"}
 									</h2>

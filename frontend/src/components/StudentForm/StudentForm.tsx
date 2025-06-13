@@ -8,6 +8,7 @@ import {
 } from "../../constants/subjects";
 import { useRecommendations } from "../../context/RecommendationsContext";
 import { useSubjects } from "../../context/SubjectsContext";
+import { useAuth } from "../../hooks/useAuth";
 import useAxiosAuth from "../../hooks/useAxiosAuth";
 import { StudentData, StudyTrack, Subject } from "../types";
 import FieldButton from "./FieldButton";
@@ -19,7 +20,6 @@ import {
 	mapToID,
 	validateForm,
 } from "./utils";
-import { useAuth } from "../../hooks/useAuth";
 
 interface StudentFormProps {
 	formData: StudentData | null;
@@ -178,10 +178,10 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 	}, []);
 
 	useEffect(() => {
-    if (subjects && subjects.length > 0) {
-        setUniqueValues(subjects);
-    }
-}, [subjects, setUniqueValues]); 
+		if (subjects && subjects.length > 0) {
+			setUniqueValues(subjects);
+		}
+	}, [subjects, setUniqueValues]);
 
 	const toggleSubject = (subject: Subject, semester: number) => {
 		const exists = (passedSubjectsPerSemester[semester] || []).some(
@@ -433,44 +433,7 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 			</div>
 			<div>
 				<h3 className="text-lg font-medium text-gray-900 mb-2 flex items-center gap-2">
-					Година на студии
-					<span
-						className="relative group cursor-pointer"
-						tabIndex={0}
-						aria-label="Објаснување за година на студии"
-					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width="18"
-							height="18"
-							fill="currentColor"
-							viewBox="0 0 20 20"
-							className="text-gray-400"
-						>
-							<circle
-								cx="10"
-								cy="10"
-								r="9"
-								stroke="currentColor"
-								strokeWidth="2"
-								fill="none"
-							/>
-							<text
-								x="10"
-								y="15"
-								textAnchor="middle"
-								fontSize="13"
-								fill="currentColor"
-							>
-								?
-							</text>
-						</svg>
-						<span className="absolute left-1/2 -translate-x-1/2 mt-2 w-64 bg-gray-800 text-white text-xs rounded px-3 py-2 opacity-0 group-hover:opacity-100 group-focus:opacity-100 pointer-events-none transition-opacity z-10">
-							Ако моментално е јуни - септември, за да добиеш соодветни
-							препораки додади еден на твојата тековна година на студии. На
-							пример, ако си втора година и е јуни, избери дека си трета година.
-						</span>
-					</span>
+					Година за која сакаш препораки
 				</h3>
 				<select
 					value={year}
