@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
 import { useAuth } from '../hooks/useAuth'; 
 import useAxiosAuth from '../hooks/useAxiosAuth';
-
+import { toast } from 'react-toastify';
 interface FavoritesContextType {
     favoriteIds: Set<number>; 
     toggleFavorite: (subjectId: number) => Promise<void>;
@@ -50,7 +50,7 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
         } catch (error) {
             console.error('Failed to toggle favorite, reverting.', error);
             setFavoriteIds(originalFavorites); // Revert on error
-            alert("Error: Could not update favorite status.");
+            toast.error("Мора да си најавен за да додадеш предмет во омилени.");
         }
     }, [axiosAuth, favoriteIds]);
 
