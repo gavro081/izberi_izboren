@@ -42,19 +42,23 @@ def get_suggestions(request):
     student = request.user.student
     if not student:
         return Response({"message": "Could not find student"}, status=status.HTTP_400_BAD_REQUEST)
-
-    subjects = get_eligible_subjects(student, season=season)
-    mapped_subjects = map_to_subjects_vector(subjects)
-    vector = student_vector(student)
+    try:
+        subjects = get_eligible_subjects(student, season=season)
+        mapped_subjects = map_to_subjects_vector(subjects)
+        vector = student_vector(student)
     
-    final_subjects = get_recommendations(score_for_preferences(vector, mapped_subjects))
+        final_subjects = get_recommendations(score_for_preferences(vector, mapped_subjects))
 
-    order = Case(*[When(name=subject_name, then=pos) for pos, subject_name in enumerate(final_subjects)])
+        order = Case(*[When(name=subject_name, then=pos) for pos, subject_name in enumerate(final_subjects)])
 
-    recommended_subject_objects = Subject.objects.filter(name__in=final_subjects).order_by(order)
+        recommended_subject_objects = Subject.objects.filter(name__in=final_subjects).order_by(order)
 
-    serializer = SubjectSerializer(recommended_subject_objects, many=True)
-    return Response({"data": serializer.data}, status=status.HTTP_200_OK)
+        serializer = SubjectSerializer(recommended_subject_objects, many=True)
+        return Response({"data": serializer.data}, status=status.HTTP_200_OK)
+    
+    except Exception as e:
+        return Response({"message": f"An error occurred: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
 
 class FavoriteSubjectsView(APIView):
     permission_classes = [IsAuthenticated]

@@ -9,7 +9,28 @@ from subjects.consts import BIAS_STUDENT_HAS_ONE, BIAS_SUBJECT_HAS_ONE, WEIGHTS,
 
 def get_eligible_subjects(student, season = 2):
     """
-    season -  0 - summer, 1 - winter, 2 - all
+    determines and returns a list of subjects that a student is eligible to enroll in.
+    args:
+        student: the student instance for whom eligible subjects are being determined.
+        season (int, optional): the season to filter subjects by.
+            - 0: summer
+            - 1: winter
+            - 2: all (default)
+    returns:
+        list: a list of Subject instances that the student is eligible to enroll in.
+
+    eligibility criteria:
+        - excludes subjects the student has already passed.
+        - filters subjects by the specified season.
+        - applies additional filters based on the student's study effort:
+            1. only easy subjects from years up to and including the student's current year.
+            2. easy and non-easy subjects from years up to and including the student's current year.
+            3. easy and non-easy subjects from the student's current year only.
+            4. easy and non-easy subjects from the student's current year and above.
+            5. only non-easy subjects from the student's current year and above.
+        - excludes subjects from levels where the student has already fulfilled the credit limit (L1: 6 credits, L2: 36 credits).
+        - further filters subjects to ensure the student meets all prerequisites (credits and required subjects).
+        - only includes subjects that are elective for the student's study track.
     """
     passed_ids = set(student.passed_subjects.values_list('id', flat=True))
     total_credits = student.total_credits
@@ -63,17 +84,27 @@ def get_eligible_subjects(student, season = 2):
     return valid_subjects
 
 def student_vector(student):
+    """
+    generates a vector representation of a student based on a predefined vocabulary.
+
+    this function loads a vocabulary from a JSON file and constructs a dictionary
+    representing the student's attributes as binary vectors, indicating the presence (1)
+    or absence (0) of specific words for each attribute. It also normalizes
+    the student's study effort and includes the current year.
+
+    args:
+        student: an object representing a student
+    returns:
+        dict: a dictionary containing binary vectors for each vocabulary key, normalized study effort, and current year.
+    raises:
+        FileNotFoundError: If the vocabulary JSON file is not found.
+    """
     base_dir = Path(__file__).resolve().parent
     vocab_file_path = base_dir / 'management' / 'data' / 'vocabulary.json'
-    try:
-        with open(vocab_file_path, 'r', encoding='utf-8') as f:
-            vocabulary = json.load(f)
-    except FileNotFoundError:
-        print("file not found")
-        return -1
+    with open(vocab_file_path, 'r', encoding='utf-8') as f:
+        vocabulary = json.load(f)
 
     student_vector = {}
-    student_vector['index'] = student.index
     for key in vocabulary:
         student_values = getattr(student, key, [])
 
@@ -89,8 +120,19 @@ def student_vector(student):
 
 
 def map_to_subjects_vector(subjects):
+    """
+    map a list of subject objects to their corresponding vector representations.
+
+    args:
+        subjects (list): a list of subject objects.
+    returns:
+        dict: a dictionary mapping subject names to their vector representations, as loaded from 'subjects_vector.json'.
+    raises:
+        FileNotFoundError: If the subjects vector JSON file is not found.
+    """
     base_dir = Path(__file__).resolve().parent
     SUBJECTS_VECTOR_PATH = base_dir / 'management' / 'data' / 'subjects_vector.json'
+
     with open(SUBJECTS_VECTOR_PATH, 'r', encoding='utf-8') as f:
         subjects_vector = json.load(f)
 
@@ -104,10 +146,29 @@ def map_to_subjects_vector(subjects):
 
 
 def score_tags(student_vector, subject_vector):
+    """
+    calculates a similarity score between a student's tag vector and a subject's tag vector,
+    using a tag graph to account for relationships between tags.
+    the score is computed as follows:
+    - for each tag, if both student and subject have the tag (value 1), this is a full match, and the score is incremented.
+    - if both tags are zeroes, ignore them.
+    - if the tags differ but one of them is 1, this is a partial match. the tag graph is used to find neighboring tags and 
+        adjust the score based on the presence of related tags and their respective weights. 
+        biases are used to ensure that a partial match will never result in a full increment, i.e., it will never be as valuable as a full match.
+    - the score is normalized by the total number of tags where either the student or subject has the tag.
+
+    args:
+            student_vector (dict): a dictionary containing a 'tags' key with a list of binary values representing the student's tags.
+            subject_vector (dict): a dictionary containing a 'tags' key with a list of binary values representing the subject's tags.
+    returns:
+            float: the normalized similarity score between the student and subject tag vectors.
+    raises:
+        FileNotFoundError: if the tag graph JSON file is not found.
+    """
     TAG_GRAPH_PATH = Path(__file__).resolve().parent / 'management' / 'data' / 'tag_graph.json'
 
     with open(TAG_GRAPH_PATH, 'r', encoding='utf-8') as f:
-        tag_graph = json.load(f)
+            tag_graph = json.load(f)
 
     student_tags = student_vector['tags']
     subject_tags = subject_vector['tags']
@@ -118,8 +179,10 @@ def score_tags(student_vector, subject_vector):
         
         if student_tags[i] == subject_tags[i]: 
             if student_tags[i] == 1:
+                # full match
                 score += 1
         else:
+            # partial match
             neighbors = tag_graph[str(i)]
             total_weight = sum(weight for _, weight in neighbors)
             if student_tags[i] == 1:
@@ -132,6 +195,18 @@ def score_tags(student_vector, subject_vector):
     return score / tot_count if tot_count != 0 else 0
 
 def score_for_preferences(student_vector, eligible_subjects):
+    """
+    calculates and returns a dictionary of scores for each eligible subject based on a student's preferences.
+
+    args:
+        student_vector (dict): a dictionary representing the student's preferences and attributes. 
+        eligible_subjects (dict): a dictionary where each key is a subject name and each value is a dictionary 
+    returns:
+        dict: A dictionary where each key is a subject name and each value is a dictionary containing scores for each preference key
+    notes:
+        - the "tags" score is calculated separately and then normalized by the maximum tag score across all subjects.
+        - all other preference scores are calculated as the ratio of matching 1's between student and subject vectors.
+    """
     filtered_subjects_vector = {}
     max_tag_score = 0
     for subject in eligible_subjects:
@@ -166,7 +241,7 @@ def score_for_preferences(student_vector, eligible_subjects):
         else:
             filtered_subjects_vector[subject]['effort'] = 0
             
-        filtered_subjects_vector[subject]['activated'] = 1
+        filtered_subjects_vector[subject]['activated'] = values['activated']
 
         filtered_subjects_vector[subject]['participant_score'] = values['participants']
     
@@ -177,6 +252,15 @@ def score_for_preferences(student_vector, eligible_subjects):
     return filtered_subjects_vector
 
 def get_recommendations(filtered_subjects_vector):
+    """
+    generates a list of recommended subjects based on weighted scores.
+
+    args:
+        filtered_subjects_vector (dict): a dictionary where each key is a subject and each value is another dictionary
+            mapping feature keys to their corresponding scores for that subject.
+    returns:
+        list: a list of top N subject names recommended based on their normalized scores. if all scores are zero, returns empty list.
+    """
     subject_scores = {}
     max_ = -1
     for subject in filtered_subjects_vector:
@@ -186,7 +270,9 @@ def get_recommendations(filtered_subjects_vector):
             score += WEIGHTS[key] * keys[key]
         max_ = max(score, max_)
         subject_scores[subject] = score
-    if max_ == 0: return filtered_subjects_vector.keys()
+    
+    if max_ == 0: return []
+    
     for subject in subject_scores:
         subject_scores[subject] /= max_
 
