@@ -4,6 +4,7 @@ import App from "./App.tsx";
 import { AuthProvider } from "./context/AuthProvider";
 import { RecommendationsProvider } from "./context/RecommendationsContext.tsx";
 import { SubjectsProvider } from "./context/SubjectsContext.tsx";
+import { FavoritesProvider } from "./context/FavoritesContext.tsx";
 import "./index.css";
 
 createRoot(document.getElementById("root")!).render(
@@ -11,7 +12,9 @@ createRoot(document.getElementById("root")!).render(
 		<AuthProvider>
 			<SubjectsProvider>
 				<RecommendationsProvider>
-					<App />
+					<FavoritesProvider>
+						<App />
+					</FavoritesProvider>
 				</RecommendationsProvider>
 			</SubjectsProvider>
 		</AuthProvider>

@@ -5,6 +5,8 @@ from django.db import connection
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 from django.db.models import Case, When
 from auth_form.serializers import StudentFormSerializer
 from subjects.utils import get_eligible_subjects, get_recommendations, map_to_subjects_vector, score_for_preferences, student_vector
@@ -54,3 +56,50 @@ def get_suggestions(request):
     serializer = SubjectSerializer(recommended_subject_objects, many=True)
     return Response({"data": serializer.data}, status=status.HTTP_200_OK)
 
+class FavoriteSubjectsView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        try:
+            student = request.user.student
+            # .values_list('id', flat=True) is very efficient
+            favorite_ids = list(student.favorite_subjects.all().values_list('id', flat=True))
+            return Response({'favorite_ids': favorite_ids}, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+class ToggleFavoriteSubjectView(APIView):
+    """
+    Toggles the favorite status of a subject for the authenticated user.
+    Expects a POST request with {'subject_id': <id>}.
+    """
+    permission_classes = [IsAuthenticated]
+    def post(self, request, *args, **kwargs):
+        subject_id = request.data.get('subject_id')
+        if not subject_id:
+            return Response({"message": "Subject ID is required"}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            student = request.user.student
+            subject = Subject.objects.get(id=subject_id)
+
+            if subject in student.favorite_subjects.all():
+                student.favorite_subjects.remove(subject)
+                action = 'removed'
+            else:
+                student.favorite_subjects.add(subject)
+                action = 'added'
+            
+            return Response({
+                'status': 'success',
+                'action': action,
+                'subject_id': subject.id
+            }, status=status.HTTP_200_OK)
+
+        except Subject.DoesNotExist:
+            return Response({'error': 'Subject not found.'}, status=status.HTTP_404_NOT_FOUND)
+        except AttributeError:
+            # This error happens if request.user.student doesn't exist
+            return Response({'error': 'Student profile not found for this user.'}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({'error': f'An unexpected error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

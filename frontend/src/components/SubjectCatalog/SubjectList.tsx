@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Subject } from "../types";
+import FavoriteButton from "./FavoriteButton";
 
 interface SubjectListProps {
 	filteredSubjects: Subject[];
@@ -35,7 +36,7 @@ const SubjectList = ({
 						{/* <p className="text-gray-700 text-sm mb-4 line-clamp-2">
             				{subject.abstract}
           					</p> */}
-						<div className="flex flex-wrap gap-2 mb-4">
+						{/* <div className="flex flex-wrap gap-2 mb-4">
 							{subject.subject_info.tags.map((tag) => (
 								<span
 									key={tag}
@@ -44,7 +45,8 @@ const SubjectList = ({
 									{tag}
 								</span>
 							))}
-						</div>
+						</div> */}
+						<FavoriteButton subjectId={subject.id} />
 						<div className="flex justify-between mt-auto gap-3">
 							<button
 								onClick={() => openSubjectDetails(subject)}

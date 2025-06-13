@@ -16,12 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from subjects.views import index, all_subjects, get_suggestions
+from subjects.views import index, all_subjects, get_suggestions, ToggleFavoriteSubjectView, FavoriteSubjectsView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('subjects/', all_subjects),
     path('suggestion/', get_suggestions),
+    path('student/favorites/', FavoriteSubjectsView.as_view(), name='student-favorites'),
+    path('student/toggle-favorite/', ToggleFavoriteSubjectView.as_view(), name='student-toggle-favorite'),
     # path('subjects/<str:code>/', subject_view),
     path('auth/', include('auth_form.urls')),
     path('', index),

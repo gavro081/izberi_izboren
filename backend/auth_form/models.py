@@ -67,7 +67,11 @@ class Student(models.Model):
     has_extracurricular = models.BooleanField(default=False, null=True)
     total_credits = models.PositiveIntegerField(null=True)
     level_credits = ArrayField(models.PositiveIntegerField(null=True), null=True, blank=True)
-    
+    favorite_subjects = models.ManyToManyField(
+        'subjects.subject', 
+        related_name="favorited_by_students", 
+        blank=True
+    )   
     # {1: [s1, s2, s3...], 2: [....], ...}
     passed_subjects_per_semester = models.JSONField(blank=True, null=True) 
 
@@ -75,10 +79,6 @@ class Student(models.Model):
     def update_info(self, new_preferences):
         self.preferred_domains = new_preferences
         self.save()
-
-    def get_recommendations(self):
-        # Placeholder for recommendation logic
-        pass
 
     def get_user_info(self):
         return self
