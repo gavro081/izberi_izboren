@@ -18,22 +18,6 @@ interface SubjectsSelectorProps {
 	invalidSubjects: Subject[];
 }
 
-const TickSvg = () => (
-	<svg
-		className="w-4 h-4"
-		fill="none"
-		stroke="currentColor"
-		viewBox="0 0 24 24"
-	>
-		<path
-			strokeLinecap="round"
-			strokeLinejoin="round"
-			strokeWidth="2"
-			d="M5 13l4 4L19 7"
-		></path>
-	</svg>
-);
-
 function SubjectsSelector({
 	studyTrack,
 	year,
@@ -187,7 +171,12 @@ function SubjectsSelector({
 																	}`}
 																aria-pressed={isSelected}
 															>
-																{isSelected && !isInvalid && <TickSvg />}
+																{isSelected && !isInvalid && (
+																	<img
+																		src="src/assets/tick.svg"
+																		className="w-4 h-4 mr-1"
+																	/>
+																)}
 																<span>{subject.name}</span>
 															</button>
 														);
@@ -244,7 +233,12 @@ function SubjectsSelector({
 																				}`}
 																		aria-pressed={true}
 																	>
-																		{!isInvalid && <TickSvg />}
+																		{!isInvalid && (
+																			<img
+																				src="src/assets/tick.svg"
+																				className="w-4 h-4 mr-1"
+																			/>
+																		)}
 																		<span>{subject.name}</span>
 																	</button>
 																);

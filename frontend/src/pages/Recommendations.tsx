@@ -45,9 +45,8 @@ const Recommendations = () => {
 		}
 	};
 
-	// Now we use the context to get the subjects, but we can also fetch them directly from the backend if needed!
-	// need to fetch subject data so that we can compare the subject IDs (prerequisites store IDs, but we need names)
-	// in the modals for the recommendations
+	// (new) Now we use the context to get the subjects, but we can also fetch them directly from the backend if needed!
+	// (old) need to fetch subject data so that we can compare the subject IDs (prerequisites store IDs, but we need names) in the modals for the recommendations
 	// useEffect(() => {
 	// 	const fetchData = async () => {
 	// 		const response = await fetch("http://localhost:8000/subjects");
@@ -111,18 +110,17 @@ const Recommendations = () => {
 				</div>
 			) : (
 				<div className="flex h-[90vh] bg-gray-50">
-					{/* <div className="flex h-screen bg-gray-50"> */}
 					<div className="w-1/3 bg-white shadow-lg p-8 flex flex-col justify-center items-center space-y-8">
 						<div className="text-center">
 							<h1 className="text-4xl font-bold text-gray-800 mb-2">
 								Препораки
 							</h1>
 							<p className="text-gray-600 text-lg">
-								Предметите што ќе ги добиеш од алгоритамот се базирани на она
+								Предметите што ќе ги добиеш од алгоритамот се базирани на тоа
 								што си го пополнил во формата.
 								<br />
 								Тие се подредени според тоа колку твоите интереси се совпаѓаат
-								со она што го нудат предметите.
+								со тоа што го нудат предметите.
 							</p>
 						</div>
 
@@ -223,19 +221,10 @@ const Recommendations = () => {
 														onClick={() => openSubjectView(subject)}
 														className="flex items-center px-3 py-2 bg-blue-600 hover:bg-blue-900 text-white text-sm font-medium rounded-md transition-colors"
 													>
-														<svg
+														<img
+															src="src/assets/open.svg"
 															className="w-4 h-4 mr-1"
-															fill="none"
-															stroke="currentColor"
-															viewBox="0 0 24 24"
-														>
-															<path
-																strokeLinecap="round"
-																strokeLinejoin="round"
-																strokeWidth={2}
-																d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-															/>
-														</svg>
+														/>
 														Отвори предмет
 													</button>
 												</div>
@@ -243,25 +232,15 @@ const Recommendations = () => {
 										</div>
 									))}
 								</div>
-								{/* Fade gradient at bottom-right to signal scrollability */}
 								<div className="absolute bottom-0 right-0 h-24 w-full pointer-events-none bg-gradient-to-t from-gray-50 to-transparent" />
 							</div>
 						) : !hasSearched ? (
 							<div className="flex flex-col items-center justify-center h-full text-center">
-								<div className="text-gray-400 mb-6">
-									<svg
+								<div className="mb-6 text-gray-400">
+									<img
+										src="src/assets/search.svg"
 										className="w-16 h-16 mx-auto"
-										fill="none"
-										stroke="currentColor"
-										viewBox="0 0 24 24"
-									>
-										<path
-											strokeLinecap="round"
-											strokeLinejoin="round"
-											strokeWidth={1}
-											d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-										/>
-									</svg>
+									/>
 								</div>
 								<h3 className="text-2xl font-bold text-gray-600 mb-4">
 									Започнете со пребарување!
