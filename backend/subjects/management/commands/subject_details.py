@@ -155,7 +155,9 @@ class Command(BaseCommand):
             else:
                 if course in subject_data:
                     subject_data[course]["professors"] = professors.split("\n") if professors != "" else []
-                    subject_data[course]["assistants"] = assistants.split("\n") if assistants != "" else []
+                    assistants = assistants.split("\n") if assistants != "" else []
+                    subject_data[course]["assistants"] = [ass for ass in assistants if ass not in subject_data[course]["professors"]]
+                    
                 else:
                     if with_warnings:
                         self.stdout.write(self.style.WARNING(f"Course {course} is not in subject data"))

@@ -3,16 +3,19 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import IOimage from "../assets/IOLogo.png";
+import { useRecommendations } from "../context/RecommendationsContext";
 import { useAuth } from "../hooks/useAuth";
 
 const Navbar: React.FC = () => {
 	const [menuOpen, setMenuOpen] = useState(false);
+	const [, setRecommendations] = useRecommendations();
 	const { isAuthenticated, logout } = useAuth();
 	const navigate = useNavigate();
 	const { login } = useAuth();
 
 	const handleLogout = () => {
 		logout();
+		setRecommendations([]);
 		navigate("/");
 		toast.success("Успешно сте одјавени!");
 	};

@@ -114,7 +114,6 @@ function SubjectsSelector({
 															);
 
 															if (allSelected) {
-																// Deselect all semester mandatory subjects
 																setPassedSubjectsPerSemester((prev) => ({
 																	...prev,
 																	[semester]: (prev[semester] || []).filter(
@@ -126,7 +125,6 @@ function SubjectsSelector({
 																	),
 																}));
 															} else {
-																// Add missing semester mandatory subjects
 																setPassedSubjectsPerSemester((prev) => {
 																	const existing = prev[semester] || [];
 																	const newSubjects = semesterMandatory.filter(

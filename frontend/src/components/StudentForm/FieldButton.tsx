@@ -17,6 +17,7 @@ const FieldButton: React.FC<{
 			ass: boolean;
 		}>
 	>;
+	searchSetter?: Dispatch<SetStateAction<string>>;
 }> = ({
 	keyProp,
 	state,
@@ -25,8 +26,10 @@ const FieldButton: React.FC<{
 	isSelected,
 	isDisabled,
 	setIsNemamSelected,
+	searchSetter,
 }) => {
 	const handleClick = () => {
+		if (searchSetter) searchSetter("");
 		if (keyProp === "Немам") {
 			if (state.includes("None")) {
 				stateSetter([]);

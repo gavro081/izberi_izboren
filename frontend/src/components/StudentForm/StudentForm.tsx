@@ -638,6 +638,7 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 									isSelected={isSelected}
 									isDisabled={shouldBeDisabled}
 									setIsNemamSelected={setIsNemamSelected}
+									searchSetter={setProfessorSearchTerm}
 								/>
 							);
 						})}
@@ -694,6 +695,7 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 									isSelected={isSelected}
 									isDisabled={shouldBeDisabled}
 									setIsNemamSelected={setIsNemamSelected}
+									searchSetter={setAssistantsSearchTerm}
 								/>
 							);
 						})}

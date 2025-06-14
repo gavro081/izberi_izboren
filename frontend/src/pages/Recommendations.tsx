@@ -103,7 +103,7 @@ const Recommendations = () => {
 	return (
 		<>
 			{formData?.has_filled_form === false ? (
-				<div className="flex h-[90vh] bg-gray-50">
+				<div className="flex h-[90vh] bg-white">
 					<div className="text-red-500 font-bold text-2xl text-center flex-1 flex items-center justify-center">
 						Пополни информации за твојот профил за да добиеш препораки!
 					</div>
