@@ -88,11 +88,18 @@ function SubjectView() {
 			<div className="bg-white shadow-sm">
 				<div className="max-w-6xl mx-auto px-4 py-4">
 					<button
-						onClick={() => navigate(-1)}
+						onClick={() => navigate(from)}
 						className="flex items-center text-gray-600 hover:text-gray-900 mb-4"
 					>
 						<ArrowLeft className="w-5 h-5 mr-2" />
-						Назад
+						Назад кон
+						{from == "/subjects"
+							? " сите предмети"
+							: from == "/recommendations"
+							? " препораките"
+							: from == "/favorite-subjects"
+							? " омилените предмети"
+							: " домашната страна"}
 					</button>
 
 					<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">

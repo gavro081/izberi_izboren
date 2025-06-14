@@ -125,6 +125,7 @@ const SubjectCatalog = () => {
 							filteredSubjects={filteredSubjects}
 							visibleCourses={visibleCourses}
 							openSubjectDetails={openSubjectDetails}
+							from="subjects"
 						/>
 					)}
 

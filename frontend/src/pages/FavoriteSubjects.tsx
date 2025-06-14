@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
-import { Subject } from "../components/types";
 import SkeletonCard from "../components/SubjectCatalog/SkeletonCard";
 import SubjectList from "../components/SubjectCatalog/SubjectList";
 import SubjectModal from "../components/SubjectCatalog/SubjectModal";
+import { getSubjectPrerequisites } from "../components/SubjectCatalog/utils";
+import { Subject } from "../components/types";
 import { useFavorites } from "../context/FavoritesContext";
 import { useSubjects } from "../context/SubjectsContext";
-import { getSubjectPrerequisites } from "../components/SubjectCatalog/utils";
 
 const FavoriteSubjects = () => {
 	const [subjects] = useSubjects();
@@ -49,37 +49,16 @@ const FavoriteSubjects = () => {
 	};
 
 	return (
-		<div className="mx-auto p-4 bg-white min-h-screen">
+		<div className="mx-auto p-4 bg-white min-h-[83vh]">
 			{favoriteSubjects.length > 0 && (
-				<div className="mb-8 flex justify-center">
-					<div className="px-12 py-8 rounded-2xl shadow-lg border-4 border-blue-500 hover:shadow-xl  hover:scale-105 hover:border-blue-700 transition-all duration-300">
-						<div className="flex items-center justify-center gap-4">
-							<div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
-								<svg
-									className="w-7 h-7 text-white"
-									fill="none"
-									stroke="currentColor"
-									viewBox="0 0 24 24"
-								>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										strokeWidth={3}
-										d="M5 13l4 4L19 7"
-									/>
-								</svg>
-							</div>
-							<p className="text-gray-800 font-bold text-2xl">
-								{favoriteSubjects.length === 1
-									? "Имаш 1 омилен предмет!"
-									: `Имаш ${favoriteSubjects.length} омилени предмети!`}
-							</p>
-						</div>
-					</div>
+				<div className="mb-8 flex">
+					<h3 className="text-3xl font-bold text-gray-900 mb-2">
+						Омилени предмети
+					</h3>
 				</div>
 			)}
 
-			<div className="flex flex-col md:flex-row gap-6">
+			<div className="flex flex-col md:flex-row gap-6 bg-gray-50 p-3 rounded">
 				<div className="flex-1">
 					{!isLoaded ? (
 						<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
@@ -92,6 +71,7 @@ const FavoriteSubjects = () => {
 							filteredSubjects={favoriteSubjects}
 							visibleCourses={visibleCourses}
 							openSubjectDetails={openSubjectDetails}
+							from="favorite-subjects"
 						/>
 					)}
 

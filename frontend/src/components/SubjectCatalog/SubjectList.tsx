@@ -6,34 +6,35 @@ interface SubjectListProps {
 	filteredSubjects: Subject[];
 	visibleCourses: number;
 	openSubjectDetails: (subject: Subject) => void;
+	from: string;
 }
 
 const SubjectList = ({
 	filteredSubjects,
 	visibleCourses,
 	openSubjectDetails,
+	from,
 }: SubjectListProps) => {
 	const navigate = useNavigate();
 	const openSubjectView = (subject: Subject) => {
-		navigate(`/subjects/${subject.code}`);
+		navigate(`/subjects/${subject.code}`, {
+			state: { from: `/${from}` },
+		});
 	};
 	return (
 		<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
 			{filteredSubjects.slice(0, visibleCourses).map((subject) => (
 				<div
 					key={subject.id}
-					className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200"
+					className="border border-gray-200 bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200"
 				>
 					<div className="p-4 min-h-full flex flex-col gap-1">
-						<div className="flex justify-between items-start mb-2">
+						<div className="flex justify-between items-start mb-8">
 							<div>
 								<h3 className="text-lg font-semibold">{subject.name}</h3>
 								<p className="text-gray-600">{subject.code}</p>
 							</div>
 						</div>
-						{/* <p className="text-gray-700 text-sm mb-4 line-clamp-2">
-            				{subject.abstract}
-          					</p> */}
 						{/* <div className="flex flex-wrap gap-2 mb-4">
 							{subject.subject_info.tags.map((tag) => (
 								<span

@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import FavoriteButton from "../components/SubjectCatalog/FavoriteButton";
 import SubjectModal from "../components/SubjectCatalog/SubjectModal";
 import { getSubjectPrerequisites } from "../components/SubjectCatalog/utils";
 import { Subject } from "../components/types";
@@ -7,7 +8,6 @@ import { useRecommendations } from "../context/RecommendationsContext";
 import { useSubjects } from "../context/SubjectsContext";
 import { useAuth } from "../hooks/useAuth";
 import useAxiosAuth from "../hooks/useAxiosAuth";
-import FavoriteButton from "../components/SubjectCatalog/FavoriteButton";
 
 const Recommendations = () => {
 	const axiosAuth = useAxiosAuth();
@@ -73,7 +73,9 @@ const Recommendations = () => {
 	};
 
 	const openSubjectView = (subject: Subject) => {
-		navigate(`/subjects/${subject.code}`);
+		navigate(`/subjects/${subject.code}`, {
+			state: { from: "/recommendations" },
+		});
 	};
 
 	const [selectedSubject, setSelectedSubject] = useState<Subject | null>(null);
