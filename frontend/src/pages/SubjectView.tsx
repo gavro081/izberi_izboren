@@ -44,10 +44,6 @@ function SubjectView() {
 		selectedSubject &&
 		selectedSubject.abstract.split(/\s+/).length > WORD_LIMIT;
 
-	const handleGoBack = () => {
-		navigate(from);
-	};
-
 	useEffect(() => {
 		if (selectedSubject) {
 			const technologies = selectedSubject.subject_info.technologies.map(
@@ -92,16 +88,11 @@ function SubjectView() {
 			<div className="bg-white shadow-sm">
 				<div className="max-w-6xl mx-auto px-4 py-4">
 					<button
-						onClick={handleGoBack}
+						onClick={() => navigate(-1)}
 						className="flex items-center text-gray-600 hover:text-gray-900 mb-4"
 					>
 						<ArrowLeft className="w-5 h-5 mr-2" />
-						Назад кон
-						{from == "/subjects"
-							? " сите предмети"
-							: from == "/recommendations"
-							? " препораките"
-							: " домашната страна"}
+						Назад
 					</button>
 
 					<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">

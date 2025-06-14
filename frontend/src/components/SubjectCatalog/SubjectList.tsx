@@ -15,9 +15,7 @@ const SubjectList = ({
 }: SubjectListProps) => {
 	const navigate = useNavigate();
 	const openSubjectView = (subject: Subject) => {
-		navigate(`/subjects/${subject.code}`, {
-			state: { from: "/subjects" },
-		});
+		navigate(`/subjects/${subject.code}`);
 	};
 	return (
 		<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">

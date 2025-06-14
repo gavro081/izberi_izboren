@@ -126,6 +126,13 @@ const Navbar: React.FC = () => {
 									>
 										Препораки
 									</Link>
+									<Link
+										to="/favorite-subjects"
+										className="block px-4 py-2 text-sm hover:bg-gray-100 hover:underline"
+										onClick={() => setMenuOpen(false)}
+									>
+										Омилени предмети
+									</Link>
 
 									<button
 										onClick={() => {
@@ -172,6 +179,13 @@ const Navbar: React.FC = () => {
 								onClick={() => setMenuOpen(false)}
 							>
 								Профил
+							</Link>
+							<Link
+								to="/favorite-subjects"
+								className="hover:underline"
+								onClick={() => setMenuOpen(false)}
+							>
+								Омилени предмети
 							</Link>
 							<button
 								onClick={() => {

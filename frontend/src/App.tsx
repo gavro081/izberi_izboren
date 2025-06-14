@@ -13,6 +13,7 @@ import Login from "./pages/Login";
 import Recommendations from "./pages/Recommendations";
 import Register from "./pages/Register";
 import SubjectView from "./pages/SubjectView";
+import FavoriteSubjects from "./pages/FavoriteSubjects";
 
 const Layout = () => (
 	<div className="flex flex-col min-h-screen">
@@ -58,6 +59,14 @@ const router = createBrowserRouter([
 				element: (
 					<PrivateRoute>
 						<Account />
+					</PrivateRoute>
+				),
+			},
+			{
+				path: "favorite-subjects",
+				element: (
+					<PrivateRoute>
+						<FavoriteSubjects />
 					</PrivateRoute>
 				),
 			},

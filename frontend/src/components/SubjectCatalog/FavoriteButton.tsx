@@ -1,4 +1,5 @@
 import { useFavorites } from '../../context/FavoritesContext'; 
+import { useAuth } from '../../hooks/useAuth';
 
 const HeartIcon = ({ filled }: { filled: boolean }) => (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill={filled ? 'currentColor' : 'none'} viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -12,12 +13,13 @@ interface FavoriteButtonProps {
 
 const FavoriteButton = ({ subjectId }: FavoriteButtonProps) => {
     const { favoriteIds, toggleFavorite, isLoading } = useFavorites();
+    const { isAuthenticated } = useAuth(); 
     const isFavorite = favoriteIds.has(subjectId);
 
     return (
         <button
             onClick={() => toggleFavorite(subjectId)}
-            disabled={isLoading}
+            disabled={isLoading || !isAuthenticated}
             className={`group relative flex items-center justify-center transition-all duration-200 p-2 rounded-full ${isFavorite ? 'text-red-500' : 'text-gray-400'} ${isLoading ? 'cursor-not-allowed animate-pulse' : ''}`}
             aria-label={isFavorite ? 'Unfavorite' : 'Favorite'}
         >

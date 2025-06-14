@@ -1,6 +1,6 @@
 # from .utils import check_prerequisites
 from .models import Student
-from .serializers import RegistrationSerializer, LoginSerializer, StudentFormSerializer
+from .serializers import RegistrationSerializer, LoginSerializer, StudentFormSerializer, UserSerializer
 from rest_framework import serializers, status, views
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -102,6 +102,13 @@ class StudentFormView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+    
+class UserDetailView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data)
 
 
 
