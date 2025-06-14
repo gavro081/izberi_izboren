@@ -4,6 +4,7 @@ import axiosInstance from "../api/axiosInstance";
 import { jwtDecode } from "jwt-decode"
 import { toast } from "react-toastify";
 import { StudentData } from "../components/types";
+import { User } from "../context/AuthContext";
 
 interface DecodedToken {
     exp: number;
@@ -16,6 +17,7 @@ interface DecodedToken {
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
+  const [user, setUser] = useState<User | null>(null);
   const [accessToken, setAccessToken] = useState<string | null>(
     localStorage.getItem("access")
   );
@@ -68,6 +70,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     setAccessToken(null);
     setRefreshToken(null);
     setFormData(null);
+    setUser(null);
   };
 
   const scheduleProactiveRefresh = (token: string) => {
@@ -75,7 +78,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
         clearTimeout(proactiveRefreshTimeoutId.current);
     }
 
-    try {
+    try {    
         const decodedToken = jwtDecode<DecodedToken>(token);
         const expirationTime = decodedToken.exp * 1000; 
         const currentTime = Date.now();
@@ -155,9 +158,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     }
   }, [axiosAuth, accessToken]); 
 
-  const login = async (newAccessToken: string, newRefreshToken: string) => {
+  const login = async (newAccessToken: string, newRefreshToken: string, userData: User) => {
     localStorage.setItem("access", newAccessToken);
     localStorage.setItem("refresh", newRefreshToken);
+    setUser(userData);
     setAccessToken(newAccessToken);
     setRefreshToken(newRefreshToken);
     scheduleProactiveRefresh(newAccessToken);
@@ -188,6 +192,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     refreshToken,
     formData,
     setFormData,
+    user,
     login,
     logout,
     isAuthenticated: !!accessToken,

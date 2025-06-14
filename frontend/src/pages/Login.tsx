@@ -36,12 +36,14 @@ const Login: React.FC = () => {
 			const response = await axios.post<{
 				access: string;
 				refresh: string;
+				full_name: string;
+				user_type: string;
 			}>("http://localhost:8000/auth/login/", {
 				email: formData.email,
 				password: formData.password,
 			});
-			const { access, refresh } = response.data;
-			login(access, refresh);
+			const { access, refresh, full_name, user_type } = response.data;
+			login(access, refresh, { full_name, user_type });
 			navigate("/");
 			toast.success("Успешно сте најавени!");
 		} catch (err: unknown) {

@@ -14,6 +14,8 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
         data['user_type'] = self.user.user_type
+        if hasattr(self.user, 'full_name'):
+            data['full_name'] = self.user.full_name
         return data
 
 class RegistrationSerializer(serializers.ModelSerializer):

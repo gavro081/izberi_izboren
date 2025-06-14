@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import IOimage from "../assets/IOLogo.png";
@@ -8,10 +8,27 @@ import { useAuth } from "../hooks/useAuth";
 
 const Navbar: React.FC = () => {
 	const [menuOpen, setMenuOpen] = useState(false);
+	const [profileMenuOpen, setProfileMenuOpen] = useState(false);
 	const [, setRecommendations] = useRecommendations();
-	const { isAuthenticated, logout } = useAuth();
+	const { isAuthenticated, logout, login, user } = useAuth();
 	const navigate = useNavigate();
-	const { login } = useAuth();
+	const profileMenuRef = useRef<HTMLDivElement>(null);
+	const userInitial = user?.full_name.charAt(0).toUpperCase() || "?";
+	// Close dropdown when clicking outside
+	useEffect(() => {
+		const handleClickOutside = (event: MouseEvent) => {
+			if (
+				profileMenuRef.current &&
+				!profileMenuRef.current.contains(event.target as Node)
+			) {
+				setProfileMenuOpen(false);
+			}
+		};
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, []);
 
 	const handleLogout = () => {
 		logout();
@@ -27,8 +44,11 @@ const Navbar: React.FC = () => {
 				email: "fffff@finki.ukim.mk",
 				password: "testTestTEST123",
 			});
-			const { access, refresh } = response.data;
-			login(access, refresh);
+			const { access, refresh, full_name, user_type } = response.data;
+			login(access, refresh, {
+				full_name,
+				user_type,
+			});
 			navigate("/");
 		} catch (err: unknown) {
 			console.log(err);
@@ -75,69 +95,99 @@ const Navbar: React.FC = () => {
 					</svg>
 				</button>
 
+				{/* Desktop Menu */}
 				<div className="hidden sm:flex space-x-4 items-center text-sm sm:text-base">
 					<button onClick={testAccountLogin}>quick login</button>
 					<Link to="/subjects" className="hover:underline">
 						Предмети
 					</Link>
-					{isAuthenticated && (
-						<Link to="/recommendations" className="hover:underline">
-							Препораки
-						</Link>
-					)}
-					{isAuthenticated && (
-						<Link to="/account" className="hover:underline">
-							Профил
-						</Link>
-					)}
 					{isAuthenticated ? (
-						<button
-							onClick={handleLogout}
-							className="bg-red-500 hover:bg-red-600 px-3 py-1 rounded"
-						>
-							Одјави се
-						</button>
+						<div className="relative" ref={profileMenuRef}>
+							<button
+								onClick={() => setProfileMenuOpen(!profileMenuOpen)}
+								className="w-10 h-10 rounded-full bg-blue-800 flex items-center justify-center font-bold text-xl hover:bg-blue-700 transition"
+							>
+								{userInitial}
+							</button>
+							{profileMenuOpen && (
+								<div className="absolute right-0 mt-1 w-48 bg-white rounded-md shadow-lg py-1 text-black z-20">
+									<Link
+										to="/account"
+										className="block px-4 py-2 text-sm hover:bg-gray-100 hover:underline"
+										onClick={() => setProfileMenuOpen(false)}
+									>
+										Профил
+									</Link>
+
+									<Link
+										to="/recommendations"
+										className="block px-4 py-2 text-sm hover:bg-gray-100 hover:underline"
+										onClick={() => setProfileMenuOpen(false)}
+									>
+										Препораки
+									</Link>
+
+									<button
+										onClick={() => {
+											handleLogout();
+											setProfileMenuOpen(false);
+										}}
+										className="w-full text-left block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 hover:underline"
+									>
+										Одјави се
+									</button>
+								</div>
+							)}
+						</div>
 					) : (
-						<>
-							<Link to="/login" className="hover:underline">
-								Најави се
-							</Link>
-						</>
+						<Link to="/login" className="hover:underline">
+							Најави се
+						</Link>
 					)}
 				</div>
 			</div>
 
+			{/* Mobile Menu */}
 			{menuOpen && (
 				<div className="sm:hidden mt-3 flex flex-col space-y-2 text-sm">
-					<Link to="/subjects" className="hover:underline">
+					<Link
+						to="/subjects"
+						className="hover:underline"
+						onClick={() => setMenuOpen(false)}
+					>
 						Предмети
 					</Link>
 					{isAuthenticated && (
-						<Link to="/account" className="hover:underline">
-							Профил
-						</Link>
-					)}
-					{isAuthenticated && (
-						<Link to="/recommendations" className="hover:underline">
-							Препораки
-						</Link>
-					)}
-					{isAuthenticated ? (
-						<button
-							onClick={() => {
-								handleLogout();
-								setMenuOpen(false);
-							}}
-							className="bg-red-500 hover:bg-red-600 px-3 py-1 rounded"
-						>
-							Одјави се
-						</button>
-					) : (
 						<>
-							<Link to="/login" onClick={() => setMenuOpen(false)}>
-								Најави се
+							<Link
+								to="/recommendations"
+								className="hover:underline"
+								onClick={() => setMenuOpen(false)}
+							>
+								Препораки
 							</Link>
+							<Link
+								to="/account"
+								className="hover:underline"
+								onClick={() => setMenuOpen(false)}
+							>
+								Профил
+							</Link>
+							<button
+								onClick={() => {
+									handleLogout();
+									setMenuOpen(false);
+								}}
+								className="text-left text-red-400 hover:underline"
+							>
+								Одјави се
+							</button>
 						</>
+					)}
+					{!isAuthenticated && (
+						<Link to="/login" onClick={() => setMenuOpen(false)}>
+							Најави се
+						</Link>
 					)}
 				</div>
 			)}

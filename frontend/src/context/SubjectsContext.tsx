@@ -23,7 +23,7 @@ export const SubjectsProvider = ({ children }: SubjectsProviderProps) => {
 	useEffect(() => {
 		const fetchSubjects = async () => {
 			try {
-				const resSubjects = await fetch("http://localhost:8000/subjects");
+				const resSubjects = await fetch("http://localhost:8000/subjects/");
 				if (resSubjects.ok) {
 					const subJson: Subject[] = await resSubjects.json();
 					setSubjects(subJson || []);
