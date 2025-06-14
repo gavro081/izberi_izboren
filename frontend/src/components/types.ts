@@ -61,8 +61,9 @@ export type Filters = {
 	electiveFor: StudyTrack[];
 	professors: string[];
 	assistants: string[];
-	hasPrerequisites: boolean;
+	hasPrerequisites: boolean | "";
 	tags: string[];
+	evaluation: string[];
 };
 
 export type StudyTrack = (typeof STUDY_TRACKS)[number];

@@ -33,7 +33,8 @@ const SubjectCatalog = () => {
 		professors: [],
 		assistants: [],
 		tags: [],
-		hasPrerequisites: false,
+		hasPrerequisites: "",
+		evaluation: [],
 	});
 	const filteredSubjects: Subject[] = filterSubjects({
 		searchTerm,

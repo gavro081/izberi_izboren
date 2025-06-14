@@ -1,5 +1,6 @@
+import { ChevronDown } from "lucide-react";
 import { useState } from "react";
-import { STUDY_TRACKS } from "../../constants/subjects";
+import { EVALUATIONS, STUDY_TRACKS } from "../../constants/subjects";
 import { Filters } from "../types";
 import { resetFilters } from "./utils";
 interface FilterSidebarProps {
@@ -11,6 +12,38 @@ interface FilterSidebarProps {
 	tags: string[];
 }
 
+const FilterHeader = ({
+	label,
+	filterKey,
+	openFilters,
+	toggleFilter,
+	children,
+}: {
+	label: string;
+	filterKey: string;
+	openFilters: { [key: string]: boolean };
+	toggleFilter: (key: string) => void;
+	children: React.ReactNode;
+}) => (
+	<div className="mb-2">
+		<button
+			type="button"
+			className="w-full flex justify-between items-center py-2"
+			onClick={() => toggleFilter(filterKey)}
+		>
+			<span className="font-medium">{label}</span>
+			<ChevronDown
+				className="h-4 w-4 text-gray-500"
+				style={{
+					transform: openFilters[filterKey] ? "rotate(180deg)" : "rotate(0deg)",
+					transition: "transform 0.2s ease-in-out",
+				}}
+			/>
+		</button>
+		{openFilters[filterKey] && children}
+	</div>
+);
+
 const FilterSidebar = ({
 	setSearchTerm,
 	setProfessorSearchTerm,
@@ -20,29 +53,43 @@ const FilterSidebar = ({
 	tags,
 }: FilterSidebarProps) => {
 	const [showTags, setShowTags] = useState(false);
+	const [openFilters, setOpenFilters] = useState<{ [key: string]: boolean }>(
+		{}
+	);
+	const toggleFilter = (key: string) => {
+		setOpenFilters((prev) => ({ ...prev, [key]: !prev[key] }));
+	};
+
+	const handleResetFilters = () => {
+		resetFilters(
+			setSearchTerm,
+			setProfessorSearchTerm,
+			setAssistantSearchTerm,
+			setFilters
+		);
+		setOpenFilters({});
+	};
+
 	return (
 		<div className="max-w-sm mx-auto">
 			<div className="flex justify-between items-center mb-4">
 				<h2 className="text-lg font-semibold">Филтри</h2>
 				<button
-					onClick={() =>
-						resetFilters(
-							setSearchTerm,
-							setProfessorSearchTerm,
-							setAssistantSearchTerm,
-							setFilters
-						)
-					}
+					onClick={handleResetFilters}
 					className="text-sm text-gray-600 hover:text-gray-900"
 				>
 					Избриши
 				</button>
 			</div>
 			<div className="mb-4">
-				{/* filter by season*/}
-				<div className="space-y-1 mb-4">
-					<h3 className="font-medium mb-2">Семестар</h3>
-					<div className="grid grid-cols-2">
+				{/* SEASON */}
+				<FilterHeader
+					label="Сезона"
+					filterKey="season"
+					openFilters={openFilters}
+					toggleFilter={toggleFilter}
+				>
+					<div className="grid grid-cols-2 mb-2 mt-1">
 						{["Летен", "Зимски"].map((season) => {
 							const seasonValue = season === "Летен" ? "S" : "W";
 							return (
@@ -70,18 +117,22 @@ const FilterSidebar = ({
 							);
 						})}
 					</div>
-				</div>
-				{/* filter by semester*/}
-				<div className="space-y-1 mb-4">
-					{/* <h3 className="font-medium mb-2">Семестар</h3> */}
-					<div className="grid grid-cols-4 gap-2">
+				</FilterHeader>
+				{/* SEMESTER */}
+				<FilterHeader
+					label="Семестар"
+					filterKey="semester"
+					openFilters={openFilters}
+					toggleFilter={toggleFilter}
+				>
+					<div className="grid grid-cols-4 gap-2 mb-2 mt-1">
 						{Array.from(Array(8)).map((_, index) => {
 							const i = index + 1;
 							return (
 								<div key={i} className="flex items-center space-x-2">
 									<input
 										type="checkbox"
-										name="season"
+										name="semester"
 										id={`s${i}`}
 										onChange={() =>
 											setFilters((prev) => ({
@@ -101,11 +152,15 @@ const FilterSidebar = ({
 							);
 						})}
 					</div>
-				</div>
-				{/* filter by level */}
-				<div className="space-y-1 mb-4">
-					<h3 className="font-medium mb-2">Ниво</h3>
-					<div className="flex gap-4 sm:grid sm:grid-cols-3">
+				</FilterHeader>
+				{/* LEVEL */}
+				<FilterHeader
+					label="Ниво"
+					filterKey="level"
+					openFilters={openFilters}
+					toggleFilter={toggleFilter}
+				>
+					<div className="flex gap-4 sm:grid sm:grid-cols-3 mb-2 mt-1">
 						{Array.from(Array(3)).map((_, index) => {
 							const i = index + 1;
 							const level = `L${i}`;
@@ -136,11 +191,15 @@ const FilterSidebar = ({
 							);
 						})}
 					</div>
-				</div>
-				{/* filter by activation*/}
-				<div className="space-y-1 mb-4">
-					<h3 className="font-medium mb-2">Активирани</h3>
-					<div className="grid grid-cols-2">
+				</FilterHeader>
+				{/* ACTIVATED */}
+				<FilterHeader
+					label="Активирани"
+					filterKey="activated"
+					openFilters={openFilters}
+					toggleFilter={toggleFilter}
+				>
+					<div className="grid grid-cols-2 mb-2 mt-1">
 						{["Активирани", "Неактивирани"].map((value) => {
 							const activeValue =
 								value === "Активирани" ? "activated" : "not_activated";
@@ -148,7 +207,7 @@ const FilterSidebar = ({
 								<div key={activeValue} className="flex items-center space-x-2">
 									<input
 										type="checkbox"
-										name="season"
+										name="activated"
 										id={activeValue}
 										onChange={() =>
 											setFilters((prev) => ({
@@ -170,18 +229,22 @@ const FilterSidebar = ({
 							);
 						})}
 					</div>
-				</div>
-				{/* filter by mandatoryFor */}
-				<div className="space-y-1 mb-4">
-					<h3 className="font-medium mb-2">Задолжителен за:</h3>
-					<div className="grid grid-cols-3 gap-2">
+				</FilterHeader>
+				{/* MANDATORY */}
+				<FilterHeader
+					label="Задолжителен за:"
+					filterKey="mandatoryFor"
+					openFilters={openFilters}
+					toggleFilter={toggleFilter}
+				>
+					<div className="grid grid-cols-3 gap-2 mb-2 mt-1">
 						{STUDY_TRACKS.map((track) => {
 							const studyTrack = track.replace(/\d+$/, "");
 							return (
 								<div key={track} className="flex items-center space-x-2">
 									<input
 										type="checkbox"
-										name="level"
+										name="mandatoryFor"
 										id={track}
 										onChange={() =>
 											setFilters((prev) => ({
@@ -204,18 +267,22 @@ const FilterSidebar = ({
 							);
 						})}
 					</div>
-				</div>
-				{/* filter by electiveFor */}
-				<div className="space-y-1 mb-6">
-					<h3 className="font-medium mb-2">Изборен за:</h3>
-					<div className="grid grid-cols-3 gap-2">
+				</FilterHeader>
+				{/* ELECTIVE */}
+				<FilterHeader
+					label="Изборен за:"
+					filterKey="electiveFor"
+					openFilters={openFilters}
+					toggleFilter={toggleFilter}
+				>
+					<div className="grid grid-cols-3 gap-2 mb-2 mt-1">
 						{STUDY_TRACKS.map((track) => {
 							const studyTrack = track.replace(/\d+$/, "");
 							return (
 								<div key={track} className="flex items-center space-x-2">
 									<input
 										type="checkbox"
-										name="level"
+										name="electiveFor"
 										id={track}
 										onChange={() =>
 											setFilters((prev) => ({
@@ -238,37 +305,69 @@ const FilterSidebar = ({
 							);
 						})}
 					</div>
-				</div>
-				{/* filter by prereq */}
-				<div className="space-y-1 mb-4">
-					<div className="flex items-center space-x-2">
-						<input
-							type="checkbox"
-							name="prereq"
-							id="prereq"
-							onChange={() =>
-								setFilters((prev) => ({
-									...prev,
-									hasPrerequisites: !prev.hasPrerequisites,
-								}))
-							}
-							checked={filters.hasPrerequisites}
-							className="h-4 w-4 rounded border-gray-300 text-blue-600"
-						/>
-						<label htmlFor={"prereq"} className="text-sm text-gray-700">
-							Предметот нема предуслови
+				</FilterHeader>
+				{/* PREREQUISITES */}
+				<FilterHeader
+					label="Предуслови"
+					filterKey="prereq"
+					openFilters={openFilters}
+					toggleFilter={toggleFilter}
+				>
+					<div className="flex flex-col gap-2 mb-2 mt-1">
+						<label className="flex items-center space-x-2">
+							<input
+								type="checkbox"
+								name="prereqsNo"
+								id="prereqsNo"
+								onChange={() =>
+									setFilters((prev) => ({
+										...prev,
+										hasPrerequisites:
+											prev.hasPrerequisites === false ? "" : false,
+									}))
+								}
+								checked={filters.hasPrerequisites === false}
+								className="h-4 w-4 text-blue-600"
+							/>
+							<span className="text-sm text-gray-700">
+								Предметот нема предуслови
+							</span>
+						</label>
+						<label className="flex items-center space-x-2">
+							<input
+								type="checkbox"
+								name="prereqYes"
+								id="prereqsYes"
+								onChange={() =>
+									setFilters((prev) => ({
+										...prev,
+										hasPrerequisites:
+											prev.hasPrerequisites === true ? "" : true,
+									}))
+								}
+								checked={filters.hasPrerequisites === true}
+								className="h-4 w-4 text-blue-600"
+							/>
+							<span className="text-sm text-gray-700">
+								Предметот има предуслови
+							</span>
 						</label>
 					</div>
-				</div>
-				<div className="space-y-1 mb-4">
-					<h3 className="font-medium mb-2">Тагови:</h3>
-					<div className="grid grid-cols-1 gap-2">
+				</FilterHeader>
+				{/* TAGS */}
+				<FilterHeader
+					label="Тагови:"
+					filterKey="tags"
+					openFilters={openFilters}
+					toggleFilter={toggleFilter}
+				>
+					<div className="grid grid-cols-1 gap-2 mb-2">
 						{tags.slice(0, showTags ? undefined : 4).map((tag) => {
 							return (
 								<div key={tag} className="flex items-center space-x-2">
 									<input
 										type="checkbox"
-										name="level"
+										name="tags"
 										id={tag}
 										onChange={() =>
 											setFilters((prev) => ({
@@ -296,7 +395,39 @@ const FilterSidebar = ({
 							</button>
 						)}
 					</div>
-				</div>
+				</FilterHeader>
+				{/* EVALUATION */}
+				<FilterHeader
+					label="Евалуација"
+					filterKey="evaluation"
+					openFilters={openFilters}
+					toggleFilter={toggleFilter}
+				>
+					<div className="grid grid-cols-2 gap-2 mb-2 mt-1">
+						{EVALUATIONS.map((evalType) => (
+							<div key={evalType} className="flex items-center space-x-2">
+								<input
+									type="checkbox"
+									name="evaluation"
+									id={evalType}
+									onChange={() =>
+										setFilters((prev) => ({
+											...prev,
+											evaluation: prev.evaluation.includes(evalType)
+												? prev.evaluation.filter((item) => item !== evalType)
+												: [...prev.evaluation, evalType],
+										}))
+									}
+									checked={filters.evaluation.includes(evalType)}
+									className="h-4 w-4 rounded border-gray-300 text-blue-600"
+								/>
+								<label htmlFor={evalType} className="text-sm text-gray-700">
+									{evalType}
+								</label>
+							</div>
+						))}
+					</div>
+				</FilterHeader>
 			</div>
 		</div>
 	);

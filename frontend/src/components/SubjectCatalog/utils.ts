@@ -1,3 +1,4 @@
+import { EVALUATION_MAP_TO_MK } from "../../constants/subjects";
 import { LatinToCyrillic } from "../StudentForm/utils";
 import { Filters, StudyTrack, Subject } from "../types";
 
@@ -14,8 +15,9 @@ interface filteredSubjectsParams {
 		electiveFor: StudyTrack[];
 		professors: string[];
 		assistants: string[];
-		hasPrerequisites: boolean;
+		hasPrerequisites: boolean | "";
 		tags: string[];
+		evaluation: string[];
 	};
 	subjects: Subject[];
 }
@@ -28,12 +30,16 @@ export const filterSubjects = ({
 	subjects,
 }: filteredSubjectsParams) =>
 	subjects?.filter((subject) => {
-		if (searchTerm !== "") searchTerm = LatinToCyrillic(searchTerm);
+		let cyrilicSearchTerm = "";
+		if (searchTerm !== "") {
+			cyrilicSearchTerm = LatinToCyrillic(searchTerm).toLowerCase();
+			searchTerm = searchTerm.toLowerCase();
+		}
 		const searchMatches =
 			searchTerm === "" ||
-			subject.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-			subject.code.toLowerCase().includes(searchTerm.toLowerCase()) ||
-			subject.abstract?.toLowerCase().includes(searchTerm.toLowerCase());
+			subject.name.toLowerCase().includes(cyrilicSearchTerm) ||
+			subject.code.toLowerCase().includes(searchTerm) ||
+			subject.abstract?.toLowerCase().includes(cyrilicSearchTerm);
 
 		const seasonMatches =
 			filters.season === "" || filters.season === subject.subject_info.season;
@@ -80,11 +86,26 @@ export const filterSubjects = ({
 			);
 
 		const prerequisitesMatch =
-			!filters.hasPrerequisites || subject.subject_info.prerequisite == null;
+			filters.hasPrerequisites === "" ||
+			(!filters.hasPrerequisites &&
+				subject.subject_info.prerequisite &&
+				Object.keys(subject.subject_info.prerequisite).length == 0) ||
+			(filters.hasPrerequisites &&
+				subject.subject_info.prerequisite &&
+				Object.keys(subject.subject_info.prerequisite).length > 0);
 
 		const tagsMatch =
 			filters.tags.length == 0 ||
 			subject.subject_info.tags.some((item) => filters.tags.includes(item));
+
+		const evaluationMatch =
+			filters.evaluation.length == 0 ||
+			subject.subject_info.evaluation.some((item) =>
+				filters.evaluation.includes(
+					EVALUATION_MAP_TO_MK[item as keyof typeof EVALUATION_MAP_TO_MK]
+				)
+			);
+
 		return (
 			searchMatches &&
 			seasonMatches &&
@@ -96,7 +117,8 @@ export const filterSubjects = ({
 			professorsMatches &&
 			assistantsMatches &&
 			prerequisitesMatch &&
-			tagsMatch
+			tagsMatch &&
+			evaluationMatch
 		);
 	});
 
@@ -118,8 +140,9 @@ export const resetFilters = (
 		electiveFor: [],
 		professors: [],
 		assistants: [],
-		hasPrerequisites: false,
+		hasPrerequisites: "",
 		tags: [],
+		evaluation: [],
 	}));
 };
 
