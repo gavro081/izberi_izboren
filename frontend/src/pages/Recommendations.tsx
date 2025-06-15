@@ -1,5 +1,7 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import DislikeButton from "../components/Recommendations/DislikeButton";
+import LikeButton from "../components/Recommendations/LikeButton";
 import FavoriteButton from "../components/SubjectCatalog/FavoriteButton";
 import SubjectModal from "../components/SubjectCatalog/SubjectModal";
 import { getSubjectPrerequisites } from "../components/SubjectCatalog/utils";
@@ -164,7 +166,11 @@ const Recommendations = () => {
 											? "семестри"
 											: "семестар"}
 									</h2>
-									<div className="w-24 h-1 bg-blue-500 mx-auto rounded-full"></div>
+									<p className="text-gray-500">
+										Помогни ни да ги подобриме алгоритамот со тоа што ќе ги
+										оцениш препораките
+									</p>
+									{/* <div className="w-24 h-1 bg-blue-500 mx-auto rounded-full"></div> */}
 								</div>
 
 								<div
@@ -216,6 +222,8 @@ const Recommendations = () => {
 															/>
 														</button>
 														<FavoriteButton subjectId={subject.id} />
+														<LikeButton id={subject.id} />
+														<DislikeButton id={subject.id} />
 													</div>
 													<div className="flex-1 flex justify-end">
 														<button

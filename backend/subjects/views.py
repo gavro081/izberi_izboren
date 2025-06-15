@@ -60,7 +60,7 @@ def get_suggestions(request):
         return Response({"message": f"An error occurred: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
 
-class FavoriteSubjectsView(APIView):
+class PreferencesView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
@@ -68,11 +68,13 @@ class FavoriteSubjectsView(APIView):
             student = request.user.student
             # .values_list('id', flat=True) is very efficient
             favorite_ids = list(student.favorite_subjects.all().values_list('id', flat=True))
-            return Response({'favorite_ids': favorite_ids}, status=status.HTTP_200_OK)
+            liked_ids = list(student.liked_subjects.all().values_list('id', flat=True))
+            disliked_ids = list(student.disliked_subjects.all().values_list('id', flat=True))
+            return Response({'favorite_ids': favorite_ids, 'liked_ids': liked_ids, 'disliked_ids': disliked_ids}, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
-class ToggleFavoriteSubjectView(APIView):
+class ToggleSubjectPreferences(APIView):
     """
     Toggles the favorite status of a subject for the authenticated user.
     Expects a POST request with {'subject_id': <id>}.
@@ -80,6 +82,7 @@ class ToggleFavoriteSubjectView(APIView):
     permission_classes = [IsAuthenticated]
     def post(self, request, *args, **kwargs):
         subject_id = request.data.get('subject_id')
+        action_type = request.data.get('action_type') 
         if not subject_id:
             return Response({"message": "Subject ID is required"}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -87,13 +90,31 @@ class ToggleFavoriteSubjectView(APIView):
             student = request.user.student
             subject = Subject.objects.get(id=subject_id)
 
-            if subject in student.favorite_subjects.all():
-                student.favorite_subjects.remove(subject)
-                action = 'removed'
-            else:
-                student.favorite_subjects.add(subject)
-                action = 'added'
+            if action_type not in ['favorite', 'liked', 'disliked']:
+                return Response({"message": "Invalid action type. Use 'favorite', 'liked', or 'disliked'."}, status=status.HTTP_400_BAD_REQUEST)
             
+            if action_type == 'favorite':
+                if subject in student.favorite_subjects.all():
+                    student.favorite_subjects.remove(subject)
+                    action = 'removed'
+                else:
+                    student.favorite_subjects.add(subject)
+                    action = 'added'
+            elif action_type == 'liked':
+                if subject in student.liked_subjects.all():
+                    student.liked_subjects.remove(subject)
+                    action = 'removed'
+                else:
+                    student.liked_subjects.add(subject)
+                    action = 'added'
+            elif action_type == 'disliked':
+                if subject in student.disliked_subjects.all():
+                    student.disliked_subjects.remove(subject)
+                    action = 'removed'
+                else:
+                    student.disliked_subjects.add(subject)
+                    action = 'added'
+                
             return Response({
                 'status': 'success',
                 'action': action,

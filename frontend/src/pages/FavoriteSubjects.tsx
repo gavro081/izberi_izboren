@@ -4,12 +4,12 @@ import SubjectList from "../components/SubjectCatalog/SubjectList";
 import SubjectModal from "../components/SubjectCatalog/SubjectModal";
 import { getSubjectPrerequisites } from "../components/SubjectCatalog/utils";
 import { Subject } from "../components/types";
-import { useFavorites } from "../context/FavoritesContext";
+import { usePreferences } from "../context/PreferencesContext";
 import { useSubjects } from "../context/SubjectsContext";
 
 const FavoriteSubjects = () => {
 	const [subjects] = useSubjects();
-	const { favoriteIds } = useFavorites();
+	const { favoriteIds } = usePreferences();
 	const [visibleCourses, setVisibleCourses] = useState<number>(12);
 	const [selectedSubject, setSelectedSubject] = useState<Subject | null>(null);
 	const [isLoaded, setIsLoaded] = useState(false);
