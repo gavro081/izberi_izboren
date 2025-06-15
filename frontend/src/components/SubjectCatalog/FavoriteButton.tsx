@@ -26,6 +26,7 @@ const FavoriteButton = ({ subjectId }: FavoriteButtonProps) => {
 	const { favoriteIds, toggleFavorite, isLoading } = usePreferences();
 	const { isAuthenticated } = useAuth();
 	const isFavorite = favoriteIds.has(subjectId);
+	const isFilled = isAuthenticated && isFavorite;
 
 	return (
 		<button
@@ -36,7 +37,7 @@ const FavoriteButton = ({ subjectId }: FavoriteButtonProps) => {
 			} ${isLoading ? "cursor-not-allowed animate-pulse" : ""}`}
 			aria-label={isFavorite ? "Unfavorite" : "Favorite"}
 		>
-			<HeartIcon filled={isFavorite} />
+			<HeartIcon filled={isFilled} />
 		</button>
 	);
 };
