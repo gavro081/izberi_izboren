@@ -15,6 +15,7 @@ const FavoriteButton = ({ subjectId }: FavoriteButtonProps) => {
     const { favoriteIds, toggleFavorite, isLoading } = useFavorites();
     const { isAuthenticated } = useAuth(); 
     const isFavorite = favoriteIds.has(subjectId);
+    const isFilled = isAuthenticated && isFavorite;
 
     return (
         <button
@@ -23,7 +24,7 @@ const FavoriteButton = ({ subjectId }: FavoriteButtonProps) => {
             className={`group relative flex items-center justify-center transition-all duration-200 p-2 rounded-full ${isFavorite ? 'text-red-500' : 'text-gray-400'} ${isLoading ? 'cursor-not-allowed animate-pulse' : ''}`}
             aria-label={isFavorite ? 'Unfavorite' : 'Favorite'}
         >
-            <HeartIcon filled={isFavorite} />
+            <HeartIcon filled={isFilled} />
         </button>
     );
 };
