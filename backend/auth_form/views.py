@@ -51,6 +51,21 @@ class LoginView(APIView):
             'user_type': user.user_type,
         }, status=status.HTTP_200_OK)
 
+class LogoutView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request):
+        try:
+            refresh_token = request.data["refresh"]
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+
+            # 205 Reset Content is a good choice for a successful logout
+            # as it tells the client to reset its view.
+            return Response(status=status.HTTP_205_RESET_CONTENT)
+        except Exception as e:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        
 class StudentFormView(APIView):
     def get_permissions(self):
         if self.request.method=='POST':

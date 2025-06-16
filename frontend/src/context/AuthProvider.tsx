@@ -85,12 +85,43 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 		}
 	}, []);
 
-	const logout = () => {
+	const logout = async () => {
+		const refreshToken = localStorage.getItem("refresh");
+
+		if (refreshToken) {
+			try {
+				const response = await fetch("http://localhost:8000/auth/logout/", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${localStorage.getItem("access")}`,
+					},
+					body: JSON.stringify({
+						refresh: refreshToken,
+					}),
+				});
+
+				if (response.ok) {
+					console.log("Successfully logged out on the server.");
+				} else {
+					console.error(
+						"Server logout failed:",
+						response.status,
+						response.statusText
+					);
+				}
+			} catch (error) {
+				console.error("An error occurred during logout:", error);
+			}
+		}
+
 		if (proactiveRefreshTimeoutId.current) {
 			clearTimeout(proactiveRefreshTimeoutId.current);
 		}
+
 		localStorage.removeItem("access");
 		localStorage.removeItem("refresh");
+
 		setAccessToken(null);
 		setRefreshToken(null);
 		setFormData(null);
