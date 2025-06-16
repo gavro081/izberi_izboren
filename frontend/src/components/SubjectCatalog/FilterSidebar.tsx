@@ -356,7 +356,7 @@ const FilterSidebar = ({
 				</FilterHeader>
 				{/* TAGS */}
 				<FilterHeader
-					label="Тагови:"
+					label="Тагови"
 					filterKey="tags"
 					openFilters={openFilters}
 					toggleFilter={toggleFilter}

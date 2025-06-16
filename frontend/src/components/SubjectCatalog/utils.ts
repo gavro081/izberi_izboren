@@ -176,14 +176,14 @@ export const getRandomStaff = (
 
 export const getSubjectPrerequisites = (
 	subject: Subject,
-	subjectMap: Map<number, string>
+	subjectMap: Map<number, string> | undefined
 ): "Нема предуслов" | number | string => {
 	const prerequisite = subject?.subject_info?.prerequisite;
 	if (!prerequisite) return "Нема предуслов";
 
 	if ("subjects" in prerequisite && Array.isArray(prerequisite.subjects)) {
 		const names = prerequisite.subjects.map(
-			(id) => subjectMap.get(id) || "Непознат предмет"
+			(id) => subjectMap?.get(id) || "Непознат предмет"
 		);
 		return names.length > 0 ? names.join(" или ") : "Нема предуслов";
 	}

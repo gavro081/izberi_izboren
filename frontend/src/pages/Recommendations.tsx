@@ -1,8 +1,6 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import DislikeButton from "../components/Recommendations/DislikeButton";
-import LikeButton from "../components/Recommendations/LikeButton";
-import FavoriteButton from "../components/SubjectCatalog/FavoriteButton";
+import SubjectCard from "../components/SubjectCatalog/SubjectCard";
 import SubjectModal from "../components/SubjectCatalog/SubjectModal";
 import { getSubjectPrerequisites } from "../components/SubjectCatalog/utils";
 import { Subject } from "../components/types";
@@ -180,7 +178,7 @@ const Recommendations = () => {
 									{recommendations.map((subject, index) => (
 										<div
 											key={subject.id}
-											className={`h-56 border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 relative ${
+											className={`border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 relative ${
 												index % 2 === 0 ? "self-start" : "self-end"
 											}`}
 											style={{
@@ -191,54 +189,14 @@ const Recommendations = () => {
 												animationDelay: `${index * 100}ms`,
 											}}
 										>
-											<div className="p-4 min-h-full flex flex-col gap-1">
-												<div className="flex justify-between items-start mb-2">
-													<div>
-														<h3 className="text-lg font-semibold">
-															{subject.name}
-														</h3>
-														<p className="text-gray-600">{subject.code}</p>
-													</div>
-												</div>
-
-												<div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-													{subject.subject_info.activated === false ? (
-														<span className="bg-red-500 text-white font-bold px-3 py-1 rounded-full shadow-lg text-xs transition-opacity duration-300 z-10">
-															Никогаш не бил активиран!
-														</span>
-													) : index === 0 ? (
-														<span className="bg-blue-600 text-white font-bold px-3 py-1 rounded-full shadow-lg text-xs transition-opacity duration-300 z-10">
-															Најсоодветен!
-														</span>
-													) : null}
-												</div>
-
-												<div className="flex justify-between mt-auto gap-3">
-													<div className="flex items-center gap-2">
-														<button onClick={() => openSubjectDetails(subject)}>
-															<img
-																src="src/assets/eye.svg"
-																className="w-5 h-5"
-															/>
-														</button>
-														<FavoriteButton subjectId={subject.id} />
-														<LikeButton id={subject.id} />
-														<DislikeButton id={subject.id} />
-													</div>
-													<div className="flex-1 flex justify-end">
-														<button
-															onClick={() => openSubjectView(subject)}
-															className="flex items-center px-3 py-2 bg-blue-600 hover:bg-blue-900 text-white text-sm font-medium rounded-md transition-colors"
-														>
-															<img
-																src="src/assets/open.svg"
-																className="w-4 h-4 mr-1"
-															/>
-															Отвори предмет
-														</button>
-													</div>
-												</div>
-											</div>
+											<SubjectCard
+												subject={subject}
+												openSubjectDetails={openSubjectDetails}
+												openSubjectView={openSubjectView}
+												canReview={true}
+												isFirst={index == 0}
+												isRecommended={true}
+											/>
 										</div>
 									))}
 								</div>

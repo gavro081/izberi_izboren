@@ -67,7 +67,7 @@ const Login: React.FC = () => {
 		}
 	};
 	return (
-		<div className="flex flex-col items-center justify-center h-[85vh] bg-white">
+		<div className="flex flex-col items-center justify-center h-[83vh] bg-white">
 			<form
 				onSubmit={handleLogin}
 				className="bg-white p-6 rounded-lg shadow-md w-80"

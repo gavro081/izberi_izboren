@@ -71,7 +71,7 @@ function SubjectView() {
 	// Handle case where the subject code is not found in our global list
 	if (!selectedSubject) {
 		return (
-			<div className="flex flex-col items-center justify-center min-h-[85vh] bg-white text-center">
+			<div className="flex flex-col items-center justify-center min-h-[83vh] bg-white text-center">
 				<p className="block">Предметот со код '{code}' не е пронајден.</p>
 				<p>
 					Не си сигурен кој е кодот на предметот? Најди го{" "}

@@ -84,7 +84,7 @@ const SubjectCatalog = () => {
 		<div className="mx-auto p-4 bg-white min-h-screen">
 			<h1 className="text-3xl font-bold mb-6">Преглед на сите предмети</h1>
 			<div className="flex flex-col md:flex-row gap-6">
-				<div className="w-full md:w-64 bg-gray-50 p-4 rounded-lg">
+				<div className="w-full md:w-64 bg-gray-50 p-4 rounded-xl shadow-md border border-gray-200 h-max">
 					<FilterSidebar
 						setSearchTerm={setSearchTerm}
 						setProfessorSearchTerm={setProfessorSearchTerm}
@@ -102,7 +102,7 @@ const SubjectCatalog = () => {
 					/>
 				</div>
 
-				<div className="flex-1">
+				<div className="flex-1 bg-gray-50 rounded-xl shadow-md border border-gray-200 p-6">
 					<div className="mb-6 relative">
 						<input
 							type="text"

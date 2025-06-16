@@ -127,11 +127,11 @@ const Navbar: React.FC = () => {
 										Препораки
 									</Link>
 									<Link
-										to="/favorite-subjects"
+										to="/subject-preferences"
 										className="block px-4 py-2 text-sm hover:bg-gray-100 hover:underline"
 										onClick={() => setMenuOpen(false)}
 									>
-										Омилени предмети
+										Мои предмети
 									</Link>
 
 									<button
