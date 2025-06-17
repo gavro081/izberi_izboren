@@ -9,7 +9,6 @@ import {
 import { useRecommendations } from "../../context/RecommendationsContext";
 import { useSubjects } from "../../context/SubjectsContext";
 import { useAuth } from "../../hooks/useAuth";
-import useAxiosAuth from "../../hooks/useAxiosAuth";
 import { StudentData, StudyTrack, Subject } from "../types";
 import FieldButton from "./FieldButton";
 import SkeletonForm from "./SkeletonForm";
@@ -20,6 +19,7 @@ import {
 	mapToID,
 	validateForm,
 } from "./utils";
+import axiosInstance from "../../api/axiosInstance";
 
 interface StudentFormProps {
 	formData: StudentData | null;
@@ -34,7 +34,6 @@ interface DistinctSubjectData {
 }
 
 const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
-	const axiosAuth = useAxiosAuth();
 	const [hasSubmitted, setHasSubmitted] = useState(false);
 	const [validationErrors, setValidationErrors] = useState<{
 		[key: string]: string;
@@ -271,7 +270,7 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 		try {
 			// For updating existing form data use PATCH instead of PUT for partial updates
 			const method = formData?.has_filled_form ? "PATCH" : "POST";
-			const response = await axiosAuth({
+			const response = await axiosInstance({
 				url: "/auth/form/",
 				method,
 				data: payload,

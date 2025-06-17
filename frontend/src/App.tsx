@@ -5,7 +5,6 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import PrivateRoute from "./components/PrivateRoute";
 import CourseCatalog from "./components/SubjectCatalog/SubjectCatalog";
-import useAxiosAuth from "./hooks/useAxiosAuth";
 import "./index.css";
 import Account from "./pages/Account";
 import Home from "./pages/Home";
@@ -15,6 +14,7 @@ import Recommendations from "./pages/Recommendations";
 import Register from "./pages/Register";
 import SubjectPreferences from "./pages/SubjectPreferences";
 import SubjectView from "./pages/SubjectView";
+import { AuthProvider } from "./context/AuthProvider";
 
 const Layout = () => (
 	<div className="flex flex-col min-h-screen">
@@ -84,8 +84,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-	useAxiosAuth();
-	return <RouterProvider router={router} />;
+	return (
+		<AuthProvider>
+			<RouterProvider router={router} />{" "}
+		</AuthProvider>
+	);
 }
 
 export default App;

@@ -7,14 +7,12 @@ export interface User {
 }
 export interface AuthContextType {
     accessToken: string | null;
-    refreshToken: string | null;
     formData: StudentData | null;
     setFormData: (data: StudentData | null) => void;
     user: User | null; 
     login: (accessToken: string, refreshToken: string, userData: User) => void;
     logout: () => void;
     isAuthenticated: boolean;
-    refreshAccessToken: () => Promise<string | null>;
     loading: boolean;
 }
 

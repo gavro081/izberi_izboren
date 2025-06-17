@@ -5,12 +5,12 @@ import React, {
 	ReactNode,
 	useCallback,
 } from "react";
-import AuthContext, { AuthContextType } from "./AuthContext";
 import axiosInstance from "../api/axiosInstance";
 import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
 import { StudentData } from "../components/types";
 import { User } from "../context/AuthContext";
+import AuthContext, { AuthContextType } from "../context/AuthContext";
 
 interface DecodedToken {
 	exp: number;
@@ -20,163 +20,178 @@ interface DecodedToken {
 	user_id: number;
 }
 
+let isRefreshing = false;
+let failedQueue: Array<{
+	resolve: (value: any) => void;
+	reject: (reason?: any) => void;
+}> = [];
+
+const processQueue = (error: any, token: string | null = null) => {
+	failedQueue.forEach((prom) => {
+		if (error) {
+			prom.reject(error);
+		} else {
+			prom.resolve(token);
+		}
+	});
+	failedQueue = [];
+};
+
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 	children,
 }) => {
 	const [user, setUser] = useState<User | null>(null);
-	const [accessToken, setAccessToken] = useState<string | null>(
-		localStorage.getItem("access")
-	);
-	const [refreshToken, setRefreshToken] = useState<string | null>(
-		localStorage.getItem("refresh")
-	);
+	const [accessToken, setAccessToken] = useState<string | null>(null);
+	const [refreshToken, setRefreshToken] = useState<string | null>(null);
 	const [formData, setFormData] = useState<StudentData | null>(null);
 	const [loading, setLoading] = useState(true);
 
 	const proactiveRefreshTimeoutId = useRef<number | null>(null);
-	// We cannot use the useAxiosAuth hook here due to the circular dependency.
-	const axiosAuth = axiosInstance;
 
-	const fetchUser = useCallback(
-		async (token: string) => {
-			try {
-				const response = await axiosAuth.get<User>("/auth/user/", {
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				});
-				setUser(response.data);
-			} catch (error) {
-				// If this fails, the token is likely invalid or expired, so log out.
-				console.error("Could not fetch user data on load", error);
-				logout();
-			}
-		},
-		[axiosAuth]
-	);
-
-	// Memoize the refresh function to stabilize dependencies in useEffect
-	const refreshAccessToken = useCallback(async (): Promise<string | null> => {
-		const currentRefreshToken = localStorage.getItem("refresh");
-		if (!currentRefreshToken) {
-			logout();
-			return null;
-		}
-		try {
-			const response = await axiosInstance.post<{
-				access: string;
-				refresh?: string;
-			}>("/auth/refresh/", { refresh: currentRefreshToken });
-			const newAccessToken = response.data.access;
-			localStorage.setItem("access", newAccessToken);
-			setAccessToken(newAccessToken);
-
-			if (response.data.refresh) {
-				localStorage.setItem("refresh", response.data.refresh);
-				setRefreshToken(response.data.refresh);
-			}
-			scheduleProactiveRefresh(newAccessToken);
-			return newAccessToken;
-		} catch (error) {
-			console.error("Error refreshing access token:", error);
-			logout();
-			toast.error("Твојата сесија е истечена. Те молам најави се повторно.");
-			return null;
-		}
-	}, []);
-
-	const logout = async () => {
-		const refreshToken = localStorage.getItem("refresh");
-
-		if (refreshToken) {
-			try {
-				const response = await fetch("http://localhost:8000/auth/logout/", {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: `Bearer ${localStorage.getItem("access")}`,
-					},
-					body: JSON.stringify({
-						refresh: refreshToken,
-					}),
-				});
-
-				if (response.ok) {
-					console.log("Successfully logged out on the server.");
-				} else {
-					console.error(
-						"Server logout failed:",
-						response.status,
-						response.statusText
-					);
-				}
-			} catch (error) {
-				console.error("An error occurred during logout:", error);
-			}
-		}
-
+	const logout = useCallback(() => {
 		if (proactiveRefreshTimeoutId.current) {
 			clearTimeout(proactiveRefreshTimeoutId.current);
+		}
+
+		const currentRefreshToken = localStorage.getItem("refresh");
+		if (currentRefreshToken) {
+			axiosInstance
+				.post("/auth/logout/", { refresh: currentRefreshToken })
+				.catch((err) =>
+					console.error(
+						"Server logout failed, proceeding with client-side cleanup",
+						err
+					)
+				);
 		}
 
 		localStorage.removeItem("access");
 		localStorage.removeItem("refresh");
-
 		setAccessToken(null);
 		setRefreshToken(null);
 		setFormData(null);
 		setUser(null);
-	};
+	}, []);
 
-	const scheduleProactiveRefresh = (token: string) => {
-		if (proactiveRefreshTimeoutId.current) {
-			clearTimeout(proactiveRefreshTimeoutId.current);
-		}
-
-		try {
-			const decodedToken = jwtDecode<DecodedToken>(token);
-			const expirationTime = decodedToken.exp * 1000;
-			const currentTime = Date.now();
-
-			// Refresh X milliseconds before the token expires
-			const refreshOffset = 30 * 1000;
-
-			let timeoutDuration = expirationTime - currentTime - refreshOffset;
-
-			if (timeoutDuration < 0) {
-				// If the token is already about to expire, refresh immediately
-				timeoutDuration = 1000;
+	const scheduleProactiveRefresh = useCallback(
+		(token: string) => {
+			if (proactiveRefreshTimeoutId.current) {
+				clearTimeout(proactiveRefreshTimeoutId.current);
 			}
 
-			proactiveRefreshTimeoutId.current = setTimeout(() => {
-				refreshAccessToken();
-			}, timeoutDuration);
-		} catch (error) {
-			console.error("Failed to decode token for proactive refresh:", error);
-		}
-	};
+			try {
+				const decodedToken = jwtDecode<DecodedToken>(token);
+				const expirationTime = decodedToken.exp * 1000;
+				const currentTime = Date.now();
+				const refreshOffset = 15 * 1000;
+				const timeoutDuration = expirationTime - currentTime - refreshOffset;
+
+				if (timeoutDuration > 0) {
+					proactiveRefreshTimeoutId.current = window.setTimeout(async () => {
+						if (isRefreshing) {
+							console.log(
+								"Proactive refresh aborted, another refresh is in progress."
+							);
+							return;
+						}
+
+						const currentRefreshToken = localStorage.getItem("refresh");
+						if (currentRefreshToken) {
+							isRefreshing = true;
+							try {
+								const res = await axiosInstance.post<{
+									access: string;
+									refresh?: string;
+								}>("/auth/refresh/", {
+									refresh: currentRefreshToken,
+								});
+								localStorage.setItem("access", res.data.access);
+								setAccessToken(res.data.access);
+								if (res.data.refresh) {
+									localStorage.setItem("refresh", res.data.refresh);
+									setRefreshToken(res.data.refresh);
+								}
+								scheduleProactiveRefresh(res.data.access);
+							} catch (err) {
+								console.error("Proactive refresh failed", err);
+								logout();
+							} finally {
+								isRefreshing = false;
+							}
+						}
+					}, timeoutDuration);
+				}
+			} catch (error) {
+				console.error("Failed to decode token for proactive refresh:", error);
+			}
+		},
+		[logout]
+	);
 
 	useEffect(() => {
-		const requestIntercept = axiosAuth.interceptors.request.use(
+		const requestIntercept = axiosInstance.interceptors.request.use(
 			(config) => {
-				if (!config.headers["Authorization"]) {
-					config.headers["Authorization"] = `Bearer ${accessToken}`;
+				const token = localStorage.getItem("access");
+				if (token && !config.headers["Authorization"]) {
+					config.headers["Authorization"] = `Bearer ${token}`;
 				}
 				return config;
 			},
 			(error) => Promise.reject(error)
 		);
 
-		const responseIntercept = axiosAuth.interceptors.response.use(
+		const responseIntercept = axiosInstance.interceptors.response.use(
 			(response) => response,
 			async (error) => {
-				const prevRequest = error?.config;
-				if (error?.response?.status === 401 && !prevRequest?.sent) {
-					prevRequest.sent = true;
-					const newAccessToken = await refreshAccessToken();
-					if (newAccessToken) {
-						prevRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
-						return axiosAuth(prevRequest);
+				const originalRequest = error.config;
+				if (error.response?.status === 401 && !originalRequest._retry) {
+					originalRequest._retry = true;
+
+					if (isRefreshing) {
+						return new Promise((resolve, reject) => {
+							failedQueue.push({ resolve, reject });
+						}).then((token) => {
+							originalRequest.headers["Authorization"] = "Bearer " + token;
+							return axiosInstance(originalRequest);
+						});
+					}
+
+					isRefreshing = true;
+
+					const currentRefreshToken = localStorage.getItem("refresh");
+					if (!currentRefreshToken) {
+						isRefreshing = false;
+						logout();
+						return Promise.reject(error);
+					}
+
+					try {
+						const response = await axiosInstance.post<{
+							access: string;
+							refresh?: string;
+						}>("/auth/refresh/", {
+							refresh: currentRefreshToken,
+						});
+						const newAccessToken = response.data.access;
+						localStorage.setItem("access", newAccessToken);
+						setAccessToken(newAccessToken);
+						if (response.data.refresh) {
+							localStorage.setItem("refresh", response.data.refresh);
+							setRefreshToken(response.data.refresh);
+						}
+						scheduleProactiveRefresh(newAccessToken);
+						originalRequest.headers[
+							"Authorization"
+						] = `Bearer ${newAccessToken}`;
+						processQueue(null, newAccessToken);
+						return axiosInstance(originalRequest);
+					} catch (refreshError) {
+						processQueue(refreshError, null);
+						logout();
+						toast.error("Your session has expired. Please log in again.");
+						return Promise.reject(refreshError);
+					} finally {
+						isRefreshing = false;
 					}
 				}
 				return Promise.reject(error);
@@ -184,86 +199,77 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 		);
 
 		return () => {
-			axiosAuth.interceptors.request.eject(requestIntercept);
-			axiosAuth.interceptors.response.eject(responseIntercept);
+			axiosInstance.interceptors.request.eject(requestIntercept);
+			axiosInstance.interceptors.response.eject(responseIntercept);
 		};
-	}, [accessToken, refreshAccessToken, axiosAuth]);
+	}, [logout, scheduleProactiveRefresh]);
 
-	const fetchFormData = useCallback(
-		async (tokenOverride?: string | null) => {
-			// Determine which token to use: the override from login, or the one from state (for refresh)
-			const tokenToUse = tokenOverride || accessToken;
+	const fetchUser = useCallback(async (token: string) => {
+		try {
+			const response = await axiosInstance.get<User>("/auth/user/", {
+				headers: { Authorization: `Bearer ${token}` },
+			});
+			setUser(response.data);
+		} catch (error) {
+			console.error("Could not fetch user data on load", error);
+		}
+	}, []);
 
-			if (!tokenToUse) {
-				console.log("Fetch aborted, no token available.");
-				return;
+	const fetchFormData = useCallback(async (token: string) => {
+		try {
+			const response = await axiosInstance.get<StudentData>("/auth/form/", {
+				headers: { Authorization: `Bearer ${token}` },
+			});
+			setFormData(response.data);
+		} catch (error) {
+			console.error("Could not fetch user form data", error);
+			if ((error as any).response?.status !== 401) {
+				toast.error("Could not load form data.");
 			}
+		}
+	}, []);
 
-			try {
-				const response = await axiosAuth.get<StudentData>("/auth/form/", {
-					headers: {
-						Authorization: `Bearer ${tokenToUse}`,
-					},
-				});
-				setFormData(response.data);
-			} catch (error) {
-				console.error("Could not fetch user form data", error);
-				toast.error("Не може да се вчитаат податоците.");
-			}
+	const login = useCallback(
+		async (newAccessToken: string, newRefreshToken: string, userData: User) => {
+			localStorage.setItem("access", newAccessToken);
+			localStorage.setItem("refresh", newRefreshToken);
+			setAccessToken(newAccessToken);
+			setRefreshToken(newRefreshToken);
+			setUser(userData);
+			scheduleProactiveRefresh(newAccessToken);
+			await fetchFormData(newAccessToken);
 		},
-		[axiosAuth, accessToken]
+		[fetchFormData, scheduleProactiveRefresh]
 	);
-
-	const login = async (
-		newAccessToken: string,
-		newRefreshToken: string,
-		userData: User
-	) => {
-		localStorage.setItem("access", newAccessToken);
-		localStorage.setItem("refresh", newRefreshToken);
-		setUser(userData);
-		setAccessToken(newAccessToken);
-		setRefreshToken(newRefreshToken);
-		scheduleProactiveRefresh(newAccessToken);
-		await fetchFormData(newAccessToken);
-	};
 
 	useEffect(() => {
 		const initializeAuth = async () => {
 			const token = localStorage.getItem("access");
 			if (token) {
+				setAccessToken(token);
+				setRefreshToken(localStorage.getItem("refresh"));
 				scheduleProactiveRefresh(token);
-				// Fetch user data and form data in parallel for speed
 				await Promise.all([fetchUser(token), fetchFormData(token)]);
 			}
 			setLoading(false);
 		};
-
 		initializeAuth();
-	}, [fetchUser, fetchFormData]);
-
-	useEffect(() => {
-		return () => {
-			if (proactiveRefreshTimeoutId.current) {
-				clearTimeout(proactiveRefreshTimeoutId.current);
-			}
-		};
-	}, []);
+	}, [fetchUser, fetchFormData, scheduleProactiveRefresh]);
 
 	const contextValue: AuthContextType = {
+		user,
 		accessToken,
-		refreshToken,
 		formData,
 		setFormData,
-		user,
 		login,
 		logout,
-		isAuthenticated: !!accessToken,
-		refreshAccessToken,
+		isAuthenticated: !!accessToken && !loading,
 		loading,
 	};
 
 	return (
-		<AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
+		<AuthContext.Provider value={contextValue}>
+			{!loading && children}
+		</AuthContext.Provider>
 	);
 };

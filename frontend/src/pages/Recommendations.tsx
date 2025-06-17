@@ -7,10 +7,9 @@ import { Subject } from "../components/types";
 import { useRecommendations } from "../context/RecommendationsContext";
 import { useSubjects } from "../context/SubjectsContext";
 import { useAuth } from "../hooks/useAuth";
-import useAxiosAuth from "../hooks/useAxiosAuth";
+import axiosInstance from "../api/axiosInstance";
 
 const Recommendations = () => {
-	const axiosAuth = useAxiosAuth();
 	const navigate = useNavigate();
 	const { formData } = useAuth();
 	const [subjects] = useSubjects();
@@ -30,7 +29,7 @@ const Recommendations = () => {
 		setIsLoading(true);
 		try {
 			const season = mapToSeasonInt(season_);
-			const response = await axiosAuth.get("/suggestion", {
+			const response = await axiosInstance.get("/suggestion", {
 				params: { season },
 			});
 			setRecommendations(response.data.data);

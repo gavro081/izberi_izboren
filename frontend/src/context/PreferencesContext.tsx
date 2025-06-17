@@ -8,7 +8,7 @@ import {
 } from "react";
 import { toast } from "react-toastify";
 import { useAuth } from "../hooks/useAuth";
-import useAxiosAuth from "../hooks/useAxiosAuth";
+import axiosInstance from "../api/axiosInstance";
 interface PreferencesContextType {
 	favoriteIds: Set<number>;
 	likedIds: Set<number>;
@@ -25,7 +25,6 @@ const PreferencesContext = createContext<PreferencesContextType | undefined>(
 
 export const PreferencesProvider = ({ children }: { children: ReactNode }) => {
 	const { accessToken } = useAuth();
-	const axiosAuth = useAxiosAuth();
 	const [isLoading, setIsLoading] = useState(true);
 	const [favoriteIds, setFavoriteIds] = useState<Set<number>>(new Set());
 	const [likedIds, setLikedIds] = useState<Set<number>>(new Set());
@@ -34,7 +33,7 @@ export const PreferencesProvider = ({ children }: { children: ReactNode }) => {
 	useEffect(() => {
 		if (accessToken) {
 			setIsLoading(true);
-			axiosAuth
+			axiosInstance
 				.get<{
 					favorite_ids: number[];
 					liked_ids: number[];
@@ -54,7 +53,7 @@ export const PreferencesProvider = ({ children }: { children: ReactNode }) => {
 			setDislikedIds(new Set());
 			setIsLoading(false);
 		}
-	}, [accessToken, axiosAuth]);
+	}, [accessToken]);
 
 	const toggleFavorite = useCallback(
 		async (subjectId: number) => {
@@ -71,7 +70,7 @@ export const PreferencesProvider = ({ children }: { children: ReactNode }) => {
 			});
 
 			try {
-				await axiosAuth.post("/student/toggle-subject-pref/", {
+				await axiosInstance.post("/student/toggle-subject-pref/", {
 					subject_id: subjectId,
 					action_type: "favorite",
 				});
@@ -81,7 +80,7 @@ export const PreferencesProvider = ({ children }: { children: ReactNode }) => {
 				toast.error("Мора да си најавен за да додадеш предмет во омилени.");
 			}
 		},
-		[axiosAuth, favoriteIds]
+		[favoriteIds]
 	);
 
 	const toggleLike = useCallback(
@@ -104,12 +103,12 @@ export const PreferencesProvider = ({ children }: { children: ReactNode }) => {
 			});
 
 			try {
-				await axiosAuth.post("/student/toggle-subject-pref/", {
+				await axiosInstance.post("/student/toggle-subject-pref/", {
 					subject_id: subjectId,
 					action_type: "liked",
 				});
 				if (wasDisliked) {
-					await axiosAuth.post("/student/toggle-subject-pref/", {
+					await axiosInstance.post("/student/toggle-subject-pref/", {
 						subject_id: subjectId,
 						action_type: "disliked",
 					});
@@ -120,7 +119,7 @@ export const PreferencesProvider = ({ children }: { children: ReactNode }) => {
 				toast.error("Мора да си најавен за да додадеш оценка на препорака.");
 			}
 		},
-		[axiosAuth, likedIds]
+		[likedIds]
 	);
 
 	const toggleDislike = useCallback(
@@ -143,12 +142,12 @@ export const PreferencesProvider = ({ children }: { children: ReactNode }) => {
 			});
 
 			try {
-				await axiosAuth.post("/student/toggle-subject-pref/", {
+				await axiosInstance.post("/student/toggle-subject-pref/", {
 					subject_id: subjectId,
 					action_type: "disliked",
 				});
 				if (wasLiked) {
-					await axiosAuth.post("/student/toggle-subject-pref/", {
+					await axiosInstance.post("/student/toggle-subject-pref/", {
 						subject_id: subjectId,
 						action_type: "liked",
 					});
@@ -159,7 +158,7 @@ export const PreferencesProvider = ({ children }: { children: ReactNode }) => {
 				toast.error("Мора да си најавен за да додадеш лајк на предмет.");
 			}
 		},
-		[axiosAuth, likedIds]
+		[likedIds]
 	);
 
 	const value = {
