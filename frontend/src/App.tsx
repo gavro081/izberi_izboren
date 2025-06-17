@@ -10,6 +10,7 @@ import "./index.css";
 import Account from "./pages/Account";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import NotFound from "./pages/NotFound";
 import Recommendations from "./pages/Recommendations";
 import Register from "./pages/Register";
 import SubjectPreferences from "./pages/SubjectPreferences";
@@ -76,7 +77,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "*",
-				element: <Home />,
+				element: <NotFound />,
 			},
 		],
 	},

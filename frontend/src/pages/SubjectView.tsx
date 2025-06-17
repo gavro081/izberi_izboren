@@ -72,13 +72,15 @@ function SubjectView() {
 	if (!selectedSubject) {
 		return (
 			<div className="flex flex-col items-center justify-center min-h-[83vh] bg-white text-center">
-				<p className="block">Предметот со код '{code}' не е пронајден.</p>
-				<p>
-					Не си сигурен кој е кодот на предметот? Најди го{" "}
-					<Link to="/subjects" className="text-blue-600 underline">
-						тука
-					</Link>
+				<p className="text-2xl font-semibold mb-6">
+					Предметот со код '{code}' не е пронајден.
 				</p>
+				<Link
+					to="/subjects"
+					className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+				>
+					Кон предмети
+				</Link>
 			</div>
 		);
 	}
