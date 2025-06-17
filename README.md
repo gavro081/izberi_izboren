@@ -7,6 +7,8 @@ This is a full-stack web application that recommends elective subjects for stude
 - **Database:** PostgreSQL
 - **Containerized:** Using Docker and Docker Compose
 
+The full documentation can be found [here](https://develop.finki.ukim.mk/projects/izberi_izboren).
+
 ## Quick Setup
 
 ### 1. Clone this repository:
@@ -43,6 +45,8 @@ DB_HOST=x
 `docker-compose up --build`
 
 > Make sure you have Docker and Docker Compose installed on your system.
+
+The frontend of the application will be available at **http://localhost:3000**, which you can access from your browser.
 
 ### 4. Apply database migrations
 
