@@ -9,20 +9,13 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from django.db.models import Case, When
 from auth_form.serializers import StudentFormSerializer
-from subjects.utils import get_eligible_subjects, get_recommendations, map_to_subjects_vector, score_for_preferences, student_vector
+from subjects.utils import get_eligible_subjects, get_recommendations, map_to_subjects_vector, score_for_preferences, get_student_vector
 from .serializers import SubjectSerializer
 from .models import Subject_Info, Subject
 from datetime import datetime
 
 def index(request):
     return HttpResponse("ok")
-
-
-# @api_view(['GET'])
-# def subject_view(request, code):
-#     subject = Subject.objects.get(code=code)
-#     serializer = SubjectSerializer(subject)
-#     return Response(serializer.data)
 
 @api_view(['GET'])
 def all_subjects(request):
@@ -33,7 +26,7 @@ def all_subjects(request):
 @api_view(['GET'])
 def get_suggestions(request):
     season = request.query_params.get('season')
-    if not season: season = 2
+    if not season: season = 2 # 2 -> any season
     try:
         season = int(season)
     except ValueError:
@@ -44,10 +37,10 @@ def get_suggestions(request):
         return Response({"message": "Could not find student"}, status=status.HTTP_400_BAD_REQUEST)
     try:
         subjects = get_eligible_subjects(student, season=season)
-        mapped_subjects = map_to_subjects_vector(subjects)
-        vector = student_vector(student)
+        subject_vectors = map_to_subjects_vector(subjects)
+        student_vector = get_student_vector(student)
     
-        final_subjects = get_recommendations(score_for_preferences(vector, mapped_subjects))
+        final_subjects = get_recommendations(score_for_preferences(student_vector, subject_vectors))
 
         order = Case(*[When(name=subject_name, then=pos) for pos, subject_name in enumerate(final_subjects)])
 

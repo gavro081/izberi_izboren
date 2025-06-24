@@ -83,7 +83,7 @@ def get_eligible_subjects(student, season = 2):
 
     return valid_subjects
 
-def student_vector(student):
+def get_student_vector(student):
     """
     generates a vector representation of a student based on a predefined vocabulary.
 
@@ -211,17 +211,17 @@ def score_for_preferences(student_vector, eligible_subjects):
     max_tag_score = 0
     for subject in eligible_subjects:
         filtered_subjects_vector[subject] = {}
-        values = eligible_subjects[subject]
+        subject_vector = eligible_subjects[subject]
         for key in student_vector:
             if key in ["index", "study_effort", "current_year"]: continue
             if key == "tags":
-                tag_score = score_tags(student_vector, values)
+                tag_score = score_tags(student_vector, subject_vector)
                 filtered_subjects_vector[subject][key] = tag_score
                 max_tag_score = max(tag_score, max_tag_score)
                 continue
 
             student_values = student_vector[key]
-            subject_values = values[key]
+            subject_values = subject_vector[key]
             tot_count = 0
             match_count = 0
 
@@ -236,14 +236,14 @@ def score_for_preferences(student_vector, eligible_subjects):
         
         study_effort = student_vector["study_effort"]
         
-        if (study_effort == 0.4 and values['isEasy']) or (study_effort == 0.8 and not values['isEasy']):
+        if (study_effort == 0.4 and subject_vector['isEasy']) or (study_effort == 0.8 and not subject_vector['isEasy']):
             filtered_subjects_vector[subject]['effort'] = 1
         else:
             filtered_subjects_vector[subject]['effort'] = 0
             
-        filtered_subjects_vector[subject]['activated'] = values['activated']
+        filtered_subjects_vector[subject]['activated'] = subject_vector['activated']
 
-        filtered_subjects_vector[subject]['participant_score'] = values['participants']
+        filtered_subjects_vector[subject]['participant_score'] = subject_vector['participants']
     
     if max_tag_score != 0:
         for subject in eligible_subjects:
@@ -262,19 +262,12 @@ def get_recommendations(filtered_subjects_vector):
         list: a list of top N subject names recommended based on their normalized scores. if all scores are zero, returns empty list.
     """
     subject_scores = {}
-    max_ = -1
     for subject in filtered_subjects_vector:
         keys = filtered_subjects_vector[subject]
         score = 0
         for key in keys:
             score += WEIGHTS[key] * keys[key]
-        max_ = max(score, max_)
         subject_scores[subject] = score
     
-    if max_ == 0: return []
-    
-    for subject in subject_scores:
-        subject_scores[subject] /= max_
-
     top_subjects = list(dict(sorted(subject_scores.items(), key=lambda item: item[1], reverse=True)))[:NUMBER_OF_SUGGESTIONS]
     return top_subjects
