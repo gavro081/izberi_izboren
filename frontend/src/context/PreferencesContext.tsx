@@ -3,16 +3,18 @@ import {
 	ReactNode,
 	useCallback,
 	useContext,
-	useEffect,
 	useState,
 } from "react";
 import { toast } from "react-toastify";
-import { useAuth } from "../hooks/useAuth";
 import axiosInstance from "../api/axiosInstance";
+import { useAuth } from "../hooks/useAuth";
 interface PreferencesContextType {
 	favoriteIds: Set<number>;
+	setFavoriteIds: React.Dispatch<React.SetStateAction<Set<number>>>;
 	likedIds: Set<number>;
+	setLikedIds: React.Dispatch<React.SetStateAction<Set<number>>>;
 	dislikedIds: Set<number>;
+	setDislikedIds: React.Dispatch<React.SetStateAction<Set<number>>>;
 	toggleFavorite: (subjectId: number) => Promise<void>;
 	toggleLike: (subjectId: number) => Promise<void>;
 	toggleDislike: (subjectId: number) => Promise<void>;
@@ -29,31 +31,6 @@ export const PreferencesProvider = ({ children }: { children: ReactNode }) => {
 	const [favoriteIds, setFavoriteIds] = useState<Set<number>>(new Set());
 	const [likedIds, setLikedIds] = useState<Set<number>>(new Set());
 	const [dislikedIds, setDislikedIds] = useState<Set<number>>(new Set());
-
-	useEffect(() => {
-		if (accessToken) {
-			setIsLoading(true);
-			axiosInstance
-				.get<{
-					favorite_ids: number[];
-					liked_ids: number[];
-					disliked_ids: number[];
-				}>("/student/preferences/")
-				.then((response) => {
-					setFavoriteIds(new Set(response.data.favorite_ids || []));
-					setLikedIds(new Set(response.data.liked_ids || []));
-					setDislikedIds(new Set(response.data.disliked_ids || []));
-				})
-				.catch((error) => console.error("Failed to fetch preferences:", error))
-				.finally(() => setIsLoading(false));
-		} else {
-			// If user logs out, clear preferences
-			setFavoriteIds(new Set());
-			setLikedIds(new Set());
-			setDislikedIds(new Set());
-			setIsLoading(false);
-		}
-	}, [accessToken]);
 
 	const toggleFavorite = useCallback(
 		async (subjectId: number) => {
@@ -163,8 +140,11 @@ export const PreferencesProvider = ({ children }: { children: ReactNode }) => {
 
 	const value = {
 		favoriteIds,
+		setFavoriteIds,
 		likedIds,
+		setLikedIds,
 		dislikedIds,
+		setDislikedIds,
 		toggleFavorite,
 		toggleLike,
 		toggleDislike,

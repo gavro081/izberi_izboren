@@ -1,16 +1,15 @@
+import { jwtDecode } from "jwt-decode";
 import React, {
-	useRef,
-	useState,
-	useEffect,
 	ReactNode,
 	useCallback,
+	useEffect,
+	useRef,
+	useState,
 } from "react";
-import axiosInstance from "../api/axiosInstance";
-import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
+import axiosInstance from "../api/axiosInstance";
 import { StudentData } from "../components/types";
-import { User } from "../context/AuthContext";
-import AuthContext, { AuthContextType } from "../context/AuthContext";
+import AuthContext, { AuthContextType, User } from "../context/AuthContext";
 
 interface DecodedToken {
 	exp: number;
@@ -215,19 +214,19 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 		}
 	}, []);
 
-	const fetchFormData = useCallback(async (token: string) => {
-		try {
-			const response = await axiosInstance.get<StudentData>("/auth/form/", {
-				headers: { Authorization: `Bearer ${token}` },
-			});
-			setFormData(response.data);
-		} catch (error) {
-			console.error("Could not fetch user form data", error);
-			if ((error as any).response?.status !== 401) {
-				toast.error("Could not load form data.");
-			}
-		}
-	}, []);
+	// const fetchFormData = useCallback(async (token: string) => {
+	// 	try {
+	// 		const response = await axiosInstance.get<StudentData>("/auth/form/", {
+	// 			headers: { Authorization: `Bearer ${token}` },
+	// 		});
+	// 		setFormData(response.data);
+	// 	} catch (error) {
+	// 		console.error("Could not fetch user form data", error);
+	// 		if ((error as any).response?.status !== 401) {
+	// 			toast.error("Could not load form data.");
+	// 		}
+	// 	}
+	// }, []);
 
 	const login = useCallback(
 		async (newAccessToken: string, newRefreshToken: string, userData: User) => {
@@ -237,9 +236,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 			setRefreshToken(newRefreshToken);
 			setUser(userData);
 			scheduleProactiveRefresh(newAccessToken);
-			await fetchFormData(newAccessToken);
+			// await fetchFormData(newAccessToken);
 		},
-		[fetchFormData, scheduleProactiveRefresh]
+		[
+			// fetchFormData,
+			scheduleProactiveRefresh,
+		]
 	);
 
 	useEffect(() => {
@@ -249,12 +251,17 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 				setAccessToken(token);
 				setRefreshToken(localStorage.getItem("refresh"));
 				scheduleProactiveRefresh(token);
-				await Promise.all([fetchUser(token), fetchFormData(token)]);
+				await Promise.all([fetchUser(token)]);
+				// await Promise.all([fetchUser(token), fetchFormData(token)]);
 			}
 			setLoading(false);
 		};
 		initializeAuth();
-	}, [fetchUser, fetchFormData, scheduleProactiveRefresh]);
+	}, [
+		fetchUser,
+		// fetchFormData,
+		scheduleProactiveRefresh,
+	]);
 
 	const contextValue: AuthContextType = {
 		user,

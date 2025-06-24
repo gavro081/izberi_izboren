@@ -1,24 +1,26 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../api/axiosInstance";
 import SubjectCard from "../components/SubjectCatalog/SubjectCard";
 import SubjectModal from "../components/SubjectCatalog/SubjectModal";
 import { getSubjectPrerequisites } from "../components/SubjectCatalog/utils";
 import { Subject } from "../components/types";
+import { usePreferences } from "../context/PreferencesContext";
 import { useRecommendations } from "../context/RecommendationsContext";
 import { useSubjects } from "../context/SubjectsContext";
 import { useAuth } from "../hooks/useAuth";
-import axiosInstance from "../api/axiosInstance";
 
 const Recommendations = () => {
 	const navigate = useNavigate();
+	const { setFavoriteIds, setLikedIds, setDislikedIds } = usePreferences();
 	const { formData } = useAuth();
+	const { accessToken } = useAuth();
 	const [subjects] = useSubjects();
 	const [recommendations, setRecommendations] = useRecommendations();
 	const [season_, setSeason] = useState<"winter" | "summer" | "all">("all");
 	const [isLoading, setIsLoading] = useState(false);
 	const [showModal, setShowModal] = useState(false);
 	const [hasSearched, setHasSearched] = useState(false);
-
 	const mapToSeasonInt = (season: "winter" | "summer" | "all") => {
 		if (season == "summer") return 0;
 		if (season == "winter") return 1;
@@ -99,6 +101,31 @@ const Recommendations = () => {
 				return "Зимски + Летен";
 		}
 	};
+
+	useEffect(() => {
+		const accessToken = localStorage.getItem("access");
+		if (accessToken) {
+			setIsLoading(true);
+			axiosInstance
+				.get<{
+					favorite_ids: number[];
+					liked_ids: number[];
+					disliked_ids: number[];
+				}>("/student/preferences/")
+				.then((response) => {
+					setFavoriteIds(new Set(response.data.favorite_ids || []));
+					setLikedIds(new Set(response.data.liked_ids || []));
+					setDislikedIds(new Set(response.data.disliked_ids || []));
+				})
+				.catch((error) => console.error("Failed to fetch preferences:", error))
+				.finally(() => setIsLoading(false));
+		} else {
+			setFavoriteIds(new Set());
+			setLikedIds(new Set());
+			setDislikedIds(new Set());
+			setIsLoading(false);
+		}
+	}, [accessToken]);
 
 	return (
 		<>

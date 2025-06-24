@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import axiosInstance from "../api/axiosInstance";
 import SkeletonCard from "../components/SubjectCatalog/SkeletonCard";
 import SubjectList from "../components/SubjectCatalog/SubjectList";
 import SubjectModal from "../components/SubjectCatalog/SubjectModal";
@@ -6,10 +7,20 @@ import { getSubjectPrerequisites } from "../components/SubjectCatalog/utils";
 import { Subject } from "../components/types";
 import { usePreferences } from "../context/PreferencesContext";
 import { useSubjects } from "../context/SubjectsContext";
+import { useAuth } from "../hooks/useAuth";
 
 const SubjectPreferences = () => {
 	const [subjects] = useSubjects();
-	const { favoriteIds, likedIds, dislikedIds } = usePreferences();
+	const { accessToken } = useAuth();
+	const [isLoading, setIsLoading] = useState(true);
+	const {
+		favoriteIds,
+		setFavoriteIds,
+		likedIds,
+		setLikedIds,
+		dislikedIds,
+		setDislikedIds,
+	} = usePreferences();
 	const [visibleCourses, setVisibleCourses] = useState<number>(12);
 	const [selectedSubject, setSelectedSubject] = useState<Subject | null>(null);
 	const [isLoaded, setIsLoaded] = useState(false);
@@ -50,6 +61,31 @@ const SubjectPreferences = () => {
 		});
 		return map;
 	};
+
+	useEffect(() => {
+		const accessToken = localStorage.getItem("access");
+		if (accessToken) {
+			setIsLoading(true);
+			axiosInstance
+				.get<{
+					favorite_ids: number[];
+					liked_ids: number[];
+					disliked_ids: number[];
+				}>("/student/preferences/")
+				.then((response) => {
+					setFavoriteIds(new Set(response.data.favorite_ids || []));
+					setLikedIds(new Set(response.data.liked_ids || []));
+					setDislikedIds(new Set(response.data.disliked_ids || []));
+				})
+				.catch((error) => console.error("Failed to fetch preferences:", error))
+				.finally(() => setIsLoading(false));
+		} else {
+			setFavoriteIds(new Set());
+			setLikedIds(new Set());
+			setDislikedIds(new Set());
+			setIsLoading(false);
+		}
+	}, [accessToken]);
 
 	const favoriteSubjects = () => {
 		return subjects.filter((subject) => favoriteIds.has(subject.id));
