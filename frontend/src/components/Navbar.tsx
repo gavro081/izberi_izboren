@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -15,7 +14,7 @@ const Navbar: React.FC = () => {
 	const { setFavoriteIds, setLikedIds, setDislikedIds } = usePreferences();
 	const navigate = useNavigate();
 	const profileMenuRef = useRef<HTMLDivElement>(null);
-	const userInitial = user?.full_name.charAt(0).toUpperCase() || "F";
+	const userInitial = user?.full_name.charAt(0).toUpperCase() || "?";
 	// Close dropdown when clicking outside
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
@@ -42,23 +41,23 @@ const Navbar: React.FC = () => {
 		toast.success("Успешно сте одјавени!");
 	};
 
-	const testAccountLogin = async () => {
-		if (isAuthenticated) return;
-		try {
-			const response = await axios.post("http://localhost:8000/auth/login/", {
-				email: "fffff@finki.ukim.mk",
-				password: "testTestTEST123",
-			});
-			const { access, refresh, full_name, user_type } = response.data;
-			login(access, refresh, {
-				full_name,
-				user_type,
-			});
-			navigate("/");
-		} catch (err: unknown) {
-			console.log(err);
-		}
-	};
+	// const testAccountLogin = async () => {
+	// 	if (isAuthenticated) return;
+	// 	try {
+	// 		const response = await axios.post("http://localhost:8000/auth/login/", {
+	// 			email: "fffff@finki.ukim.mk",
+	// 			password: "testTestTEST123",
+	// 		});
+	// 		const { access, refresh, full_name, user_type } = response.data;
+	// 		login(access, refresh, {
+	// 			full_name,
+	// 			user_type,
+	// 		});
+	// 		navigate("/");
+	// 	} catch (err: unknown) {
+	// 		console.log(err);
+	// 	}
+	// };
 
 	return (
 		<nav className="bg-blue-600 text-white p-4">
@@ -104,7 +103,7 @@ const Navbar: React.FC = () => {
 				<div className="hidden sm:flex space-x-4 items-center text-sm sm:text-base">
 					{/* <button onClick={testAccountLogin}>quick login</button> */}
 					<Link to="/subjects" className="hover:underline">
-						Предмети
+						Сите предмети
 					</Link>
 					{isAuthenticated ? (
 						<div className="relative" ref={profileMenuRef}>

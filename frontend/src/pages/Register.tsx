@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import PasswordInput from "../components/PasswordInput";
+import { User } from "../context/AuthContext";
 import { useAuth } from "../hooks/useAuth";
 
 interface RegisterForm {
@@ -48,14 +49,15 @@ const Register: React.FC = () => {
 			const response = await axios.post<{
 				access: string;
 				refresh: string;
+				user: User;
 			}>("http://localhost:8000/auth/register/", {
 				email: formData.email,
 				password: formData.password,
 				confirm_password: formData.confirmPassword,
 				full_name: formData.fullName,
 			});
-			const { access, refresh } = response.data;
-			login(access, refresh);
+			const { access, refresh, user } = response.data;
+			login(access, refresh, user);
 			toast.success("Успешна регистрација!");
 			navigate("/account");
 		} catch (err: unknown) {
