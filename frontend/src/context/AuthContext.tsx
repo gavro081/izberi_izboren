@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, Dispatch, SetStateAction } from "react";
 import { StudentData } from "../components/types";
 
 export interface User {
@@ -14,6 +14,7 @@ export interface AuthContextType {
 	logout: () => void;
 	isAuthenticated: boolean;
 	loading: boolean;
+	setUser: Dispatch<SetStateAction<User | null>>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);

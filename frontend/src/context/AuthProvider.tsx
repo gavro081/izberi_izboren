@@ -203,17 +203,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 		};
 	}, [logout, scheduleProactiveRefresh]);
 
-	const fetchUser = useCallback(async (token: string) => {
-		try {
-			const response = await axiosInstance.get<User>("/auth/user/", {
-				headers: { Authorization: `Bearer ${token}` },
-			});
-			setUser(response.data);
-		} catch (error) {
-			console.error("Could not fetch user data on load", error);
-		}
-	}, []);
-
 	const login = useCallback(
 		async (newAccessToken: string, newRefreshToken: string, userData: User) => {
 			localStorage.setItem("access", newAccessToken);
@@ -222,12 +211,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 			setRefreshToken(newRefreshToken);
 			setUser(userData);
 			scheduleProactiveRefresh(newAccessToken);
-			// await fetchFormData(newAccessToken);
 		},
-		[
-			// fetchFormData,
-			scheduleProactiveRefresh,
-		]
+		[scheduleProactiveRefresh]
 	);
 
 	useEffect(() => {
@@ -237,12 +222,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 				setAccessToken(token);
 				setRefreshToken(localStorage.getItem("refresh"));
 				scheduleProactiveRefresh(token);
-				await fetchUser(token);
 			}
 			setLoading(false);
 		};
 		initializeAuth();
-	}, [scheduleProactiveRefresh, fetchUser]);
+	}, [scheduleProactiveRefresh]);
 
 	const contextValue: AuthContextType = {
 		user,
@@ -253,6 +237,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 		logout,
 		isAuthenticated: !!accessToken && !loading,
 		loading,
+		setUser,
 	};
 
 	return (
