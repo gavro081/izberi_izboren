@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
+import { fetchPreferences } from "../api/preferences";
+import { fetchSubjects } from "../api/subjects";
 import SubjectCard from "../components/SubjectCatalog/SubjectCard";
 import SubjectModal from "../components/SubjectCatalog/SubjectModal";
 import { getSubjectPrerequisites } from "../components/SubjectCatalog/utils";
@@ -12,13 +14,14 @@ import { useAuth } from "../hooks/useAuth";
 
 const Recommendations = () => {
 	const navigate = useNavigate();
-	const { setFavoriteIds, setLikedIds, setDislikedIds } = usePreferences();
+	const { setDislikedIds, setFavoriteIds, setLikedIds } = usePreferences();
+	const [isLoading, setIsLoading] = useState(false);
 	const { formData } = useAuth();
 	const { accessToken } = useAuth();
-	const [subjects] = useSubjects();
+	const [subjects, setSubjects] = useSubjects();
 	const [recommendations, setRecommendations] = useRecommendations();
+	const [recommendationsLoaded, setRecommendationsLoaded] = useState(true);
 	const [season_, setSeason] = useState<"winter" | "summer" | "all">("all");
-	const [isLoading, setIsLoading] = useState(false);
 	const [showModal, setShowModal] = useState(false);
 	const [hasSearched, setHasSearched] = useState(false);
 	const mapToSeasonInt = (season: "winter" | "summer" | "all") => {
@@ -27,8 +30,14 @@ const Recommendations = () => {
 		return 2;
 	};
 
+	useEffect(() => {
+		if (!subjects || subjects.length === 0) {
+			fetchSubjects({ setSubjects });
+		}
+	}, []);
+
 	const fetchRecommendations = async () => {
-		setIsLoading(true);
+		setRecommendationsLoaded(false);
 		try {
 			const season = mapToSeasonInt(season_);
 			const response = await axiosInstance.get("/suggestion", {
@@ -38,7 +47,7 @@ const Recommendations = () => {
 		} catch (error) {
 			console.error("Error fetching recommendations:", error);
 		} finally {
-			setIsLoading(false);
+			setRecommendationsLoaded(true);
 			setHasSearched(true);
 			const container = document.querySelector(".flex-1.p-8.overflow-y-auto");
 			if (container) {
@@ -46,18 +55,6 @@ const Recommendations = () => {
 			}
 		}
 	};
-
-	// (new) Now we use the context to get the subjects, but we can also fetch them directly from the backend if needed!
-	// (old) need to fetch subject data so that we can compare the subject IDs (prerequisites store IDs, but we need names) in the modals for the recommendations
-	// useEffect(() => {
-	// 	const fetchData = async () => {
-	// 		const response = await fetch("http://localhost:8000/subjects");
-	// 		const data = await response.json();
-	// 		setSubjects(data);
-	// 	};
-	// 	fetchData();
-	// 	if (subjects.length == 0) fetchData();
-	// }, []);
 
 	const subjectIdToNameMap = useMemo(() => {
 		const map = new Map<number, string>();
@@ -103,28 +100,12 @@ const Recommendations = () => {
 	};
 
 	useEffect(() => {
-		const accessToken = localStorage.getItem("access");
-		if (accessToken) {
-			setIsLoading(true);
-			axiosInstance
-				.get<{
-					favorite_ids: number[];
-					liked_ids: number[];
-					disliked_ids: number[];
-				}>("/student/preferences/")
-				.then((response) => {
-					setFavoriteIds(new Set(response.data.favorite_ids || []));
-					setLikedIds(new Set(response.data.liked_ids || []));
-					setDislikedIds(new Set(response.data.disliked_ids || []));
-				})
-				.catch((error) => console.error("Failed to fetch preferences:", error))
-				.finally(() => setIsLoading(false));
-		} else {
-			setFavoriteIds(new Set());
-			setLikedIds(new Set());
-			setDislikedIds(new Set());
-			setIsLoading(false);
-		}
+		fetchPreferences({
+			setIsLoading,
+			setDislikedIds,
+			setFavoriteIds,
+			setLikedIds,
+		});
 	}, [accessToken]);
 
 	return (
@@ -162,14 +143,14 @@ const Recommendations = () => {
 
 						<button
 							onClick={fetchRecommendations}
-							disabled={isLoading}
+							disabled={!recommendationsLoaded}
 							className={`${
-								isLoading
+								!recommendationsLoaded
 									? "bg-gray-400 cursor-not-allowed"
 									: "bg-green-500 hover:bg-green-600 hover:scale-105 shadow-md hover:shadow-lg"
 							} text-white px-8 py-4 rounded-lg text-xl font-bold transition-all duration-200 flex items-center space-x-2`}
 						>
-							{isLoading ? (
+							{!recommendationsLoaded ? (
 								<>
 									<div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
 									<span>Се вчитува...</span>
@@ -222,6 +203,7 @@ const Recommendations = () => {
 												canReview={true}
 												isFirst={index == 0}
 												isRecommended={true}
+												isLoading={isLoading}
 											/>
 										</div>
 									))}

@@ -20,18 +20,19 @@ const HeartIcon = ({ filled }: { filled: boolean }) => (
 
 interface FavoriteButtonProps {
 	subjectId: number;
+	isLoading?: boolean;
 }
 
-const FavoriteButton = ({ subjectId }: FavoriteButtonProps) => {
-	const { favoriteIds, toggleFavorite, isLoading } = usePreferences();
+const FavoriteButton = ({ subjectId, isLoading }: FavoriteButtonProps) => {
+	const { favoriteIds, toggleFavorite } = usePreferences();
 	const { isAuthenticated } = useAuth();
-	const isFavorite = favoriteIds.has(subjectId);
+	const isFavorite = favoriteIds?.has(subjectId) || false;
 	const isFilled = isAuthenticated && isFavorite;
 	return (
 		<button
 			onClick={() => toggleFavorite(subjectId)}
 			disabled={isLoading || !isAuthenticated}
-			className={`group relative flex items-center justify-center transition-all duration-200 p-2 rounded-full 
+			className={`relative flex items-center justify-center transition-all duration-200 p-2 rounded-full 
 				${!isAuthenticated ? "cursor-not-allowed" : ""}
 				${isFavorite ? "text-red-500" : "text-gray-400"}
 				${isLoading ? "cursor-not-allowed animate-pulse" : ""}`}

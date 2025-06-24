@@ -214,20 +214,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 		}
 	}, []);
 
-	// const fetchFormData = useCallback(async (token: string) => {
-	// 	try {
-	// 		const response = await axiosInstance.get<StudentData>("/auth/form/", {
-	// 			headers: { Authorization: `Bearer ${token}` },
-	// 		});
-	// 		setFormData(response.data);
-	// 	} catch (error) {
-	// 		console.error("Could not fetch user form data", error);
-	// 		if ((error as any).response?.status !== 401) {
-	// 			toast.error("Could not load form data.");
-	// 		}
-	// 	}
-	// }, []);
-
 	const login = useCallback(
 		async (newAccessToken: string, newRefreshToken: string, userData: User) => {
 			localStorage.setItem("access", newAccessToken);
@@ -251,17 +237,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 				setAccessToken(token);
 				setRefreshToken(localStorage.getItem("refresh"));
 				scheduleProactiveRefresh(token);
-				await Promise.all([fetchUser(token)]);
-				// await Promise.all([fetchUser(token), fetchFormData(token)]);
+				await fetchUser(token);
 			}
 			setLoading(false);
 		};
 		initializeAuth();
-	}, [
-		fetchUser,
-		// fetchFormData,
-		scheduleProactiveRefresh,
-	]);
+	}, [scheduleProactiveRefresh, fetchUser]);
 
 	const contextValue: AuthContextType = {
 		user,

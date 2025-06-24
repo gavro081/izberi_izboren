@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import axiosInstance from "../../api/axiosInstance";
+import { fetchSubjects } from "../../api/subjects";
 import {
 	EVALUATIONS,
 	EVALUATIONS_MAP,
@@ -89,6 +90,7 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 	});
 	const [showProfessors, setShowProfessors] = useState(false);
 	const [showAssistants, setShowAssistants] = useState(false);
+	const [, setSubjects] = useSubjects();
 	const [distinctSubjectData, setDistinctSubjectData] =
 		useState<DistinctSubjectData>({
 			tags: [],
@@ -104,6 +106,9 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 
 	// Update form when formData changes (e.g., after fetching user data)
 	useEffect(() => {
+		if (!subjects || subjects.length === 0) {
+			fetchSubjects({ setSubjects });
+		}
 		const fetchFormData = async (token: string) => {
 			try {
 				const response = await axiosInstance.get<StudentData>("/auth/form/", {

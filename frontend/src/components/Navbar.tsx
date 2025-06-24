@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import IOimage from "../assets/IOLogo.png";
+import { usePreferences } from "../context/PreferencesContext";
 import { useRecommendations } from "../context/RecommendationsContext";
 import { useAuth } from "../hooks/useAuth";
 
@@ -11,6 +12,7 @@ const Navbar: React.FC = () => {
 	const [profileMenuOpen, setProfileMenuOpen] = useState(false);
 	const [, setRecommendations] = useRecommendations();
 	const { isAuthenticated, logout, login, user } = useAuth();
+	const { setFavoriteIds, setLikedIds, setDislikedIds } = usePreferences();
 	const navigate = useNavigate();
 	const profileMenuRef = useRef<HTMLDivElement>(null);
 	const userInitial = user?.full_name.charAt(0).toUpperCase() || "?";
@@ -33,6 +35,9 @@ const Navbar: React.FC = () => {
 	const handleLogout = () => {
 		logout();
 		setRecommendations([]);
+		setFavoriteIds(new Set());
+		setLikedIds(new Set());
+		setDislikedIds(new Set());
 		navigate("/");
 		toast.success("Успешно сте одјавени!");
 	};
