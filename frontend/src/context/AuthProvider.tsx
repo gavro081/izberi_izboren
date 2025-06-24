@@ -8,9 +8,10 @@ import React, {
 import axiosInstance from "../api/axiosInstance";
 import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
+import { User } from "./AuthContext";
 import { StudentData } from "../components/types";
-import { User } from "../context/AuthContext";
-import AuthContext, { AuthContextType } from "../context/AuthContext";
+import AuthContext, { AuthContextType } from "./AuthContext";
+import { AxiosError, AxiosRequestConfig, isAxiosError } from "axios";
 
 interface DecodedToken {
 	exp: number;
@@ -20,13 +21,17 @@ interface DecodedToken {
 	user_id: number;
 }
 
+interface CustomAxiosRequestConfig extends AxiosRequestConfig {
+	_retry?: boolean;
+}
+
 let isRefreshing = false;
 let failedQueue: Array<{
-	resolve: (value: any) => void;
-	reject: (reason?: any) => void;
+	resolve: (value: string | null) => void;
+	reject: (reason: unknown) => void;
 }> = [];
 
-const processQueue = (error: any, token: string | null = null) => {
+const processQueue = (error: unknown, token: string | null = null) => {
 	failedQueue.forEach((prom) => {
 		if (error) {
 			prom.reject(error);
@@ -42,9 +47,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
 	const [user, setUser] = useState<User | null>(null);
 	const [accessToken, setAccessToken] = useState<string | null>(null);
-	const [refreshToken, setRefreshToken] = useState<string | null>(null);
 	const [formData, setFormData] = useState<StudentData | null>(null);
 	const [loading, setLoading] = useState(true);
+	const [sessionInitialized, setSessionInitialized] = useState(false);
 
 	const proactiveRefreshTimeoutId = useRef<number | null>(null);
 
@@ -52,7 +57,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 		if (proactiveRefreshTimeoutId.current) {
 			clearTimeout(proactiveRefreshTimeoutId.current);
 		}
-
 		const currentRefreshToken = localStorage.getItem("refresh");
 		if (currentRefreshToken) {
 			axiosInstance
@@ -64,13 +68,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 					)
 				);
 		}
-
 		localStorage.removeItem("access");
 		localStorage.removeItem("refresh");
 		setAccessToken(null);
-		setRefreshToken(null);
 		setFormData(null);
 		setUser(null);
+		setSessionInitialized(false); // Reset session on logout
 	}, []);
 
 	const scheduleProactiveRefresh = useCallback(
@@ -78,23 +81,15 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 			if (proactiveRefreshTimeoutId.current) {
 				clearTimeout(proactiveRefreshTimeoutId.current);
 			}
-
 			try {
 				const decodedToken = jwtDecode<DecodedToken>(token);
 				const expirationTime = decodedToken.exp * 1000;
 				const currentTime = Date.now();
 				const refreshOffset = 15 * 1000;
 				const timeoutDuration = expirationTime - currentTime - refreshOffset;
-
 				if (timeoutDuration > 0) {
 					proactiveRefreshTimeoutId.current = window.setTimeout(async () => {
-						if (isRefreshing) {
-							console.log(
-								"Proactive refresh aborted, another refresh is in progress."
-							);
-							return;
-						}
-
+						if (isRefreshing) return;
 						const currentRefreshToken = localStorage.getItem("refresh");
 						if (currentRefreshToken) {
 							isRefreshing = true;
@@ -102,18 +97,15 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 								const res = await axiosInstance.post<{
 									access: string;
 									refresh?: string;
-								}>("/auth/refresh/", {
-									refresh: currentRefreshToken,
-								});
+								}>("/auth/refresh/", { refresh: currentRefreshToken });
 								localStorage.setItem("access", res.data.access);
 								setAccessToken(res.data.access);
 								if (res.data.refresh) {
 									localStorage.setItem("refresh", res.data.refresh);
-									setRefreshToken(res.data.refresh);
 								}
 								scheduleProactiveRefresh(res.data.access);
 							} catch (err) {
-								console.error("Proactive refresh failed", err);
+								console.error("Proactive token refresh failed:", err);
 								logout();
 							} finally {
 								isRefreshing = false;
@@ -137,52 +129,48 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 				}
 				return config;
 			},
-			(error) => Promise.reject(error)
+			(error: AxiosError) => Promise.reject(error)
 		);
-
 		const responseIntercept = axiosInstance.interceptors.response.use(
 			(response) => response,
 			async (error) => {
-				const originalRequest = error.config;
+				const originalRequest = error.config as CustomAxiosRequestConfig;
 				if (error.response?.status === 401 && !originalRequest._retry) {
 					originalRequest._retry = true;
-
 					if (isRefreshing) {
 						return new Promise((resolve, reject) => {
 							failedQueue.push({ resolve, reject });
 						}).then((token) => {
-							originalRequest.headers["Authorization"] = "Bearer " + token;
+							if (originalRequest.headers) {
+								originalRequest.headers["Authorization"] = "Bearer " + token;
+							}
 							return axiosInstance(originalRequest);
 						});
 					}
-
 					isRefreshing = true;
-
 					const currentRefreshToken = localStorage.getItem("refresh");
 					if (!currentRefreshToken) {
 						isRefreshing = false;
 						logout();
 						return Promise.reject(error);
 					}
-
 					try {
 						const response = await axiosInstance.post<{
 							access: string;
 							refresh?: string;
-						}>("/auth/refresh/", {
-							refresh: currentRefreshToken,
-						});
+						}>("/auth/refresh/", { refresh: currentRefreshToken });
 						const newAccessToken = response.data.access;
 						localStorage.setItem("access", newAccessToken);
 						setAccessToken(newAccessToken);
 						if (response.data.refresh) {
 							localStorage.setItem("refresh", response.data.refresh);
-							setRefreshToken(response.data.refresh);
 						}
 						scheduleProactiveRefresh(newAccessToken);
-						originalRequest.headers[
-							"Authorization"
-						] = `Bearer ${newAccessToken}`;
+						if (originalRequest.headers) {
+							originalRequest.headers[
+								"Authorization"
+							] = `Bearer ${newAccessToken}`;
+						}
 						processQueue(null, newAccessToken);
 						return axiosInstance(originalRequest);
 					} catch (refreshError) {
@@ -197,7 +185,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 				return Promise.reject(error);
 			}
 		);
-
 		return () => {
 			axiosInstance.interceptors.request.eject(requestIntercept);
 			axiosInstance.interceptors.response.eject(responseIntercept);
@@ -211,7 +198,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 			});
 			setUser(response.data);
 		} catch (error) {
-			console.error("Could not fetch user data on load", error);
+			console.error("Could not fetch user data", error);
 		}
 	}, []);
 
@@ -223,7 +210,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 			setFormData(response.data);
 		} catch (error) {
 			console.error("Could not fetch user form data", error);
-			if ((error as any).response?.status !== 401) {
+			if (isAxiosError(error) && error.response?.status !== 401) {
 				toast.error("Could not load form data.");
 			}
 		}
@@ -234,27 +221,30 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 			localStorage.setItem("access", newAccessToken);
 			localStorage.setItem("refresh", newRefreshToken);
 			setAccessToken(newAccessToken);
-			setRefreshToken(newRefreshToken);
 			setUser(userData);
 			scheduleProactiveRefresh(newAccessToken);
 			await fetchFormData(newAccessToken);
+			setSessionInitialized(true);
 		},
 		[fetchFormData, scheduleProactiveRefresh]
 	);
 
-	useEffect(() => {
-		const initializeAuth = async () => {
-			const token = localStorage.getItem("access");
-			if (token) {
-				setAccessToken(token);
-				setRefreshToken(localStorage.getItem("refresh"));
-				scheduleProactiveRefresh(token);
-				await Promise.all([fetchUser(token), fetchFormData(token)]);
-			}
-			setLoading(false);
-		};
-		initializeAuth();
+	const initializeUser = useCallback(async () => {
+		const token = localStorage.getItem("access");
+		if (token) {
+			scheduleProactiveRefresh(token);
+			await Promise.all([fetchUser(token), fetchFormData(token)]);
+		}
+		setSessionInitialized(true);
 	}, [fetchUser, fetchFormData, scheduleProactiveRefresh]);
+
+	useEffect(() => {
+		const token = localStorage.getItem("access");
+		if (token) {
+			setAccessToken(token);
+		}
+		setLoading(false);
+	}, []);
 
 	const contextValue: AuthContextType = {
 		user,
@@ -263,13 +253,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 		setFormData,
 		login,
 		logout,
-		isAuthenticated: !!accessToken && !loading,
+		isAuthenticated: !!accessToken,
 		loading,
+		sessionInitialized,
+		initializeUser,
 	};
 
 	return (
-		<AuthContext.Provider value={contextValue}>
-			{!loading && children}
-		</AuthContext.Provider>
+		<AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
 	);
 };

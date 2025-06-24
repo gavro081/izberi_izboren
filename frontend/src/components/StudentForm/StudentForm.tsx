@@ -20,6 +20,7 @@ import {
 	validateForm,
 } from "./utils";
 import axiosInstance from "../../api/axiosInstance";
+import { isAxiosError } from 'axios';
 
 interface StudentFormProps {
 	formData: StudentData | null;
@@ -32,6 +33,36 @@ interface DistinctSubjectData {
 	assistants: string[];
 	technologies: string[];
 }
+
+
+const parseBackendError = (error: unknown): string => {
+  if (isAxiosError(error) && error.response) {
+    const data = error.response.data;
+
+    if (data && data.detail) {
+      return data.detail;
+    }
+
+    if (data && data.message) {
+      return data.message;
+    }
+
+    if (data && typeof data === 'object' && Object.keys(data).length > 0) {
+      const firstErrorField = Object.keys(data)[0];
+      const errorMessages = data[firstErrorField];
+
+      if (Array.isArray(errorMessages) && errorMessages.length > 0) {
+        return errorMessages[0];
+      }
+    }
+  }
+
+  if (error instanceof Error) {
+    return error.message;
+  }
+
+  return 'An unknown error occurred. Please try again.';
+};
 
 const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 	const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -287,9 +318,10 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 			}, 5000);
 			window.scrollTo({ top: 0, behavior: "smooth" });
 		} catch (error) {
+			const errorMessage = parseBackendError(error);
 			setFormStatus({
 				isSubmitting: false,
-				message: `Грешка при зачувување: ${(error as Error).message}`,
+				message: `Грешка при зачувување: ${errorMessage}`,
 				isError: true,
 			});
 			window.scrollTo({ top: 0, behavior: "smooth" });
