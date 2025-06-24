@@ -15,7 +15,7 @@ const Navbar: React.FC = () => {
 	const { setFavoriteIds, setLikedIds, setDislikedIds } = usePreferences();
 	const navigate = useNavigate();
 	const profileMenuRef = useRef<HTMLDivElement>(null);
-	const userInitial = user?.full_name.charAt(0).toUpperCase() || "?";
+	const userInitial = user?.full_name.charAt(0).toUpperCase() || "F";
 	// Close dropdown when clicking outside
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
@@ -102,7 +102,7 @@ const Navbar: React.FC = () => {
 
 				{/* Desktop Menu */}
 				<div className="hidden sm:flex space-x-4 items-center text-sm sm:text-base">
-					<button onClick={testAccountLogin}>quick login</button>
+					{/* <button onClick={testAccountLogin}>quick login</button> */}
 					<Link to="/subjects" className="hover:underline">
 						Предмети
 					</Link>
