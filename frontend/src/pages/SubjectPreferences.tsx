@@ -71,6 +71,7 @@ const SubjectPreferences = () => {
 	};
 
 	useEffect(() => {
+		if (!accessToken) return;
 		fetchPreferences({
 			setDislikedIds,
 			setFavoriteIds,
@@ -113,7 +114,6 @@ const SubjectPreferences = () => {
 		}
 		setSelectedSubjects(newSubjects);
 		setIdsToMap(newMap);
-		console.log(newSubjects);
 		setIsLoaded(true);
 	}, [favoriteIds, likedIds, dislikedIds, activeFilter, subjects]);
 

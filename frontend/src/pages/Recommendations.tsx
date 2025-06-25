@@ -100,6 +100,7 @@ const Recommendations = () => {
 	};
 
 	useEffect(() => {
+		if (!accessToken) return;
 		fetchPreferences({
 			setIsLoading,
 			setDislikedIds,

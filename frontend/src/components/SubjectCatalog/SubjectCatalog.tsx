@@ -51,6 +51,7 @@ const SubjectCatalog = () => {
 	const { setDislikedIds, setLikedIds, setFavoriteIds } = usePreferences();
 
 	useEffect(() => {
+		if (!accessToken) return;
 		fetchPreferences({
 			setDislikedIds,
 			setFavoriteIds,
