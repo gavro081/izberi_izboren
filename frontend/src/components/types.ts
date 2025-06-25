@@ -24,7 +24,7 @@ export interface StudentData {
 	assistants: string[];
 	has_filled_form: boolean;
 	has_extracurricular: boolean;
-	passed_subjects_per_semester: Record<number, Subject[] | []>;
+	passed_subjects_per_semester: Record<string, number[]> | [];
 }
 
 export type Prerequisite = {

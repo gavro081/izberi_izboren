@@ -124,6 +124,27 @@ export const mapToID = (passedSubjects: Record<number, Subject[]>) => {
 	);
 };
 
+export const mapToSubjects = (
+	passedSubjects: Record<string, number[]> | Record<number, Subject[]>,
+	subjects: Subject[]
+) => {
+	const mapped = Object.fromEntries(
+		Object.entries(passedSubjects).map(([semester, subjectIDs]) => [
+			semester,
+			subjectIDs
+				.map((id: SubjectID) => subjects.find((s) => s.id === id))
+				.filter(Boolean),
+		])
+	);
+	const normalized: Record<number, Subject[]> = Object.fromEntries(
+		Object.entries(mapped).map(([k, arr]) => [
+			Number(k),
+			(arr as (Subject | undefined)[]).filter((s): s is Subject => !!s),
+		])
+	);
+	return normalized || {};
+};
+
 export const getPassedSubjects = (
 	passedSubjects: Record<number, Subject[]>
 ) => {

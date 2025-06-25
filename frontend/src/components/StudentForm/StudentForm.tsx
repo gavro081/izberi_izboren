@@ -1,4 +1,8 @@
+import { isAxiosError } from "axios";
 import { useCallback, useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import axiosInstance from "../../api/axiosInstance";
+import { fetchSubjects } from "../../api/subjects";
 import {
 	EVALUATIONS,
 	EVALUATIONS_MAP,
@@ -17,10 +21,9 @@ import {
 	getPassedSubjectsByID,
 	LatinToCyrillic,
 	mapToID,
+	mapToSubjects,
 	validateForm,
 } from "./utils";
-import axiosInstance from "../../api/axiosInstance";
-import { isAxiosError } from 'axios';
 
 interface StudentFormProps {
 	formData: StudentData | null;
@@ -34,37 +37,37 @@ interface DistinctSubjectData {
 	technologies: string[];
 }
 
-
 const parseBackendError = (error: unknown): string => {
-  if (isAxiosError(error) && error.response) {
-    const data = error.response.data;
+	if (isAxiosError(error) && error.response) {
+		const data = error.response.data;
 
-    if (data && data.detail) {
-      return data.detail;
-    }
+		if (data && data.detail) {
+			return data.detail;
+		}
 
-    if (data && data.message) {
-      return data.message;
-    }
+		if (data && data.message) {
+			return data.message;
+		}
 
-    if (data && typeof data === 'object' && Object.keys(data).length > 0) {
-      const firstErrorField = Object.keys(data)[0];
-      const errorMessages = data[firstErrorField];
+		if (data && typeof data === "object" && Object.keys(data).length > 0) {
+			const firstErrorField = Object.keys(data)[0];
+			const errorMessages = data[firstErrorField];
 
-      if (Array.isArray(errorMessages) && errorMessages.length > 0) {
-        return errorMessages[0];
-      }
-    }
-  }
+			if (Array.isArray(errorMessages) && errorMessages.length > 0) {
+				return errorMessages[0];
+			}
+		}
+	}
 
-  if (error instanceof Error) {
-    return error.message;
-  }
+	if (error instanceof Error) {
+		return error.message;
+	}
 
-  return 'An unknown error occurred. Please try again.';
+	return "An unknown error occurred. Please try again.";
 };
 
 const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
+	const [subjects] = useSubjects();
 	const [hasSubmitted, setHasSubmitted] = useState(false);
 	const [validationErrors, setValidationErrors] = useState<{
 		[key: string]: string;
@@ -77,7 +80,8 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 	const [passedSubjectsPerSemester, setPassedSubjectsPerSemester] = useState<
 		Record<number, Subject[]>
 	>(
-		formData?.passed_subjects_per_semester ??
+		(formData?.passed_subjects_per_semester &&
+			mapToSubjects(formData.passed_subjects_per_semester, subjects || [])) ||
 			Object.fromEntries(Array.from({ length: 8 }, (_, i) => [[i + 1], []]))
 	);
 	const [studyEffort, setStudyEffort] = useState(formData?.study_effort || "");
@@ -116,7 +120,7 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 	});
 	const [showProfessors, setShowProfessors] = useState(false);
 	const [showAssistants, setShowAssistants] = useState(false);
-	const [subjects] = useSubjects();
+	const [, setSubjects] = useSubjects();
 	const [distinctSubjectData, setDistinctSubjectData] =
 		useState<DistinctSubjectData>({
 			tags: [],
@@ -131,6 +135,28 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 	const { setFormData } = useAuth();
 
 	// Update form when formData changes (e.g., after fetching user data)
+	useEffect(() => {
+		if (!subjects || subjects.length === 0) {
+			fetchSubjects({ setSubjects });
+		}
+		const fetchFormData = async (token: string) => {
+			try {
+				const response = await axiosInstance.get<StudentData>("/auth/form/", {
+					headers: { Authorization: `Bearer ${token}` },
+				});
+				setFormData(response.data);
+			} catch (error) {
+				console.error("Could not fetch user form data", error);
+				if ((error as any).response?.status !== 401) {
+					toast.error("Could not load form data.");
+				}
+			}
+		};
+		const token = localStorage.getItem("access");
+		if (token) {
+			fetchFormData(token);
+		}
+	}, []);
 	useEffect(() => {
 		if (formData) {
 			setIndex(formData.index || "");
@@ -169,8 +195,21 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 				: formData.assistants || [];
 			setFavoriteAssistants(favoriteAssistants_);
 
-			setPassedSubjectsPerSemester(formData.passed_subjects_per_semester || []);
-
+			if (
+				formData.passed_subjects_per_semester &&
+				subjects &&
+				subjects.length > 0
+			) {
+				const mappedSubjects = mapToSubjects(
+					formData.passed_subjects_per_semester,
+					subjects
+				);
+				setPassedSubjectsPerSemester(mappedSubjects);
+			} else {
+				setPassedSubjectsPerSemester(
+					Object.fromEntries(Array.from({ length: 8 }, (_, i) => [[i + 1], []]))
+				);
+			}
 			setHasExtracurricular(formData.has_extracurricular || false);
 		}
 	}, [formData]);

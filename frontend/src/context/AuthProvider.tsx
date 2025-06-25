@@ -1,17 +1,17 @@
+import { AxiosError, AxiosRequestConfig } from "axios";
+import { jwtDecode } from "jwt-decode";
 import React, {
-	useRef,
-	useState,
-	useEffect,
 	ReactNode,
 	useCallback,
+	useEffect,
+	useRef,
+	useState,
 } from "react";
-import axiosInstance from "../api/axiosInstance";
-import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
-import { User } from "./AuthContext";
+import axiosInstance from "../api/axiosInstance";
+import { fetchUser } from "../api/user";
 import { StudentData } from "../components/types";
-import AuthContext, { AuthContextType } from "./AuthContext";
-import { AxiosError, AxiosRequestConfig, isAxiosError } from "axios";
+import AuthContext, { AuthContextType, User } from "../context/AuthContext";
 
 interface DecodedToken {
 	exp: number;
@@ -191,31 +191,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 		};
 	}, [logout, scheduleProactiveRefresh]);
 
-	const fetchUser = useCallback(async (token: string) => {
-		try {
-			const response = await axiosInstance.get<User>("/auth/user/", {
-				headers: { Authorization: `Bearer ${token}` },
-			});
-			setUser(response.data);
-		} catch (error) {
-			console.error("Could not fetch user data", error);
-		}
-	}, []);
-
-	const fetchFormData = useCallback(async (token: string) => {
-		try {
-			const response = await axiosInstance.get<StudentData>("/auth/form/", {
-				headers: { Authorization: `Bearer ${token}` },
-			});
-			setFormData(response.data);
-		} catch (error) {
-			console.error("Could not fetch user form data", error);
-			if (isAxiosError(error) && error.response?.status !== 401) {
-				toast.error("Could not load form data.");
-			}
-		}
-	}, []);
-
 	const login = useCallback(
 		async (newAccessToken: string, newRefreshToken: string, userData: User) => {
 			localStorage.setItem("access", newAccessToken);
@@ -223,20 +198,18 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 			setAccessToken(newAccessToken);
 			setUser(userData);
 			scheduleProactiveRefresh(newAccessToken);
-			await fetchFormData(newAccessToken);
-			setSessionInitialized(true);
 		},
-		[fetchFormData, scheduleProactiveRefresh]
+		[scheduleProactiveRefresh]
 	);
 
 	const initializeUser = useCallback(async () => {
 		const token = localStorage.getItem("access");
 		if (token) {
 			scheduleProactiveRefresh(token);
-			await Promise.all([fetchUser(token), fetchFormData(token)]);
+			await fetchUser(token, setUser);
 		}
 		setSessionInitialized(true);
-	}, [fetchUser, fetchFormData, scheduleProactiveRefresh]);
+	}, [fetchUser, scheduleProactiveRefresh]);
 
 	useEffect(() => {
 		const token = localStorage.getItem("access");
@@ -257,6 +230,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 		loading,
 		sessionInitialized,
 		initializeUser,
+		setUser,
 	};
 
 	return (

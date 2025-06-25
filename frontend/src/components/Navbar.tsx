@@ -1,8 +1,8 @@
-import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import IOimage from "../assets/IOLogo.png";
+import { usePreferences } from "../context/PreferencesContext";
 import { useRecommendations } from "../context/RecommendationsContext";
 import { useAuth } from "../hooks/useAuth";
 
@@ -11,6 +11,7 @@ const Navbar: React.FC = () => {
 	const [profileMenuOpen, setProfileMenuOpen] = useState(false);
 	const [, setRecommendations] = useRecommendations();
 	const { isAuthenticated, logout, login, user } = useAuth();
+	const { setFavoriteIds, setLikedIds, setDislikedIds } = usePreferences();
 	const navigate = useNavigate();
 	const profileMenuRef = useRef<HTMLDivElement>(null);
 	const userInitial = user?.full_name.charAt(0).toUpperCase() || "?";
@@ -33,27 +34,30 @@ const Navbar: React.FC = () => {
 	const handleLogout = () => {
 		logout();
 		setRecommendations([]);
+		setFavoriteIds(new Set());
+		setLikedIds(new Set());
+		setDislikedIds(new Set());
 		navigate("/");
 		toast.success("Успешно сте одјавени!");
 	};
 
-	const testAccountLogin = async () => {
-		if (isAuthenticated) return;
-		try {
-			const response = await axios.post("http://localhost:8000/auth/login/", {
-				email: "fffff@finki.ukim.mk",
-				password: "testTestTEST123",
-			});
-			const { access, refresh, full_name, user_type } = response.data;
-			login(access, refresh, {
-				full_name,
-				user_type,
-			});
-			navigate("/");
-		} catch (err: unknown) {
-			console.log(err);
-		}
-	};
+	// const testAccountLogin = async () => {
+	// 	if (isAuthenticated) return;
+	// 	try {
+	// 		const response = await axios.post("http://localhost:8000/auth/login/", {
+	// 			email: "fffff@finki.ukim.mk",
+	// 			password: "testTestTEST123",
+	// 		});
+	// 		const { access, refresh, full_name, user_type } = response.data;
+	// 		login(access, refresh, {
+	// 			full_name,
+	// 			user_type,
+	// 		});
+	// 		navigate("/");
+	// 	} catch (err: unknown) {
+	// 		console.log(err);
+	// 	}
+	// };
 
 	return (
 		<nav className="bg-blue-600 text-white p-4">
@@ -97,9 +101,9 @@ const Navbar: React.FC = () => {
 
 				{/* Desktop Menu */}
 				<div className="hidden sm:flex space-x-4 items-center text-sm sm:text-base">
-					<button onClick={testAccountLogin}>quick login</button>
+					{/* <button onClick={testAccountLogin}>quick login</button> */}
 					<Link to="/subjects" className="hover:underline">
-						Предмети
+						Сите предмети
 					</Link>
 					{isAuthenticated ? (
 						<div className="relative" ref={profileMenuRef}>

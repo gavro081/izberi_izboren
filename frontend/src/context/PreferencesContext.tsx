@@ -3,20 +3,20 @@ import {
 	ReactNode,
 	useCallback,
 	useContext,
-	useEffect,
 	useState,
 } from "react";
 import { toast } from "react-toastify";
-import { useAuth } from "../hooks/useAuth";
 import axiosInstance from "../api/axiosInstance";
 interface PreferencesContextType {
-	favoriteIds: Set<number>;
-	likedIds: Set<number>;
-	dislikedIds: Set<number>;
+	favoriteIds: Set<number> | undefined;
+	setFavoriteIds: React.Dispatch<React.SetStateAction<Set<number> | undefined>>;
+	likedIds: Set<number> | undefined;
+	setLikedIds: React.Dispatch<React.SetStateAction<Set<number> | undefined>>;
+	dislikedIds: Set<number> | undefined;
+	setDislikedIds: React.Dispatch<React.SetStateAction<Set<number> | undefined>>;
 	toggleFavorite: (subjectId: number) => Promise<void>;
 	toggleLike: (subjectId: number) => Promise<void>;
 	toggleDislike: (subjectId: number) => Promise<void>;
-	isLoading: boolean;
 }
 
 const PreferencesContext = createContext<PreferencesContextType | undefined>(
@@ -24,36 +24,13 @@ const PreferencesContext = createContext<PreferencesContextType | undefined>(
 );
 
 export const PreferencesProvider = ({ children }: { children: ReactNode }) => {
-	const { accessToken } = useAuth();
-	const [isLoading, setIsLoading] = useState(true);
-	const [favoriteIds, setFavoriteIds] = useState<Set<number>>(new Set());
-	const [likedIds, setLikedIds] = useState<Set<number>>(new Set());
-	const [dislikedIds, setDislikedIds] = useState<Set<number>>(new Set());
-
-	useEffect(() => {
-		if (accessToken) {
-			setIsLoading(true);
-			axiosInstance
-				.get<{
-					favorite_ids: number[];
-					liked_ids: number[];
-					disliked_ids: number[];
-				}>("/student/preferences/")
-				.then((response) => {
-					setFavoriteIds(new Set(response.data.favorite_ids || []));
-					setLikedIds(new Set(response.data.liked_ids || []));
-					setDislikedIds(new Set(response.data.disliked_ids || []));
-				})
-				.catch((error) => console.error("Failed to fetch preferences:", error))
-				.finally(() => setIsLoading(false));
-		} else {
-			// If user logs out, clear preferences
-			setFavoriteIds(new Set());
-			setLikedIds(new Set());
-			setDislikedIds(new Set());
-			setIsLoading(false);
-		}
-	}, [accessToken]);
+	const [favoriteIds, setFavoriteIds] = useState<Set<number> | undefined>(
+		undefined
+	);
+	const [likedIds, setLikedIds] = useState<Set<number> | undefined>(undefined);
+	const [dislikedIds, setDislikedIds] = useState<Set<number> | undefined>(
+		undefined
+	);
 
 	const toggleFavorite = useCallback(
 		async (subjectId: number) => {
@@ -85,7 +62,7 @@ export const PreferencesProvider = ({ children }: { children: ReactNode }) => {
 
 	const toggleLike = useCallback(
 		async (subjectId: number) => {
-			const wasDisliked = dislikedIds.has(subjectId);
+			const wasDisliked = dislikedIds?.has(subjectId);
 			if (wasDisliked) {
 				const newDisliked = new Set(dislikedIds);
 				newDisliked.delete(subjectId);
@@ -124,7 +101,7 @@ export const PreferencesProvider = ({ children }: { children: ReactNode }) => {
 
 	const toggleDislike = useCallback(
 		async (subjectId: number) => {
-			const wasLiked = likedIds.has(subjectId);
+			const wasLiked = likedIds?.has(subjectId);
 			if (wasLiked) {
 				const newLiked = new Set(likedIds);
 				newLiked.delete(subjectId);
@@ -163,12 +140,14 @@ export const PreferencesProvider = ({ children }: { children: ReactNode }) => {
 
 	const value = {
 		favoriteIds,
+		setFavoriteIds,
 		likedIds,
+		setLikedIds,
 		dislikedIds,
+		setDislikedIds,
 		toggleFavorite,
 		toggleLike,
 		toggleDislike,
-		isLoading,
 	};
 
 	return (

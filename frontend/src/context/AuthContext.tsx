@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, Dispatch, SetStateAction } from "react";
 import { StudentData } from "../components/types";
 
 export interface User {
@@ -16,6 +16,7 @@ export interface AuthContextType {
 	loading: boolean;
 	sessionInitialized: boolean;
 	initializeUser: () => Promise<void>;
+	setUser: Dispatch<SetStateAction<User | null>>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);

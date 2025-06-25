@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { fetchPreferences } from "../api/preferences";
+import { fetchSubjects } from "../api/subjects";
 import SkeletonCard from "../components/SubjectCatalog/SkeletonCard";
 import SubjectList from "../components/SubjectCatalog/SubjectList";
 import SubjectModal from "../components/SubjectCatalog/SubjectModal";
@@ -6,10 +8,19 @@ import { getSubjectPrerequisites } from "../components/SubjectCatalog/utils";
 import { Subject } from "../components/types";
 import { usePreferences } from "../context/PreferencesContext";
 import { useSubjects } from "../context/SubjectsContext";
+import { useAuth } from "../hooks/useAuth";
 
 const SubjectPreferences = () => {
-	const [subjects] = useSubjects();
-	const { favoriteIds, likedIds, dislikedIds } = usePreferences();
+	const [subjects, setSubjects] = useSubjects();
+	const { accessToken } = useAuth();
+	const {
+		favoriteIds,
+		setDislikedIds,
+		likedIds,
+		setLikedIds,
+		dislikedIds,
+		setFavoriteIds,
+	} = usePreferences();
 	const [visibleCourses, setVisibleCourses] = useState<number>(12);
 	const [selectedSubject, setSelectedSubject] = useState<Subject | null>(null);
 	const [isLoaded, setIsLoaded] = useState(false);
@@ -20,8 +31,14 @@ const SubjectPreferences = () => {
 		"favorite" | "liked" | "disliked"
 	>("favorite");
 
-	// Helper functions
+	useEffect(() => {
+		if (!subjects || subjects.length === 0) {
+			fetchSubjects({ setSubjects });
+		}
+	}, []);
+
 	const favoriteIDsToMap = () => {
+		if (!favoriteIds) return new Map<number, string>();
 		const map = new Map<number, string>();
 		subjects.forEach((subject) => {
 			if (favoriteIds.has(subject.id)) {
@@ -32,9 +49,10 @@ const SubjectPreferences = () => {
 	};
 
 	const likedIDsToMap = () => {
+		if (!likedIds) return new Map<number, string>();
 		const map = new Map<number, string>();
 		subjects.forEach((subject) => {
-			if (likedIds.has(subject.id)) {
+			if (likedIds?.has(subject.id)) {
 				map.set(subject.id, subject.name);
 			}
 		});
@@ -42,6 +60,7 @@ const SubjectPreferences = () => {
 	};
 
 	const dislikedIDsToMap = () => {
+		if (!dislikedIds) return new Map<number, string>();
 		const map = new Map<number, string>();
 		subjects.forEach((subject) => {
 			if (dislikedIds.has(subject.id)) {
@@ -51,19 +70,31 @@ const SubjectPreferences = () => {
 		return map;
 	};
 
+	useEffect(() => {
+		fetchPreferences({
+			setDislikedIds,
+			setFavoriteIds,
+			setLikedIds,
+		});
+	}, [accessToken]);
+
 	const favoriteSubjects = () => {
+		if (!favoriteIds) return [];
 		return subjects.filter((subject) => favoriteIds.has(subject.id));
 	};
 
 	const likedSubjects = () => {
+		if (!likedIds) return [];
 		return subjects.filter((subject) => likedIds.has(subject.id));
 	};
 
 	const dislikedSubjects = () => {
+		if (!dislikedIds) return [];
 		return subjects.filter((subject) => dislikedIds.has(subject.id));
 	};
 
 	useEffect(() => {
+		if (!subjects || subjects.length === 0 || favoriteIds === undefined) return;
 		let newSubjects: Subject[] = [];
 		let newMap: Map<number, string> = new Map();
 		switch (activeFilter) {
@@ -82,6 +113,7 @@ const SubjectPreferences = () => {
 		}
 		setSelectedSubjects(newSubjects);
 		setIdsToMap(newMap);
+		console.log(newSubjects);
 		setIsLoaded(true);
 	}, [favoriteIds, likedIds, dislikedIds, activeFilter, subjects]);
 

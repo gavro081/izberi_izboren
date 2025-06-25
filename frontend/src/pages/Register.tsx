@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import PasswordInput from "../components/PasswordInput";
-import { useAuth } from "../hooks/useAuth";
 import { User } from "../context/AuthContext";
+import { useAuth } from "../hooks/useAuth";
 
 interface RegisterForm {
 	email: string;
@@ -56,7 +56,6 @@ const Register: React.FC = () => {
 				confirm_password: formData.confirmPassword,
 				full_name: formData.fullName,
 			});
-			console.log(response.data);
 			const { access, refresh, user } = response.data;
 			login(access, refresh, user);
 			toast.success("Успешна регистрација!");

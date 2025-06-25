@@ -111,7 +111,7 @@ def get_student_vector(student):
         student_vector[key] = []
         words = vocabulary[key]
         for word in words:
-            student_vector[key].append(0 if word not in student_values else 1)
+            student_vector[key].append(1 if word in student_values else 0)
 
     student_vector['study_effort'] = student.study_effort / 5
     student_vector['current_year'] = student.current_year
@@ -207,16 +207,16 @@ def score_for_preferences(student_vector, eligible_subjects):
         - the "tags" score is calculated separately and then normalized by the maximum tag score across all subjects.
         - all other preference scores are calculated as the ratio of matching 1's between student and subject vectors.
     """
-    filtered_subjects_vector = {}
+    subjects_tag_scores = {}
     max_tag_score = 0
     for subject in eligible_subjects:
-        filtered_subjects_vector[subject] = {}
+        subjects_tag_scores[subject] = {}
         subject_vector = eligible_subjects[subject]
         for key in student_vector:
             if key in ["index", "study_effort", "current_year"]: continue
             if key == "tags":
                 tag_score = score_tags(student_vector, subject_vector)
-                filtered_subjects_vector[subject][key] = tag_score
+                subjects_tag_scores[subject][key] = tag_score
                 max_tag_score = max(tag_score, max_tag_score)
                 continue
 
@@ -232,26 +232,26 @@ def score_for_preferences(student_vector, eligible_subjects):
                         match_count += 1
             
             score = match_count / tot_count if tot_count != 0 else 0
-            filtered_subjects_vector[subject][key] = score
+            subjects_tag_scores[subject][key] = score
         
         study_effort = student_vector["study_effort"]
         
         if (study_effort == 0.4 and subject_vector['isEasy']) or (study_effort == 0.8 and not subject_vector['isEasy']):
-            filtered_subjects_vector[subject]['effort'] = 1
+            subjects_tag_scores[subject]['effort'] = 1
         else:
-            filtered_subjects_vector[subject]['effort'] = 0
+            subjects_tag_scores[subject]['effort'] = 0
             
-        filtered_subjects_vector[subject]['activated'] = subject_vector['activated']
+        subjects_tag_scores[subject]['activated'] = subject_vector['activated']
 
-        filtered_subjects_vector[subject]['participant_score'] = subject_vector['participants']
+        subjects_tag_scores[subject]['participant_score'] = subject_vector['participants']
     
     if max_tag_score != 0:
         for subject in eligible_subjects:
-            filtered_subjects_vector[subject]['tags'] /= max_tag_score 
+            subjects_tag_scores[subject]['tags'] /= max_tag_score 
 
-    return filtered_subjects_vector
+    return subjects_tag_scores
 
-def get_recommendations(filtered_subjects_vector):
+def get_recommendations(subjects_tag_scores):
     """
     generates a list of recommended subjects based on weighted scores.
 
@@ -262,8 +262,8 @@ def get_recommendations(filtered_subjects_vector):
         list: a list of top N subject names recommended based on their normalized scores. if all scores are zero, returns empty list.
     """
     subject_scores = {}
-    for subject in filtered_subjects_vector:
-        keys = filtered_subjects_vector[subject]
+    for subject in subjects_tag_scores:
+        keys = subjects_tag_scores[subject]
         score = 0
         for key in keys:
             score += WEIGHTS[key] * keys[key]

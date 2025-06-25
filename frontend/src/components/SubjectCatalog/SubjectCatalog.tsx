@@ -1,5 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
+import { fetchPreferences } from "../../api/preferences";
+import { fetchSubjects } from "../../api/subjects";
+import { usePreferences } from "../../context/PreferencesContext";
 import { useSubjects } from "../../context/SubjectsContext";
+import { useAuth } from "../../hooks/useAuth";
 import { Filters, Subject } from "../types";
 import FilterSidebar from "./FilterSidebar";
 import SkeletonCard from "./SkeletonCard";
@@ -13,7 +17,8 @@ import {
 	resetFilters,
 } from "./utils";
 const SubjectCatalog = () => {
-	const [subjects] = useSubjects();
+	const { accessToken } = useAuth();
+	const [subjects, setSubjects] = useSubjects();
 	const [visibleCourses, setVisibleCourses] = useState<number>(12);
 	const [searchTerm, setSearchTerm] = useState<string>("");
 	const [professorSearchTerm, setProfessorSearchTerm] = useState<string>("");
@@ -43,6 +48,15 @@ const SubjectCatalog = () => {
 		filters,
 		subjects,
 	});
+	const { setDislikedIds, setLikedIds, setFavoriteIds } = usePreferences();
+
+	useEffect(() => {
+		fetchPreferences({
+			setDislikedIds,
+			setFavoriteIds,
+			setLikedIds,
+		});
+	}, [accessToken]);
 
 	useEffect(() => {
 		if (subjects && subjects.length > 0) {
@@ -75,6 +89,12 @@ const SubjectCatalog = () => {
 		setSelectedSubject(subjects.find((item) => item.id == subject.id) ?? null);
 		setShowModal(true);
 	};
+
+	useEffect(() => {
+		if (!subjects || subjects.length === 0) {
+			fetchSubjects({ setSubjects });
+		}
+	}, []);
 
 	const closeModal = () => {
 		setShowModal(false);

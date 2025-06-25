@@ -10,6 +10,7 @@ interface SubjectCardProps {
 	canReview?: boolean;
 	isFirst?: boolean;
 	isRecommended?: boolean;
+	isLoading?: boolean;
 }
 
 const SubjectCard = ({
@@ -19,6 +20,7 @@ const SubjectCard = ({
 	canReview = false,
 	isFirst = false,
 	isRecommended = false,
+	isLoading = false,
 }: SubjectCardProps) => {
 	return (
 		<div
@@ -51,7 +53,7 @@ const SubjectCard = ({
 						<button onClick={() => openSubjectDetails(subject)}>
 							<img src="src/assets/eye.svg" className="w-5 h-5" />
 						</button>
-						<FavoriteButton subjectId={subject.id} />
+						<FavoriteButton subjectId={subject.id} isLoading={isLoading} />
 						{canReview && (
 							<>
 								<LikeButton id={subject.id} />
