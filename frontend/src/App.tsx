@@ -3,7 +3,9 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
+import PrivateRoute from "./components/PrivateRoute";
 import CourseCatalog from "./components/SubjectCatalog/SubjectCatalog";
+import { AuthProvider } from "./context/AuthProvider";
 import "./index.css";
 import Account from "./pages/Account";
 import Home from "./pages/Home";
@@ -13,9 +15,6 @@ import Recommendations from "./pages/Recommendations";
 import Register from "./pages/Register";
 import SubjectPreferences from "./pages/SubjectPreferences";
 import SubjectView from "./pages/SubjectView";
-import { AuthProvider } from "./context/AuthProvider";
-import ProtectedLayout from "./components/ProtectedLayout";
-import PrivateRoute from "./components/PrivateRoute";
 
 const Layout = () => (
 	<div className="flex flex-col min-h-screen">
@@ -39,7 +38,6 @@ const Layout = () => (
 		<Footer />
 	</div>
 );
-
 const router = createBrowserRouter([
 	{
 		path: "/",
@@ -49,39 +47,38 @@ const router = createBrowserRouter([
 			{ path: "subjects", element: <CourseCatalog /> },
 			{ path: "login", element: <Login /> },
 			{ path: "register", element: <Register /> },
-			{ path: "subjects/:code", element: <SubjectView /> },
-
 			{
-				element: <ProtectedLayout />,
-				children: [
-					{
-						path: "recommendations",
-						element: (
-							<PrivateRoute>
-								<Recommendations />
-							</PrivateRoute>
-						),
-					},
-					{
-						path: "account",
-						element: (
-							<PrivateRoute>
-								<Account />
-							</PrivateRoute>
-						),
-					},
-					{
-						path: "subject-preferences",
-						element: (
-							<PrivateRoute>
-								<SubjectPreferences />
-							</PrivateRoute>
-						),
-					},
-				],
+				path: "recommendations",
+				element: (
+					<PrivateRoute>
+						<Recommendations />
+					</PrivateRoute>
+				),
 			},
-
-			{ path: "*", element: <NotFound /> },
+			{
+				path: "account",
+				element: (
+					<PrivateRoute>
+						<Account />
+					</PrivateRoute>
+				),
+			},
+			{
+				path: "subject-preferences",
+				element: (
+					<PrivateRoute>
+						<SubjectPreferences />
+					</PrivateRoute>
+				),
+			},
+			{
+				path: "subjects/:code",
+				element: <SubjectView />,
+			},
+			{
+				path: "*",
+				element: <NotFound />,
+			},
 		],
 	},
 ]);

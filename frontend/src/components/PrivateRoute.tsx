@@ -9,7 +9,6 @@ interface PrivateRouteProps {
 const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
 	const { isAuthenticated } = useAuth();
 
-	// This check runs AFTER ProtectedLayout has finished initializing
 	if (!isAuthenticated) {
 		return <Navigate to="/login" replace />;
 	}
