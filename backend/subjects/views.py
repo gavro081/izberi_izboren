@@ -1,18 +1,15 @@
 import json
-from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
-from django.db import connection
+from django.http import HttpResponse
+from django.core.cache import cache
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from django.db.models import Case, When
-from auth_form.serializers import StudentFormSerializer
-from subjects.utils import get_eligible_subjects, get_recommendations, map_to_subjects_vector, score_for_preferences, get_student_vector
+from subjects.utils import get_eligible_subjects, get_recommendations, get_recommendations_cache_key, map_to_subjects_vector, score_for_preferences, get_student_vector
 from .serializers import SubjectSerializer
-from .models import Subject_Info, Subject
-from datetime import datetime
+from .models import Subject
 
 def index(request):
     return HttpResponse("ok")
@@ -35,6 +32,11 @@ def get_suggestions(request):
     student = request.user.student
     if not student:
         return Response({"message": "Could not find student"}, status=status.HTTP_400_BAD_REQUEST)
+    cache_key = get_recommendations_cache_key(student, season)
+    if cache_key:
+        cached_data = cache.get(cache_key)
+        if cached_data:
+            return Response({"data": json.loads(cached_data)}, status=status.HTTP_200_OK)
     try:
         subjects = get_eligible_subjects(student, season=season)
         subject_vectors = map_to_subjects_vector(subjects)
@@ -47,6 +49,8 @@ def get_suggestions(request):
         recommended_subject_objects = Subject.objects.filter(name__in=final_subjects).order_by(order)
 
         serializer = SubjectSerializer(recommended_subject_objects, many=True)
+        if cache_key:
+            cache.set(cache_key, json.dumps(serializer.data), timeout=60 * 60 * 24 * 14) # 14 days  
         return Response({"data": serializer.data}, status=status.HTTP_200_OK)
     
     except Exception as e:
@@ -59,7 +63,6 @@ class PreferencesView(APIView):
     def get(self, request, *args, **kwargs):
         try:
             student = request.user.student
-            # .values_list('id', flat=True) is very efficient
             favorite_ids = list(student.favorite_subjects.all().values_list('id', flat=True))
             liked_ids = list(student.liked_subjects.all().values_list('id', flat=True))
             disliked_ids = list(student.disliked_subjects.all().values_list('id', flat=True))

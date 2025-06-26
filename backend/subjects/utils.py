@@ -22,6 +22,11 @@ with open(SUBJECTS_VECTOR_PATH, 'r', encoding='utf-8') as f:
 with open(TAG_GRAPH_PATH, 'r', encoding='utf-8') as f:
     TAG_GRAPH = json.load(f)
 
+def get_recommendations_cache_key(student, season):
+    passed_subjects_hash = hash(tuple(sorted(student.passed_subjects.values_list('id', flat=True))))
+    cache_key = (f"student_{student.id}_season_{season}_effort_{student.study_effort}"
+                 f"_year_{student.current_year}_passed_{passed_subjects_hash}")
+    return cache_key
 
 def get_eligible_subjects(student, season = 2):
     """
