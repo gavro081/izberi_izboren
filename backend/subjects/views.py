@@ -7,7 +7,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from django.db.models import Case, When
-from subjects.utils import get_eligible_subjects, get_recommendations, get_recommendations_cache_key, map_to_subjects_vector, score_for_preferences, get_student_vector
+from subjects.utils import get_eligible_subjects, get_recommendations_cache_key, get_recommended_subjects, map_to_subjects_vector, score_for_preferences, get_student_vector
 from .serializers import SubjectSerializer
 from .models import Subject
 
@@ -21,28 +21,29 @@ def all_subjects(request):
     return Response(serializer.data)
 
 @api_view(['GET'])
-def get_suggestions(request):
-    season = request.query_params.get('season')
-    if not season: season = 2 # 2 -> any season
+def get_recommendations(request):
+    season = request.query_params.get('season', 2)
+    not_activated = request.query_params.get('not_activated', 0)
     try:
+        not_activated = int(not_activated)
         season = int(season)
     except ValueError:
-        return Response({"message": "Invalid season"}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"message": "invalid params"}, status=status.HTTP_400_BAD_REQUEST)
     
     student = request.user.student
     if not student:
         return Response({"message": "Could not find student"}, status=status.HTTP_400_BAD_REQUEST)
-    cache_key = get_recommendations_cache_key(student, season)
+    cache_key = get_recommendations_cache_key(student, season, not_activated)
     if cache_key:
         cached_data = cache.get(cache_key)
         if cached_data:
             return Response({"data": json.loads(cached_data)}, status=status.HTTP_200_OK)
     try:
-        subjects = get_eligible_subjects(student, season=season)
+        subjects = get_eligible_subjects(student, season=season, not_activated=not_activated)
         subject_vectors = map_to_subjects_vector(subjects)
         student_vector = get_student_vector(student)
     
-        final_subjects = get_recommendations(score_for_preferences(student_vector, subject_vectors))
+        final_subjects = get_recommended_subjects(score_for_preferences(student_vector, subject_vectors))
 
         order = Case(*[When(name=subject_name, then=pos) for pos, subject_name in enumerate(final_subjects)])
 

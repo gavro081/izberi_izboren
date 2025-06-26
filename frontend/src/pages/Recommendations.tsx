@@ -22,6 +22,7 @@ const Recommendations = () => {
 	const [recommendations, setRecommendations] = useRecommendations();
 	const [recommendationsLoaded, setRecommendationsLoaded] = useState(true);
 	const [season_, setSeason] = useState<"winter" | "summer" | "all">("all");
+	const [includeNotActivated, setIncludeNotActivated] = useState(false);
 	const [showModal, setShowModal] = useState(false);
 	const [hasSearched, setHasSearched] = useState(false);
 	const mapToSeasonInt = (season: "winter" | "summer" | "all") => {
@@ -40,8 +41,9 @@ const Recommendations = () => {
 		setRecommendationsLoaded(false);
 		try {
 			const season = mapToSeasonInt(season_);
-			const response = await axiosInstance.get("/suggestion", {
-				params: { season },
+			const notActivated = includeNotActivated ? 1 : 0;
+			const response = await axiosInstance.get("/recommendations", {
+				params: { season, not_activated: notActivated },
 			});
 			setRecommendations(response.data.data);
 		} catch (error) {
@@ -160,6 +162,20 @@ const Recommendations = () => {
 								<span>Вчитај препораки!</span>
 							)}
 						</button>
+
+						<div className="flex flex-col items-center space-y-2">
+							<label className="flex items-center space-x-2 cursor-pointer">
+								<input
+									type="checkbox"
+									checked={includeNotActivated}
+									onChange={() => setIncludeNotActivated(!includeNotActivated)}
+									className="form-checkbox h-5 w-5 text-blue-600"
+								/>
+								<span className="text-gray-700">
+									Сакам да добивам и неактивирани предмети
+								</span>
+							</label>
+						</div>
 					</div>
 
 					<div className="flex-1 p-8 overflow-y-auto">

@@ -16,6 +16,7 @@ def save_student_profile(sender, instance, **kwargs):
 @receiver(post_save, sender=Student)
 def invalidate_recommendations_cache(sender, instance, **kwargs):
     for season in [0,1,2]:
-        cache_key = get_recommendations_cache_key(instance, season)
-        if cache_key:
-            cache.delete(cache_key)
+        for not_activated in [0, 1]:
+            cache_key = get_recommendations_cache_key(instance, season, not_activated)
+            if cache_key:
+                cache.delete(cache_key)

@@ -22,13 +22,13 @@ with open(SUBJECTS_VECTOR_PATH, 'r', encoding='utf-8') as f:
 with open(TAG_GRAPH_PATH, 'r', encoding='utf-8') as f:
     TAG_GRAPH = json.load(f)
 
-def get_recommendations_cache_key(student, season):
+def get_recommendations_cache_key(student, season, not_activated):
     passed_subjects_hash = hash(tuple(sorted(student.passed_subjects.values_list('id', flat=True))))
-    cache_key = (f"student_{student.id}_season_{season}_effort_{student.study_effort}"
+    cache_key = (f"student_{student.id}_season_{season}_not_activated{not_activated}_effort_{student.study_effort}"
                  f"_year_{student.current_year}_passed_{passed_subjects_hash}")
     return cache_key
 
-def get_eligible_subjects(student, season = 2):
+def get_eligible_subjects(student, season = 2, not_activated = 0):
     """
     determines and returns a list of subjects that a student is eligible to enroll in.
     args:
@@ -37,6 +37,9 @@ def get_eligible_subjects(student, season = 2):
             - 0: summer
             - 1: winter
             - 2: all (default)
+        not_activated (int, optional): whether to exclude subjects that are not activated.
+            - 0: exclude not activated subjects (default)
+            - 1: include not activated subjects
     returns:
         list: a list of Subject instances that the student is eligible to enroll in.
 
@@ -59,13 +62,16 @@ def get_eligible_subjects(student, season = 2):
     study_track = student.study_track
     study_effort = student.study_effort
     current_year = student.current_year
-
+    
     all_subjects = (Subject.objects
         .exclude(id__in=passed_ids)
         .select_related('subject_info')
         .filter(subject_info__elective_for__contains=[study_track])
     )
 
+    if not_activated == 0:
+        all_subjects = all_subjects.filter(subject_info__activated=True)
+        
     if season == 0:
         all_subjects = all_subjects.exclude(subject_info__season='W')
     elif season == 1:
@@ -251,7 +257,7 @@ def score_for_preferences(student_vector, eligible_subjects):
 
     return subjects_tag_scores
 
-def get_recommendations(subjects_tag_scores):
+def get_recommended_subjects(subjects_tag_scores):
     """
     generates a list of recommended subjects based on weighted scores.
 
