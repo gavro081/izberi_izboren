@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.contrib.postgres.fields import ArrayField
-# Create your models here.
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None, full_name=None, **extra_fields):

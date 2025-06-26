@@ -1,9 +1,6 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
 
-# to access subject_info for a subject use subject.subject_info.<optional_field>
-# to access subject from subject_info use subject_info.subject.<optional_field>
-
 class Subject(models.Model):
     name = models.TextField(null=False)
     code = models.TextField(null=False)

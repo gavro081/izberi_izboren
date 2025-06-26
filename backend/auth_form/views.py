@@ -1,4 +1,3 @@
-# from .utils import check_prerequisites
 from .models import Student
 from .serializers import RegistrationSerializer, LoginSerializer, StudentFormSerializer, UserSerializer
 from rest_framework import serializers, status, views
@@ -7,10 +6,8 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework_simplejwt.tokens import RefreshToken
-
 from .permissions import IsStudent, CanSubmitForm, CanUpdateForm
 
-# Create your views here.
 
 
 class RegisterView(APIView):
@@ -103,12 +100,10 @@ class StudentFormView(APIView):
             return Response({"detail": "No student profile found."}, status=status.HTTP_404_NOT_FOUND)
         
         index_match = Student.objects.filter(index=request.data['index'])
-
         index = request.data['index']
         index_match = Student.objects.filter(index=index).exclude(pk=request.user.student.pk)
         if index_match.exists():
             return Response({'message': "Постои студент со тој индекс."}, status=status.HTTP_400_BAD_REQUEST)
-        
         
         serializer = StudentFormSerializer(instance=request.user.student, data=request.data)
 

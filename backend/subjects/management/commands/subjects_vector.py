@@ -65,9 +65,6 @@ class Command(BaseCommand):
             "technologies": list(distinct_technologies),
             "tags": list(distinct_tags),
             "evaluation": list(distinct_evaluations),
-            # "isEasy": [],
-            # "activated": [],
-            # "participants": []
         }
 
         vectors = {}
@@ -93,7 +90,7 @@ class Command(BaseCommand):
 
             subject_vector['isEasy'] = 1 if values['isEasy'] else 0
             subject_vector['activated'] = 1 if values['activated'] else 0
-            # 0 - leten, 1 - zimski
+            # 0 - summer, 1 - winter
             subject_vector['season'] = 1 if values['season'] == 'W' else 0
             subject_vector['year'] = ceil(values['semester'] / 2)
             participants = average(values['participants'])

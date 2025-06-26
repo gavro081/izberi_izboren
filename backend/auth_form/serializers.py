@@ -6,7 +6,6 @@ from rest_framework.exceptions import AuthenticationFailed
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .models import Student
 from subjects.models import Subject
-from subjects.serializers import SubjectSerializer
 
 User = get_user_model()
 
