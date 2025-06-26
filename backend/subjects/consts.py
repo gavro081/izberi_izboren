@@ -12,15 +12,4 @@ WEIGHTS = {
     "participant_score": 0.01,
 }
 
-# WEIGHTS = {
-#     "professors": 0.065,
-#     "assistants": 0,
-#     "technologies": 0.065,
-#     "tags": 0.4,
-#     "evaluation": 0.15, 
-#     "effort": 0.3,
-#     "activated": 0.01,
-#     "participant_score": 0.01,
-# }
-
 NUMBER_OF_SUGGESTIONS = 6

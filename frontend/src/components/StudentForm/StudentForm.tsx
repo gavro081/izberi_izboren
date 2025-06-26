@@ -1,7 +1,7 @@
 import { isAxiosError } from "axios";
 import { useCallback, useEffect, useState } from "react";
-import { toast } from "react-toastify";
 import axiosInstance from "../../api/axiosInstance";
+import { fetchFormData } from "../../api/formdata";
 import { fetchSubjects } from "../../api/subjects";
 import {
 	EVALUATIONS,
@@ -139,22 +139,9 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 		if (!subjects || subjects.length === 0) {
 			fetchSubjects({ setSubjects });
 		}
-		const fetchFormData = async (token: string) => {
-			try {
-				const response = await axiosInstance.get<StudentData>("/auth/form/", {
-					headers: { Authorization: `Bearer ${token}` },
-				});
-				setFormData(response.data);
-			} catch (error) {
-				console.error("Could not fetch user form data", error);
-				if ((error as any).response?.status !== 401) {
-					toast.error("Could not load form data.");
-				}
-			}
-		};
 		const token = localStorage.getItem("access");
-		if (token) {
-			fetchFormData(token);
+		if (token && !formData) {
+			fetchFormData(token, setFormData);
 		}
 	}, []);
 	useEffect(() => {

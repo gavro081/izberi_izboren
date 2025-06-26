@@ -24,7 +24,7 @@ with open(TAG_GRAPH_PATH, 'r', encoding='utf-8') as f:
 
 def get_recommendations_cache_key(student, season, not_activated):
     passed_subjects_hash = hash(tuple(sorted(student.passed_subjects.values_list('id', flat=True))))
-    cache_key = (f"student_{student.id}_season_{season}_not_activated{not_activated}_effort_{student.study_effort}"
+    cache_key = (f"student_{student.id}_season_{season}_not_activated_{not_activated}_effort_{student.study_effort}"
                  f"_year_{student.current_year}_passed_{passed_subjects_hash}")
     return cache_key
 
@@ -71,7 +71,7 @@ def get_eligible_subjects(student, season = 2, not_activated = 0):
 
     if not_activated == 0:
         all_subjects = all_subjects.filter(subject_info__activated=True)
-        
+
     if season == 0:
         all_subjects = all_subjects.exclude(subject_info__season='W')
     elif season == 1:

@@ -84,7 +84,6 @@ class StudentFormSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         rep = super().to_representation(instance)
         rep['passed_subjects'] = [subject.id for subject in instance.passed_subjects.all()]
-        all_subject_ids = [subj_id for subjects in (instance.passed_subjects_per_semester or {}).values() for subj_id in subjects]
         rep['passed_subjects_per_semester'] = {
             str(sem): [ subj_id for subj_id in subjects]
             for sem, subjects in (instance.passed_subjects_per_semester or {}).items()
