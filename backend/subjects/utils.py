@@ -1,11 +1,27 @@
-from copy import deepcopy
-from subjects.management.commands import subjects_vector
 from subjects.models import Subject
 from pathlib import Path
 import json
 from django.db.models import Q
 import os
 from subjects.consts import BIAS_STUDENT_HAS_ONE, BIAS_SUBJECT_HAS_ONE, WEIGHTS, NUMBER_OF_SUGGESTIONS
+
+base_dir = Path(__file__).resolve().parent
+
+VOCAB_FILE_PATH = base_dir / 'management' / 'data' / 'vocabulary.json'
+TAG_GRAPH_PATH = base_dir / 'management' / 'data' / 'tag_graph.json'
+SUBJECTS_VECTOR_PATH = base_dir / 'management' / 'data' / 'subjects_vector.json'
+if not os.path.exists(VOCAB_FILE_PATH) or not os.path.exists(TAG_GRAPH_PATH) or not os.path.exists(SUBJECTS_VECTOR_PATH):
+    raise FileNotFoundError("required data files are missing. ensure 'vocabulary.json', 'tag_graph.json', and 'subjects_vector.json' are present in the 'management/data' directory.")
+
+with open(VOCAB_FILE_PATH, 'r', encoding='utf-8') as f:
+    VOCABULARY = json.load(f)
+
+with open(SUBJECTS_VECTOR_PATH, 'r', encoding='utf-8') as f:
+    SUBJECTS_VECTOR = json.load(f)
+
+with open(TAG_GRAPH_PATH, 'r', encoding='utf-8') as f:
+    TAG_GRAPH = json.load(f)
+
 
 def get_eligible_subjects(student, season = 2):
     """
@@ -42,22 +58,22 @@ def get_eligible_subjects(student, season = 2):
     all_subjects = (Subject.objects
         .exclude(id__in=passed_ids)
         .select_related('subject_info')
+        .filter(subject_info__elective_for__contains=[study_track])
     )
 
-    if season != 2:
-        if season == 0:
-            all_subjects = all_subjects.exclude(subject_info__season='W')
-        elif season == 1:
-            all_subjects = all_subjects.exclude(subject_info__season='S')
+    if season == 0:
+        all_subjects = all_subjects.exclude(subject_info__season='W')
+    elif season == 1:
+        all_subjects = all_subjects.exclude(subject_info__season='S')
 
     if study_effort < 3:
         all_subjects = all_subjects.exclude(subject_info__semester__gt=current_year * 2)
         if study_effort == 1:
             all_subjects = all_subjects.filter(subject_info__is_easy=True)
     elif study_effort == 3:
+        eligible_semesters = [current_year * 2, current_year * 2 - 1]
         all_subjects = all_subjects.filter(
-            Q(subject_info__semester=current_year * 2) |
-            Q(subject_info__semester=current_year * 2 - 1)
+            subject_info__semester__in=eligible_semesters
         )
     else:
         all_subjects = all_subjects.filter(subject_info__semester__gte=current_year * 2)
@@ -75,9 +91,8 @@ def get_eligible_subjects(student, season = 2):
         prereqs = subject_info_.prerequisite or {}
         if prereqs.get('credits') and total_credits < prereqs['credits']:
             continue
-        if prereqs.get('subjects') and not any(subj_id in passed_ids for subj_id in prereqs['subjects']):
-            continue
-        if study_track not in subject_info_.elective_for:
+        required_subjects = prereqs.get('subjects')
+        if required_subjects and not passed_ids.intersection(required_subjects): 
             continue
         valid_subjects.append(subject)
 
@@ -87,29 +102,24 @@ def get_student_vector(student):
     """
     generates a vector representation of a student based on a predefined vocabulary.
 
-    this function loads a vocabulary from a JSON file and constructs a dictionary
-    representing the student's attributes as binary vectors, indicating the presence (1)
-    or absence (0) of specific words for each attribute. It also normalizes
+    reads form the vocabulary and constructs a dictionary representing the
+    student's attributes as binary vectors, indicating the presence (1)
+    or absence (0) of specific words for each attribute. it also normalizes
     the student's study effort and includes the current year.
 
     args:
         student: an object representing a student
     returns:
-        dict: a dictionary containing binary vectors for each vocabulary key, normalized study effort, and current year.
-    raises:
-        FileNotFoundError: If the vocabulary JSON file is not found.
+        dict: a dictionary containing binary vectors for each vocabulary key, normalized study effort,
+        and current year.
     """
-    base_dir = Path(__file__).resolve().parent
-    vocab_file_path = base_dir / 'management' / 'data' / 'vocabulary.json'
-    with open(vocab_file_path, 'r', encoding='utf-8') as f:
-        vocabulary = json.load(f)
 
     student_vector = {}
-    for key in vocabulary:
+    for key in VOCABULARY:
         student_values = getattr(student, key, [])
 
         student_vector[key] = []
-        words = vocabulary[key]
+        words = VOCABULARY[key]
         for word in words:
             student_vector[key].append(1 if word in student_values else 0)
 
@@ -126,19 +136,11 @@ def map_to_subjects_vector(subjects):
     args:
         subjects (list): a list of subject objects.
     returns:
-        dict: a dictionary mapping subject names to their vector representations, as loaded from 'subjects_vector.json'.
-    raises:
-        FileNotFoundError: If the subjects vector JSON file is not found.
+        dict: a dictionary mapping subject names to their vector representations from SUBJECTS_VECTOR .
     """
-    base_dir = Path(__file__).resolve().parent
-    SUBJECTS_VECTOR_PATH = base_dir / 'management' / 'data' / 'subjects_vector.json'
-
-    with open(SUBJECTS_VECTOR_PATH, 'r', encoding='utf-8') as f:
-        subjects_vector = json.load(f)
-
     filtered_subject_vectors = {}
     for subject in subjects:
-        vector = subjects_vector.get(subject.name)
+        vector = SUBJECTS_VECTOR.get(subject.name)
         if vector:
             filtered_subject_vectors[subject.name] = vector
     
@@ -162,14 +164,7 @@ def score_tags(student_vector, subject_vector):
             subject_vector (dict): a dictionary containing a 'tags' key with a list of binary values representing the subject's tags.
     returns:
             float: the normalized similarity score between the student and subject tag vectors.
-    raises:
-        FileNotFoundError: if the tag graph JSON file is not found.
     """
-    TAG_GRAPH_PATH = Path(__file__).resolve().parent / 'management' / 'data' / 'tag_graph.json'
-
-    with open(TAG_GRAPH_PATH, 'r', encoding='utf-8') as f:
-            tag_graph = json.load(f)
-
     student_tags = student_vector['tags']
     subject_tags = subject_vector['tags']
     score = 0
@@ -183,7 +178,7 @@ def score_tags(student_vector, subject_vector):
                 score += 1
         else:
             # partial match
-            neighbors = tag_graph[str(i)]
+            neighbors = TAG_GRAPH[str(i)]
             total_weight = sum(weight for _, weight in neighbors)
             if student_tags[i] == 1:
                 for neighbor in neighbors: 
