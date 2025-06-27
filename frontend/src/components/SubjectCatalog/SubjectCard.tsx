@@ -66,8 +66,11 @@ const SubjectCard = ({
 							onClick={() => openSubjectView(subject)}
 							className="flex items-center px-3 py-2 bg-blue-600 hover:bg-blue-900 text-white text-sm font-medium rounded-md transition-colors"
 						>
-							<img src="src/assets/open.svg" className="w-4 h-4 mr-1" />
-							Отвори предмет
+							<img
+								src="src/assets/open.svg"
+								className="w-4 h-4 xs:mr-0 sm:mr-1"
+							/>
+							<span className="hidden xs:inline">Отвори предмет</span>
 						</button>
 					</div>
 				</div>

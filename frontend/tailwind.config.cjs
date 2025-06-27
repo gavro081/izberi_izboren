@@ -12,6 +12,9 @@ module.exports = {
 					"50%": { backgroundColor: "#f9fafb" },
 				},
 			},
+			screens: {
+				xs: "480px",
+			},
 		},
 	},
 	plugins: [],
