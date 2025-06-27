@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Subject } from "../types";
 
 interface SubjectModalProps {
@@ -11,6 +12,13 @@ function SubjectModal({
 	closeModal,
 	subjectPrerequisites,
 }: SubjectModalProps) {
+	const navigate = useNavigate();
+
+	const openSubject = () => {
+		navigate(`/subjects/${selectedSubject.code}`, {
+			state: { from: `/subjects` },
+		});
+	};
 	return (
 		<>
 			<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
@@ -134,16 +142,6 @@ function SubjectModal({
 								</div>
 							</div>
 						</div>
-						{/* <div>
-							{selectedSubject.subject_info.participants[0] == 0 ? (
-								<div className="bg-red-500 py-3 pl-2 rounded-md">
-									Овој предмет не бил активиран минатиот семестар.
-								</div>
-							) : (
-								<p>{`Овој предмет минатиот семестар бил запишан од
-									${selectedSubject.subject_info.participants[0]} студенти.`}</p>
-							)}
-						</div> */}
 
 						<div className="mt-4 bg-blue-50 border-l-4 border-blue-400 p-4 rounded">
 							<p className="text-blue-800">
@@ -151,19 +149,19 @@ function SubjectModal({
 							</p>
 						</div>
 
-						<div className="mt-4 flex justify-end space-x-3">
+						<div className="mt-4 flex justify-between space-x-3">
 							<button
 								onClick={closeModal}
 								className="w-full md:w-auto px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-normal rounded-md shadow focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
 							>
 								Затвори
 							</button>
-							{/* <button
-									onClick={closeModal}
-									className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-								>
-									Погледни
-								</button> */}
+							<button
+								onClick={openSubject}
+								className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+							>
+								Отвори предмет
+							</button>
 						</div>
 					</div>
 				</div>

@@ -113,22 +113,6 @@ function SubjectView() {
 								{selectedSubject.code}
 							</p>
 						</div>
-
-						{/* <div className="mt-4 sm:mt-0">
-							<div className="flex items-center space-x-4 text-sm text-gray-500">
-								<div className="flex items-center">
-									<Calendar className="w-4 h-4 mr-1" />
-									{subject.subject_info.season === "S"
-										? "Летен"
-										: "Зимски"}{" "}
-									семестар
-								</div>
-								<div className="flex items-center">
-									<BookOpen className="w-4 h-4 mr-1" />L
-									{subject.subject_info.level} ниво
-								</div>
-							</div>
-						</div> */}
 					</div>
 				</div>
 			</div>
@@ -241,7 +225,6 @@ function SubjectView() {
 							</div>
 						</div>
 
-						{/* Tags */}
 						<div className="bg-white rounded-lg shadow-sm p-6">
 							<h2 className="text-xl font-semibold mb-4 flex items-center">
 								<Tag className="w-5 h-5 mr-2" />
@@ -355,17 +338,11 @@ function SubjectView() {
 								</div>
 							)}
 						</div>
-
-						{/* <div className="bg-white rounded-lg shadow-sm p-6">
+						{/* 
+						<div className="bg-white rounded-lg shadow-sm p-6">
 							<div className="space-y-3">
-								<button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-colors">
-									Запиши предмет
-								</button>
 								<button className="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-3 px-4 rounded-lg transition-colors">
 									Додај во омилени
-								</button>
-								<button className="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-3 px-4 rounded-lg transition-colors">
-									Сподели
 								</button>
 							</div>
 						</div> */}

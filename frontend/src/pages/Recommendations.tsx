@@ -192,11 +192,9 @@ const Recommendations = () => {
 										Помогни ни да ги подобриме алгоритамот со тоа што ќе ги
 										оцениш препораките
 									</p>
-									{/* <div className="w-24 h-1 bg-blue-500 mx-auto rounded-full"></div> */}
 								</div>
 
 								<div
-									// className={`grid grid-cols-1 lg:grid-cols-2 gap-3 lg:h-[1150px]`}
 									className={`grid grid-cols-1 lg:grid-cols-2 gap-3 auto-rows-[300px] relative pb-4`}
 								>
 									{recommendations.map((subject, index) => (
