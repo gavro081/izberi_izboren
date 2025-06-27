@@ -99,7 +99,7 @@ function SubjectView() {
 							? " сите предмети"
 							: from == "/recommendations"
 							? " препораките"
-							: from == "/favorite-subjects"
+							: from == "/subject-preferences"
 							? " омилените предмети"
 							: " домашната страна"}
 					</button>

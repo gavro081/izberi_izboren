@@ -198,7 +198,7 @@ const SubjectPreferences = () => {
 										filteredSubjects={selectedSubjects}
 										visibleCourses={visibleCourses}
 										openSubjectDetails={openSubjectDetails}
-										from="favorite-subjects"
+										from="subject-preferences"
 										canReview={activeFilter !== "favorite"}
 									/>
 									{selectedSubjects.length > visibleCourses && (

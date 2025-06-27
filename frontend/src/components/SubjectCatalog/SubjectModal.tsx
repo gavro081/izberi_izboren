@@ -152,7 +152,7 @@ function SubjectModal({
 						<div className="mt-4 flex justify-between space-x-3">
 							<button
 								onClick={closeModal}
-								className="w-full md:w-auto px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-normal rounded-md shadow focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+								className="md:w-auto px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-normal rounded-md shadow focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
 							>
 								Затвори
 							</button>

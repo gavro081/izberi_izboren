@@ -20,6 +20,7 @@ const Login: React.FC = () => {
 	>({});
 	const navigate = useNavigate();
 	const { login } = useAuth();
+	const [isLogging, setIsLogging] = useState(false);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setFormData({
@@ -31,7 +32,7 @@ const Login: React.FC = () => {
 	const handleLogin = async (e: React.FormEvent) => {
 		e.preventDefault();
 		setErrors({});
-
+		setIsLogging(true);
 		try {
 			const response = await axios.post<{
 				access: string;
@@ -65,6 +66,7 @@ const Login: React.FC = () => {
 				setErrors({ detail: ["An unknown error occurred."] });
 			}
 		}
+		setIsLogging(false);
 	};
 	return (
 		<div className="flex flex-col items-center justify-center h-[83vh] bg-white">
@@ -103,9 +105,10 @@ const Login: React.FC = () => {
 				</p>
 				<button
 					type="submit"
-					className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+					className={`w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 
+						${isLogging ? "opacity-70 cursor-not-allowed" : ""}`}
 				>
-					Најави се
+					{isLogging ? "Се најавува..." : "Најави се"}
 				</button>
 			</form>
 		</div>
