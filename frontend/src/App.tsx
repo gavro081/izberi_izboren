@@ -91,9 +91,12 @@ function App() {
 	// TODO
 	useEffect(() => {
 		const token = localStorage.getItem("access");
-		if (token) {
-			fetchUser(token, setUser);
-		}
+		const handler = async () => {
+			if (token) {
+				await fetchUser(token, setUser);
+			}
+		};
+		handler();
 	}, []);
 	return (
 		<AuthProvider>

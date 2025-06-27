@@ -212,11 +212,15 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 	}, [fetchUser, scheduleProactiveRefresh]);
 
 	useEffect(() => {
-		const token = localStorage.getItem("access");
-		if (token) {
-			setAccessToken(token);
-		}
-		setLoading(false);
+		const handler = async () => {
+			const token = localStorage.getItem("access");
+			if (token) {
+				setAccessToken(token);
+				await fetchUser(token, setUser);
+			}
+			setLoading(false);
+		};
+		handler();
 	}, []);
 
 	const contextValue: AuthContextType = {

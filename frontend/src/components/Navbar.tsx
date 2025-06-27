@@ -14,7 +14,7 @@ const Navbar: React.FC = () => {
 	const { setFavoriteIds, setLikedIds, setDislikedIds } = usePreferences();
 	const navigate = useNavigate();
 	const profileMenuRef = useRef<HTMLDivElement>(null);
-	const userInitial = user?.full_name.charAt(0).toUpperCase() || "?";
+	const userInitial = user?.full_name.charAt(0).toUpperCase() || "";
 	// Close dropdown when clicking outside
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
