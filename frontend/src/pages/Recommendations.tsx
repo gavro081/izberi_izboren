@@ -25,6 +25,7 @@ const Recommendations = () => {
 	const [includeNotActivated, setIncludeNotActivated] = useState(false);
 	const [showModal, setShowModal] = useState(false);
 	const [hasSearched, setHasSearched] = useState(false);
+
 	const mapToSeasonInt = (season: "winter" | "summer" | "all") => {
 		if (season == "summer") return 0;
 		if (season == "winter") return 1;
@@ -35,7 +36,7 @@ const Recommendations = () => {
 		if (!subjects || subjects.length === 0) {
 			fetchSubjects({ setSubjects });
 		}
-	}, []);
+	}, [subjects, setSubjects]);
 
 	const fetchRecommendations = async () => {
 		setRecommendationsLoaded(false);
@@ -51,7 +52,7 @@ const Recommendations = () => {
 		} finally {
 			setRecommendationsLoaded(true);
 			setHasSearched(true);
-			const container = document.querySelector(".flex-1.p-8.overflow-y-auto");
+			const container = document.querySelector(".hide-scrollbar");
 			if (container) {
 				container.scrollTo({ top: 0, behavior: "smooth" });
 			}
@@ -109,24 +110,24 @@ const Recommendations = () => {
 			setFavoriteIds,
 			setLikedIds,
 		});
-	}, [accessToken]);
+	}, [accessToken, setDislikedIds, setFavoriteIds, setLikedIds]);
 
 	return (
 		<>
 			{formData?.has_filled_form === false ? (
-				<div className="flex h-[90vh] bg-white">
-					<div className="text-red-500 font-bold text-2xl text-center flex-1 flex items-center justify-center">
+				<div className="flex min-h-[90vh] bg-white p-4">
+					<div className="text-red-500 font-bold text-xl md:text-2xl text-center flex-1 flex items-center justify-center">
 						Пополни информации за твојот профил за да добиеш препораки!
 					</div>
 				</div>
 			) : (
-				<div className="flex h-[90vh] bg-gray-50">
-					<div className="w-1/3 bg-white shadow-lg p-8 flex flex-col justify-center items-center space-y-8">
+				<div className="flex flex-col lg:flex-row lg:h-[90vh] bg-gray-50">
+					<div className="w-full lg:w-1/3 bg-white shadow-lg p-6 lg:p-8 flex flex-col justify-center items-center space-y-6 lg:space-y-8">
 						<div className="text-center">
-							<h1 className="text-4xl font-bold text-gray-800 mb-2">
+							<h1 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-2">
 								Препораки
 							</h1>
-							<p className="text-gray-600 text-lg">
+							<p className="text-gray-600 text-base lg:text-lg">
 								Предметите што ќе ги добиеш од алгоритамот се базирани на тоа
 								што си го пополнил во формата.
 								<br />
@@ -134,16 +135,14 @@ const Recommendations = () => {
 								со тоа што го нудат предметите.
 							</p>
 						</div>
-
 						<button onClick={cycleSeason}>
-							<div className="bg-blue-500 border border-blue-200 rounded-lg p-6 font-semibold text-white text-center hover:bg-blue-800 transition-colors duration-200">
-								<p className="text-white mb-3">
+							<div className="bg-blue-500 border border-blue-200 rounded-lg p-4 md:p-6 font-semibold text-white text-center hover:bg-blue-800 transition-colors duration-200">
+								<p className="text-white mb-2 md:mb-3">
 									{season_ === "all" ? "Избрани семестри:" : "Избран семестар:"}
 								</p>
-								<p className="text-2xl">{getSeasonText()}</p>
+								<p className="text-xl md:text-2xl">{getSeasonText()}</p>
 							</div>
 						</button>
-
 						<button
 							onClick={fetchRecommendations}
 							disabled={!recommendationsLoaded}
@@ -151,7 +150,7 @@ const Recommendations = () => {
 								!recommendationsLoaded
 									? "bg-gray-400 cursor-not-allowed"
 									: "bg-green-500 hover:bg-green-600 hover:scale-105 shadow-md hover:shadow-lg"
-							} text-white px-8 py-4 rounded-lg text-xl font-bold transition-all duration-200 flex items-center space-x-2`}
+							} text-white px-6 py-3 lg:px-8 lg:py-4 rounded-lg text-lg lg:text-xl font-bold transition-all duration-200 flex items-center space-x-2`}
 						>
 							{!recommendationsLoaded ? (
 								<>
@@ -162,8 +161,7 @@ const Recommendations = () => {
 								<span>Вчитај препораки!</span>
 							)}
 						</button>
-
-						<div className="flex flex-col items-center space-y-2">
+						<div className="flex flex-col items-center space-y-2 pt-4">
 							<label className="flex items-center space-x-2 cursor-pointer">
 								<input
 									type="checkbox"
@@ -171,87 +169,90 @@ const Recommendations = () => {
 									onChange={() => setIncludeNotActivated(!includeNotActivated)}
 									className="form-checkbox h-5 w-5 text-blue-600"
 								/>
-								<span className="text-gray-700">
+								<span className="text-gray-700 text-center">
 									Сакам да добивам и неактивирани предмети
 								</span>
 							</label>
 						</div>
 					</div>
 
-					<div className="flex-1 p-8 overflow-y-auto">
-						{recommendations.length > 0 ? (
-							<div className="space-y-6">
-								<div className="text-center mb-8">
-									<h2 className="text-3xl font-bold text-gray-800 mb-2">
-										Вашите препораки за {getSeasonText().toLowerCase()}{" "}
-										{getSeasonText().toLowerCase() === "Зимски + Летен"
-											? "семестри"
-											: "семестар"}
-									</h2>
-									<p className="text-gray-500">
-										Помогни ни да ги подобриме алгоритамот со тоа што ќе ги
-										оцениш препораките
+					<div className="flex-1 relative">
+						<div className="h-full p-4 lg:p-8 overflow-y-auto hide-scrollbar">
+							{recommendations.length > 0 ? (
+								<div className="space-y-6">
+									<div className="text-center mb-4 md:mb-8">
+										<h2 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-2">
+											Вашите препораки за {getSeasonText().toLowerCase()}{" "}
+											{getSeasonText().toLowerCase() === "Зимски + Летен"
+												? "семестри"
+												: "семестар"}
+										</h2>
+										<p className="text-gray-500">
+											Помогни ни да ги подобриме алгоритамот со тоа што ќе ги
+											оцениш препораките
+										</p>
+									</div>
+									<div
+										className={`grid grid-cols-1 md:grid-cols-2 gap-3 md:auto-rows-[300px] relative pb-4`}
+									>
+										{recommendations.map((subject, index) => (
+											<div
+												key={subject.id}
+												className={`border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 relative ${
+													index % 2 === 0 ? "self-start" : "self-end"
+												}`}
+												style={{
+													animationName: "fadeInUp",
+													animationDuration: "0.6s",
+													animationTimingFunction: "ease-out",
+													animationFillMode: "forwards",
+													animationDelay: `${index * 100}ms`,
+												}}
+											>
+												<SubjectCard
+													subject={subject}
+													openSubjectDetails={openSubjectDetails}
+													openSubjectView={openSubjectView}
+													canReview={true}
+													isFirst={index == 0}
+													isRecommended={true}
+													isLoading={isLoading}
+												/>
+											</div>
+										))}
+									</div>
+								</div>
+							) : !hasSearched ? (
+								<div className="flex flex-col items-center justify-center h-full text-center">
+									<div className="mb-6 text-gray-400">
+										<img
+											src="src/assets/search.svg"
+											alt="Search icon"
+											className="w-16 h-16 mx-auto"
+										/>
+									</div>
+									<h3 className="text-xl md:text-2xl font-bold text-gray-600 mb-4">
+										Започнете со пребарување!
+									</h3>
+									<p className="text-gray-500 text-base lg:text-lg max-w-md">
+										Изберете ја саканата сезона и кликнете на "Вчитај препораки"
+										за да ги откриете вашите идеални предмети!
 									</p>
 								</div>
-
-								<div
-									className={`grid grid-cols-1 lg:grid-cols-2 gap-3 auto-rows-[300px] relative pb-4`}
-								>
-									{recommendations.map((subject, index) => (
-										<div
-											key={subject.id}
-											className={`border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 relative ${
-												index % 2 === 0 ? "self-start" : "self-end"
-											}`}
-											style={{
-												animationName: "fadeInUp",
-												animationDuration: "0.6s",
-												animationTimingFunction: "ease-out",
-												animationFillMode: "forwards",
-												animationDelay: `${index * 100}ms`,
-											}}
-										>
-											<SubjectCard
-												subject={subject}
-												openSubjectDetails={openSubjectDetails}
-												openSubjectView={openSubjectView}
-												canReview={true}
-												isFirst={index == 0}
-												isRecommended={true}
-												isLoading={isLoading}
-											/>
-										</div>
-									))}
+							) : (
+								<div className="flex flex-col items-center justify-center h-full text-center">
+									<h3 className="text-xl md:text-2xl font-bold text-gray-600 mb-4">
+										Моментално немаме препораки за тебе :(
+									</h3>
+									<p className="text-gray-500 text-base lg:text-lg max-w-md">
+										Направи промени во профилот и обиди се повторно.
+									</p>
 								</div>
-								<div className="absolute bottom-0 right-0 h-24 w-full pointer-events-none bg-gradient-to-t from-gray-50 to-transparent" />
-							</div>
-						) : !hasSearched ? (
-							<div className="flex flex-col items-center justify-center h-full text-center">
-								<div className="mb-6 text-gray-400">
-									<img
-										src="src/assets/search.svg"
-										className="w-16 h-16 mx-auto"
-									/>
-								</div>
-								<h3 className="text-2xl font-bold text-gray-600 mb-4">
-									Започнете со пребарување!
-								</h3>
-								<p className="text-gray-500 text-lg max-w-md">
-									Изберете ја саканата сезона и кликнете на "Вчитај препораки"
-									за да ги откриете вашите идеални предмети!
-								</p>
-							</div>
-						) : (
-							<div className="flex flex-col items-center justify-center h-full text-center">
-								<h3 className="text-2xl font-bold text-gray-600 mb-4">
-									Моментално немаме препораки за тебе :(
-								</h3>
-								<p className="text-gray-500 text-lg max-w-md">
-									Направи промени во профилот и обиди се повторно.
-								</p>
-							</div>
-						)}
+							)}
+						</div>
+						<div className="hidden lg:block absolute bottom-0 right-0 h-24 w-full pointer-events-none bg-gradient-to-t from-gray-50 to-transparent" />
 					</div>
+
 					{showModal && selectedSubject && (
 						<SubjectModal
 							selectedSubject={selectedSubject}
