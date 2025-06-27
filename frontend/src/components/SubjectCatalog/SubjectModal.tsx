@@ -5,18 +5,20 @@ interface SubjectModalProps {
 	selectedSubject: Subject;
 	subjectPrerequisites: string | number | "Нема предуслов";
 	closeModal: () => void;
+	from?: string;
 }
 
 function SubjectModal({
 	selectedSubject,
 	closeModal,
 	subjectPrerequisites,
+	from,
 }: SubjectModalProps) {
 	const navigate = useNavigate();
 
 	const openSubject = () => {
 		navigate(`/subjects/${selectedSubject.code}`, {
-			state: { from: `/subjects` },
+			state: { from: `/${from ? from : "subjects"}` },
 		});
 	};
 	return (

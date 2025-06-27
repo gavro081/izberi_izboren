@@ -260,6 +260,7 @@ const Recommendations = () => {
 								selectedSubject,
 								subjectIdToNameMap
 							)}
+							from="recommendations"
 						/>
 					)}
 				</div>

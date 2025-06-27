@@ -226,6 +226,7 @@ const SubjectPreferences = () => {
 						selectedSubject,
 						idsToMap
 					)}
+					from="subject-preferences"
 				/>
 			)}
 		</div>
