@@ -20,7 +20,6 @@ class Subject_Info(models.Model):
     )
 
     level = models.IntegerField(null=False)
-    short = models.TextField(blank=True, null=True)
     prerequisite = models.JSONField(blank=True, null=True)
     activated = models.BooleanField(null=False)
     participants = ArrayField(models.IntegerField(blank=True))

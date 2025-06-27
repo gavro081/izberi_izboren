@@ -81,9 +81,8 @@ class Command(BaseCommand):
             }
         self.stdout.write(self.style.SUCCESS(f"Information data collected..."))
         for course in formatted_prereq_data:
-            code, prereqs  = formatted_prereq_data[course].values()
+            prereqs  = formatted_prereq_data[course].values()
             if course in subject_data:
-                subject_data[course]["short"] = code
                 subject_data[course]["prerequisite"] = prereqs
             else:
                 if with_warnings:

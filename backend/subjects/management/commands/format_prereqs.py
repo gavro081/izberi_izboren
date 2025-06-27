@@ -44,7 +44,6 @@ class Command(BaseCommand):
             code, subject, prereq, _ = entry.values()
             # have to convert everything to lowercase, to avoid inconsistencies in data
             formatted_prereqs[subject] = {}
-            formatted_prereqs[subject]["code"] = code
             prereq = prereq.lower()
             if prereq == "": 
                 formatted_prereqs[subject]["prerequisite"] = {}

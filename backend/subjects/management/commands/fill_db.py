@@ -66,7 +66,6 @@ class Command(BaseCommand):
             info = Subject_Info(
                 subject=db_subject,
                 level=item["level"],
-                short=item.get("short"),
                 prerequisite=prereq,
                 activated=item["activated"],
                 participants=item.get("participants", [0, 0, 0]),

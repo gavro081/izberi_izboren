@@ -6,7 +6,6 @@ class SubjectInfoSerializer(serializers.ModelSerializer):
         model = Subject_Info
         fields = [
             'level',
-            'short',
             'prerequisite',
             'activated',
             'participants',

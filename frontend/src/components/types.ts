@@ -35,7 +35,6 @@ export type Prerequisite = {
 
 export interface SubjectInfo {
 	level: number;
-	short: string;
 	prerequisite: Prerequisite;
 	activated: boolean;
 	participants: number[];
