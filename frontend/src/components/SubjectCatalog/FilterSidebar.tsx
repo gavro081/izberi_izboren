@@ -56,6 +56,8 @@ const FilterSidebar = ({
 	const [openFilters, setOpenFilters] = useState<{ [key: string]: boolean }>(
 		{}
 	);
+	const [isFiltersVisible, setIsFiltersVisible] = useState(false);
+
 	const toggleFilter = (key: string) => {
 		setOpenFilters((prev) => ({ ...prev, [key]: !prev[key] }));
 	};
@@ -71,9 +73,23 @@ const FilterSidebar = ({
 	};
 
 	return (
-		<div className="max-w-sm mx-auto">
+		<div className="w-full">
 			<div className="flex justify-between items-center mb-4">
-				<h2 className="text-lg font-semibold">Филтри</h2>
+				<button
+					className="flex items-center space-x-2 text-left md:hidden"
+					onClick={() => setIsFiltersVisible(!isFiltersVisible)}
+				>
+					<h2 className="text-lg font-semibold">Филтри</h2>
+					<ChevronDown
+						className="h-4 w-4 text-gray-500"
+						style={{
+							transform: isFiltersVisible ? "rotate(180deg)" : "rotate(0deg)",
+							transition: "transform 0.2s ease-in-out",
+						}}
+					/>
+				</button>
+
+				<h2 className="hidden md:block text-lg font-semibold">Филтри</h2>
 				<button
 					onClick={handleResetFilters}
 					className="text-sm text-gray-600 hover:text-gray-900"
@@ -81,8 +97,9 @@ const FilterSidebar = ({
 					Избриши
 				</button>
 			</div>
-			<div className="mb-4">
-				{/* SEASON */}
+			
+			<div className={`mb-4 md:block ${isFiltersVisible ? "block" : "hidden"}`}>
+
 				<FilterHeader
 					label="Сезона"
 					filterKey="season"
@@ -118,7 +135,7 @@ const FilterSidebar = ({
 						})}
 					</div>
 				</FilterHeader>
-				{/* SEMESTER */}
+
 				<FilterHeader
 					label="Семестар"
 					filterKey="semester"
@@ -153,7 +170,7 @@ const FilterSidebar = ({
 						})}
 					</div>
 				</FilterHeader>
-				{/* LEVEL */}
+
 				<FilterHeader
 					label="Ниво"
 					filterKey="level"
@@ -192,7 +209,7 @@ const FilterSidebar = ({
 						})}
 					</div>
 				</FilterHeader>
-				{/* ACTIVATED */}
+
 				<FilterHeader
 					label="Активирани"
 					filterKey="activated"
@@ -230,7 +247,7 @@ const FilterSidebar = ({
 						})}
 					</div>
 				</FilterHeader>
-				{/* MANDATORY */}
+
 				<FilterHeader
 					label="Задолжителен за:"
 					filterKey="mandatoryFor"
@@ -268,7 +285,7 @@ const FilterSidebar = ({
 						})}
 					</div>
 				</FilterHeader>
-				{/* ELECTIVE */}
+
 				<FilterHeader
 					label="Изборен за:"
 					filterKey="electiveFor"
@@ -306,7 +323,7 @@ const FilterSidebar = ({
 						})}
 					</div>
 				</FilterHeader>
-				{/* PREREQUISITES */}
+
 				<FilterHeader
 					label="Предуслови"
 					filterKey="prereq"
@@ -354,7 +371,7 @@ const FilterSidebar = ({
 						</label>
 					</div>
 				</FilterHeader>
-				{/* TAGS */}
+
 				<FilterHeader
 					label="Тагови"
 					filterKey="tags"
@@ -391,12 +408,12 @@ const FilterSidebar = ({
 								onClick={() => setShowTags(!showTags)}
 								className="text-sm text-blue-600 hover:text-blue-800"
 							>
-								{showTags ? "Прикажи помалку" : "Прикажи повеќе"}
+								{showTags ? "Прикажи помалку" : "Прикажи помалку"}
 							</button>
 						)}
 					</div>
 				</FilterHeader>
-				{/* EVALUATION */}
+
 				<FilterHeader
 					label="Евалуација"
 					filterKey="evaluation"

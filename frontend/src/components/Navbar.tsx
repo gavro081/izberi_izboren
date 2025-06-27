@@ -10,7 +10,7 @@ const Navbar: React.FC = () => {
 	const [menuOpen, setMenuOpen] = useState(false);
 	const [profileMenuOpen, setProfileMenuOpen] = useState(false);
 	const [, setRecommendations] = useRecommendations();
-	const { isAuthenticated, logout, login, user } = useAuth();
+	const { isAuthenticated, logout, user } = useAuth();
 	const { setFavoriteIds, setLikedIds, setDislikedIds } = usePreferences();
 	const navigate = useNavigate();
 	const profileMenuRef = useRef<HTMLDivElement>(null);
@@ -185,7 +185,7 @@ const Navbar: React.FC = () => {
 								Профил
 							</Link>
 							<Link
-								to="/favorite-subjects"
+								to="/subject-preferences"
 								className="hover:underline"
 								onClick={() => setMenuOpen(false)}
 							>

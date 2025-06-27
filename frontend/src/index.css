@@ -36,14 +36,36 @@
 		background-color: #f9fafb; /* gray-50 */
 	}
 }
+
 .skeleton-pulse {
 	animation: skeleton-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-.custom-toast-container {
-	/* This overrides the default 'top' value from the library */
+.Toastify__toast-container.custom-toast-container {
+	/* This moves the toast container down by 8em from the top */
 	top: 8em !important;
 }
+
+@media screen and (max-width: 480px) {
+	.Toastify__toast-container.custom-toast-container {
+		top: 5em !important;
+		width: auto !important;
+		max-width: 90vw !important;
+		left: auto !important;
+		right: 1em !important;
+		transform: none !important;
+	}
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+  scrollbar-width: none; /* For Firefox */
+}
+
 :root {
 	background: rgb(37 99 235 / var(--tw-bg-opacity, 1));
 }
