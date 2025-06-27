@@ -42,7 +42,7 @@ const Recommendations = () => {
 		try {
 			const season = mapToSeasonInt(season_);
 			const notActivated = includeNotActivated ? 1 : 0;
-			const response = await axiosInstance.get("/recommendations", {
+			const response = await axiosInstance.get("subjects/recommendations/", {
 				params: { season, not_activated: notActivated },
 			});
 			setRecommendations(response.data.data);

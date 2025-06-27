@@ -47,7 +47,7 @@ export const PreferencesProvider = ({ children }: { children: ReactNode }) => {
 			});
 
 			try {
-				await axiosInstance.post("/student/toggle-subject-pref/", {
+				await axiosInstance.post("/subjects/toggle-subject-pref/", {
 					subject_id: subjectId,
 					action_type: "favorite",
 				});
@@ -80,12 +80,12 @@ export const PreferencesProvider = ({ children }: { children: ReactNode }) => {
 			});
 
 			try {
-				await axiosInstance.post("/student/toggle-subject-pref/", {
+				await axiosInstance.post("/subjects/toggle-subject-pref/", {
 					subject_id: subjectId,
 					action_type: "liked",
 				});
 				if (wasDisliked) {
-					await axiosInstance.post("/student/toggle-subject-pref/", {
+					await axiosInstance.post("/subjects/toggle-subject-pref/", {
 						subject_id: subjectId,
 						action_type: "disliked",
 					});
@@ -119,12 +119,12 @@ export const PreferencesProvider = ({ children }: { children: ReactNode }) => {
 			});
 
 			try {
-				await axiosInstance.post("/student/toggle-subject-pref/", {
+				await axiosInstance.post("/subjects/toggle-subject-pref/", {
 					subject_id: subjectId,
 					action_type: "disliked",
 				});
 				if (wasLiked) {
-					await axiosInstance.post("/student/toggle-subject-pref/", {
+					await axiosInstance.post("/subjects/toggle-subject-pref/", {
 						subject_id: subjectId,
 						action_type: "liked",
 					});

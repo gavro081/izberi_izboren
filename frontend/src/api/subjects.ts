@@ -7,7 +7,7 @@ interface fetchSubjectsProps {
 
 export const fetchSubjects = async ({ setSubjects }: fetchSubjectsProps) => {
 	try {
-		const resSubjects = await fetch("http://localhost:8000/subjects/");
+		const resSubjects = await fetch("http://localhost:8000/subjects/all/");
 		if (resSubjects.ok) {
 			const subJson: Subject[] = await resSubjects.json();
 			setSubjects(subJson || []);

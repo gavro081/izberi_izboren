@@ -23,7 +23,7 @@ export const fetchPreferences = async ({
 				favorite_ids: number[];
 				liked_ids: number[];
 				disliked_ids: number[];
-			}>("/student/preferences/")
+			}>("/subjects/preferences/")
 			.then((response) => {
 				setFavoriteIds(new Set(response.data.favorite_ids || []));
 				setLikedIds(new Set(response.data.liked_ids || []));

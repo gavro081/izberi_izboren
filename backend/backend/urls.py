@@ -4,10 +4,7 @@ from subjects.views import index, all_subjects, get_recommendations, ToggleSubje
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('subjects/', all_subjects),
-    path('recommendations/', get_recommendations),
-    path('student/preferences/', PreferencesView.as_view(), name='student-preferences'),
-    path('student/toggle-subject-pref/', ToggleSubjectPreferences.as_view(), name='student-toggle-favorite'),
     path('auth/', include('auth_form.urls')),
+    path('subjects/', include('subjects.urls')),
     path('', index),
 ]
