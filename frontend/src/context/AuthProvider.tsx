@@ -202,25 +202,15 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 		[scheduleProactiveRefresh]
 	);
 
-	const initializeUser = useCallback(async () => {
+	useEffect(() => {
 		const token = localStorage.getItem("access");
 		if (token) {
-			scheduleProactiveRefresh(token);
-			await fetchUser(token, setUser);
+			setAccessToken(token);
+			fetchUser(token, setUser);
+			// if the function needs to be awaited
+			// (async () => await fetchUser(token, setUser))();
 		}
-		setSessionInitialized(true);
-	}, [fetchUser, scheduleProactiveRefresh]);
-
-	useEffect(() => {
-		const handler = async () => {
-			const token = localStorage.getItem("access");
-			if (token) {
-				setAccessToken(token);
-				await fetchUser(token, setUser);
-			}
-			setLoading(false);
-		};
-		handler();
+		setLoading(false);
 	}, []);
 
 	const contextValue: AuthContextType = {
@@ -233,7 +223,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 		isAuthenticated: !!accessToken,
 		loading,
 		sessionInitialized,
-		initializeUser,
 		setUser,
 	};
 

@@ -15,7 +15,6 @@ export interface AuthContextType {
 	isAuthenticated: boolean;
 	loading: boolean;
 	sessionInitialized: boolean;
-	initializeUser: () => Promise<void>;
 	setUser: Dispatch<SetStateAction<User | null>>;
 }
 

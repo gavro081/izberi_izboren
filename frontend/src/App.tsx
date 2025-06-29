@@ -1,14 +1,11 @@
-import { useEffect } from "react";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { fetchUser } from "./api/user";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import PrivateRoute from "./components/PrivateRoute";
 import CourseCatalog from "./components/SubjectCatalog/SubjectCatalog";
 import { AuthProvider } from "./context/AuthProvider";
-import { useAuth } from "./hooks/useAuth";
 import "./index.css";
 import Account from "./pages/Account";
 import Home from "./pages/Home";
@@ -87,17 +84,6 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-	const { setUser } = useAuth();
-	// TODO
-	useEffect(() => {
-		const token = localStorage.getItem("access");
-		const handler = async () => {
-			if (token) {
-				await fetchUser(token, setUser);
-			}
-		};
-		handler();
-	}, []);
 	return (
 		<AuthProvider>
 			<RouterProvider router={router} />
