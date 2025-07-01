@@ -12,16 +12,12 @@ from .permissions import IsStudent, CanSubmitForm, CanUpdateForm
 
 class RegisterView(APIView):
     def post(self, request, *args, **kwargs):
-        # Step 1: Initialize the serializer with the request data
         serializer = RegistrationSerializer(data = request.data)
 
-        # Step 2: Validate the serialized data
         if serializer.is_valid():
-            # Step 3: Save the user
             user = serializer.save()
             refresh = RefreshToken.for_user(user)
 
-            # Step 4: Return a success response
             return Response({
                 'refresh': str(refresh),
                 'access': str(refresh.access_token),
@@ -29,8 +25,6 @@ class RegisterView(APIView):
                 'user': serializer.data
             }, status=status.HTTP_201_CREATED)
 
-        # If the serializer is not valid, return an error response
-        print(serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class LoginView(APIView):

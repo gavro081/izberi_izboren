@@ -70,7 +70,7 @@ const SubjectCatalog = () => {
 		setTags(
 			Array.from(
 				new Set(filteredSubjects.flatMap((sub) => sub.subject_info.tags))
-			)
+			).sort((a, b) => a.localeCompare(b))
 		);
 	}, [subjects]);
 

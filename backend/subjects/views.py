@@ -121,7 +121,6 @@ class ToggleSubjectPreferences(APIView):
         except Subject.DoesNotExist:
             return Response({'error': 'Subject not found.'}, status=status.HTTP_404_NOT_FOUND)
         except AttributeError:
-            # This error happens if request.user.student doesn't exist
             return Response({'error': 'Student profile not found for this user.'}, status=status.HTTP_404_NOT_FOUND)
         except Exception as e:
             return Response({'error': f'An unexpected error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

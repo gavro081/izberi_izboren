@@ -97,9 +97,8 @@ const FilterSidebar = ({
 					Избриши
 				</button>
 			</div>
-			
-			<div className={`mb-4 md:block ${isFiltersVisible ? "block" : "hidden"}`}>
 
+			<div className={`mb-4 md:block ${isFiltersVisible ? "block" : "hidden"}`}>
 				<FilterHeader
 					label="Сезона"
 					filterKey="season"
@@ -408,7 +407,7 @@ const FilterSidebar = ({
 								onClick={() => setShowTags(!showTags)}
 								className="text-sm text-blue-600 hover:text-blue-800"
 							>
-								{showTags ? "Прикажи помалку" : "Прикажи помалку"}
+								{showTags ? "Прикажи помалку" : "Прикажи повеќе"}
 							</button>
 						)}
 					</div>

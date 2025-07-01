@@ -34,7 +34,6 @@ export const PreferencesProvider = ({ children }: { children: ReactNode }) => {
 
 	const toggleFavorite = useCallback(
 		async (subjectId: number) => {
-			// Optimistic UI update
 			const originalFavorites = new Set(favoriteIds);
 			setFavoriteIds((prevIds) => {
 				const newIds = new Set(prevIds);
@@ -53,7 +52,7 @@ export const PreferencesProvider = ({ children }: { children: ReactNode }) => {
 				});
 			} catch (error) {
 				console.error("Failed to toggle favorite, reverting.", error);
-				setFavoriteIds(originalFavorites); // Revert on error
+				setFavoriteIds(originalFavorites);
 				toast.error("Мора да си најавен за да додадеш предмет во омилени.");
 			}
 		},
