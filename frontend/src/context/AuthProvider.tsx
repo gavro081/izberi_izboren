@@ -23,6 +23,7 @@ interface DecodedToken {
 
 interface CustomAxiosRequestConfig extends AxiosRequestConfig {
 	_retry?: boolean;
+	_skipAuthRefresh?: boolean;
 }
 
 let isRefreshing = false;
@@ -97,7 +98,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 								const res = await axiosInstance.post<{
 									access: string;
 									refresh?: string;
-								}>("/auth/refresh/", { refresh: currentRefreshToken });
+								}>("/auth/refresh/", { refresh: currentRefreshToken }, {
+									_skipAuthRefresh: true,
+								} as CustomAxiosRequestConfig);
 								localStorage.setItem("access", res.data.access);
 								setAccessToken(res.data.access);
 								if (res.data.refresh) {
@@ -135,7 +138,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 			(response) => response,
 			async (error) => {
 				const originalRequest = error.config as CustomAxiosRequestConfig;
-				if (error.response?.status === 401 && !originalRequest._retry) {
+				if (
+					error.response?.status === 401 &&
+					!originalRequest._retry &&
+					!originalRequest._skipAuthRefresh
+				) {
 					originalRequest._retry = true;
 					if (isRefreshing) {
 						return new Promise((resolve, reject) => {
@@ -158,7 +165,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 						const response = await axiosInstance.post<{
 							access: string;
 							refresh?: string;
-						}>("/auth/refresh/", { refresh: currentRefreshToken });
+						}>("/auth/refresh/", { refresh: currentRefreshToken }, {
+							_skipAuthRefresh: true,
+						} as CustomAxiosRequestConfig);
 						const newAccessToken = response.data.access;
 						localStorage.setItem("access", newAccessToken);
 						setAccessToken(newAccessToken);
@@ -176,7 +185,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 					} catch (refreshError) {
 						processQueue(refreshError, null);
 						logout();
-						toast.error("Твојата сесија истече. Логирај се повторно.");
+						toast.error("Твојата сесија истече. Најави се повторно.");
 						return Promise.reject(refreshError);
 					} finally {
 						isRefreshing = false;
