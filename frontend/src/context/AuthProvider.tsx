@@ -176,7 +176,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 					} catch (refreshError) {
 						processQueue(refreshError, null);
 						logout();
-						toast.error("Your session has expired. Please log in again.");
+						toast.error("Твојата сесија истече. Логирај се повторно.");
 						return Promise.reject(refreshError);
 					} finally {
 						isRefreshing = false;

@@ -15,9 +15,11 @@ import Recommendations from "./pages/Recommendations";
 import Register from "./pages/Register";
 import SubjectPreferences from "./pages/SubjectPreferences";
 import SubjectView from "./pages/SubjectView";
+import ScrollToTop from "./components/ScrollToTop";
 
 const Layout = () => (
 	<div className="flex flex-col min-h-screen">
+		<ScrollToTop />
 		<Navbar />
 		<ToastContainer
 			className="custom-toast-container"
