@@ -30,6 +30,7 @@ services:
     environment:
       - NODE_ENV=development
       - CHOKIDAR_USEPOLLING="true"
+      - VITE_GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
     depends_on:
       - backend
     networks:

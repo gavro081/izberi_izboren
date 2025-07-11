@@ -72,6 +72,24 @@ class LoginSerializer(serializers.Serializer):
             return data
         else:
             raise serializers.ValidationError('Must include "email" and "password"')
+        
+class GoogleLoginSerializer(serializers.Serializer):
+    email = serializers.EmailField(required=True)
+
+    def validate(self, data):
+        try:
+            email = data.get('email')
+            User = get_user_model()
+            user = User.objects.get(email=email)
+            if user is None:
+                raise AuthenticationFailed('Invalid email or password')
+            if not user.is_active:
+                raise AuthenticationFailed('User account is disabled')
+            data['user'] = user
+            return data
+        except:
+            raise serializers.ValidationError('Must include email.')
+        
 
 class StudentFormSerializer(serializers.ModelSerializer):
     passed_subjects = serializers.PrimaryKeyRelatedField(queryset=Subject.objects.all(), many=True)

@@ -13,6 +13,7 @@
 		"watch:css": "npx tailwindcss -i ./src/index.css -o ./src/output.css --watch"
 	},
 	"dependencies": {
+		"@react-oauth/google": "^0.12.2",
 		"axios": "^1.9.0",
 		"jwt-decode": "^4.0.0",
 		"lucide-react": "^0.513.0",

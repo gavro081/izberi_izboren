@@ -7,7 +7,8 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework_simplejwt.tokens import RefreshToken
 from .permissions import IsStudent, CanSubmitForm, CanUpdateForm
-
+from dj_rest_auth.registration.views import SocialLoginView
+from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 
 
 class RegisterView(APIView):
@@ -115,6 +116,18 @@ class UserDetailView(APIView):
         return Response(serializer.data)
 
 
+class CustomGoogleLogin(SocialLoginView):
+    adapter_class = GoogleOAuth2Adapter
+
+    def get_response(self):
+        refresh = RefreshToken.for_user(self.user)
+
+        return Response({
+            'refresh': str(refresh),
+            'access': str(refresh.access_token),
+            'full_name': self.user.full_name,
+            'user_type': self.user.user_type,
+        }, status=status.HTTP_200_OK)
 
 
 
