@@ -1,7 +1,8 @@
 import axios, { AxiosError } from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import googleLogo from "../assets/google-logo.png";
 import PasswordInput from "../components/PasswordInput";
 import { User } from "../context/AuthContext";
 import { useAuth } from "../hooks/useAuth";
@@ -27,7 +28,7 @@ const Register: React.FC = () => {
 		}
 	>({});
 	const navigate = useNavigate();
-	const { login } = useAuth();
+	const { login, customGoogleLogin, googleLoginLoading } = useAuth();
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setFormData({
@@ -35,6 +36,21 @@ const Register: React.FC = () => {
 			[e.target.name]: e.target.value,
 		});
 	};
+
+	useEffect(() => {
+		const handleGoogleLoginSuccess = () => {
+			navigate("/");
+		};
+
+		window.addEventListener("googleLoginSuccess", handleGoogleLoginSuccess);
+
+		return () => {
+			window.removeEventListener(
+				"googleLoginSuccess",
+				handleGoogleLoginSuccess
+			);
+		};
+	}, [navigate]);
 
 	const handleRegister = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -81,14 +97,16 @@ const Register: React.FC = () => {
 		}
 	};
 	return (
-		<div className="flex flex-col items-center justify-center h-[83vh] bg-white">
+		<div className="flex flex-col items-center justify-center min-h-[83vh] py-4 px-4 bg-white">
 			<form
 				onSubmit={handleRegister}
-				className="bg-white p-6 rounded-lg h-auto shadow-md w-80"
+				className="bg-white p-4 sm:p-6 rounded-lg shadow-md w-full max-w-sm h-auto"
 			>
-				<h2 className="text-xl font-semibold mb-4 text-center">Регистрација</h2>
+				<h2 className="text-xl font-semibold mb-3 sm:mb-4 text-center">
+					Регистрација
+				</h2>
 				{errors.non_field_errors && (
-					<div className="text-red-500 mb-3 text-sm">
+					<div className="text-red-500 mb-2 sm:mb-3 text-sm">
 						{errors.non_field_errors[0]}
 					</div>
 				)}
@@ -99,10 +117,10 @@ const Register: React.FC = () => {
 					value={formData.email}
 					onChange={handleChange}
 					placeholder="Email"
-					className="w-full mb-3 p-2 border rounded"
+					className="w-full mb-2 sm:mb-3 p-2 border rounded"
 				/>
 				{errors.email && (
-					<p className="text-red-500 text-sm mb-2">
+					<p className="text-red-500 text-sm mb-1 sm:mb-2">
 						Постои корисник со оваа адреса.
 					</p>
 				)}
@@ -124,7 +142,9 @@ const Register: React.FC = () => {
 					onChange={handleChange}
 				/>
 				{errors.confirmPassword && (
-					<p className="text-red-500 text-sm mb-2">Лозинките не се совпаѓаат</p>
+					<p className="text-red-500 text-sm mb-1 sm:mb-2">
+						Лозинките не се совпаѓаат
+					</p>
 				)}
 				<input
 					type="text"
@@ -133,9 +153,9 @@ const Register: React.FC = () => {
 					value={formData.fullName}
 					onChange={handleChange}
 					placeholder="Име презиме"
-					className="w-full mb-3 p-2 border rounded"
+					className="w-full mb-2 sm:mb-3 p-2 border rounded"
 				/>
-				<p className="text-sm text-center mb-4">
+				<p className="text-sm text-center mb-3 sm:mb-4">
 					Имаш профил?{" "}
 					<Link to="/login" className="text-blue-600 hover:underline">
 						Најави се
@@ -149,6 +169,28 @@ const Register: React.FC = () => {
 					}`}
 				>
 					{loading ? "Се регистрира..." : "Регистрирај се"}
+				</button>
+				<div className="mt-3 sm:mt-4 text-center">
+					<div className="relative">
+						<div className="absolute inset-0 flex items-center">
+							<div className="w-full border-t border-gray-300" />
+						</div>
+						<div className="relative flex justify-center text-sm">
+							<span className="px-2 bg-white text-gray-500">или</span>
+						</div>
+					</div>
+				</div>
+
+				<button
+					type="button"
+					onClick={() => customGoogleLogin()}
+					disabled={googleLoginLoading}
+					className={`w-full mt-3 sm:mt-4 bg-white border border-gray-300 text-gray-700 p-2 rounded hover:bg-gray-50 flex items-center justify-center gap-2 ${
+						googleLoginLoading ? "opacity-70 cursor-not-allowed" : ""
+					}`}
+				>
+					<img src={googleLogo} alt="Google logo" className="w-5 h-5" />
+					{googleLoginLoading ? "Се најавува..." : "Продолжи со Google"}
 				</button>
 			</form>
 		</div>

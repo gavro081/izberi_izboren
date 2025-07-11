@@ -1,4 +1,5 @@
-import { AxiosError, AxiosRequestConfig } from "axios";
+import { useGoogleLogin } from "@react-oauth/google";
+import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import { jwtDecode } from "jwt-decode";
 import React, {
 	ReactNode,
@@ -51,6 +52,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 	const [formData, setFormData] = useState<StudentData | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [sessionInitialized, setSessionInitialized] = useState(false);
+	const [googleLoginLoading, setGoogleLoginLoading] = useState(false);
 
 	const proactiveRefreshTimeoutId = useRef<number | null>(null);
 
@@ -211,6 +213,38 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 		[scheduleProactiveRefresh]
 	);
 
+	const customGoogleLogin = useGoogleLogin({
+		onSuccess: async (tokenResponse) => {
+			setGoogleLoginLoading(true);
+			const accessToken = tokenResponse.access_token;
+			try {
+				const response = await axios.post<{
+					access: string;
+					refresh: string;
+					full_name: string;
+					user_type: string;
+				}>("http://localhost:8000/auth/google/login/", {
+					access_token: accessToken,
+				});
+				const { access, refresh, full_name, user_type } = response.data;
+				await login(access, refresh, { full_name, user_type });
+				toast.success("Успешно сте најавени!");
+				window.dispatchEvent(new CustomEvent("googleLoginSuccess"));
+			} catch (err: any) {
+				console.error("Login failed:", err.response?.data || err.message);
+				toast.error("Грешка при најавување со Google");
+			} finally {
+				setGoogleLoginLoading(false);
+			}
+		},
+		onError: () => {
+			console.error("Login Failed");
+			setGoogleLoginLoading(false);
+			toast.error("Грешка при најавување со Google");
+		},
+		flow: "implicit",
+	});
+
 	useEffect(() => {
 		(async () => {
 			const token = localStorage.getItem("access");
@@ -233,6 +267,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 		loading,
 		sessionInitialized,
 		setUser,
+		customGoogleLogin,
+		googleLoginLoading,
 	};
 
 	return (

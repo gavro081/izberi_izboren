@@ -1,5 +1,3 @@
-import { useGoogleLogin } from "@react-oauth/google";
-import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -12,7 +10,6 @@ const Navbar: React.FC = () => {
 	const [menuOpen, setMenuOpen] = useState(false);
 	const [profileMenuOpen, setProfileMenuOpen] = useState(false);
 	const [, setRecommendations] = useRecommendations();
-	const { login } = useAuth();
 	const { isAuthenticated, logout, user } = useAuth();
 	const { setFavoriteIds, setLikedIds, setDislikedIds } = usePreferences();
 	const navigate = useNavigate();
@@ -43,32 +40,6 @@ const Navbar: React.FC = () => {
 		navigate("/");
 		toast.success("Успешно сте одјавени!");
 	};
-
-	const googleLogin = useGoogleLogin({
-		onSuccess: async (tokenResponse) => {
-			const accessToken = tokenResponse.access_token;
-			try {
-				const response = await axios.post<{
-					access: string;
-					refresh: string;
-					full_name: string;
-					user_type: string;
-				}>("http://localhost:8000/auth/google/login/", {
-					access_token: accessToken,
-				});
-				const { access, refresh, full_name, user_type } = response.data;
-				login(access, refresh, { full_name, user_type });
-				navigate("/");
-				toast.success("Успешно сте најавени!");
-			} catch (err: any) {
-				console.error("Login failed:", err.response?.data || err.message);
-			}
-		},
-		onError: () => {
-			console.error("Login Failed");
-		},
-		flow: "implicit",
-	});
 
 	// const testAccountLogin = async () => {
 	// 	if (isAuthenticated) return;
@@ -184,9 +155,6 @@ const Navbar: React.FC = () => {
 							Најави се
 						</Link>
 					)}
-				</div>
-				<div>
-					<button onClick={() => googleLogin()}>Login with google</button>
 				</div>
 			</div>
 
