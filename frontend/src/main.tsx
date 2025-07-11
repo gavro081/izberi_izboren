@@ -8,9 +8,24 @@ import { RecommendationsProvider } from "./context/RecommendationsContext.tsx";
 import { SubjectsProvider } from "./context/SubjectsContext.tsx";
 import "./index.css";
 
+const useOAuth = import.meta.env.VITE_USE_OAUTH === "true";
+
+const OAuthWrapper: React.FC<{ children: React.ReactNode }> = ({
+	children,
+}) => {
+	if (useOAuth) {
+		return (
+			<GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+				{children}
+			</GoogleOAuthProvider>
+		);
+	}
+	return <>{children}</>;
+};
+
 createRoot(document.getElementById("root")!).render(
 	<StrictMode>
-		<GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+		<OAuthWrapper>
 			<AuthProvider>
 				<SubjectsProvider>
 					<RecommendationsProvider>
@@ -20,6 +35,6 @@ createRoot(document.getElementById("root")!).render(
 					</RecommendationsProvider>
 				</SubjectsProvider>
 			</AuthProvider>
-		</GoogleOAuthProvider>
+		</OAuthWrapper>
 	</StrictMode>
 );

@@ -17,10 +17,11 @@ export interface AuthContextType {
 	loading: boolean;
 	sessionInitialized: boolean;
 	setUser: Dispatch<SetStateAction<User | null>>;
-	customGoogleLogin: (
+	customGoogleLogin?: (
 		overrideConfig?: OverridableTokenClientConfig | undefined
 	) => void;
 	googleLoginLoading: boolean;
+	useOAuth: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);

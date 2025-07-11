@@ -13,6 +13,7 @@ import axiosInstance from "../api/axiosInstance";
 import { fetchUser } from "../api/user";
 import { StudentData } from "../components/types";
 import AuthContext, { AuthContextType, User } from "../context/AuthContext";
+const useOAuth = import.meta.env.VITE_USE_OAUTH === "true";
 
 interface DecodedToken {
 	exp: number;
@@ -213,37 +214,39 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 		[scheduleProactiveRefresh]
 	);
 
-	const customGoogleLogin = useGoogleLogin({
-		onSuccess: async (tokenResponse) => {
-			setGoogleLoginLoading(true);
-			const accessToken = tokenResponse.access_token;
-			try {
-				const response = await axios.post<{
-					access: string;
-					refresh: string;
-					full_name: string;
-					user_type: string;
-				}>("http://localhost:8000/auth/google/login/", {
-					access_token: accessToken,
-				});
-				const { access, refresh, full_name, user_type } = response.data;
-				await login(access, refresh, { full_name, user_type });
-				toast.success("Успешно сте најавени!");
-				window.dispatchEvent(new CustomEvent("googleLoginSuccess"));
-			} catch (err: any) {
-				console.error("Login failed:", err.response?.data || err.message);
-				toast.error("Грешка при најавување со Google");
-			} finally {
-				setGoogleLoginLoading(false);
-			}
-		},
-		onError: () => {
-			console.error("Login Failed");
-			setGoogleLoginLoading(false);
-			toast.error("Грешка при најавување со Google");
-		},
-		flow: "implicit",
-	});
+	const customGoogleLogin = useOAuth
+		? useGoogleLogin({
+				onSuccess: async (tokenResponse) => {
+					setGoogleLoginLoading(true);
+					const accessToken = tokenResponse.access_token;
+					try {
+						const response = await axios.post<{
+							access: string;
+							refresh: string;
+							full_name: string;
+							user_type: string;
+						}>("http://localhost:8000/auth/google/login/", {
+							access_token: accessToken,
+						});
+						const { access, refresh, full_name, user_type } = response.data;
+						await login(access, refresh, { full_name, user_type });
+						toast.success("Успешно сте најавени!");
+						window.dispatchEvent(new CustomEvent("googleLoginSuccess"));
+					} catch (err: any) {
+						console.error("Login failed:", err.response?.data || err.message);
+						toast.error("Грешка при најавување со Google");
+					} finally {
+						setGoogleLoginLoading(false);
+					}
+				},
+				onError: () => {
+					console.error("Login Failed");
+					setGoogleLoginLoading(false);
+					toast.error("Грешка при најавување со Google");
+				},
+				flow: "implicit",
+		  })
+		: undefined;
 
 	useEffect(() => {
 		(async () => {
@@ -269,6 +272,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 		setUser,
 		customGoogleLogin,
 		googleLoginLoading,
+		useOAuth,
 	};
 
 	return (

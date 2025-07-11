@@ -20,7 +20,7 @@ const Login: React.FC = () => {
 		Partial<LoginForm> & { detail?: string[] }
 	>({});
 	const navigate = useNavigate();
-	const { login, customGoogleLogin, googleLoginLoading } = useAuth();
+	const { login, customGoogleLogin, googleLoginLoading, useOAuth } = useAuth();
 	const [isLogging, setIsLogging] = useState(false);
 
 	useEffect(() => {
@@ -131,28 +131,32 @@ const Login: React.FC = () => {
 					{isLogging ? "Се најавува..." : "Најави се"}
 				</button>
 
-				<div className="mt-3 sm:mt-4 text-center">
-					<div className="relative">
-						<div className="absolute inset-0 flex items-center">
-							<div className="w-full border-t border-gray-300" />
+				{useOAuth && (
+					<>
+						<div className="mt-3 sm:mt-4 text-center">
+							<div className="relative">
+								<div className="absolute inset-0 flex items-center">
+									<div className="w-full border-t border-gray-300" />
+								</div>
+								<div className="relative flex justify-center text-sm">
+									<span className="px-2 bg-white text-gray-500">или</span>
+								</div>
+							</div>
 						</div>
-						<div className="relative flex justify-center text-sm">
-							<span className="px-2 bg-white text-gray-500">или</span>
-						</div>
-					</div>
-				</div>
 
-				<button
-					type="button"
-					onClick={() => customGoogleLogin()}
-					disabled={googleLoginLoading}
-					className={`w-full mt-3 sm:mt-4 bg-white border border-gray-300 text-gray-700 p-2 rounded hover:bg-gray-50 flex items-center justify-center gap-2 ${
-						googleLoginLoading ? "opacity-70 cursor-not-allowed" : ""
-					}`}
-				>
-					<img src={googleLogo} alt="Google logo" className="w-5 h-5" />
-					{googleLoginLoading ? "Се најавува..." : "Продолжи со Google"}
-				</button>
+						<button
+							type="button"
+							onClick={() => customGoogleLogin?.()}
+							disabled={googleLoginLoading}
+							className={`w-full mt-3 sm:mt-4 bg-white border border-gray-300 text-gray-700 p-2 rounded hover:bg-gray-50 flex items-center justify-center gap-2 ${
+								googleLoginLoading ? "opacity-70 cursor-not-allowed" : ""
+							}`}
+						>
+							<img src={googleLogo} alt="Google logo" className="w-5 h-5" />
+							{googleLoginLoading ? "Се најавува..." : "Продолжи со Google"}
+						</button>
+					</>
+				)}
 			</form>
 		</div>
 	);
