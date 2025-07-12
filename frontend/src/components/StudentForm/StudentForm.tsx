@@ -137,7 +137,7 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 	// Update form when formData changes (e.g., after fetching user data)
 	useEffect(() => {
 		if (!subjects || subjects.length === 0) {
-			fetchSubjects({ setSubjects });
+			fetchSubjects(setSubjects);
 		}
 		const token = localStorage.getItem("access");
 		if (token && !formData) {

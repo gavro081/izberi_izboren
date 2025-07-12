@@ -1,6 +1,6 @@
 import { EVALUATION_MAP_TO_MK } from "../../constants/subjects";
 import { LatinToCyrillic } from "../StudentForm/utils";
-import { Filters, StudyTrack, Subject } from "../types";
+import { Filters, OtherReview, StudyTrack, Subject } from "../types";
 
 interface filteredSubjectsParams {
 	searchTerm: string;
@@ -193,4 +193,13 @@ export const getSubjectPrerequisites = (
 	}
 
 	return "Нема предуслов";
+};
+
+export const MAP_REVIEW_CATEGORY_TO_MK: Record<
+	OtherReview["category"],
+	string
+> = {
+	material: "Материјал",
+	staff: "Кадар",
+	other: "Друго",
 };

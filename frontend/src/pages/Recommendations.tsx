@@ -34,7 +34,7 @@ const Recommendations = () => {
 
 	useEffect(() => {
 		if (!subjects || subjects.length === 0) {
-			fetchSubjects({ setSubjects });
+			fetchSubjects(setSubjects);
 		}
 	}, [subjects, setSubjects]);
 

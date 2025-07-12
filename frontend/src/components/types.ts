@@ -66,3 +66,43 @@ export type Filters = {
 };
 
 export type StudyTrack = (typeof STUDY_TRACKS)[number];
+
+export interface EvaluationComponent {
+	category:
+		| "project"
+		| "theory"
+		| "practical"
+		| "homework"
+		| "attendance"
+		| "presentation";
+	percentage: number;
+}
+
+export interface EvaluationMethod {
+	note?: string;
+	components: EvaluationComponent[];
+}
+
+export interface EvaluationReview {
+	review: Review;
+	methods: EvaluationMethod[];
+	signature_condition: string;
+}
+
+export interface OtherReview {
+	review: Review;
+	category: "material" | "staff" | "other";
+	content: string;
+}
+
+export interface Review {
+	id?: number;
+	student?: string;
+	is_confirmed?: boolean;
+	votes_count?: number;
+}
+
+export interface Reviews {
+	evaluation: EvaluationReview; // only one evaluation review per subject
+	other: OtherReview[];
+}

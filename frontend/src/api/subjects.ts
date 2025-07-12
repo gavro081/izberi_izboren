@@ -1,11 +1,9 @@
 import { Dispatch, SetStateAction } from "react";
 import { Subject } from "../components/types";
 
-interface fetchSubjectsProps {
-	setSubjects: Dispatch<SetStateAction<Subject[]>>;
-}
-
-export const fetchSubjects = async ({ setSubjects }: fetchSubjectsProps) => {
+export const fetchSubjects = async (
+	setSubjects: Dispatch<SetStateAction<Subject[]>>
+) => {
 	try {
 		const resSubjects = await fetch("http://localhost:8000/subjects/all/");
 		if (resSubjects.ok) {

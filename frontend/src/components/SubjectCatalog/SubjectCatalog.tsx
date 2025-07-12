@@ -93,7 +93,7 @@ const SubjectCatalog = () => {
 
 	useEffect(() => {
 		if (!subjects || subjects.length === 0) {
-			fetchSubjects({ setSubjects });
+			fetchSubjects(setSubjects);
 		}
 	}, []);
 
