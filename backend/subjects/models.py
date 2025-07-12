@@ -71,6 +71,10 @@ class Review(models.Model):
     @property
     def downvote_count(self):
         return self.votes.filter(review_votes__reviewvote__vote_type='down').count()
+    @property
+    def votes_count(self):
+        return self.votes.count()
+
 
 class ReviewVote(models.Model):
     VOTE_TYPES = [
@@ -95,7 +99,7 @@ class EvaluationMethod(models.Model):
     # option A: project: 90%, labs: 10%
     # option B: theory: 35%, practical: 35%, labs: 10%, project: 20%
     # each of these (option A - project, option A - labs, option B - project etc. is a EvaluationComponent)
-    evaluation_review = models.ForeignKey(EvaluationReview, on_delete=models.CASCADE)
+    evaluation_review = models.ForeignKey(EvaluationReview, on_delete=models.CASCADE, related_name='methods')
     note = models.CharField(max_length=64, null=True, blank=True, help_text="additional info about this particular evaluation method.")
 
 class EvaluationComponent(models.Model):
@@ -109,7 +113,7 @@ class EvaluationComponent(models.Model):
         ("attendance", "Attendance"),
         # todo: check if there are more
     ]
-    evaluation_method = models.ForeignKey(EvaluationMethod, on_delete=models.CASCADE)
+    evaluation_method = models.ForeignKey(EvaluationMethod, on_delete=models.CASCADE, related_name='components')
     category = models.CharField(max_length=16, choices=CATEGORY_TYPE_CHOICES)
     percentage = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
 

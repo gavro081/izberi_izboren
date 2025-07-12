@@ -1,16 +1,64 @@
-import { ArrowLeft, Tag, Users } from "lucide-react";
+import {
+	ArrowDown,
+	ArrowLeft,
+	ArrowUp,
+	Tag,
+	// ThumbsDown,
+	// ThumbsUp,
+	Users,
+} from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import axiosInstance from "../api/axiosInstance";
 import { getSubjectPrerequisites } from "../components/SubjectCatalog/utils";
 import SkeletonSubjectView from "../components/SubjectView/SkeletonSubjectView";
 import { EVALUATION_MAP_TO_MK } from "../constants/subjects";
 import { useSubjects } from "../context/SubjectsContext";
+
+interface EvaluationComponent {
+	category:
+		| "project"
+		| "theory"
+		| "practical"
+		| "homework"
+		| "attendance"
+		| "presentation";
+	percentage: number;
+}
+
+interface EvaluationMethod {
+	note?: string;
+	components: EvaluationComponent[];
+}
+
+interface EvaluationReview {
+	review: Review;
+	methods: EvaluationMethod[];
+}
+
+interface OtherReview {
+	review: Review;
+	category: "material" | "staff" | "other";
+	content: string;
+}
+
+interface Review {
+	student?: string;
+	is_confirmed?: boolean;
+	votes_count?: number;
+}
+
+interface Reviews {
+	evaluation: EvaluationReview; // only one evaluation review per subject
+	other: OtherReview[];
+}
 
 function SubjectView() {
 	const [subjectPrerequisites, setSubjectPrerequisites] = useState<
 		"Нема предуслов" | number | string
 	>("Нема предуслов");
 	const [isExpanded, setIsExpanded] = useState(false);
+	const [reviews, setReviews] = useState<Reviews>({} as Reviews);
 	const [filteredTechonologies, setFilteredTechnologies] = useState<string[]>(
 		[]
 	);
@@ -24,6 +72,20 @@ function SubjectView() {
 	const selectedSubject = useMemo(() => {
 		return subjects.find((subject) => subject.code === code);
 	}, [subjects, code]);
+
+	useEffect(() => {
+		if (!selectedSubject) return;
+		(async () => {
+			try {
+				const response = await axiosInstance.get<Reviews>(
+					`subjects/subject-review/${selectedSubject?.code}`
+				);
+				setReviews(response.data);
+			} catch (err) {
+				console.error("Error: ", err);
+			}
+		})();
+	}, [selectedSubject]);
 
 	const WORD_LIMIT = 40;
 	const from = location.state?.from || "/";
@@ -241,6 +303,181 @@ function SubjectView() {
 								))}
 							</div>
 						</div>
+
+						<div className="bg-white rounded-lg shadow-sm p-6">
+							{!reviews ||
+							!reviews.evaluation ||
+							!reviews.other ? null : reviews.evaluation?.methods?.length ==
+									0 && reviews.other.length == 0 ? (
+								<p>Нема информации од студенти за овој предмет.</p>
+							) : (
+								<>
+									<h2 className="text-xl font-semibold mb-6">
+										Информации од студенти
+									</h2>
+									{reviews.evaluation.methods.length > 0 && (
+										<>
+											{reviews.evaluation?.methods?.length > 0 && (
+												<div className="mb-8">
+													<h3 className="text-lg font-medium mb-4 text-gray-900">
+														Информации за полагање
+													</h3>
+													<div className="space-y-4">
+														{reviews &&
+															reviews.evaluation &&
+															(reviews.evaluation?.methods?.length > 0 ? (
+																<div className="border border-gray-200 rounded-lg p-4">
+																	<div className="flex items-start justify-between mb-3">
+																		<div className="flex items-center space-x-2">
+																			<span className="text-sm text-gray-600">
+																				Индекс:{" "}
+																				{reviews.evaluation?.review.student}
+																			</span>
+																			{reviews.evaluation?.review
+																				.is_confirmed ? (
+																				<div className="flex items-center text-green-600">
+																					{/* <CheckCircle className="w-4 h-4 mr-1" /> */}
+																					<span className="text-sm">
+																						Потврдено
+																					</span>
+																				</div>
+																			) : (
+																				<div className="flex items-center text-red-600">
+																					<span className="text-sm">
+																						Непотврдено
+																					</span>
+																				</div>
+																			)}
+																		</div>
+																		<div className="flex items-center space-x-1">
+																			<button className="flex items-center justify-center w-6 h-6 text-gray-400 hover:text-green-600 hover:bg-green-50 rounded">
+																				<ArrowUp className="w-4 h-4" />
+																			</button>
+																			<span className="text-sm font-medium text-gray-700 min-w-[20px] text-center">
+																				{reviews.evaluation?.review.votes_count}
+																			</span>
+																			<button className="flex items-center justify-center w-6 h-6 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded">
+																				<ArrowDown className="w-4 h-4" />
+																			</button>
+																		</div>
+																	</div>
+																	{reviews.evaluation?.methods?.map(
+																		(method, index) => (
+																			<div key={index}>
+																				<div className="space-y-4 mb-3">
+																					<div>
+																						<p className="text-sm text-gray-600 mb-2">
+																							Начин на положување {index + 1}:
+																						</p>
+																						<div className="overflow-x-auto">
+																							<table className="min-w-full border border-gray-300">
+																								<thead className="bg-gray-50">
+																									<tr>
+																										<th className="px-4 py-2 text-left text-sm font-medium text-gray-700 border-b">
+																											Активност
+																										</th>
+																										<th className="px-4 py-2 text-left text-sm font-medium text-gray-700 border-b">
+																											Процент од оценка
+																										</th>
+																									</tr>
+																								</thead>
+																								<tbody>
+																									{method.components.map(
+																										(component, cidx) => (
+																											<tr key={cidx}>
+																												<td className="px-4 py-2 text-sm text-gray-900 border-b">
+																													{
+																														EVALUATION_MAP_TO_MK[
+																															(component.category
+																																.charAt(0)
+																																.toUpperCase() +
+																																component.category.slice(
+																																	1
+																																)) as keyof typeof EVALUATION_MAP_TO_MK
+																														]
+																													}
+																												</td>
+																												<td className="px-4 py-2 text-sm text-gray-900 border-b">
+																													{component.percentage}
+																													%
+																												</td>
+																											</tr>
+																										)
+																									)}
+																								</tbody>
+																							</table>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																		)
+																	)}
+																	<p className="text-gray-800">
+																		Услов за потпис: <span>TODO</span>
+																	</p>
+																</div>
+															) : null)}
+													</div>
+												</div>
+											)}
+										</>
+									)}
+									{reviews.other.length > 0 && (
+										<div>
+											<h3 className="text-lg font-medium mb-4 text-gray-900">
+												Останати информации
+											</h3>
+
+											<div className="space-y-4">
+												{reviews.other.map((review) => (
+													<div className="border border-gray-200 rounded-lg p-4">
+														<div className="flex items-start justify-between mb-3">
+															<div className="flex items-center space-x-2">
+																<span className="text-sm text-gray-600">
+																	Индекс: {review.review.student}
+																</span>
+																<span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">
+																	{review.category}
+																</span>
+																{reviews.evaluation?.review.is_confirmed ? (
+																	<div className="flex items-center text-green-600">
+																		{/* <CheckCircle className="w-4 h-4 mr-1" /> */}
+																		<span className="text-sm">Потврдено</span>
+																	</div>
+																) : (
+																	<div className="flex items-center text-red-600">
+																		<span className="text-sm">Непотврдено</span>
+																	</div>
+																)}
+															</div>
+															<div className="flex items-center space-x-1">
+																<button className="flex items-center justify-center w-6 h-6 text-gray-400 hover:text-green-600 hover:bg-green-50 rounded">
+																	<ArrowUp className="w-4 h-4" />
+																</button>
+																<span className="text-sm font-medium text-gray-700 min-w-[20px] text-center">
+																	{review.review.votes_count}
+																</span>
+																<button className="flex items-center justify-center w-6 h-6 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded">
+																	<ArrowDown className="w-4 h-4" />
+																</button>
+															</div>
+														</div>
+														<p className="text-gray-700 text-sm">
+															{review.content}
+														</p>
+													</div>
+												))}
+											</div>
+										</div>
+									)}
+								</>
+							)}
+							<div className="mt-6 pt-4 border-gray-200">
+								<button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+									Сподели мислење
+								</button>
+							</div>
+						</div>
 					</div>
 
 					<div className="space-y-6">
@@ -338,14 +575,6 @@ function SubjectView() {
 								</div>
 							)}
 						</div>
-						{/* 
-						<div className="bg-white rounded-lg shadow-sm p-6">
-							<div className="space-y-3">
-								<button className="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-3 px-4 rounded-lg transition-colors">
-									Додај во омилени
-								</button>
-							</div>
-						</div> */}
 					</div>
 				</div>
 			</div>

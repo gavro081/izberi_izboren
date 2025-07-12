@@ -29,4 +29,8 @@ export const EVALUATION_MAP_TO_MK = {
 	Practical: "Практично",
 	Code: "Код",
 	Project: "Проект",
+	Homework: "Домашни",
+	Labs: "Лабораториски",
+	Attendance: "Присуство",
+	Presentation: "Презентација",
 };

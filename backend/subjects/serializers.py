@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Subject, Subject_Info, EvaluationMethod, EvaluationComponent, EvaluationReview, OtherReview
+from .models import Subject, Subject_Info, EvaluationMethod, EvaluationComponent, EvaluationReview, OtherReview, Review
 
 class SubjectInfoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -21,6 +21,7 @@ class SubjectInfoSerializer(serializers.ModelSerializer):
             'evaluation',
             'is_easy'
         ]
+
 class SubjectSerializer(serializers.ModelSerializer):
     subject_info = SubjectInfoSerializer()
     class Meta:
@@ -29,24 +30,20 @@ class SubjectSerializer(serializers.ModelSerializer):
             'id', 'name', 'code', 'abstract', 'subject_info'
         ]
 
+class ReviewMetaSerializer(serializers.ModelSerializer):
+    student = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Review
+        fields = ['student', 'is_confirmed', 'votes_count']
+
+    def get_student(self, obj):
+        return obj.student.index
+
 class EvaluationComponentSerializer(serializers.ModelSerializer):
     class Meta:
         model = EvaluationComponent
         fields = ['category', 'percentage']
-
-    # def validate(self, data):
-    #     try:
-    #         category = data['category']
-    #         percentage = data['percentage']
-    #         try:
-    #             percentage = int(percentage)
-    #         except ValueError:
-    #             raise ValidationError("percentage should be an integer.")
-    #     except:
-    #         raise ValidationError("invalid data for evaluation component.")
-    #
-    #     return data
-
 
 
 class EvaluationMethodSerializer(serializers.ModelSerializer):
@@ -74,10 +71,11 @@ class EvaluationMethodSerializer(serializers.ModelSerializer):
 
 class EvaluationReviewSerializer(serializers.ModelSerializer):
     methods = EvaluationMethodSerializer(many=True)
+    review = ReviewMetaSerializer()
 
     class Meta:
         model = EvaluationReview
-        fields = ['methods']
+        fields = ['review', 'methods']
 
     def validate(self, data):
         methods = data.get('methods', [])
@@ -90,14 +88,17 @@ class EvaluationReviewSerializer(serializers.ModelSerializer):
         review = self.context['review']
         evaluation_review = EvaluationReview.objects.create(review=review)
         for method_data in methods_data:
-            method_data['evaluation_review'] = evaluation_review
-            self.fields['methods'].create(method_data)
+            validated_method_data = self.fields['methods'].child.run_validation(method_data)
+            validated_method_data['evaluation_review'] = evaluation_review
+            self.fields['methods'].child.create(validated_method_data)
         return evaluation_review
 
 class OtherReviewSerializer(serializers.ModelSerializer):
+    review = ReviewMetaSerializer()
+
     class Meta:
         model = OtherReview
-        fields = ['category', 'content']
+        fields = ['review', 'category', 'content']
 
     def create(self, validated_data):
         review = self.context['review']

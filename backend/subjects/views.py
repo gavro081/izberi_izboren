@@ -9,7 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 from django.db.models import Case, When
 from subjects.utils import get_eligible_subjects, get_recommendations_cache_key, get_recommended_subjects, map_to_subjects_vector, score_for_preferences, get_student_vector
 from .serializers import SubjectSerializer, EvaluationReviewSerializer, OtherReviewSerializer
-from .models import Subject, Review, EvaluationReview
+from .models import Subject, Review, EvaluationReview, OtherReview
 
 def index(request):
     return HttpResponse("ok")
@@ -157,11 +157,8 @@ class SubjectReview(APIView):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        existing_evaluation = EvaluationReview.objects.filter(
-            review__subject_id=subject_id
-        ).exists()
-
-        if existing_evaluation:
+        if review_type == 'evaluation' and \
+            EvaluationReview.objects.filter(review__subject_id=subject_id).exists():
             return Response(
                 {"error": "An evaluation review for this subject already exists."},
                 status=status.HTTP_400_BAD_REQUEST
@@ -188,3 +185,23 @@ class SubjectReview(APIView):
         else:
             review.delete()
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class ReviewsForSubject(APIView):
+    def get(self, request, code):
+        subject = Subject.objects.filter(code=code)
+        if not subject.exists():
+            return Response({'error': 'Subject not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+        reviews = Review.objects.filter(subject__code=code)
+
+        evaluation_reviews = EvaluationReview.objects.filter(review__in=reviews).first()
+        other_reviews = OtherReview.objects.filter(review__in=reviews)
+
+
+        evaluation_serializer = EvaluationReviewSerializer(evaluation_reviews)
+        other_serializer = OtherReviewSerializer(other_reviews, many=True)
+
+        return Response({
+            "evaluation": evaluation_serializer.data,
+            "other": other_serializer.data
+        }, status=status.HTTP_200_OK)
