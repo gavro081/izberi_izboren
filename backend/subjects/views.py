@@ -8,8 +8,8 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from django.db.models import Case, When
 from subjects.utils import get_eligible_subjects, get_recommendations_cache_key, get_recommended_subjects, map_to_subjects_vector, score_for_preferences, get_student_vector
-from .serializers import SubjectSerializer
-from .models import Subject
+from .serializers import SubjectSerializer, EvaluationReviewSerializer, OtherReviewSerializer
+from .models import Subject, Review, EvaluationReview
 
 def index(request):
     return HttpResponse("ok")
@@ -87,9 +87,6 @@ class ToggleSubjectPreferences(APIView):
             student = request.user.student
             subject = Subject.objects.get(id=subject_id)
 
-            if action_type not in ['favorite', 'liked', 'disliked']:
-                return Response({"message": "Invalid action type. Use 'favorite', 'liked', or 'disliked'."}, status=status.HTTP_400_BAD_REQUEST)
-            
             if action_type == 'favorite':
                 if subject in student.favorite_subjects.all():
                     student.favorite_subjects.remove(subject)
@@ -111,6 +108,9 @@ class ToggleSubjectPreferences(APIView):
                 else:
                     student.disliked_subjects.add(subject)
                     action = 'added'
+            else:
+                return Response({"message": "Invalid action type. Use 'favorite', 'liked', or 'disliked'."},
+                                status=status.HTTP_400_BAD_REQUEST)
                 
             return Response({
                 'status': 'success',
@@ -124,3 +124,67 @@ class ToggleSubjectPreferences(APIView):
             return Response({'error': 'Student profile not found for this user.'}, status=status.HTTP_404_NOT_FOUND)
         except Exception as e:
             return Response({'error': f'An unexpected error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class SubjectReview(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        student = request.user.student
+        subject_id = request.data.get('subject_id')
+        review_type = request.data.get('type')
+
+        if not subject_id or review_type not in ['evaluation', 'other']:
+            return Response({'error': 'Missing or invalid data.'}, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            subject_id = int(subject_id)
+        except (TypeError, ValueError):
+            return Response({'error': 'Invalid subject ID.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            subject = Subject.objects.get(pk=subject_id)
+        except Subject.DoesNotExist:
+            return Response({'error': 'Subject not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+        existing = Review.objects.filter(
+            student=student,
+            subject_id=subject_id,
+            review_type=review_type
+        ).exists()
+
+        if existing:
+            return Response(
+                {"error": "You have already submitted this type of review for this subject."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        existing_evaluation = EvaluationReview.objects.filter(
+            review__subject_id=subject_id
+        ).exists()
+
+        if existing_evaluation:
+            return Response(
+                {"error": "An evaluation review for this subject already exists."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        review = Review.objects.create(
+            student=student,
+            subject=subject,
+            review_type=review_type
+        )
+
+        if review_type == "evaluation":
+            serializer = EvaluationReviewSerializer(data=request.data, context={'review': review})
+        else:
+            serializer = OtherReviewSerializer(data=request.data, context={'review': review})
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response({
+                    "message": f"{review_type.capitalize()} review created.",
+                    "review_id": review.id,
+                    },
+                status=status.HTTP_201_CREATED)
+        else:
+            review.delete()
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
