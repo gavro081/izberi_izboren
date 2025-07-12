@@ -35,7 +35,7 @@ class ReviewMetaSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Review
-        fields = ['student', 'is_confirmed', 'votes_count']
+        fields = ['id', 'student', 'is_confirmed', 'votes_count']
 
     def get_student(self, obj):
         return obj.student.index
@@ -75,7 +75,7 @@ class EvaluationReviewSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = EvaluationReview
-        fields = ['review', 'methods']
+        fields = ['review', 'methods', 'signature_condition']
 
     def validate(self, data):
         methods = data.get('methods', [])

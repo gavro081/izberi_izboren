@@ -6,10 +6,10 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
-from django.db.models import Case, When
+from django.db.models import Case, When, F
 from subjects.utils import get_eligible_subjects, get_recommendations_cache_key, get_recommended_subjects, map_to_subjects_vector, score_for_preferences, get_student_vector
 from .serializers import SubjectSerializer, EvaluationReviewSerializer, OtherReviewSerializer
-from .models import Subject, Review, EvaluationReview, OtherReview
+from .models import Subject, Review, EvaluationReview, OtherReview, ReviewVote
 
 def index(request):
     return HttpResponse("ok")
@@ -205,3 +205,33 @@ class ReviewsForSubject(APIView):
             "evaluation": evaluation_serializer.data,
             "other": other_serializer.data
         }, status=status.HTTP_200_OK)
+
+class ToggleVote(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        review_id = request.data.get('review_id')
+        vote_type = request.data.get('vote_type')
+        if vote_type not in ['up', 'down']:
+            return Response({"error": "Invalid vote type."}, status=status.HTTP_400_BAD_REQUEST)
+        if not review_id:
+            return Response({"error": "Review ID is required."}, status=status.HTTP_400_BAD_REQUEST)
+
+        student = request.user.student
+
+        try:
+            review = Review.objects.get(pk=review_id)
+        except Review.DoesNotExist:
+            return Response({"error": "Review not found."}, status=status.HTTP_404_NOT_FOUND)
+
+        try:
+            vote = ReviewVote.objects.get(review=review, student=student)
+            if vote.vote_type == vote_type:
+                vote.delete()
+                return Response({"message": "Vote deleted."}, status=status.HTTP_200_OK)
+            vote.vote_type = vote_type
+            vote.save()
+        except ReviewVote.DoesNotExist:
+            ReviewVote.objects.create(review=review, student=student, vote_type=vote_type)
+            return Response({"message": "Vote recorded."}, status=status.HTTP_201_CREATED)
+

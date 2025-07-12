@@ -1,30 +1,29 @@
 import { EVALUATION_MAP_TO_MK } from "../../constants/subjects";
-import { Reviews } from "../types";
+import { EvaluationReview } from "../types";
 import Votes from "./Votes";
 
 interface EvaluationReviewsProps {
-	reviews: Reviews;
+	evaluation_review: EvaluationReview;
 }
 
-const EvaluationReviews = ({ reviews }: EvaluationReviewsProps) => {
+const EvaluationReviews = ({ evaluation_review }: EvaluationReviewsProps) => {
 	return (
 		<>
-			{reviews.evaluation?.methods?.length > 0 && (
+			{evaluation_review.methods?.length > 0 && (
 				<div className="mb-8">
 					<h3 className="text-lg font-medium mb-4 text-gray-900">
 						Информации за полагање
 					</h3>
 					<div className="space-y-4">
-						{reviews &&
-							reviews.evaluation &&
-							(reviews.evaluation?.methods?.length > 0 ? (
+						{evaluation_review &&
+							(evaluation_review.methods?.length > 0 ? (
 								<div className="border border-gray-200 rounded-lg p-4">
 									<div className="flex items-start justify-between mb-3">
 										<div className="flex items-center space-x-2">
 											<span className="text-sm text-gray-600">
-												Индекс: {reviews.evaluation?.review.student}
+												Индекс: {evaluation_review.review.student}
 											</span>
-											{reviews.evaluation?.review.is_confirmed ? (
+											{evaluation_review.review.is_confirmed ? (
 												<div className="flex items-center text-green-600">
 													{/* <CheckCircle className="w-4 h-4 mr-1" /> */}
 													<span className="text-sm">Потврдено</span>
@@ -41,14 +40,15 @@ const EvaluationReviews = ({ reviews }: EvaluationReviewsProps) => {
 												</div>
 											)}
 										</div>
-										<Votes reviews={reviews} />
+										<Votes review={evaluation_review.review} />
 									</div>
-									{reviews.evaluation?.methods?.map((method, index) => (
+									{evaluation_review.methods?.map((method, index) => (
 										<div key={index}>
 											<div className="space-y-4 mb-3">
 												<div>
 													<p className="text-sm text-gray-600 mb-2 font-semibold">
 														Начин на оценување {index + 1}:
+														{evaluation_review.review.id}
 													</p>
 													<div className="overflow-x-auto">
 														<table className="min-w-full border border-gray-300">
@@ -92,9 +92,9 @@ const EvaluationReviews = ({ reviews }: EvaluationReviewsProps) => {
 									<p className="text-gray-800 font-semibold">
 										Услов за потпис:{" "}
 										<span>
-											{reviews.evaluation.signature_condition &&
-											reviews.evaluation.signature_condition != "None"
-												? reviews.evaluation.signature_condition
+											{evaluation_review.signature_condition &&
+											evaluation_review.signature_condition != "None"
+												? evaluation_review.signature_condition
 												: "Нема"}
 										</span>
 									</p>

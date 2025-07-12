@@ -1,16 +1,35 @@
 import { ArrowDown, ArrowUp } from "lucide-react";
+import { useState } from "react";
+import axiosInstance from "../../api/axiosInstance";
 import { useAuth } from "../../hooks/useAuth";
-import { Reviews } from "../types";
+import { Review } from "../types";
 
 interface VotesProps {
-	reviews: Reviews;
-	review_id?: number;
+	review: Review;
 }
 
-const Votes = ({ reviews }: VotesProps) => {
+const Votes = ({ review }: VotesProps) => {
+	const [localCount, setLocalCount] = useState<number>(review.votes_count ?? 0);
 	const { isAuthenticated } = useAuth();
-	const handleClick = (action: "up" | "down") => {
-		console.log(action);
+	const handleClick = async (vote_type: "up" | "down") => {
+		const review_id = review.id;
+		console.log(review_id);
+		console.log(vote_type);
+		try {
+			const response = await axiosInstance.post(
+				"subjects/subject-review/toggle-vote/",
+				{
+					review_id: review_id,
+					vote_type: vote_type,
+				}
+			);
+			setLocalCount((prevCount) =>
+				vote_type == "up" ? prevCount + 1 : prevCount - 1
+			);
+			console.log(response.data);
+		} catch (err) {
+			console.error("Error occured: ", err);
+		}
 	};
 
 	return (
@@ -27,7 +46,7 @@ const Votes = ({ reviews }: VotesProps) => {
 				<ArrowUp className="w-4 h-4" />
 			</button>
 			<span className="text-sm font-medium text-gray-700 min-w-[20px] text-center">
-				{reviews.evaluation?.review.votes_count}
+				{localCount}
 			</span>
 			<button
 				className={`flex items-center justify-center w-6 h-6 text-gray-400 rounded transition-color ${
@@ -35,6 +54,7 @@ const Votes = ({ reviews }: VotesProps) => {
 						? "cursor-not-allowed"
 						: "cursor-pointer hover:text-red-600 hover:bg-red-50"
 				}`}
+				onClick={() => handleClick("down")}
 				disabled={!isAuthenticated}
 			>
 				<ArrowDown className="w-4 h-4" />

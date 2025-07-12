@@ -284,10 +284,10 @@ function SubjectView() {
 										Информации од студенти
 									</h2>
 									{reviews.evaluation.methods.length > 0 && (
-										<EvaluationReviews reviews={reviews} />
+										<EvaluationReviews evaluation_review={reviews.evaluation} />
 									)}
 									{reviews.other.length > 0 && (
-										<OtherReviews reviews={reviews} />
+										<OtherReviews other_reviews={reviews.other} />
 									)}
 								</>
 							)}

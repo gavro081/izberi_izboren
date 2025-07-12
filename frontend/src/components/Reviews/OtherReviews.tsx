@@ -1,12 +1,13 @@
+import { CheckCircle } from "lucide-react";
 import { MAP_REVIEW_CATEGORY_TO_MK } from "../SubjectCatalog/utils";
-import { Reviews } from "../types";
+import { OtherReview } from "../types";
 import Votes from "./Votes";
 
 interface OtherReviewsProps {
-	reviews: Reviews;
+	other_reviews: OtherReview[];
 }
 
-const OtherReviews = ({ reviews }: OtherReviewsProps) => {
+const OtherReviews = ({ other_reviews }: OtherReviewsProps) => {
 	return (
 		<div>
 			<h3 className="text-lg font-medium mb-4 text-gray-900">
@@ -14,19 +15,20 @@ const OtherReviews = ({ reviews }: OtherReviewsProps) => {
 			</h3>
 
 			<div className="space-y-4">
-				{reviews.other.map((review) => (
+				{other_reviews.map((other_review) => (
 					<div className="border border-gray-200 rounded-lg p-4">
 						<div className="flex items-start justify-between mb-3">
 							<div className="flex items-center space-x-2">
 								<span className="text-sm text-gray-600">
-									Индекс: {review.review.student}
+									{other_review.review.id}
+									Индекс: {other_review.review.student}
 								</span>
 								<span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">
-									{MAP_REVIEW_CATEGORY_TO_MK[review.category]}
+									{MAP_REVIEW_CATEGORY_TO_MK[other_review.category]}
 								</span>
-								{reviews.evaluation?.review.is_confirmed ? (
+								{other_review.review.is_confirmed ? (
 									<div className="flex items-center text-green-600">
-										{/* <CheckCircle className="w-4 h-4 mr-1" /> */}
+										<CheckCircle className="w-4 h-4 mr-1" />
 										<span className="text-sm">Потврдено</span>
 									</div>
 								) : (
@@ -41,9 +43,9 @@ const OtherReviews = ({ reviews }: OtherReviewsProps) => {
 									</div>
 								)}
 							</div>
-							<Votes reviews={reviews} />
+							<Votes review={other_review.review} />
 						</div>
-						<p className="text-gray-700 text-sm">{review.content}</p>
+						<p className="text-gray-700 text-sm">{other_review.content}</p>
 					</div>
 				))}
 			</div>

@@ -92,13 +92,14 @@ class ReviewVote(models.Model):
 
 class EvaluationReview(models.Model):
     review = models.OneToOneField(Review, on_delete=models.CASCADE)
+    signature_condition = models.CharField(max_length=64, blank=True)
 
 class EvaluationMethod(models.Model):
     # one evaluation review could have more evaluation methods
     # example through a project and through exams
-    # option A: project: 90%, labs: 10%
-    # option B: theory: 35%, practical: 35%, labs: 10%, project: 20%
-    # each of these (option A - project, option A - labs, option B - project etc. is a EvaluationComponent)
+    # method A: project: 90%, labs: 10%
+    # method B: theory: 35%, practical: 35%, labs: 10%, project: 20%
+    # each of these (method A - project, method A - labs, method B - project etc. is a EvaluationComponent)
     evaluation_review = models.ForeignKey(EvaluationReview, on_delete=models.CASCADE, related_name='methods')
     note = models.CharField(max_length=64, null=True, blank=True, help_text="additional info about this particular evaluation method.")
 
