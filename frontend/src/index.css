@@ -58,14 +58,10 @@
 }
 
 .hide-scrollbar::-webkit-scrollbar {
-  display: none; /* For Chrome, Safari, and Opera */
+	display: none; /* For Chrome, Safari, and Opera */
 }
 
 .hide-scrollbar {
-  -ms-overflow-style: none; /* For Internet Explorer and Edge */
-  scrollbar-width: none; /* For Firefox */
-}
-
-:root {
-	background: rgb(37 99 235 / var(--tw-bg-opacity, 1));
+	-ms-overflow-style: none; /* For Internet Explorer and Edge */
+	scrollbar-width: none; /* For Firefox */
 }

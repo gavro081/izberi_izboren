@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import PrivateRoute from "./components/PrivateRoute";
+import ScrollToTop from "./components/ScrollToTop";
 import CourseCatalog from "./components/SubjectCatalog/SubjectCatalog";
 import { AuthProvider } from "./context/AuthProvider";
 import "./index.css";
@@ -13,9 +14,9 @@ import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import Recommendations from "./pages/Recommendations";
 import Register from "./pages/Register";
+import ReviewForm from "./pages/ReviewForm";
 import SubjectPreferences from "./pages/SubjectPreferences";
 import SubjectView from "./pages/SubjectView";
-import ScrollToTop from "./components/ScrollToTop";
 
 const Layout = () => (
 	<div className="flex flex-col min-h-screen">
@@ -77,6 +78,15 @@ const router = createBrowserRouter([
 				path: "subjects/:code",
 				element: <SubjectView />,
 			},
+			{
+				path: "review-form/:code",
+				element: (
+					<PrivateRoute>
+						<ReviewForm />
+					</PrivateRoute>
+				),
+			},
+
 			{
 				path: "*",
 				element: <NotFound />,
