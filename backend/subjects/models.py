@@ -63,17 +63,13 @@ class Review(models.Model):
     review_type = models.CharField(max_length=16, choices=REVIEW_TYPE_CHOICES)
 
     def __str__(self):
-        return f"Review for {self.subject.name} from {self.student.index}."
+        return f"Review #{self.id} for {self.subject.name} from {self.student.index}."
 
     @property
-    def upvote_count(self):
-        return self.votes.filter(review_votes__reviewvote__vote_type='up').count()
-    @property
-    def downvote_count(self):
-        return self.votes.filter(review_votes__reviewvote__vote_type='down').count()
-    @property
-    def votes_count(self):
-        return self.votes.count()
+    def votes_score(self):
+        upvotes = self.reviewvote_set.filter(vote_type='up').count()
+        downvotes = self.reviewvote_set.filter(vote_type='down').count()
+        return upvotes - downvotes
 
 
 class ReviewVote(models.Model):

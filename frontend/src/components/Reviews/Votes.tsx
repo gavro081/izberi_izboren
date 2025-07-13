@@ -9,24 +9,27 @@ interface VotesProps {
 }
 
 const Votes = ({ review }: VotesProps) => {
-	const [localCount, setLocalCount] = useState<number>(review.votes_count ?? 0);
+	const [localCount, setLocalCount] = useState<number>(review.votes_score ?? 0);
 	const { isAuthenticated } = useAuth();
+	const [userVote, setUserVote] = useState<"up" | "down" | "none">(
+		review.user_has_voted ?? "none"
+	);
+
 	const handleClick = async (vote_type: "up" | "down") => {
 		const review_id = review.id;
-		console.log(review_id);
-		console.log(vote_type);
 		try {
-			const response = await axiosInstance.post(
-				"subjects/subject-review/toggle-vote/",
-				{
-					review_id: review_id,
-					vote_type: vote_type,
-				}
-			);
-			setLocalCount((prevCount) =>
-				vote_type == "up" ? prevCount + 1 : prevCount - 1
-			);
-			console.log(response.data);
+			const response = await axiosInstance.post<{
+				message: string;
+				vote_score: number;
+			}>("subjects/subject-review/toggle-vote/", {
+				review_id: review_id,
+				vote_type: vote_type,
+			});
+			setUserVote(userVote === vote_type ? "none" : vote_type);
+
+			// in the case that someone has voted on a review since we opened the page and we vote on the same review
+			// an upvote or downvote might change the counter by more than one which might look confusing
+			setLocalCount(response.data.vote_score);
 		} catch (err) {
 			console.error("Error occured: ", err);
 		}
@@ -35,11 +38,12 @@ const Votes = ({ review }: VotesProps) => {
 	return (
 		<div className="flex items-center space-x-1">
 			<button
-				className={`flex items-center justify-center w-6 h-6 text-gray-400 rounded transition-colors ${
+				className={`flex items-center justify-center w-6 h-6 rounded transition-colors${
 					!isAuthenticated
 						? "cursor-not-allowed"
 						: "cursor-pointer hover:text-green-600 hover:bg-green-50 "
-				}`}
+				}
+					${userVote == "up" ? "text-green-600" : "text-gray-400"}`}
 				onClick={() => handleClick("up")}
 				disabled={!isAuthenticated}
 			>
@@ -49,11 +53,12 @@ const Votes = ({ review }: VotesProps) => {
 				{localCount}
 			</span>
 			<button
-				className={`flex items-center justify-center w-6 h-6 text-gray-400 rounded transition-color ${
+				className={`flex items-center justify-center w-6 h-6 rounded transition-colors${
 					!isAuthenticated
 						? "cursor-not-allowed"
-						: "cursor-pointer hover:text-red-600 hover:bg-red-50"
-				}`}
+						: "cursor-pointer hover:text-red-600 hover:bg-green-50 "
+				}
+					${userVote == "down" ? "text-red-600" : "text-gray-400"}`}
 				onClick={() => handleClick("down")}
 				disabled={!isAuthenticated}
 			>

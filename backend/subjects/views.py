@@ -194,12 +194,12 @@ class ReviewsForSubject(APIView):
 
         reviews = Review.objects.filter(subject__code=code)
 
-        evaluation_reviews = EvaluationReview.objects.filter(review__in=reviews).first()
+        evaluation_review = EvaluationReview.objects.filter(review__in=reviews).first()
         other_reviews = OtherReview.objects.filter(review__in=reviews)
 
-
-        evaluation_serializer = EvaluationReviewSerializer(evaluation_reviews)
-        other_serializer = OtherReviewSerializer(other_reviews, many=True)
+        context = {'request': request}
+        evaluation_serializer = EvaluationReviewSerializer(evaluation_review, context=context)
+        other_serializer = OtherReviewSerializer(other_reviews, many=True, context=context)
 
         return Response({
             "evaluation": evaluation_serializer.data,
@@ -228,10 +228,11 @@ class ToggleVote(APIView):
             vote = ReviewVote.objects.get(review=review, student=student)
             if vote.vote_type == vote_type:
                 vote.delete()
-                return Response({"message": "Vote deleted."}, status=status.HTTP_200_OK)
+                return Response({"message": "Vote deleted.", "vote_score": review.votes_score}, status=status.HTTP_200_OK)
             vote.vote_type = vote_type
             vote.save()
+            return Response({"message": "Vote updated.", "vote_score": review.votes_score}, status=status.HTTP_200_OK)
         except ReviewVote.DoesNotExist:
             ReviewVote.objects.create(review=review, student=student, vote_type=vote_type)
-            return Response({"message": "Vote recorded."}, status=status.HTTP_201_CREATED)
+            return Response({"message": "Vote recorded.", "vote_score": review.votes_score}, status=status.HTTP_201_CREATED)
 

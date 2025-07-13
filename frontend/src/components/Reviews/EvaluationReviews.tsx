@@ -40,6 +40,7 @@ const EvaluationReviews = ({ evaluation_review }: EvaluationReviewsProps) => {
 												</div>
 											)}
 										</div>
+										{/* TODO: decide if this should stay here */}
 										<Votes review={evaluation_review.review} />
 									</div>
 									{evaluation_review.methods?.map((method, index) => (
@@ -48,7 +49,6 @@ const EvaluationReviews = ({ evaluation_review }: EvaluationReviewsProps) => {
 												<div>
 													<p className="text-sm text-gray-600 mb-2 font-semibold">
 														Начин на оценување {index + 1}:
-														{evaluation_review.review.id}
 													</p>
 													<div className="overflow-x-auto">
 														<table className="min-w-full border border-gray-300">

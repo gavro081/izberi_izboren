@@ -99,7 +99,8 @@ export interface Review {
 	id?: number;
 	student?: string;
 	is_confirmed?: boolean;
-	votes_count?: number;
+	votes_score?: number;
+	user_has_voted?: "none" | "up" | "down";
 }
 
 export interface Reviews {

@@ -272,6 +272,7 @@ function SubjectView() {
 							</div>
 						</div>
 
+						{/* reviews section */}
 						<div className="bg-white rounded-lg shadow-sm p-6">
 							{!reviews ||
 							!reviews.evaluation ||
@@ -293,7 +294,7 @@ function SubjectView() {
 							)}
 							<div className="mt-6 pt-4 border-gray-200">
 								<button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-									Сподели мислење
+									Сподели информација / мислење
 								</button>
 							</div>
 						</div>

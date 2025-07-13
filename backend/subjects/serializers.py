@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import Subject, Subject_Info, EvaluationMethod, EvaluationComponent, EvaluationReview, OtherReview, Review
+from .models import (Subject, Subject_Info, EvaluationMethod, EvaluationComponent,
+                     EvaluationReview, OtherReview, Review, ReviewVote)
 
 class SubjectInfoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -32,10 +33,25 @@ class SubjectSerializer(serializers.ModelSerializer):
 
 class ReviewMetaSerializer(serializers.ModelSerializer):
     student = serializers.SerializerMethodField()
+    user_has_voted = serializers.SerializerMethodField()
 
     class Meta:
         model = Review
-        fields = ['id', 'student', 'is_confirmed', 'votes_count']
+        fields = ['id', 'student', 'is_confirmed', 'votes_score', 'user_has_voted']
+
+
+    def get_user_has_voted(self, obj):
+        request = self.context.get("request")
+        if request and hasattr(request, 'user') and request.user.is_authenticated:
+            if hasattr(request.user, 'student'):
+                student = request.user.student
+                try:
+                    vote = ReviewVote.objects.get(review=obj, student=student)
+                    return vote.vote_type
+                except ReviewVote.DoesNotExist:
+                    return 'none'
+        return 'none'
+
 
     def get_student(self, obj):
         return obj.student.index
@@ -71,7 +87,7 @@ class EvaluationMethodSerializer(serializers.ModelSerializer):
 
 class EvaluationReviewSerializer(serializers.ModelSerializer):
     methods = EvaluationMethodSerializer(many=True)
-    review = ReviewMetaSerializer()
+    review = serializers.SerializerMethodField()
 
     class Meta:
         model = EvaluationReview
@@ -83,22 +99,31 @@ class EvaluationReviewSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("A subject can't have more than 3 evaluation methods.")
         return data
 
+    def get_review(self, obj):
+        if obj:
+            return ReviewMetaSerializer(obj.review, context=self.context).data
+        return None
+
     def create(self, validated_data):
         methods_data = validated_data.pop('methods')
         review = self.context['review']
-        evaluation_review = EvaluationReview.objects.create(review=review)
+        evaluation_review = EvaluationReview.objects.create(review=review, **validated_data)
         for method_data in methods_data:
             validated_method_data = self.fields['methods'].child.run_validation(method_data)
             validated_method_data['evaluation_review'] = evaluation_review
             self.fields['methods'].child.create(validated_method_data)
+
         return evaluation_review
 
 class OtherReviewSerializer(serializers.ModelSerializer):
-    review = ReviewMetaSerializer()
+    review = serializers.SerializerMethodField()
 
     class Meta:
         model = OtherReview
         fields = ['review', 'category', 'content']
+
+    def get_review(self, obj):
+        return ReviewMetaSerializer(obj.review, context=self.context).data
 
     def create(self, validated_data):
         review = self.context['review']
