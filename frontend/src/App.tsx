@@ -53,7 +53,7 @@ const router = createBrowserRouter([
 			{
 				path: "recommendations",
 				element: (
-					<PrivateRoute>
+					<PrivateRoute allowedUserTypes={["student"]}>
 						<Recommendations />
 					</PrivateRoute>
 				),
@@ -61,7 +61,7 @@ const router = createBrowserRouter([
 			{
 				path: "account",
 				element: (
-					<PrivateRoute>
+					<PrivateRoute allowedUserTypes={["student"]}>
 						<Account />
 					</PrivateRoute>
 				),
@@ -69,7 +69,7 @@ const router = createBrowserRouter([
 			{
 				path: "subject-preferences",
 				element: (
-					<PrivateRoute>
+					<PrivateRoute allowedUserTypes={["student"]}>
 						<SubjectPreferences />
 					</PrivateRoute>
 				),
@@ -81,7 +81,7 @@ const router = createBrowserRouter([
 			{
 				path: "review-form/:code",
 				element: (
-					<PrivateRoute>
+					<PrivateRoute allowedUserTypes={["student"]}>
 						<ReviewForm />
 					</PrivateRoute>
 				),

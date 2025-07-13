@@ -42,13 +42,20 @@ class RegistrationSerializer(serializers.ModelSerializer):
     
     def create(self, validated_data):
         validated_data.pop('confirm_password')
-
-        user = User.objects.create_user(
-            email=validated_data['email'],
-            password=validated_data['password'],
-            full_name = validated_data['full_name'],
-            user_type='student',
-        )
+        if "students" in validated_data['email']:
+            user = User.objects.create_user(
+                email=validated_data['email'],
+                password=validated_data['password'],
+                full_name = validated_data['full_name'],
+                user_type='student',
+            )
+        else:
+            user = User.objects.create_superuser(
+                email=validated_data['email'],
+                password=validated_data['password'],
+                full_name=validated_data['full_name'],
+                user_type='admin',
+            )
 
         return user
 

@@ -1,11 +1,7 @@
 import { OverridableTokenClientConfig } from "@react-oauth/google";
 import { createContext, Dispatch, SetStateAction } from "react";
-import { StudentData } from "../components/types";
+import { StudentData, User } from "../components/types";
 
-export interface User {
-	full_name: string;
-	user_type: string;
-}
 export interface AuthContextType {
 	accessToken: string | null;
 	formData: StudentData | null;

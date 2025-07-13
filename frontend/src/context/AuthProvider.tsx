@@ -11,8 +11,8 @@ import React, {
 import { toast } from "react-toastify";
 import axiosInstance from "../api/axiosInstance";
 import { fetchUser } from "../api/user";
-import { StudentData } from "../components/types";
-import AuthContext, { AuthContextType, User } from "../context/AuthContext";
+import { StudentData, User, UserType } from "../components/types";
+import AuthContext, { AuthContextType } from "../context/AuthContext";
 const useOAuth = import.meta.env.VITE_USE_OAUTH === "true";
 
 interface DecodedToken {
@@ -224,7 +224,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 							access: string;
 							refresh: string;
 							full_name: string;
-							user_type: string;
+							user_type: UserType;
 						}>("http://localhost:8000/auth/google/login/", {
 							access_token: accessToken,
 						});

@@ -14,7 +14,7 @@ const Navbar: React.FC = () => {
 	const { setFavoriteIds, setLikedIds, setDislikedIds } = usePreferences();
 	const navigate = useNavigate();
 	const profileMenuRef = useRef<HTMLDivElement>(null);
-	const userInitial = user?.full_name.charAt(0).toUpperCase() || "";
+	const userInitial = user?.full_name?.charAt(0).toUpperCase() || "";
 	// Close dropdown when clicking outside
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
@@ -115,38 +115,57 @@ const Navbar: React.FC = () => {
 							</button>
 							{profileMenuOpen && (
 								<div className="absolute right-0 mt-1 w-48 bg-white rounded-md shadow-lg py-1 text-black z-20">
-									<Link
-										to="/account"
-										className="block px-4 py-2 text-sm hover:bg-gray-100 hover:underline"
-										onClick={() => setProfileMenuOpen(false)}
-									>
-										Профил
-									</Link>
+									{user?.user_type === "admin" ? (
+										<>
+											<div className="block px-4 py-2 text-sm text-gray-500">
+												Admin Panel (Placeholder)
+											</div>
+											<button
+												onClick={() => {
+													handleLogout();
+													setProfileMenuOpen(false);
+												}}
+												className="w-full text-left block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 hover:underline"
+											>
+												Одјави се
+											</button>
+										</>
+									) : (
+										<>
+											<Link
+												to="/account"
+												className="block px-4 py-2 text-sm hover:bg-gray-100 hover:underline"
+												onClick={() => setProfileMenuOpen(false)}
+											>
+												Профил
+											</Link>
 
-									<Link
-										to="/recommendations"
-										className="block px-4 py-2 text-sm hover:bg-gray-100 hover:underline"
-										onClick={() => setProfileMenuOpen(false)}
-									>
-										Препораки
-									</Link>
-									<Link
-										to="/subject-preferences"
-										className="block px-4 py-2 text-sm hover:bg-gray-100 hover:underline"
-										onClick={() => setMenuOpen(false)}
-									>
-										Мои предмети
-									</Link>
+											<Link
+												to="/recommendations"
+												className="block px-4 py-2 text-sm hover:bg-gray-100 hover:underline"
+												onClick={() => setProfileMenuOpen(false)}
+											>
+												Препораки
+											</Link>
+											<Link
+												to="/subject-preferences"
+												className="block px-4 py-2 text-sm hover:bg-gray-100 hover:underline"
+												onClick={() => setMenuOpen(false)}
+											>
+												Мои предмети
+											</Link>
 
-									<button
-										onClick={() => {
-											handleLogout();
-											setProfileMenuOpen(false);
-										}}
-										className="w-full text-left block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 hover:underline"
-									>
-										Одјави се
-									</button>
+											<button
+												onClick={() => {
+													handleLogout();
+													setProfileMenuOpen(false);
+												}}
+												className="w-full text-left block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 hover:underline"
+											>
+												Одјави се
+											</button>
+										</>
+									)}
 								</div>
 							)}
 						</div>
@@ -170,36 +189,53 @@ const Navbar: React.FC = () => {
 					</Link>
 					{isAuthenticated && (
 						<>
-							<Link
-								to="/recommendations"
-								className="hover:underline"
-								onClick={() => setMenuOpen(false)}
-							>
-								Препораки
-							</Link>
-							<Link
-								to="/account"
-								className="hover:underline"
-								onClick={() => setMenuOpen(false)}
-							>
-								Профил
-							</Link>
-							<Link
-								to="/subject-preferences"
-								className="hover:underline"
-								onClick={() => setMenuOpen(false)}
-							>
-								Омилени предмети
-							</Link>
-							<button
-								onClick={() => {
-									handleLogout();
-									setMenuOpen(false);
-								}}
-								className="text-left text-red-400 hover:underline"
-							>
-								Одјави се
-							</button>
+							{user?.user_type === "admin" ? (
+								<>
+									<div className="text-gray-400">Admin Panel (Placeholder)</div>
+									<button
+										onClick={() => {
+											handleLogout();
+											setMenuOpen(false);
+										}}
+										className="text-left text-red-400 hover:underline"
+									>
+										Одјави се
+									</button>
+								</>
+							) : (
+								<>
+									<Link
+										to="/recommendations"
+										className="hover:underline"
+										onClick={() => setMenuOpen(false)}
+									>
+										Препораки
+									</Link>
+									<Link
+										to="/account"
+										className="hover:underline"
+										onClick={() => setMenuOpen(false)}
+									>
+										Профил
+									</Link>
+									<Link
+										to="/subject-preferences"
+										className="hover:underline"
+										onClick={() => setMenuOpen(false)}
+									>
+										Омилени предмети
+									</Link>
+									<button
+										onClick={() => {
+											handleLogout();
+											setMenuOpen(false);
+										}}
+										className="text-left text-red-400 hover:underline"
+									>
+										Одјави се
+									</button>
+								</>
+							)}
 						</>
 					)}
 					{!isAuthenticated && (

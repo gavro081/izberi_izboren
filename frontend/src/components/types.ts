@@ -1,5 +1,12 @@
 import { STUDY_TRACKS } from "../constants/subjects";
 
+export type UserType = "admin" | "student";
+
+export interface User {
+	full_name: string;
+	user_type: UserType;
+}
+
 export interface Subject {
 	id: number;
 	code: string;

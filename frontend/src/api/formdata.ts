@@ -14,7 +14,7 @@ export const fetchFormData = async (
 	} catch (error) {
 		console.error("Could not fetch user form data", error);
 		if ((error as any).response?.status !== 401) {
-			toast.error("Could not load form data.");
+			toast.error("Настана грешка при барањето.");
 		}
 	}
 };

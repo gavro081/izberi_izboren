@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import googleLogo from "../assets/google-logo.png";
 import PasswordInput from "../components/PasswordInput";
-import { User } from "../context/AuthContext";
+import { User } from "../components/types";
 import { useAuth } from "../hooks/useAuth";
 
 interface RegisterForm {
@@ -73,7 +73,8 @@ const Register: React.FC = () => {
 			const { access, refresh, user } = response.data;
 			login(access, refresh, user);
 			toast.success("Успешна регистрација!");
-			navigate("/account");
+			if (user.user_type === "student") navigate("/account");
+			else navigate("/");
 		} catch (err: unknown) {
 			const axiosError = err as AxiosError<{
 				[key: string]: string[] | string;

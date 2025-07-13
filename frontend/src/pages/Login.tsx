@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import googleLogo from "../assets/google-logo.png";
 import PasswordInput from "../components/PasswordInput";
+import { UserType } from "../components/types";
 import { useAuth } from "../hooks/useAuth";
 
 interface LoginForm {
@@ -54,7 +55,7 @@ const Login: React.FC = () => {
 				access: string;
 				refresh: string;
 				full_name: string;
-				user_type: string;
+				user_type: UserType;
 			}>("http://localhost:8000/auth/login/", {
 				email: formData.email,
 				password: formData.password,
@@ -62,7 +63,9 @@ const Login: React.FC = () => {
 			const { access, refresh, full_name, user_type } = response.data;
 			login(access, refresh, { full_name, user_type });
 			navigate("/");
-			toast.success("Успешно сте најавени!");
+			toast.success(
+				`Успешно сте најавени${user_type ? " како администратор" : ""}!`
+			);
 		} catch (err: unknown) {
 			const axiosError = err as AxiosError<{
 				[key: string]: string[] | string;

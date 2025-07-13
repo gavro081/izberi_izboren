@@ -13,12 +13,11 @@ class UserManager(BaseUserManager):
         user.set_password(password)
         user.save(using=self._db)
         return user
-    def create_superuser(self, email, password=None, **extra_fields):
+    def create_superuser(self, email, password=None, full_name=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
-        extra_fields.setdefault('username', email)
 
-        return self.create_user(email, password, **extra_fields)
+        return self.create_user(email, password, full_name, **extra_fields)
     
 class User(AbstractUser):
     USER_TYPE_CHOICES = [
@@ -94,4 +93,8 @@ class Student(models.Model):
         ]
 
 
-    
+class Admin(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='admin')
+
+    def __str__(self):
+        return f"Admin: {self.user.email}"

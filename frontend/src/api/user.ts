@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { User } from "../context/AuthContext";
+import { User } from "../components/types";
 import axiosInstance from "./axiosInstance";
 
 export const fetchUser = async (
