@@ -87,7 +87,7 @@ class ReviewVote(models.Model):
         ]
 
 class EvaluationReview(models.Model):
-    review = models.OneToOneField(Review, on_delete=models.CASCADE)
+    review = models.OneToOneField(Review, on_delete=models.CASCADE, related_name='evaluation_review')
     signature_condition = models.CharField(max_length=64, blank=True)
 
 class EvaluationMethod(models.Model):
@@ -129,7 +129,7 @@ class OtherReview(models.Model):
         ("staff", "Staff"),
         ("other", "Other"),
     ]
-    review = models.OneToOneField(Review, on_delete=models.CASCADE)
+    review = models.OneToOneField(Review, on_delete=models.CASCADE, related_name='other_review')
     content = models.TextField()
     category = models.CharField(max_length=16, choices=CATEGORY_TYPE_CHOICES)
 

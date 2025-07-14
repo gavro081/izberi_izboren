@@ -1,6 +1,5 @@
 import { isAxiosError } from "axios";
 import { useCallback, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../api/axiosInstance";
 import { fetchFormData } from "../../api/formdata";
 import { fetchSubjects } from "../../api/subjects";
@@ -133,21 +132,15 @@ const StudentForm = ({ formData, isLoading }: StudentFormProps) => {
 		formData?.has_extracurricular || false
 	);
 	const [invalidSubjects, setInvalidSubjects] = useState<Subject[]>([]);
-	const { setFormData, user } = useAuth();
-	const navigate = useNavigate();
+	const { setFormData } = useAuth();
 
 	// Update form when formData changes (e.g., after fetching user data)
 	useEffect(() => {
-		if (user?.user_type == "admin") {
-			navigate("/");
-			return;
-		}
-
 		if (!subjects || subjects.length === 0) {
 			fetchSubjects(setSubjects);
 		}
 		const token = localStorage.getItem("access");
-		if (user?.user_type !== "student" && token && !formData) {
+		if (token && !formData) {
 			fetchFormData(token, setFormData);
 		}
 	}, []);

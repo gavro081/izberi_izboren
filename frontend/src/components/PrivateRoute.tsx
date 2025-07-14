@@ -13,6 +13,10 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
 	children,
 }) => {
 	const { isAuthenticated, loading, user } = useAuth();
+	if (loading) {
+		// TODO: add loading screen or skeleton, or dont
+		return null;
+	}
 	if (!isAuthenticated && !loading) {
 		return <Navigate to="/login" replace />;
 	}

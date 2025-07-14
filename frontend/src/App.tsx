@@ -9,6 +9,7 @@ import CourseCatalog from "./components/SubjectCatalog/SubjectCatalog";
 import { AuthProvider } from "./context/AuthProvider";
 import "./index.css";
 import Account from "./pages/Account";
+import AdminDashboard from "./pages/AdminDashboard";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
@@ -81,8 +82,16 @@ const router = createBrowserRouter([
 			{
 				path: "review-form/:code",
 				element: (
-					<PrivateRoute allowedUserTypes={["student"]}>
+					<PrivateRoute allowedUserTypes={["student", "admin"]}>
 						<ReviewForm />
+					</PrivateRoute>
+				),
+			},
+			{
+				path: "admin",
+				element: (
+					<PrivateRoute allowedUserTypes={["admin"]}>
+						<AdminDashboard />
 					</PrivateRoute>
 				),
 			},

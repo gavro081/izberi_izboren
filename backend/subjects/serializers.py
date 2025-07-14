@@ -33,11 +33,12 @@ class SubjectSerializer(serializers.ModelSerializer):
 
 class ReviewMetaSerializer(serializers.ModelSerializer):
     student = serializers.SerializerMethodField()
+    subject = serializers.SerializerMethodField()
     user_has_voted = serializers.SerializerMethodField()
 
     class Meta:
         model = Review
-        fields = ['id', 'student', 'is_confirmed', 'votes_score', 'user_has_voted']
+        fields = ['id', 'student', 'subject', 'is_confirmed', 'votes_score', 'user_has_voted']
 
 
     def get_user_has_voted(self, obj):
@@ -55,6 +56,9 @@ class ReviewMetaSerializer(serializers.ModelSerializer):
 
     def get_student(self, obj):
         return obj.student.index
+
+    def get_subject(self, obj):
+        return {"name": obj.subject.name, "code": obj.subject.code}
 
 class EvaluationComponentSerializer(serializers.ModelSerializer):
     class Meta:

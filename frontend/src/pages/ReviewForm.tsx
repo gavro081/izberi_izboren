@@ -141,6 +141,8 @@ const ReviewForm = () => {
 			return;
 		}
 
+		// TODO: handle admin requests (should be approved from start)
+
 		// post specific for evaluation reviews
 		try {
 			await axiosInstance.post("/subjects/subject-review/", {

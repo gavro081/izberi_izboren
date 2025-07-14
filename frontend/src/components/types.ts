@@ -102,11 +102,17 @@ export interface OtherReview {
 	content: string;
 }
 
+export interface ReviewSubject {
+	name: string;
+	code: string;
+}
+
 export interface Review {
 	id?: number;
 	student?: string;
 	is_confirmed?: boolean;
 	votes_score?: number;
+	subject: ReviewSubject;
 	user_has_voted?: "none" | "up" | "down";
 }
 

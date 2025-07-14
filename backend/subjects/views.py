@@ -10,7 +10,8 @@ from django.db.models import Case, When, F
 from subjects.utils import get_eligible_subjects, get_recommendations_cache_key, get_recommended_subjects, map_to_subjects_vector, score_for_preferences, get_student_vector
 from .serializers import SubjectSerializer, EvaluationReviewSerializer, OtherReviewSerializer
 from .models import Subject, Review, EvaluationReview, OtherReview, ReviewVote
-
+from rest_framework.pagination import LimitOffsetPagination
+from .permissions import IsAdminUserType, IsStudentUserType
 def index(request):
     return HttpResponse("ok")
 
@@ -59,7 +60,7 @@ def get_recommendations(request):
         
 
 class PreferencesView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsStudentUserType]
 
     def get(self, request, *args, **kwargs):
         try:
@@ -76,7 +77,7 @@ class ToggleSubjectPreferences(APIView):
     Toggles the favorite status of a subject for the authenticated user.
     Expects a POST request with {'subject_id': <id>}.
     """
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsStudentUserType]
     def post(self, request, *args, **kwargs):
         subject_id = request.data.get('subject_id')
         action_type = request.data.get('action_type') 
@@ -127,7 +128,6 @@ class ToggleSubjectPreferences(APIView):
 
 class SubjectReview(APIView):
     permission_classes = [IsAuthenticated]
-
     def post(self, request):
         student = request.user.student
         subject_id = request.data.get('subject_id')
@@ -236,3 +236,37 @@ class ToggleVote(APIView):
             ReviewVote.objects.create(review=review, student=student, vote_type=vote_type)
             return Response({"message": "Vote recorded.", "vote_score": review.votes_score}, status=status.HTTP_201_CREATED)
 
+class ReviewListView(APIView):
+    # permission_classes = [IsAuthenticated, IsAdminUserType]
+
+    def get(self, request):
+        review_query_set = Review.objects.all()
+
+        review_type = request.query_params.get('type')
+        if review_type:
+            if review_type not in ["evaluation", "other"]:
+                return Response({"message": "Invalid type."}, status=status.HTTP_400_BAD_REQUEST)
+            review_query_set = review_query_set.filter(review_type=review_type)
+
+        is_confirmed = request.query_params.get('is_confirmed')
+        if is_confirmed:
+            if is_confirmed not in ["true", "false"]:
+                    return Response({"message": "Invalid is_confirmed param."}, status=status.HTTP_400_BAD_REQUEST)
+            is_confirmed = True if is_confirmed == "true" else False
+            review_query_set = review_query_set.filter(is_confirmed=is_confirmed)
+
+        review_query_set = review_query_set.select_related("evaluation_review", "other_review")
+
+        paginator = LimitOffsetPagination()
+        paginated_query_set = paginator.paginate_queryset(review_query_set, request)
+
+        data = []
+        for review in paginated_query_set:
+            if review.review_type == 'evaluation' and hasattr(review, "evaluation_review"):
+                    serializer = EvaluationReviewSerializer(review.evaluation_review)
+                    data.append(serializer.data)
+            elif review.review_type == 'other' and hasattr(review, "other_review"):
+                serializer = OtherReviewSerializer(review.other_review)
+                data.append(serializer.data)
+
+        return paginator.get_paginated_response(data)
