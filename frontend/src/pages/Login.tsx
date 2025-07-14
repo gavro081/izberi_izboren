@@ -22,7 +22,7 @@ const Login: React.FC = () => {
 	>({});
 	const navigate = useNavigate();
 	const { login, customGoogleLogin, googleLoginLoading, useOAuth } = useAuth();
-	const [isLogging, setIsLogging] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
 		const handleGoogleLoginSuccess = () => {
@@ -49,7 +49,7 @@ const Login: React.FC = () => {
 	const handleLogin = async (e: React.FormEvent) => {
 		e.preventDefault();
 		setErrors({});
-		setIsLogging(true);
+		setIsLoading(true);
 		try {
 			const response = await axios.post<{
 				access: string;
@@ -85,7 +85,7 @@ const Login: React.FC = () => {
 				setErrors({ detail: ["An unknown error occurred."] });
 			}
 		}
-		setIsLogging(false);
+		setIsLoading(false);
 	};
 	return (
 		<div className="flex flex-col items-center justify-center min-h-[83vh] py-4 px-4 bg-white">
@@ -106,6 +106,7 @@ const Login: React.FC = () => {
 					name="email"
 					required
 					value={formData.email}
+					disabled={isLoading || googleLoginLoading}
 					onChange={handleChange}
 					placeholder="Email"
 					className="w-full mb-2 sm:mb-3 p-2 border rounded"
@@ -116,6 +117,7 @@ const Login: React.FC = () => {
 				<PasswordInput
 					name="password"
 					value={formData.password}
+					disabled={isLoading || googleLoginLoading}
 					onChange={handleChange}
 					placeholder="Лозинка"
 					error={errors.password ? errors.password[0] : undefined}
@@ -128,10 +130,11 @@ const Login: React.FC = () => {
 				</p>
 				<button
 					type="submit"
+					disabled={isLoading || googleLoginLoading}
 					className={`w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 
-						${isLogging ? "opacity-70 cursor-not-allowed" : ""}`}
+						${isLoading || googleLoginLoading ? "opacity-70 cursor-not-allowed" : ""}`}
 				>
-					{isLogging ? "Се најавува..." : "Најави се"}
+					{isLoading ? "Се најавува..." : "Најави се"}
 				</button>
 
 				{useOAuth && (
@@ -150,9 +153,11 @@ const Login: React.FC = () => {
 						<button
 							type="button"
 							onClick={() => customGoogleLogin?.()}
-							disabled={googleLoginLoading}
+							disabled={isLoading || googleLoginLoading}
 							className={`w-full mt-3 sm:mt-4 bg-white border border-gray-300 text-gray-700 p-2 rounded hover:bg-gray-50 flex items-center justify-center gap-2 ${
-								googleLoginLoading ? "opacity-70 cursor-not-allowed" : ""
+								googleLoginLoading || isLoading
+									? "opacity-70 cursor-not-allowed"
+									: ""
 							}`}
 						>
 							<img src={googleLogo} alt="Google logo" className="w-5 h-5" />

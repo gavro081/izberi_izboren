@@ -7,6 +7,7 @@ interface PasswordInputProps {
 	value: string;
 	placeholder: string;
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	disabled: boolean;
 	error?: string;
 }
 
@@ -15,6 +16,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
 	value,
 	placeholder,
 	onChange,
+	disabled,
 	error,
 }) => {
 	const [showPassword, setShowPassword] = useState(false);
@@ -31,6 +33,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
 				value={value}
 				onChange={onChange}
 				className="w-full mb-3 p-2 border rounded"
+				disabled={disabled}
 				placeholder={placeholder}
 				required
 			/>

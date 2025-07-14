@@ -21,7 +21,7 @@ const Register: React.FC = () => {
 		confirmPassword: "",
 		fullName: "",
 	});
-	const [loading, setLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 	const [errors, setErrors] = useState<
 		Partial<Record<keyof RegisterForm, string[]>> & {
 			non_field_errors?: string[];
@@ -57,7 +57,7 @@ const Register: React.FC = () => {
 			setErrors({ confirmPassword: ["Password do not match. "] });
 			return;
 		}
-		setLoading(true);
+		setIsLoading(true);
 
 		try {
 			const response = await axios.post<{
@@ -92,7 +92,7 @@ const Register: React.FC = () => {
 				setErrors({ non_field_errors: ["An unexpected error occurred."] });
 			}
 		} finally {
-			setLoading(false);
+			setIsLoading(false);
 		}
 	};
 	return (
@@ -114,6 +114,7 @@ const Register: React.FC = () => {
 					name="email"
 					required
 					value={formData.email}
+					disabled={isLoading || googleLoginLoading}
 					onChange={handleChange}
 					placeholder="Email"
 					className="w-full mb-2 sm:mb-3 p-2 border rounded"
@@ -128,6 +129,7 @@ const Register: React.FC = () => {
 					value={formData.password}
 					onChange={handleChange}
 					placeholder="Лозинка"
+					disabled={isLoading || googleLoginLoading}
 					error={
 						errors.password
 							? "Лозинката е едноставна. Треба да содржи барем 8 карактери и еден специјален знак."
@@ -139,6 +141,7 @@ const Register: React.FC = () => {
 					value={formData.confirmPassword}
 					placeholder="Потврди ја лозинката"
 					onChange={handleChange}
+					disabled={isLoading || googleLoginLoading}
 				/>
 				{errors.confirmPassword && (
 					<p className="text-red-500 text-sm mb-1 sm:mb-2">
@@ -151,6 +154,7 @@ const Register: React.FC = () => {
 					required
 					value={formData.fullName}
 					onChange={handleChange}
+					disabled={isLoading || googleLoginLoading}
 					placeholder="Име презиме"
 					className="w-full mb-2 sm:mb-3 p-2 border rounded"
 				/>
@@ -162,12 +166,12 @@ const Register: React.FC = () => {
 				</p>
 				<button
 					type="submit"
-					disabled={loading}
+					disabled={isLoading}
 					className={`w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition ${
-						loading ? "opacity-50 cursor-not-allowed" : ""
+						isLoading ? "opacity-50 cursor-not-allowed" : ""
 					}`}
 				>
-					{loading ? "Се регистрира..." : "Регистрирај се"}
+					{isLoading ? "Се регистрира..." : "Регистрирај се"}
 				</button>
 				{useOAuth && (
 					<>
