@@ -1,6 +1,7 @@
 import json
 from django.http import HttpResponse
 from django.core.cache import cache
+from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -59,7 +60,6 @@ class RecommendationsView(APIView):
 
         except Exception as e:
             return Response({"message": f"An error occurred: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        
 
 class PreferencesView(APIView):
     permission_classes = [IsAuthenticated, IsStudent]
@@ -129,7 +129,7 @@ class ToggleSubjectPreferences(APIView):
             return Response({'error': f'An unexpected error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class SubjectReview(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsStudent]
     def post(self, request):
         student = request.user.student
         subject_id = request.data.get('subject_id')
@@ -188,6 +188,22 @@ class SubjectReview(APIView):
             review.delete()
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class AdminSubjectReview(APIView):
+    permission_classes = [IsAuthenticated, IsAdmin]
+    def delete(self, request, pk):
+        review = get_object_or_404(Review, pk=pk)
+        review.delete()
+        return Response({"message": "Review deleted"}, status=status.HTTP_200_OK)
+
+    def patch(self, request, pk):
+        review = get_object_or_404(Review, pk=pk)
+        is_confirmed = request.data.get('is_confirmed')
+        if is_confirmed is None:
+            return Response({"message": "Missing is_confirmed param."}, status=status.HTTP_400_BAD_REQUEST)
+        review.is_confirmed = is_confirmed
+        review.save()
+        return Response({"message": "Review confirmed"}, status=status.HTTP_200_OK)
+    
 class ReviewsForSubject(APIView):
     def get(self, request, code):
         subject = Subject.objects.filter(code=code)

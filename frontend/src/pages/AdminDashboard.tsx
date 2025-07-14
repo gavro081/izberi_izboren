@@ -58,9 +58,13 @@ const AdminDashboard = () => {
 
 	const toggleApproval = async (reviewId: number, currentStatus: boolean) => {
 		try {
-			await axiosInstance.patch(`/subjects/admin/reviews/${reviewId}/`, {
-				is_confirmed: !currentStatus,
-			});
+			const response = await axiosInstance.patch(
+				`/subjects/admin-subject-review/${reviewId}/`,
+				{
+					is_confirmed: !currentStatus,
+				}
+			);
+			console.log(response.data);
 			setReviews((prev) =>
 				prev.map((review) =>
 					review.review.id === reviewId
@@ -82,7 +86,10 @@ const AdminDashboard = () => {
 		}
 
 		try {
-			await axiosInstance.delete(`/subjects/admin/reviews/${reviewId}/`);
+			const response = await axiosInstance.delete(
+				`/subjects/admin-subject-review/${reviewId}/`
+			);
+			console.log(response.data);
 			setReviews((prev) =>
 				prev.filter((review) => review.review.id !== reviewId)
 			);
