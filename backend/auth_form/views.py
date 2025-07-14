@@ -1,12 +1,11 @@
-from .models import Student
-from .serializers import RegistrationSerializer, LoginSerializer, StudentFormSerializer, UserSerializer
-from rest_framework import serializers, status, views
+from auth_form.models import Student
+from auth_form.serializers import RegistrationSerializer, LoginSerializer, StudentFormSerializer, UserSerializer
+from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from rest_framework.decorators import api_view, permission_classes
 from rest_framework_simplejwt.tokens import RefreshToken
-from .permissions import IsStudent, CanSubmitForm, CanUpdateForm
+from auth_form.permissions import IsStudent, CanSubmitForm, CanUpdateForm
 from dj_rest_auth.registration.views import SocialLoginView
 from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 
@@ -55,7 +54,7 @@ class LogoutView(APIView):
             # 205 Reset Content is a good choice for a successful logout
             # as it tells the client to reset its view.
             return Response(status=status.HTTP_205_RESET_CONTENT)
-        except Exception as e:
+        except Exception:
             return Response(status=status.HTTP_400_BAD_REQUEST)
         
 class StudentFormView(APIView):
@@ -94,7 +93,6 @@ class StudentFormView(APIView):
         if not hasattr(request.user, 'student'):
             return Response({"detail": "No student profile found."}, status=status.HTTP_404_NOT_FOUND)
         
-        index_match = Student.objects.filter(index=request.data['index'])
         index = request.data['index']
         index_match = Student.objects.filter(index=index).exclude(pk=request.user.student.pk)
         if index_match.exists():

@@ -11,3 +11,7 @@ class CanSubmitForm(BasePermission):
 class CanUpdateForm(BasePermission):
     def has_permission(self, request, view):
         return hasattr(request.user, 'student') and request.user.student.has_filled_form
+
+class IsAdmin(BasePermission):
+    def has_permission(self, request, view):
+        return request.user.user_type in ['admin']

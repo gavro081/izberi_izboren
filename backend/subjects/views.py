@@ -6,12 +6,13 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
-from django.db.models import Case, When, F
+from django.db.models import Case, When
 from subjects.utils import get_eligible_subjects, get_recommendations_cache_key, get_recommended_subjects, map_to_subjects_vector, score_for_preferences, get_student_vector
 from .serializers import SubjectSerializer, EvaluationReviewSerializer, OtherReviewSerializer
 from .models import Subject, Review, EvaluationReview, OtherReview, ReviewVote
 from rest_framework.pagination import LimitOffsetPagination
-from .permissions import IsAdminUserType, IsStudentUserType
+from auth_form.permissions import IsStudent, IsAdmin
+
 def index(request):
     return HttpResponse("ok")
 
@@ -21,46 +22,47 @@ def all_subjects(request):
     serializer = SubjectSerializer(subjects, many=True)
     return Response(serializer.data)
 
-@api_view(['GET'])
-def get_recommendations(request):
-    season = request.query_params.get('season', 2)
-    not_activated = request.query_params.get('not_activated', 0)
-    try:
-        not_activated = int(not_activated)
-        season = int(season)
-    except ValueError:
-        return Response({"message": "invalid params"}, status=status.HTTP_400_BAD_REQUEST)
-    
-    student = request.user.student
-    if not student:
-        return Response({"message": "Could not find student"}, status=status.HTTP_400_BAD_REQUEST)
-    cache_key = get_recommendations_cache_key(student, season, not_activated)
-    if cache_key:
-        cached_data = cache.get(cache_key)
-        if cached_data:
-            return Response({"data": json.loads(cached_data)}, status=status.HTTP_200_OK)
-    try:
-        subjects = get_eligible_subjects(student, season=season, not_activated=not_activated)
-        subject_vectors = map_to_subjects_vector(subjects)
-        student_vector = get_student_vector(student)
-    
-        final_subjects = get_recommended_subjects(score_for_preferences(student_vector, subject_vectors))
+class RecommendationsView(APIView):
+    permission_classes = [IsAuthenticated, IsStudent]
+    def get(self, request):
+        season = request.query_params.get('season', 2)
+        not_activated = request.query_params.get('not_activated', 0)
+        try:
+            not_activated = int(not_activated)
+            season = int(season)
+        except ValueError:
+            return Response({"message": "invalid params"}, status=status.HTTP_400_BAD_REQUEST)
 
-        order = Case(*[When(name=subject_name, then=pos) for pos, subject_name in enumerate(final_subjects)])
-
-        recommended_subject_objects = Subject.objects.filter(name__in=final_subjects).order_by(order)
-
-        serializer = SubjectSerializer(recommended_subject_objects, many=True)
+        student = request.user.student
+        if not student:
+            return Response({"message": "Could not find student"}, status=status.HTTP_400_BAD_REQUEST)
+        cache_key = get_recommendations_cache_key(student, season, not_activated)
         if cache_key:
-            cache.set(cache_key, json.dumps(serializer.data), timeout=60 * 60 * 24 * 14) # 14 days  
-        return Response({"data": serializer.data}, status=status.HTTP_200_OK)
-    
-    except Exception as e:
-        return Response({"message": f"An error occurred: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            cached_data = cache.get(cache_key)
+            if cached_data:
+                return Response({"data": json.loads(cached_data)}, status=status.HTTP_200_OK)
+        try:
+            subjects = get_eligible_subjects(student, season=season, not_activated=not_activated)
+            subject_vectors = map_to_subjects_vector(subjects)
+            student_vector = get_student_vector(student)
+
+            final_subjects = get_recommended_subjects(score_for_preferences(student_vector, subject_vectors))
+
+            order = Case(*[When(name=subject_name, then=pos) for pos, subject_name in enumerate(final_subjects)])
+
+            recommended_subject_objects = Subject.objects.filter(name__in=final_subjects).order_by(order)
+
+            serializer = SubjectSerializer(recommended_subject_objects, many=True)
+            if cache_key:
+                cache.set(cache_key, json.dumps(serializer.data), timeout=60 * 60 * 24 * 14) # 14 days
+            return Response({"data": serializer.data}, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            return Response({"message": f"An error occurred: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
 
 class PreferencesView(APIView):
-    permission_classes = [IsAuthenticated, IsStudentUserType]
+    permission_classes = [IsAuthenticated, IsStudent]
 
     def get(self, request, *args, **kwargs):
         try:
@@ -77,7 +79,7 @@ class ToggleSubjectPreferences(APIView):
     Toggles the favorite status of a subject for the authenticated user.
     Expects a POST request with {'subject_id': <id>}.
     """
-    permission_classes = [IsAuthenticated, IsStudentUserType]
+    permission_classes = [IsAuthenticated, IsStudent]
     def post(self, request, *args, **kwargs):
         subject_id = request.data.get('subject_id')
         action_type = request.data.get('action_type') 
@@ -237,7 +239,7 @@ class ToggleVote(APIView):
             return Response({"message": "Vote recorded.", "vote_score": review.votes_score}, status=status.HTTP_201_CREATED)
 
 class ReviewListView(APIView):
-    # permission_classes = [IsAuthenticated, IsAdminUserType]
+    permission_classes = [IsAuthenticated, IsAdmin]
 
     def get(self, request):
         review_query_set = Review.objects.all()
