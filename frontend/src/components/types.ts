@@ -5,6 +5,7 @@ export type UserType = "admin" | "student";
 export interface User {
 	full_name: string;
 	user_type: UserType;
+	student_index?: string;
 }
 
 export interface Subject {

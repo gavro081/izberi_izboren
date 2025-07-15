@@ -157,13 +157,6 @@ const Navbar: React.FC = () => {
 											</Link>
 
 											<Link
-												to="/recommendations"
-												className="block px-4 py-2 text-sm hover:bg-gray-100 hover:underline"
-												onClick={() => setProfileMenuOpen(false)}
-											>
-												Препораки
-											</Link>
-											<Link
 												to="/subject-preferences"
 												className="block px-4 py-2 text-sm hover:bg-gray-100 hover:underline"
 												onClick={() => setMenuOpen(false)}

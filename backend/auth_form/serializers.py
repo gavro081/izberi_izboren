@@ -10,9 +10,14 @@ from subjects.models import Subject
 User = get_user_model()
 
 class UserSerializer(serializers.ModelSerializer):
+    student_index = serializers.SerializerMethodField()
     class Meta:
         model = User
-        fields = ('id', 'user_type', 'full_name')
+        fields = ('user_type', 'full_name', 'student_index')
+
+    def get_student_index(self, obj):
+        if obj.user_type == 'student':
+            return obj.student.index
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):

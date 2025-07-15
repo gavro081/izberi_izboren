@@ -30,6 +30,7 @@ const Reviews = () => {
 		approved: "all", // all, approved, unapproved
 		sort_by: "date", // date, votes
 		sort_order: "desc", // asc, desc
+		my_reviews: false, // show only user's own reviews
 	});
 	const [subjects, setSubjects] = useSubjects();
 	const { user } = useAuth();
@@ -90,6 +91,9 @@ const Reviews = () => {
 			}
 			params.append("sort_by", filters.sort_by);
 			params.append("sort_order", filters.sort_order);
+			if (filters.my_reviews) {
+				params.append("my_reviews", "true");
+			}
 
 			const requestUrl =
 				url || `/subjects/subjects-reviews-list/?${params.toString()}`;
@@ -316,7 +320,7 @@ const Reviews = () => {
 								</div>
 							</div>
 						</div>
-						<div className="flex pt-4">
+						<div className="flex pt-4 space-x-2">
 							<button
 								onClick={handleSearch}
 								disabled={loading}
@@ -326,6 +330,29 @@ const Reviews = () => {
 							>
 								{loading ? "Се вчитува..." : "Пребарај"}
 							</button>
+							{user?.user_type === "student" && (
+								<label className="flex items-center space-x-2 cursor-pointer select-none px-2 py-1 rounded-md transition-colors">
+									<input
+										type="checkbox"
+										checked={filters.my_reviews}
+										onChange={(e) => {
+											const newMyReviews = e.target.checked;
+											setFilters((prev) => ({
+												...prev,
+												my_reviews: newMyReviews,
+												subject: newMyReviews ? "all" : prev.subject,
+											}));
+											if (newMyReviews) {
+												setSelectedSubject(null);
+											}
+										}}
+										className="form-checkbox h-5 w-5 text-blue-600"
+									/>
+									<span className="text-gray-700 text-base">
+										Прикажи само мои објави
+									</span>
+								</label>
+							)}
 						</div>
 					</div>
 				</div>
@@ -394,6 +421,15 @@ const Reviews = () => {
 									>
 										<Eye className="w-4 h-4" />
 									</button>
+									{!isAdmin && review.review.student == user?.student_index && (
+										<button
+											onClick={() => deleteReview(review.review.id!)}
+											className="p-2 text-red-600 hover:text-red-800 hover:bg-red-50 rounded"
+											title="Избриши"
+										>
+											<Trash2 className="w-4 h-4" />
+										</button>
+									)}
 									{isAdmin && (
 										<>
 											<button

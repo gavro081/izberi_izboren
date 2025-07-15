@@ -189,7 +189,12 @@ class SubjectReview(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class AdminSubjectReview(APIView):
-    permission_classes = [IsAuthenticated, IsAdmin]
+    def get_permissions(self):
+        if self.request.method=='DELETE':
+            return [IsAuthenticated()]
+        elif self.request.method == 'PATCH':
+            return [IsAuthenticated(), IsAdmin()]
+        return []
     def delete(self, request, pk):
         review = get_object_or_404(Review, pk=pk)
         review.delete()
@@ -276,6 +281,13 @@ class ReviewListView(APIView):
         subject_code = request.query_params.get("subject_code")
         if subject_code:
             review_query_set = review_query_set.filter(subject__code=subject_code)
+
+        my_reviews = request.query_params.get('my_reviews')
+        if my_reviews and my_reviews.lower() == 'true':
+            if hasattr(request.user, 'student'):
+                review_query_set = review_query_set.filter(student=request.user.student)
+            else:
+                review_query_set = review_query_set.none()
 
         sort_by = request.query_params.get('sort_by', 'date')  
         sort_order = request.query_params.get('sort_order', 'desc')
