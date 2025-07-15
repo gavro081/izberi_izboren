@@ -27,6 +27,8 @@ DB_USER=x
 DB_PASS=x
 DB_HOST=x
 DB_PORT=5432
+
+USE_OAUTH=False
 ```
 
 In the root directory (for Docker Compose and PostgreSQL):
@@ -36,7 +38,29 @@ POSTGRES_PASSWORD=x
 DB_USER=x
 DB_NAME=x
 DB_HOST=x
+VITE_USE_OAUTH=false
 ```
+</br>
+
+
+**NOTE**: This project uses OAuth2 to enable Google login. By default, it’s disabled for convenience.  
+If you’d like to use Google login, follow [this guide](https://support.google.com/googleapi/answer/6158849?hl=en) to create your credentials. Then make the following changes:
+
+**In the backend .env:**
+
+```bash
+GOOGLE_CLIENT_ID=<your_google_client_id>
+GOOGLE_CLIENT_SECRET=<your_google_client_secret>
+USE_OAUTH=True
+```
+**In the root .env:**
+
+```bash
+GOOGLE_CLIENT_ID=<your_google_client_id> # exclude the '.apps.googleusercontent.com' part
+VITE_USE_OAUTH=true
+```
+
+If you run into any issues, feel free to [open an issue](https://github.com/gavro081/izberi_izboren/issues).
 
 > Adjust the values according to your environment
 
