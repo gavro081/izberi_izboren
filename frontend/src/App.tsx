@@ -82,7 +82,7 @@ const router = createBrowserRouter([
 			{
 				path: "review-form/:code",
 				element: (
-					<PrivateRoute allowedUserTypes={["student", "admin"]}>
+					<PrivateRoute allowedUserTypes={["student"]}>
 						<ReviewForm />
 					</PrivateRoute>
 				),

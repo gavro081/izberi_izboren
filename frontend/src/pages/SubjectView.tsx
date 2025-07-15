@@ -16,6 +16,7 @@ import SkeletonSubjectView from "../components/SubjectView/SkeletonSubjectView";
 import { Reviews } from "../components/types";
 import { EVALUATION_MAP_TO_MK } from "../constants/subjects";
 import { useSubjects } from "../context/SubjectsContext";
+import { useAuth } from "../hooks/useAuth";
 
 function SubjectView() {
 	const [subjectPrerequisites, setSubjectPrerequisites] = useState<
@@ -29,7 +30,7 @@ function SubjectView() {
 	const { code } = useParams();
 	const navigate = useNavigate();
 	const location = useLocation();
-
+	const { user } = useAuth();
 	const [subjects, setSubjects] = useSubjects();
 
 	// useMemo makes this efficient, so it only re-calculates when subjects or code changes.
@@ -292,24 +293,23 @@ function SubjectView() {
 									)}
 								</>
 							)}
-							<div className="mt-6 pt-4 border-gray-200">
-								<button
-									className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-									onClick={() =>
-										navigate(`/review-form/${selectedSubject.code}`, {
-											state: {
-												subject_id: `${selectedSubject.id}`,
-												subject_name: `${selectedSubject.name}`,
-												has_evaluation_review: `${
-													reviews.evaluation.methods.length > 0
-												}`,
-											},
-										})
-									}
-								>
-									Сподели информација / мислење
-								</button>
-							</div>
+							{user?.user_type == "student" && (
+								<div className="mt-6 pt-4 border-gray-200">
+									<button
+										className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+										onClick={() =>
+											navigate(`/review-form/${selectedSubject.code}`, {
+												state: {
+													subject_id: `${selectedSubject.id}`,
+													subject_name: `${selectedSubject.name}`,
+												},
+											})
+										}
+									>
+										Сподели информација / мислење
+									</button>
+								</div>
+							)}
 						</div>
 					</div>
 

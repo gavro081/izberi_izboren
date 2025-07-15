@@ -33,8 +33,6 @@ const ReviewForm = () => {
 	const location = useLocation();
 	const subjectName: string = location?.state?.subject_name;
 	const subjectId: number = location?.state?.subject_id;
-	const eval_ = location?.state?.has_evaluation_review;
-	const hasEvaluation: boolean = !eval_ || eval_ === "true";
 	// const { code } = useParams();
 
 	const addMethod = () => {
@@ -141,8 +139,6 @@ const ReviewForm = () => {
 			return;
 		}
 
-		// TODO: handle admin requests (should be approved from start)
-
 		// post specific for evaluation reviews
 		try {
 			await axiosInstance.post("/subjects/subject-review/", {
@@ -177,22 +173,17 @@ const ReviewForm = () => {
 						Тип на рецензија
 					</label>
 					<div className="flex space-x-4">
-						{!hasEvaluation && (
-							<label className="flex items-center">
-								<input
-									type="radio"
-									name="reviewType"
-									value="evaluation"
-									checked={reviewType === "evaluation"}
-									onChange={(e) =>
-										setReviewType(e.target.value as "evaluation")
-									}
-									className="mr-2"
-								/>
-								{hasEvaluation}
-								Информации за полагање
-							</label>
-						)}
+						<label className="flex items-center">
+							<input
+								type="radio"
+								name="reviewType"
+								value="evaluation"
+								checked={reviewType === "evaluation"}
+								onChange={(e) => setReviewType(e.target.value as "evaluation")}
+								className="mr-2"
+							/>
+							Информации за полагање
+						</label>
 						<label className="flex items-center">
 							<input
 								type="radio"

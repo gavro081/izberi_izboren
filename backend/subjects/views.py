@@ -159,12 +159,12 @@ class SubjectReview(APIView):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        if review_type == 'evaluation' and \
-            EvaluationReview.objects.filter(review__subject_id=subject_id).exists():
-            return Response(
-                {"error": "An evaluation review for this subject already exists."},
-                status=status.HTTP_400_BAD_REQUEST
-            )
+        # if review_type == 'evaluation' and \
+        #     EvaluationReview.objects.filter(review__subject_id=subject_id).exists():
+        #     return Response(
+        #         {"error": "An evaluation review for this subject already exists."},
+        #         status=status.HTTP_400_BAD_REQUEST
+        #     )
 
         review = Review.objects.create(
             student=student,
