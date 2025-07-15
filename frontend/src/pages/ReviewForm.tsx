@@ -14,6 +14,12 @@ const COMPONENT_CATEGORIES = [
 	{ value: "attendance", label: "Присуство" },
 ];
 
+const OTHER_REVIEW_CATEGORIES = [
+	{ value: "material", label: "Материјали" },
+	{ value: "staff", label: "Наставен кадар" },
+	{ value: "other", label: "Останато" },
+];
+
 const ReviewForm = () => {
 	const [reviewType, setReviewType] = useState<"evaluation" | "other" | "">("");
 	const [error, setError] = useState<string>("");
@@ -29,6 +35,10 @@ const ReviewForm = () => {
 	>("none");
 	const [signatureRequiredAmount, setSignatureRequiredAmount] = useState("");
 	const [signatureMaxAmount, setSignatureMaxAmount] = useState("");
+	const [otherCategory, setOtherCategory] = useState<
+		"material" | "staff" | "other"
+	>("material");
+	const [otherContent, setOtherContent] = useState("");
 	const navigate = useNavigate();
 	const location = useLocation();
 	const subjectName: string = location?.state?.subject_name;
@@ -134,8 +144,34 @@ const ReviewForm = () => {
 			}
 		}
 
-		if (reviewType !== "evaluation") {
-			alert("todo");
+		if (reviewType === "other") {
+			if (!otherCategory) {
+				setError("Мора да изберете категорија");
+				return;
+			}
+			if (!otherContent.trim()) {
+				setError("Содржината не може да биде празна");
+				return;
+			}
+
+			if (otherContent.trim().length > 700) {
+				setError("Содржината не може да биде подолга од 700 карактери");
+				return;
+			}
+
+			try {
+				await axiosInstance.post("/subjects/subject-review/", {
+					subject_id: subjectId,
+					type: "other",
+					category: otherCategory,
+					content: otherContent.trim(),
+				});
+				navigate(-1);
+				// TODO: maybe add message for successful post
+			} catch (err) {
+				console.error(err);
+				setError("Грешка при зачувување");
+			}
 			return;
 		}
 
@@ -148,7 +184,7 @@ const ReviewForm = () => {
 				signature_condition: signatureCondition,
 			});
 			navigate(-1);
-			// TODO: maybe add message for succesfull post
+			// TODO: maybe add message for successful post
 		} catch (err) {
 			console.error(err);
 		}
@@ -156,12 +192,12 @@ const ReviewForm = () => {
 
 	return (
 		<div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-sm">
-			<h2 className="text-2xl font-bold mb-6">Додај рецензија</h2>
+			<h2 className="text-2xl font-bold mb-6">Сподели информација</h2>
 
 			{subjectName && (
 				<div className="mb-6 p-4 bg-blue-50 rounded-lg">
 					<p className="text-blue-800">
-						Додавате рецензија за предмет:{" "}
+						Додавате информација за предмет:{" "}
 						<span className="font-semibold">{subjectName}</span>
 					</p>
 				</div>
@@ -170,7 +206,7 @@ const ReviewForm = () => {
 			<form onSubmit={handleSubmit} className="space-y-6">
 				<div>
 					<label className="block text-sm font-medium text-gray-700 mb-3">
-						Тип на рецензија
+						Тип
 					</label>
 					<div className="flex space-x-4">
 						<label className="flex items-center">
@@ -452,8 +488,53 @@ const ReviewForm = () => {
 				)}
 
 				{reviewType === "other" && (
-					<div className="p-6 bg-gray-50 rounded-lg">
-						<p className="text-gray-600 text-center">TODO</p>
+					<div className="space-y-6">
+						<div>
+							<label className="block text-sm font-medium text-gray-700 mb-2">
+								Тема
+							</label>
+							<select
+								value={otherCategory}
+								onChange={(e) =>
+									setOtherCategory(
+										e.target.value as "material" | "staff" | "other"
+									)
+								}
+								className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 custom-select"
+							>
+								{OTHER_REVIEW_CATEGORIES.map((category) => (
+									<option key={category.value} value={category.value}>
+										{category.label}
+									</option>
+								))}
+							</select>
+						</div>
+
+						<div>
+							<label className="block text-sm font-medium text-gray-700 mb-2">
+								Содржина
+							</label>
+							<textarea
+								value={otherContent}
+								onChange={(e) => setOtherContent(e.target.value)}
+								placeholder="Опишете го вашето искуство или мислење за предметот..."
+								rows={6}
+								className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-vertical"
+								required
+							/>
+							<div className="flex justify-between items-center mt-1">
+								<p className="text-sm text-gray-500">
+									Споделете корисни информации за други студенти
+								</p>
+								<p
+									className={`text-sm ${
+										otherContent.length > 700 ? "text-red-600" : "text-gray-500"
+									}`}
+								>
+									{otherContent.length}/700 карактери
+								</p>
+							</div>
+						</div>
 					</div>
 				)}
 

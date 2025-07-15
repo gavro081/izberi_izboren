@@ -165,11 +165,10 @@ const AdminDashboard = () => {
 				</div>
 			</div>
 
-			{/* Reviews List */}
 			<div className="space-y-4">
 				{reviews.length === 0 && !loading ? (
 					<p className="text-gray-500 text-center py-8">
-						Нема рецензии според избраните филтри.
+						Нема резултати за избраните филтри.
 					</p>
 				) : (
 					reviews.map((review) => (
@@ -283,7 +282,6 @@ const AdminDashboard = () => {
 								</span>
 							</div>
 
-							{/* Expanded Details */}
 							{expandedReview === review.review.id && (
 								<div className="mt-4 pt-4 border-t border-gray-200">
 									{"methods" in review ? (
@@ -353,7 +351,6 @@ const AdminDashboard = () => {
 					))
 				)}
 
-				{/* Load More Button */}
 				{nextUrl && (
 					<div className="flex justify-center pt-6">
 						<button

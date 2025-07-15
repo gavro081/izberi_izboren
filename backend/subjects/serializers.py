@@ -126,6 +126,12 @@ class OtherReviewSerializer(serializers.ModelSerializer):
         model = OtherReview
         fields = ['review', 'category', 'content']
 
+    def validate(self, data):
+        content: str = data['content']
+        if len(content) > 700:
+            raise serializers.ValidationError("Content length can be bigger than 700 characters.")
+        return data
+
     def get_review(self, obj):
         return ReviewMetaSerializer(obj.review, context=self.context).data
 
