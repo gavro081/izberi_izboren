@@ -114,9 +114,10 @@ export interface Review {
 	votes_score?: number;
 	subject: ReviewSubject;
 	user_has_voted?: "none" | "up" | "down";
+	date_posted: string;
 }
 
 export interface Reviews {
-	evaluation: EvaluationReview; // only one evaluation review per subject
+	evaluation: EvaluationReview[];
 	other: OtherReview[];
 }

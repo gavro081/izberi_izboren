@@ -9,13 +9,13 @@ import CourseCatalog from "./components/SubjectCatalog/SubjectCatalog";
 import { AuthProvider } from "./context/AuthProvider";
 import "./index.css";
 import Account from "./pages/Account";
-import AdminDashboard from "./pages/AdminDashboard";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import Recommendations from "./pages/Recommendations";
 import Register from "./pages/Register";
 import ReviewForm from "./pages/ReviewForm";
+import Reviews from "./pages/Reviews";
 import SubjectPreferences from "./pages/SubjectPreferences";
 import SubjectView from "./pages/SubjectView";
 
@@ -88,14 +88,13 @@ const router = createBrowserRouter([
 				),
 			},
 			{
-				path: "admin",
+				path: "reviews",
 				element: (
-					<PrivateRoute allowedUserTypes={["admin"]}>
-						<AdminDashboard />
+					<PrivateRoute allowedUserTypes={["student", "admin"]}>
+						<Reviews />
 					</PrivateRoute>
 				),
 			},
-
 			{
 				path: "*",
 				element: <NotFound />,

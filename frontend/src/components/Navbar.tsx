@@ -105,6 +105,25 @@ const Navbar: React.FC = () => {
 					<Link to="/subjects" className="hover:underline">
 						Сите предмети
 					</Link>
+					{isAuthenticated && user?.user_type === "student" && (
+						<Link to="/reviews" className="hover:underline">
+							Информации од студенти
+						</Link>
+					)}
+					{isAuthenticated && user?.user_type === "admin" && (
+						<Link to="/reviews" className="hover:underline">
+							Админ панел
+						</Link>
+					)}
+					{isAuthenticated && user?.user_type === "student" && (
+						<Link
+							to="/recommendations"
+							className="hover:underline"
+							onClick={() => setProfileMenuOpen(false)}
+						>
+							Препораки
+						</Link>
+					)}
 					{isAuthenticated ? (
 						<div className="relative" ref={profileMenuRef}>
 							<button
@@ -117,13 +136,6 @@ const Navbar: React.FC = () => {
 								<div className="absolute right-0 mt-1 w-48 bg-white rounded-md shadow-lg py-1 text-black z-20">
 									{user?.user_type === "admin" ? (
 										<>
-											<Link
-												to="/admin"
-												className="block px-4 py-2 text-sm hover:bg-gray-100 hover:underline"
-												onClick={() => setProfileMenuOpen(false)}
-											>
-												Админ панел
-											</Link>
 											<button
 												onClick={() => {
 													handleLogout();
@@ -196,7 +208,7 @@ const Navbar: React.FC = () => {
 							{user?.user_type === "admin" ? (
 								<>
 									<Link
-										to="/admin"
+										to="/reviews"
 										className="hover:underline"
 										onClick={() => setMenuOpen(false)}
 									>
@@ -214,6 +226,13 @@ const Navbar: React.FC = () => {
 								</>
 							) : (
 								<>
+									<Link
+										to="/reviews"
+										className="hover:underline"
+										onClick={() => setMenuOpen(false)}
+									>
+										Информации од студенти
+									</Link>
 									<Link
 										to="/recommendations"
 										className="hover:underline"

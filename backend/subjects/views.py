@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
-from django.db.models import Case, When
+from django.db.models import Case, When, Count, F, Q
 from subjects.utils import get_eligible_subjects, get_recommendations_cache_key, get_recommended_subjects, map_to_subjects_vector, score_for_preferences, get_student_vector
 from .serializers import SubjectSerializer, EvaluationReviewSerializer, OtherReviewSerializer
 from .models import Subject, Review, EvaluationReview, OtherReview, ReviewVote
@@ -255,7 +255,7 @@ class ToggleVote(APIView):
             return Response({"message": "Vote recorded.", "vote_score": review.votes_score}, status=status.HTTP_201_CREATED)
 
 class ReviewListView(APIView):
-    permission_classes = [IsAuthenticated, IsAdmin]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
         review_query_set = Review.objects.all()
@@ -273,6 +273,35 @@ class ReviewListView(APIView):
             is_confirmed = True if is_confirmed == "true" else False
             review_query_set = review_query_set.filter(is_confirmed=is_confirmed)
 
+        subject_code = request.query_params.get("subject_code")
+        if subject_code:
+            review_query_set = review_query_set.filter(subject__code=subject_code)
+
+        sort_by = request.query_params.get('sort_by', 'date')  
+        sort_order = request.query_params.get('sort_order', 'desc')
+        
+        if sort_by not in ['date', 'votes']:
+            return Response({"message": "Invalid sort_by param."}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if sort_order not in ['asc', 'desc']:
+            return Response({"message": "Invalid sort_order param."}, status=status.HTTP_400_BAD_REQUEST)
+
+        if sort_by == 'votes':
+            review_query_set = review_query_set.annotate(
+                vote_score=Count('votes', filter=Q(reviewvote__vote_type='up')) -
+                           Count('votes', filter=Q(reviewvote__vote_type='down'))
+            )
+
+            if sort_order == 'desc':
+                review_query_set = review_query_set.order_by('-vote_score', '-id')
+            else:
+                review_query_set = review_query_set.order_by('vote_score', 'id')
+        else:  
+            if sort_order == 'desc':
+                review_query_set = review_query_set.order_by('-id')
+            else:
+                review_query_set = review_query_set.order_by('id')
+
         review_query_set = review_query_set.select_related("evaluation_review", "other_review")
 
         paginator = LimitOffsetPagination()
@@ -281,10 +310,10 @@ class ReviewListView(APIView):
         data = []
         for review in paginated_query_set:
             if review.review_type == 'evaluation' and hasattr(review, "evaluation_review"):
-                    serializer = EvaluationReviewSerializer(review.evaluation_review)
+                    serializer = EvaluationReviewSerializer(review.evaluation_review, context={'request': request})
                     data.append(serializer.data)
             elif review.review_type == 'other' and hasattr(review, "other_review"):
-                serializer = OtherReviewSerializer(review.other_review)
+                serializer = OtherReviewSerializer(review.other_review, context={'request': request})
                 data.append(serializer.data)
 
         return paginator.get_paginated_response(data)

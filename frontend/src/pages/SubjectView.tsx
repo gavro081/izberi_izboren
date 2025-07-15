@@ -1,19 +1,9 @@
-import {
-	ArrowLeft,
-	Tag,
-	// ThumbsDown,
-	// ThumbsUp,
-	Users,
-} from "lucide-react";
+import { ArrowLeft, Tag, Users } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import axiosInstance from "../api/axiosInstance";
 import { fetchSubjects } from "../api/subjects";
-import EvaluationReviews from "../components/Reviews/EvaluationReviews";
-import OtherReviews from "../components/Reviews/OtherReviews";
 import { getSubjectPrerequisites } from "../components/SubjectCatalog/utils";
 import SkeletonSubjectView from "../components/SubjectView/SkeletonSubjectView";
-import { Reviews } from "../components/types";
 import { EVALUATION_MAP_TO_MK } from "../constants/subjects";
 import { useSubjects } from "../context/SubjectsContext";
 import { useAuth } from "../hooks/useAuth";
@@ -23,7 +13,6 @@ function SubjectView() {
 		"Нема предуслов" | number | string
 	>("Нема предуслов");
 	const [isExpanded, setIsExpanded] = useState(false);
-	const [reviews, setReviews] = useState<Reviews>({} as Reviews);
 	const [filteredTechonologies, setFilteredTechnologies] = useState<string[]>(
 		[]
 	);
@@ -37,20 +26,6 @@ function SubjectView() {
 	const selectedSubject = useMemo(() => {
 		return subjects.find((subject) => subject.code === code);
 	}, [subjects, code]);
-
-	useEffect(() => {
-		if (!selectedSubject) return;
-		(async () => {
-			try {
-				const response = await axiosInstance.get<Reviews>(
-					`subjects/subject-review/${selectedSubject?.code}`
-				);
-				setReviews(response.data);
-			} catch (err) {
-				console.error("Error: ", err);
-			}
-		})();
-	}, [selectedSubject]);
 
 	useEffect(() => {
 		fetchSubjects(setSubjects);
@@ -94,12 +69,10 @@ function SubjectView() {
 		}
 	}, [selectedSubject, subjects]);
 
-	// We are "loading" if the global subjects context hasn't populated yet.
 	if (subjects.length === 0) {
 		return <SkeletonSubjectView />;
 	}
 
-	// Handle case where the subject code is not found in our global list
 	if (!selectedSubject) {
 		return (
 			<div className="flex flex-col items-center justify-center min-h-[83vh] bg-white text-center">
@@ -143,6 +116,45 @@ function SubjectView() {
 							<p className="text-lg text-gray-600 mt-1">
 								{selectedSubject.code}
 							</p>
+						</div>
+
+						{/* Action buttons */}
+						<div className="mt-4 sm:mt-0 flex flex-col sm:flex-row gap-3">
+							{user?.user_type === "student" ? (
+								<>
+									<button
+										className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm"
+										onClick={() =>
+											navigate(`/reviews`, {
+												state: { code: `${selectedSubject.code}` },
+											})
+										}
+									>
+										Прегледај информации
+									</button>
+									<button
+										className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors text-sm"
+										onClick={() =>
+											navigate(`/review-form/${selectedSubject.code}`, {
+												state: {
+													subject_id: `${selectedSubject.id}`,
+													subject_name: `${selectedSubject.name}`,
+													from: `/subjects/${selectedSubject.code}`,
+												},
+											})
+										}
+									>
+										Сподели информација
+									</button>
+								</>
+							) : user?.user_type === "admin" ? (
+								<button
+									className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors text-sm"
+									onClick={() => navigate("/admin")}
+								>
+									Админ панел
+								</button>
+							) : null}
 						</div>
 					</div>
 				</div>
@@ -271,45 +283,6 @@ function SubjectView() {
 									</span>
 								))}
 							</div>
-						</div>
-
-						{/* reviews section */}
-						<div className="bg-white rounded-lg shadow-sm p-6">
-							{!reviews ||
-							!reviews.evaluation ||
-							!reviews.other ? null : reviews.evaluation?.methods?.length ==
-									0 && reviews.other.length == 0 ? (
-								<p>Нема информации од студенти за овој предмет.</p>
-							) : (
-								<>
-									<h2 className="text-xl font-semibold mb-6">
-										Информации од студенти
-									</h2>
-									{reviews.evaluation.methods.length > 0 && (
-										<EvaluationReviews evaluation_review={reviews.evaluation} />
-									)}
-									{reviews.other.length > 0 && (
-										<OtherReviews other_reviews={reviews.other} />
-									)}
-								</>
-							)}
-							{user?.user_type == "student" && (
-								<div className="mt-6 pt-4 border-gray-200">
-									<button
-										className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-										onClick={() =>
-											navigate(`/review-form/${selectedSubject.code}`, {
-												state: {
-													subject_id: `${selectedSubject.id}`,
-													subject_name: `${selectedSubject.name}`,
-												},
-											})
-										}
-									>
-										Сподели информација / мислење
-									</button>
-								</div>
-							)}
 						</div>
 					</div>
 

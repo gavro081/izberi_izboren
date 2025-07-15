@@ -1,6 +1,6 @@
-import { AlertCircle, Plus, Trash2 } from "lucide-react";
+import { AlertCircle, ArrowLeft, Plus, Trash2 } from "lucide-react";
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
 import { EvaluationComponent, EvaluationMethod } from "../components/types";
 
@@ -43,7 +43,9 @@ const ReviewForm = () => {
 	const location = useLocation();
 	const subjectName: string = location?.state?.subject_name;
 	const subjectId: number = location?.state?.subject_id;
-	// const { code } = useParams();
+	// const from: string = location.state?.from || "/";
+	const { code } = useParams();
+	const from = `/subjects/${code}`;
 
 	const addMethod = () => {
 		if (methods.length < 3) {
@@ -192,13 +194,24 @@ const ReviewForm = () => {
 
 	return (
 		<div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-sm">
+			<button
+				onClick={() => navigate(from)}
+				className="flex items-center text-gray-600 hover:text-gray-900 mb-4"
+			>
+				<ArrowLeft className="w-5 h-5 mr-2" />
+				Назад кон преглед на предметот
+				{/* {from.startsWith("/subjects")
+					? ` преглед на предметот`
+					: " домашната страна"} */}
+			</button>
+
 			<h2 className="text-2xl font-bold mb-6">Сподели информација</h2>
 
-			{subjectName && (
+			{(subjectName || code) && (
 				<div className="mb-6 p-4 bg-blue-50 rounded-lg">
 					<p className="text-blue-800">
 						Додавате информација за предмет:{" "}
-						<span className="font-semibold">{subjectName}</span>
+						<span className="font-semibold">{subjectName || code}</span>
 					</p>
 				</div>
 			)}

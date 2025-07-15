@@ -61,6 +61,7 @@ class Review(models.Model):
         Student, through='ReviewVote', related_name='review_votes'
     )
     review_type = models.CharField(max_length=16, choices=REVIEW_TYPE_CHOICES)
+    date_posted = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return f"Review #{self.id} for {self.subject.name} from {self.student.index}."

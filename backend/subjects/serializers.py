@@ -38,7 +38,7 @@ class ReviewMetaSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Review
-        fields = ['id', 'student', 'subject', 'is_confirmed', 'votes_score', 'user_has_voted']
+        fields = ['id', 'student', 'subject', 'is_confirmed', 'votes_score', 'user_has_voted', 'date_posted']
 
 
     def get_user_has_voted(self, obj):
