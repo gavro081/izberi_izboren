@@ -125,7 +125,7 @@ function SubjectView() {
 									<button
 										className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm"
 										onClick={() =>
-											navigate(`/reviews`, {
+											navigate("/reviews", {
 												state: { code: `${selectedSubject.code}` },
 											})
 										}
@@ -150,7 +150,11 @@ function SubjectView() {
 							) : user?.user_type === "admin" ? (
 								<button
 									className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors text-sm"
-									onClick={() => navigate("/admin")}
+									onClick={() =>
+										navigate(`/reviews`, {
+											state: { code: `${selectedSubject.code}` },
+										})
+									}
 								>
 									Админ панел
 								</button>

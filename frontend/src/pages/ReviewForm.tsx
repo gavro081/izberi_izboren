@@ -1,6 +1,7 @@
 import { AlertCircle, ArrowLeft, Plus, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import axiosInstance from "../api/axiosInstance";
 import { EvaluationComponent, EvaluationMethod } from "../components/types";
 
@@ -73,6 +74,10 @@ const ReviewForm = () => {
 
 	const addComponent = (methodIndex: number) => {
 		const updatedMethods = [...methods];
+		if (updatedMethods[methodIndex].components.length >= 7) {
+			setError("Не можете да додавате повеќе од 7 компоненти по метод");
+			return;
+		}
 		updatedMethods[methodIndex].components.push({
 			category: "project",
 			percentage: 0,
@@ -143,6 +148,20 @@ const ReviewForm = () => {
 				);
 				return;
 			}
+
+			if (signatureType === "points" && Number(signatureMaxAmount) > 500) {
+				setError(
+					"Максималните поени за лабораториски не можат да бидат повеќе од 500"
+				);
+				return;
+			}
+
+			if (signatureType === "attendance" && Number(signatureMaxAmount) > 12) {
+				setError(
+					"Максималниот број на лабораториски вежби не може да биде повеќе од 12"
+				);
+				return;
+			}
 		}
 
 		// post other
@@ -168,8 +187,8 @@ const ReviewForm = () => {
 					category: otherCategory,
 					content: otherContent.trim(),
 				});
+				toast.success("Вашата објава е зачувана!");
 				navigate(-1);
-				// TODO: maybe add message for successful post
 			} catch (err) {
 				console.error(err);
 				setError("Грешка при зачувување");
@@ -185,15 +204,15 @@ const ReviewForm = () => {
 				methods: methods,
 				signature_condition: signatureCondition,
 			});
+			toast.success("Вашата објава е зачувана!");
 			navigate(-1);
-			// TODO: maybe add message for successful post
 		} catch (err) {
 			console.error(err);
 		}
 	};
 
 	return (
-		<div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-sm">
+		<div className="max-w-4xl mx-auto my-6 p-6 rounded-lg shadow-sm">
 			<button
 				onClick={() => navigate(from)}
 				className="flex items-center text-gray-600 hover:text-gray-900 mb-4"
@@ -309,6 +328,7 @@ const ReviewForm = () => {
 											}
 										}}
 										placeholder="Максимални поени"
+										max="500"
 										className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
 										required
 									/>
@@ -346,6 +366,7 @@ const ReviewForm = () => {
 											}
 										}}
 										placeholder="Вкупно лабораториски вежби"
+										max="12"
 										className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
 										required
 									/>
@@ -373,7 +394,7 @@ const ReviewForm = () => {
 							{methods.map((method, methodIndex) => (
 								<div
 									key={methodIndex}
-									className="border border-gray-200 rounded-lg p-4 mb-4"
+									className="border border-gray-200 rounded-lg p-4 mb-4 bg-gray-50"
 								>
 									<div className="flex items-center justify-between mb-4">
 										<h4 className="font-medium text-gray-900">
@@ -413,7 +434,8 @@ const ReviewForm = () => {
 											<button
 												type="button"
 												onClick={() => addComponent(methodIndex)}
-												className="flex items-center px-2 py-1 text-xs bg-green-600 text-white rounded hover:bg-green-700"
+												className="flex items-center px-2 py-1 text-xs bg-green-600 text-white rounded hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+												disabled={method.components.length >= 7}
 											>
 												<Plus className="w-3 h-3 mr-1" />
 												Додај компонента

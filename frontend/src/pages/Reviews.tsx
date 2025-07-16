@@ -364,98 +364,72 @@ const Reviews = () => {
 						Нема резултати за избраните филтри.
 					</p>
 				) : (
-					reviews.map((review) => (
-						<div
-							key={review.review.id}
-							className="border border-gray-200 rounded-lg p-6"
-						>
-							<div className="flex items-start justify-between mb-4">
-								<div className="flex-1">
-									<div className="flex items-center space-x-3 mb-2">
-										<span className="font-semibold text-lg">
-											{review.review.subject.name} ({review.review.subject.code}
-											)
-										</span>
-										<span className="px-2 py-1 rounded text-xs font-medium bg-blue-100 text-blue-800">
-											{"methods" in review ? "Полагање" : "Други"}
-										</span>
-										{"category" in review && review.category && (
-											<span className="bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs">
-												{
-													MAP_REVIEW_CATEGORY_TO_MK[
-														review.category as keyof typeof MAP_REVIEW_CATEGORY_TO_MK
-													]
-												}
+					reviews.map((review) => {
+						const isUsersPost =
+							!isAdmin && review.review.student == user?.student_index;
+						return (
+							<div
+								key={review.review.id}
+								className="border border-gray-200 rounded-lg p-6"
+							>
+								<div className="flex items-start justify-between mb-4">
+									<div className="flex-1">
+										<div className="flex items-center space-x-3 mb-2">
+											{isUsersPost && (
+												<span className="px-2 py-1 rounded text-xs font-medium bg-gray-100">
+													Мој оглас
+												</span>
+											)}
+											<span className="font-semibold text-lg">
+												{review.review.subject.name} (
+												{review.review.subject.code})
 											</span>
-										)}
+											<span className="px-2 py-1 rounded text-xs font-medium bg-blue-100 text-blue-800">
+												{"methods" in review ? "Полагање" : "Други"}
+											</span>
+											{"category" in review && review.category && (
+												<span className="bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs">
+													{
+														MAP_REVIEW_CATEGORY_TO_MK[
+															review.category as keyof typeof MAP_REVIEW_CATEGORY_TO_MK
+														]
+													}
+												</span>
+											)}
+										</div>
+										<div className="flex items-center space-x-4 text-sm text-gray-600">
+											<span>{review.review.date_posted}</span>
+											<span>Студент: {review.review.student} </span>
+											<span>
+												Гласови:{" "}
+												{`${
+													review.review.votes_score ?? 0 > 0
+														? "+"
+														: review.review.votes_score ?? 0 < 0
+														? "-"
+														: ""
+												}${review.review.votes_score}`}
+											</span>
+										</div>
 									</div>
-									<div className="flex items-center space-x-4 text-sm text-gray-600">
-										<span>{review.review.date_posted}</span>
-										<span>Студент: {review.review.student}</span>
-										<span>
-											Гласови:{" "}
-											{`${
-												review.review.votes_score ?? 0 > 0
-													? "+"
-													: review.review.votes_score ?? 0 < 0
-													? "-"
-													: ""
-											}${review.review.votes_score}`}
-										</span>
-									</div>
-								</div>
-								<div className="flex items-center space-x-2">
-									{!isAdmin && <Votes review={review.review} />}
-									<button
-										onClick={() => {
-											const newCollapsed = new Set(collapsedReviews);
-											if (newCollapsed.has(review.review.id!)) {
-												newCollapsed.delete(review.review.id!);
-											} else {
-												newCollapsed.add(review.review.id!);
-											}
-											setCollapsedReviews(newCollapsed);
-										}}
-										className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded"
-										title="Прегледај детали"
-									>
-										<Eye className="w-4 h-4" />
-									</button>
-									{!isAdmin && review.review.student == user?.student_index && (
+									<div className="flex items-center space-x-2">
+										{!isAdmin && <Votes review={review.review} />}
 										<button
-											onClick={() => deleteReview(review.review.id!)}
-											className="p-2 text-red-600 hover:text-red-800 hover:bg-red-50 rounded"
-											title="Избриши"
+											onClick={() => {
+												const newCollapsed = new Set(collapsedReviews);
+												if (newCollapsed.has(review.review.id!)) {
+													newCollapsed.delete(review.review.id!);
+												} else {
+													newCollapsed.add(review.review.id!);
+												}
+												setCollapsedReviews(newCollapsed);
+											}}
+											className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded"
+											title="Прегледај детали"
 										>
-											<Trash2 className="w-4 h-4" />
+											<Eye className="w-4 h-4" />
 										</button>
-									)}
-									{isAdmin && (
-										<>
-											<button
-												onClick={() =>
-													toggleApproval(
-														review.review.id!,
-														review.review.is_confirmed!
-													)
-												}
-												className={`p-2 rounded ${
-													review.review.is_confirmed
-														? "text-red-600 hover:text-red-800 hover:bg-red-50"
-														: "text-green-600 hover:text-green-800 hover:bg-green-50"
-												}`}
-												title={
-													review.review.is_confirmed
-														? "Означи како неодобрено"
-														: "Означи како одобрено"
-												}
-											>
-												{review.review.is_confirmed ? (
-													<XCircle className="w-4 h-4" />
-												) : (
-													<CheckCircle className="w-4 h-4" />
-												)}
-											</button>
+										{isUsersPost && (
 											<button
 												onClick={() => deleteReview(review.review.id!)}
 												className="p-2 text-red-600 hover:text-red-800 hover:bg-red-50 rounded"
@@ -463,90 +437,129 @@ const Reviews = () => {
 											>
 												<Trash2 className="w-4 h-4" />
 											</button>
-										</>
-									)}
-								</div>
-							</div>
-
-							<div className="flex items-center space-x-2 mb-3">
-								<span
-									className={`text-sm font-medium ${
-										review.review.is_confirmed
-											? "text-green-600"
-											: "text-red-600"
-									}`}
-								>
-									{review.review.is_confirmed ? "✓ Одобрено" : "✗ Неодобрено"}
-								</span>
-							</div>
-
-							{!collapsedReviews.has(review.review.id!) && (
-								<div className="mt-4 pt-4 border-t border-gray-200">
-									{"methods" in review ? (
-										<div className="space-y-4">
-											<h4 className="font-medium">Начини на оценување:</h4>
-											{review.methods?.map((method, index) => (
-												<div key={index} className="bg-gray-50 rounded p-3">
-													<p className="font-medium mb-2">Метод {index + 1}:</p>
-													{method.note && (
-														<p className="text-sm text-gray-600 mb-2">
-															Забелешка: {method.note}
-														</p>
+										)}
+										{isAdmin && (
+											<>
+												<button
+													onClick={() =>
+														toggleApproval(
+															review.review.id!,
+															review.review.is_confirmed!
+														)
+													}
+													className={`p-2 rounded ${
+														review.review.is_confirmed
+															? "text-red-600 hover:text-red-800 hover:bg-red-50"
+															: "text-green-600 hover:text-green-800 hover:bg-green-50"
+													}`}
+													title={
+														review.review.is_confirmed
+															? "Означи како неодобрено"
+															: "Означи како одобрено"
+													}
+												>
+													{review.review.is_confirmed ? (
+														<XCircle className="w-4 h-4" />
+													) : (
+														<CheckCircle className="w-4 h-4" />
 													)}
-													<div className="overflow-x-auto">
-														<table className="min-w-full border border-gray-300">
-															<thead className="bg-gray-100">
-																<tr>
-																	<th className="px-3 py-2 text-left text-sm font-medium">
-																		Активност
-																	</th>
-																	<th className="px-3 py-2 text-left text-sm font-medium">
-																		Процент
-																	</th>
-																</tr>
-															</thead>
-															<tbody>
-																{method.components.map((component, idx) => (
-																	<tr key={idx}>
-																		<td className="px-3 py-2 text-sm border-b">
-																			{
-																				EVALUATION_MAP_TO_MK[
-																					(component.category
-																						.charAt(0)
-																						.toUpperCase() +
-																						component.category.slice(
-																							1
-																						)) as keyof typeof EVALUATION_MAP_TO_MK
-																				]
-																			}
-																		</td>
-																		<td className="px-3 py-2 text-sm border-b">
-																			{component.percentage}%
-																		</td>
-																	</tr>
-																))}
-															</tbody>
-														</table>
-													</div>
-												</div>
-											))}
-											<div>
-												<strong>Услов за потпис:</strong>{" "}
-												{review.signature_condition || "Нема"}
-											</div>
-										</div>
-									) : (
-										<div>
-											<h4 className="font-medium mb-2">Содржина:</h4>
-											<p className="text-gray-700">
-												{"content" in review ? review.content : "Нема содржина"}
-											</p>
-										</div>
-									)}
+												</button>
+												<button
+													onClick={() => deleteReview(review.review.id!)}
+													className="p-2 text-red-600 hover:text-red-800 hover:bg-red-50 rounded"
+													title="Избриши"
+												>
+													<Trash2 className="w-4 h-4" />
+												</button>
+											</>
+										)}
+									</div>
 								</div>
-							)}
-						</div>
-					))
+
+								<div className="flex items-center space-x-2 mb-3">
+									<span
+										className={`text-sm font-medium ${
+											review.review.is_confirmed
+												? "text-green-600"
+												: "text-red-600"
+										}`}
+									>
+										{review.review.is_confirmed ? "✓ Одобрено" : "✗ Неодобрено"}
+									</span>
+								</div>
+
+								{!collapsedReviews.has(review.review.id!) && (
+									<div className="mt-4 pt-4 border-t border-gray-200">
+										{"methods" in review ? (
+											<div className="space-y-4">
+												<h4 className="font-medium">Начини на оценување:</h4>
+												{review.methods?.map((method, index) => (
+													<div key={index} className="bg-gray-50 rounded p-3">
+														<p className="font-medium mb-2">
+															Метод {index + 1}:
+														</p>
+														{method.note && (
+															<p className="text-sm text-gray-600 mb-2">
+																Забелешка: {method.note}
+															</p>
+														)}
+														<div className="overflow-x-auto">
+															<table className="min-w-full border border-gray-300">
+																<thead className="bg-gray-100">
+																	<tr>
+																		<th className="px-3 py-2 text-left text-sm font-medium">
+																			Активност
+																		</th>
+																		<th className="px-3 py-2 text-left text-sm font-medium">
+																			Процент
+																		</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	{method.components.map((component, idx) => (
+																		<tr key={idx}>
+																			<td className="px-3 py-2 text-sm border-b">
+																				{
+																					EVALUATION_MAP_TO_MK[
+																						(component.category
+																							.charAt(0)
+																							.toUpperCase() +
+																							component.category.slice(
+																								1
+																							)) as keyof typeof EVALUATION_MAP_TO_MK
+																					]
+																				}
+																			</td>
+																			<td className="px-3 py-2 text-sm border-b">
+																				{component.percentage}%
+																			</td>
+																		</tr>
+																	))}
+																</tbody>
+															</table>
+														</div>
+													</div>
+												))}
+												<div>
+													<strong>Услов за потпис:</strong>{" "}
+													{review.signature_condition || "Нема"}
+												</div>
+											</div>
+										) : (
+											<div>
+												<h4 className="font-medium mb-2">Содржина:</h4>
+												<p className="text-gray-700">
+													{"content" in review
+														? review.content
+														: "Нема содржина"}
+												</p>
+											</div>
+										)}
+									</div>
+								)}
+							</div>
+						);
+					})
 				)}
 
 				{nextUrl && (
