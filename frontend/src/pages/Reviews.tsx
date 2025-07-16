@@ -208,7 +208,7 @@ const Reviews = () => {
 																).toLowerCase()
 															)
 												)
-												.slice(0, 5)
+												// .slice(0, 5)
 												.map((subject) => (
 													<div
 														key={subject.code}

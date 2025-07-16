@@ -1,8 +1,45 @@
 import json
-import os
 from django.core.management.base import BaseCommand
-from subjects.models import Subject, Subject_Info
+from subjects.serializers import EvaluationReviewSerializer, OtherReviewSerializer
+from subjects.models import Review, Subject, Subject_Info
 from pathlib import Path
+from auth_form.models import User, Student
+
+def add_review(review_data, student):
+    review_type = review_data.get('type')
+    subject_name = review_data.get('subject')
+
+    if not review_type or not subject_name:
+        print(f"Skipping review due to missing type or subject: {review_data}")
+        return
+
+    try:
+        subject = Subject.objects.get(name=subject_name)
+    except Subject.DoesNotExist:
+        print(f"Skipping review because subject '{subject_name}' not found.")
+        return
+    review = Review.objects.create(
+        student=student,
+        subject=subject,
+        review_type=review_type,
+    )
+
+    context = {'review': review}
+    if review_type == "evaluation":
+        serializer = EvaluationReviewSerializer(data=review_data, context=context)
+    elif review_type == "other":
+        serializer = OtherReviewSerializer(data=review_data, context=context)
+    else:
+        review.delete()
+        print(f"Unknown review type: {review_type}")
+        return
+
+    if serializer.is_valid():
+        print(f"Successfully added review for {subject_name}")
+        serializer.save()
+    else:
+        print(f"Error saving review for {subject_name}: {serializer.errors}")
+        review.delete()
 
 class Command(BaseCommand):
     help = "Fill db with subjects and subject info from JSON"
@@ -19,14 +56,19 @@ class Command(BaseCommand):
 
         if reset_db:
             self.stdout.write("Reset flag enabled: Clearing existing database entries...")
+            Review.objects.all().delete()
             Subject_Info.objects.all().delete()
             Subject.objects.all().delete()
 
         base_dir = Path(__file__).resolve().parent.parent
         file_path = base_dir / 'data' / 'subject_details.json'
+        reviews_file_path = base_dir / 'data' / 'reviews.json'
         
         with open(file_path, 'r', encoding='utf-8') as f:
             subject_details = json.load(f)
+        
+        with open(reviews_file_path, 'r', encoding='utf-8') as f:
+            all_reviews = json.load(f)
 
         for item in subject_details.values():
             name = item["subject"].lower()
@@ -85,5 +127,26 @@ class Command(BaseCommand):
         
         Subject_Info.objects.bulk_create(subject_infos)
         
-        self.stdout.write(self.style.SUCCESS('Database filled successfully.'))
+        self.stdout.write(self.style.SUCCESS('Subjects and SubjectInfo filled successfully.'))
+
+        # dummy student for reviews
+        user, _ = User.objects.get_or_create(
+            username='teststudent',
+            defaults={
+                'email': 'teststudent@students.finki.ukim.mk',
+                'first_name': 'Тест',
+                'last_name': 'Студент',
+                'user_type': 'student'
+            }
+        )
+        student, _ = Student.objects.get_or_create(user=user)
+        if student.index is None:
+            student.index = '230000'
+            student.save()
+
+        self.stdout.write(self.style.SUCCESS(f'Using student "{student.index}" for reviews.'))
+
+        for review_data in all_reviews:
+            add_review(review_data, student)
         
+        self.stdout.write(self.style.SUCCESS('Reviews filled successfully.'))
