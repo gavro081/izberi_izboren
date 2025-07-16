@@ -212,35 +212,41 @@ const ReviewForm = () => {
 	};
 
 	return (
-		<div className="max-w-4xl mx-auto my-6 p-6 rounded-lg shadow-sm">
+		<div className="max-w-4xl mx-auto my-4 md:my-6 p-4 md:p-6 rounded-lg shadow-sm">
 			<button
 				onClick={() => navigate(from)}
 				className="flex items-center text-gray-600 hover:text-gray-900 mb-4"
 			>
 				<ArrowLeft className="w-5 h-5 mr-2" />
-				Назад кон преглед на предметот
+				<span className="text-sm md:text-base">
+					Назад кон преглед на предметот
+				</span>
 				{/* {from.startsWith("/subjects")
 					? ` преглед на предметот`
 					: " домашната страна"} */}
 			</button>
 
-			<h2 className="text-2xl font-bold mb-6">Сподели информација</h2>
+			<h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">
+				Сподели информација
+			</h2>
 
 			{(subjectName || code) && (
-				<div className="mb-6 p-4 bg-blue-50 rounded-lg">
-					<p className="text-blue-800">
+				<div className="mb-4 md:mb-6 p-3 md:p-4 bg-blue-50 rounded-lg">
+					<p className="text-blue-800 text-sm md:text-base">
 						Додавате информација за предмет:{" "}
-						<span className="font-semibold">{subjectName || code}</span>
+						<span className="font-semibold break-words">
+							{subjectName || code}
+						</span>
 					</p>
 				</div>
 			)}
 
-			<form onSubmit={handleSubmit} className="space-y-6">
+			<form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
 				<div>
-					<label className="block text-sm font-medium text-gray-700 mb-3">
+					<label className="block text-sm font-medium text-gray-700 mb-2 md:mb-3">
 						Тип
 					</label>
-					<div className="flex space-x-4">
+					<div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
 						<label className="flex items-center">
 							<input
 								type="radio"
@@ -268,7 +274,7 @@ const ReviewForm = () => {
 
 				{/* evaluation */}
 				{reviewType === "evaluation" && (
-					<div className="space-y-6">
+					<div className="space-y-4 md:space-y-6">
 						<div>
 							<label className="block text-sm font-medium text-gray-700 mb-2">
 								Услов за потпис
@@ -299,7 +305,7 @@ const ReviewForm = () => {
 							</select>
 
 							{signatureType === "points" && (
-								<div className="flex items-center space-x-2">
+								<div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-2">
 									<input
 										type="number"
 										value={signatureRequiredAmount}
@@ -312,10 +318,10 @@ const ReviewForm = () => {
 											}
 										}}
 										placeholder="Потребни поени"
-										className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+										className="flex-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
 										required
 									/>
-									<span className="text-gray-500">/</span>
+									<span className="text-gray-500 self-center">/</span>
 									<input
 										type="number"
 										value={signatureMaxAmount}
@@ -329,7 +335,7 @@ const ReviewForm = () => {
 										}}
 										placeholder="Максимални поени"
 										max="500"
-										className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+										className="flex-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
 										required
 									/>
 									{/* <span className="text-sm text-gray-500">поени</span> */}
@@ -337,7 +343,7 @@ const ReviewForm = () => {
 							)}
 
 							{signatureType === "attendance" && (
-								<div className="flex items-center space-x-2">
+								<div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-2">
 									<input
 										type="number"
 										value={signatureRequiredAmount}
@@ -350,10 +356,10 @@ const ReviewForm = () => {
 											}
 										}}
 										placeholder="Потребно присуство"
-										className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+										className="flex-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
 										required
 									/>
-									<span className="text-gray-500">/</span>
+									<span className="text-gray-500 self-center">/</span>
 									<input
 										type="number"
 										value={signatureMaxAmount}
@@ -367,7 +373,7 @@ const ReviewForm = () => {
 										}}
 										placeholder="Вкупно лабораториски вежби"
 										max="12"
-										className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+										className="flex-1 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
 										required
 									/>
 								</div>
@@ -375,7 +381,7 @@ const ReviewForm = () => {
 						</div>
 
 						<div>
-							<div className="flex items-center justify-between mb-4">
+							<div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 space-y-2 sm:space-y-0">
 								<h3 className="text-lg font-medium text-gray-900">
 									Начини на оценување ({methods.length}/3)
 								</h3>
@@ -383,7 +389,7 @@ const ReviewForm = () => {
 									<button
 										type="button"
 										onClick={addMethod}
-										className="flex items-center px-3 py-2 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700"
+										className="flex items-center justify-center px-3 py-2 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 w-full sm:w-auto"
 									>
 										<Plus className="w-4 h-4 mr-1" />
 										Додај метод
@@ -394,9 +400,9 @@ const ReviewForm = () => {
 							{methods.map((method, methodIndex) => (
 								<div
 									key={methodIndex}
-									className="border border-gray-200 rounded-lg p-4 mb-4 bg-gray-50"
+									className="border border-gray-200 rounded-lg p-3 md:p-4 mb-4 bg-gray-50"
 								>
-									<div className="flex items-center justify-between mb-4">
+									<div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 space-y-2 sm:space-y-0">
 										<h4 className="font-medium text-gray-900">
 											Метод {methodIndex + 1}
 										</h4>
@@ -404,7 +410,7 @@ const ReviewForm = () => {
 											<button
 												type="button"
 												onClick={() => removeMethod(methodIndex)}
-												className="text-red-600 hover:text-red-800"
+												className="text-red-600 hover:text-red-800 self-start sm:self-center"
 											>
 												<Trash2 className="w-4 h-4" />
 											</button>
@@ -427,14 +433,14 @@ const ReviewForm = () => {
 									</div>
 
 									<div>
-										<div className="flex items-center justify-between mb-3">
+										<div className="flex flex-col sm:flex-row sm:items-center justify-between mb-3 space-y-2 sm:space-y-0">
 											<label className="block text-sm font-medium text-gray-700">
 												Компоненти на оценување
 											</label>
 											<button
 												type="button"
 												onClick={() => addComponent(methodIndex)}
-												className="flex items-center px-2 py-1 text-xs bg-green-600 text-white rounded hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+												className="flex items-center justify-center px-2 py-1 text-xs bg-green-600 text-white rounded hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed w-full sm:w-auto"
 												disabled={method.components.length >= 7}
 											>
 												<Plus className="w-3 h-3 mr-1" />
@@ -445,7 +451,7 @@ const ReviewForm = () => {
 										{method.components.map((component, componentIndex) => (
 											<div
 												key={componentIndex}
-												className="flex items-center space-x-3 mb-3"
+												className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-3 mb-3"
 											>
 												<select
 													value={component.category}
@@ -457,7 +463,7 @@ const ReviewForm = () => {
 															e.target.value
 														)
 													}
-													className="flex-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 custom-select"
+													className="flex-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 custom-select"
 												>
 													{COMPONENT_CATEGORIES.map((cat) => (
 														<option key={cat.value} value={cat.value}>
@@ -466,7 +472,7 @@ const ReviewForm = () => {
 													))}
 												</select>
 
-												<div className="flex items-center space-x-2">
+												<div className="flex items-center space-x-2 w-full sm:w-auto">
 													<input
 														type="number"
 														min="0"
@@ -483,30 +489,29 @@ const ReviewForm = () => {
 														className="w-20 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
 													/>
 													<span className="text-sm text-gray-500">%</span>
+													{method.components.length > 1 && (
+														<button
+															type="button"
+															onClick={() =>
+																removeComponent(methodIndex, componentIndex)
+															}
+															className="text-red-600 hover:text-red-800 ml-2"
+														>
+															<Trash2 className="w-4 h-4" />
+														</button>
+													)}
 												</div>
-
-												{method.components.length > 1 && (
-													<button
-														type="button"
-														onClick={() =>
-															removeComponent(methodIndex, componentIndex)
-														}
-														className="text-red-600 hover:text-red-800"
-													>
-														<Trash2 className="w-4 h-4" />
-													</button>
-												)}
 											</div>
 										))}
 
-										<div className="flex items-center justify-between mt-3 pt-3 border-t border-gray-200">
-											<div className="flex items-center space-x-2">
+										<div className="flex flex-col sm:flex-row sm:items-center justify-between mt-3 pt-3 border-t border-gray-200 space-y-2 sm:space-y-0">
+											<div className="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-2">
 												<span className="text-sm text-gray-600">
 													Вкупно: {getMethodPercentageTotal(method)}%
 												</span>
 												{!isMethodValid(method) && (
-													<div className="flex items-center text-red-600">
-														<AlertCircle className="w-4 h-4 mr-1" />
+													<div className="flex items-start sm:items-center text-red-600">
+														<AlertCircle className="w-4 h-4 mr-1 mt-0.5 sm:mt-0 shrink-0" />
 														<span className="text-sm">
 															Мора да биде 100% и сите компоненти да се
 															различни.
@@ -523,7 +528,7 @@ const ReviewForm = () => {
 				)}
 
 				{reviewType === "other" && (
-					<div className="space-y-6">
+					<div className="space-y-4 md:space-y-6">
 						<div>
 							<label className="block text-sm font-medium text-gray-700 mb-2">
 								Тема
@@ -557,7 +562,7 @@ const ReviewForm = () => {
 								className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-vertical"
 								required
 							/>
-							<div className="flex justify-between items-center mt-1">
+							<div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-1 space-y-1 sm:space-y-0">
 								<p className="text-sm text-gray-500">
 									Споделете корисни информации за други студенти
 								</p>
@@ -575,16 +580,18 @@ const ReviewForm = () => {
 
 				{/* error */}
 				{error && (
-					<div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-						<div className="flex items-center">
-							<AlertCircle className="w-5 h-5 text-red-600 mr-2" />
-							<p className="text-red-800">{error}</p>
+					<div className="p-3 md:p-4 bg-red-50 border border-red-200 rounded-lg">
+						<div className="flex items-start">
+							<AlertCircle className="w-5 h-5 text-red-600 mr-2 mt-0.5 shrink-0" />
+							<p className="text-red-800 text-sm md:text-base break-words">
+								{error}
+							</p>
 						</div>
 					</div>
 				)}
 
 				{reviewType && (
-					<div className="flex items-center justify-end space-x-4 pt-6 border-t border-gray-200">
+					<div className="flex flex-col sm:flex-row sm:items-center justify-end space-y-3 sm:space-y-0 sm:space-x-4 pt-4 md:pt-6 border-t border-gray-200">
 						<button
 							type="submit"
 							disabled={
@@ -593,7 +600,7 @@ const ReviewForm = () => {
 									signatureType !== "none" &&
 									(!signatureRequiredAmount || !signatureMaxAmount))
 							}
-							className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+							className="w-full sm:w-auto px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
 						>
 							Објави
 						</button>

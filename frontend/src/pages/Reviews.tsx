@@ -159,17 +159,17 @@ const Reviews = () => {
 	const isAdmin = user?.user_type === "admin";
 
 	return (
-		<div className="max-w-7xl mx-auto p-6 bg-white min-h-screen">
-			<h1 className="text-3xl font-bold mb-8">
+		<div className="max-w-7xl mx-auto p-4 md:p-6 bg-white min-h-screen">
+			<h1 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8">
 				{isAdmin ? "Администраторски панел" : "Информации од студенти"}
 			</h1>
 
 			{/* filters */}
-			<div className="bg-gray-50 rounded-lg p-4 mb-6">
+			<div className="bg-gray-50 rounded-lg p-3 md:p-4 mb-4 md:mb-6">
 				<div className="flex items-center space-x-4">
-					<div className="flex flex-col items-start space-x-0 space-y-2">
-						<div className="flex flex-col md:flex-row md:space-x-8">
-							<div className="relative" ref={dropdownRef}>
+					<div className="flex flex-col items-start space-x-0 space-y-2 w-full">
+						<div className="flex flex-col space-y-4 md:space-y-0 md:flex-row md:space-x-8 w-full">
+							<div className="relative w-full md:w-auto" ref={dropdownRef}>
 								<label className="block text-sm font-medium text-gray-700 mb-1">
 									Предмет
 								</label>
@@ -187,7 +187,7 @@ const Reviews = () => {
 												selectedSubject === null ? "Пребарај предмет..." : ""
 											}`}
 											disabled={selectedSubject !== null}
-											className={`w-64 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+											className={`w-full md:w-64 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
 												selectedSubject ? "bg-gray-100 cursor-not-allowed" : ""
 											}`}
 										/>
@@ -250,7 +250,7 @@ const Reviews = () => {
 									</div>
 								)}
 							</div>
-							<div>
+							<div className="w-full md:w-auto">
 								<label className="block text-sm font-medium text-gray-700 mb-1">
 									Тип
 								</label>
@@ -259,14 +259,14 @@ const Reviews = () => {
 									onChange={(e) =>
 										setFilters((prev) => ({ ...prev, type: e.target.value }))
 									}
-									className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 custom-select"
+									className="w-full md:w-auto px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 custom-select"
 								>
 									<option value="all">Сите типови</option>
 									<option value="evaluation">Информации за полагање</option>
 									<option value="other">Други информации</option>
 								</select>
 							</div>
-							<div>
+							<div className="w-full md:w-auto">
 								<label className="block text-sm font-medium text-gray-700 mb-1">
 									Статус на одобрување
 								</label>
@@ -278,14 +278,14 @@ const Reviews = () => {
 											approved: e.target.value,
 										}))
 									}
-									className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 custom-select"
+									className="w-full md:w-auto px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 custom-select"
 								>
 									<option value="all">Сите</option>
 									<option value="approved">Одобрени</option>
 									<option value="unapproved">Неодобрени</option>
 								</select>
 							</div>
-							<div>
+							<div className="w-full md:w-auto">
 								<label className="block text-sm font-medium text-gray-700 mb-1">
 									Сортирај по
 								</label>
@@ -298,7 +298,7 @@ const Reviews = () => {
 												sort_by: e.target.value,
 											}))
 										}
-										className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 custom-select"
+										className="flex-1 md:flex-none px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 custom-select"
 									>
 										<option value="date">Датум</option>
 										<option value="votes">Гласови</option>
@@ -320,18 +320,18 @@ const Reviews = () => {
 								</div>
 							</div>
 						</div>
-						<div className="flex pt-4 space-x-2">
+						<div className="flex flex-col sm:flex-row pt-4 space-y-2 sm:space-y-0 sm:space-x-2 w-full">
 							<button
 								onClick={handleSearch}
 								disabled={loading}
-								className={`px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
+								className={`w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
 									loading ? "bg-gray-400 cursor-not-allowed" : ""
 								}`}
 							>
 								{loading ? "Се вчитува..." : "Пребарај"}
 							</button>
 							{user?.user_type === "student" && (
-								<label className="flex items-center space-x-2 cursor-pointer select-none px-2 py-1 rounded-md transition-colors">
+								<label className="flex items-center space-x-2 cursor-pointer select-none px-2 py-1 rounded-md transition-colors w-full sm:w-auto justify-center sm:justify-start">
 									<input
 										type="checkbox"
 										checked={filters.my_reviews}
@@ -370,17 +370,17 @@ const Reviews = () => {
 						return (
 							<div
 								key={review.review.id}
-								className="border border-gray-200 rounded-lg p-6"
+								className="border border-gray-200 rounded-lg p-4 md:p-6"
 							>
-								<div className="flex items-start justify-between mb-4">
+								<div className="flex flex-col sm:flex-row sm:items-start justify-between mb-4 space-y-3 sm:space-y-0">
 									<div className="flex-1">
-										<div className="flex items-center space-x-3 mb-2">
+										<div className="flex flex-wrap items-center gap-2 mb-2">
 											{isUsersPost && (
 												<span className="px-2 py-1 rounded text-xs font-medium bg-gray-100">
 													Мој оглас
 												</span>
 											)}
-											<span className="font-semibold text-lg">
+											<span className="font-semibold text-base md:text-lg break-words">
 												{review.review.subject.name} (
 												{review.review.subject.code})
 											</span>
@@ -397,22 +397,26 @@ const Reviews = () => {
 												</span>
 											)}
 										</div>
-										<div className="flex items-center space-x-4 text-sm text-gray-600">
+										<div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-gray-600">
 											<span>{review.review.date_posted}</span>
-											<span>Студент: {review.review.student} </span>
-											<span>
-												Гласови:{" "}
-												{`${
-													review.review.votes_score ?? 0 > 0
-														? "+"
-														: review.review.votes_score ?? 0 < 0
-														? "-"
-														: ""
-												}${review.review.votes_score}`}
+											<span className="break-all">
+												Студент: {review.review.student}{" "}
 											</span>
+											{isAdmin && (
+												<span>
+													Гласови:{" "}
+													{`${
+														review.review.votes_score ?? 0 > 0
+															? "+"
+															: review.review.votes_score ?? 0 < 0
+															? "-"
+															: ""
+													}${review.review.votes_score}`}
+												</span>
+											)}
 										</div>
 									</div>
-									<div className="flex items-center space-x-2">
+									<div className="flex items-center space-x-2 shrink-0 md:justify-end ">
 										{!isAdmin && <Votes review={review.review} />}
 										<button
 											onClick={() => {
@@ -504,13 +508,13 @@ const Reviews = () => {
 															</p>
 														)}
 														<div className="overflow-x-auto">
-															<table className="min-w-full border border-gray-300">
+															<table className="min-w-full border border-gray-300 text-sm">
 																<thead className="bg-gray-100">
 																	<tr>
-																		<th className="px-3 py-2 text-left text-sm font-medium">
+																		<th className="px-2 md:px-3 py-2 text-left text-xs md:text-sm font-medium">
 																			Активност
 																		</th>
-																		<th className="px-3 py-2 text-left text-sm font-medium">
+																		<th className="px-2 md:px-3 py-2 text-left text-xs md:text-sm font-medium">
 																			Процент
 																		</th>
 																	</tr>
@@ -518,7 +522,7 @@ const Reviews = () => {
 																<tbody>
 																	{method.components.map((component, idx) => (
 																		<tr key={idx}>
-																			<td className="px-3 py-2 text-sm border-b">
+																			<td className="px-2 md:px-3 py-2 text-xs md:text-sm border-b break-words">
 																				{
 																					EVALUATION_MAP_TO_MK[
 																						(component.category
@@ -530,7 +534,7 @@ const Reviews = () => {
 																					]
 																				}
 																			</td>
-																			<td className="px-3 py-2 text-sm border-b">
+																			<td className="px-2 md:px-3 py-2 text-xs md:text-sm border-b">
 																				{component.percentage}%
 																			</td>
 																		</tr>
@@ -548,7 +552,7 @@ const Reviews = () => {
 										) : (
 											<div>
 												<h4 className="font-medium mb-2">Содржина:</h4>
-												<p className="text-gray-700">
+												<p className="text-gray-700 break-words">
 													{"content" in review
 														? review.content
 														: "Нема содржина"}
