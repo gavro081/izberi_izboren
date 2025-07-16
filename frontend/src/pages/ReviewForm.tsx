@@ -127,7 +127,6 @@ const ReviewForm = () => {
 		setError("");
 
 		if (Number(signatureMaxAmount) < Number(signatureRequiredAmount)) {
-			alert(1);
 			setError("Провери услов за потпис");
 			return;
 		}
@@ -146,6 +145,7 @@ const ReviewForm = () => {
 			}
 		}
 
+		// post other
 		if (reviewType === "other") {
 			if (!otherCategory) {
 				setError("Мора да изберете категорија");
@@ -177,7 +177,7 @@ const ReviewForm = () => {
 			return;
 		}
 
-		// post specific for evaluation reviews
+		// post evaluation
 		try {
 			await axiosInstance.post("/subjects/subject-review/", {
 				subject_id: subjectId,

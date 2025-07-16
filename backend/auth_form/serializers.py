@@ -25,6 +25,8 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         data['user_type'] = self.user.user_type
         if hasattr(self.user, 'full_name'):
             data['full_name'] = self.user.full_name
+        if hasattr(self.user, 'student'):
+            data['student_index'] = self.user.student.index
         return data
 
 class RegistrationSerializer(serializers.ModelSerializer):

@@ -56,12 +56,14 @@ const Login: React.FC = () => {
 				refresh: string;
 				full_name: string;
 				user_type: UserType;
+				student_index?: string;
 			}>("http://localhost:8000/auth/login/", {
 				email: formData.email,
 				password: formData.password,
 			});
-			const { access, refresh, full_name, user_type } = response.data;
-			login(access, refresh, { full_name, user_type });
+			const { access, refresh, full_name, user_type, student_index } =
+				response.data;
+			login(access, refresh, { full_name, user_type, student_index });
 			navigate("/");
 			toast.success(
 				`Успешно сте најавени${user_type ? " како администратор" : ""}!`
