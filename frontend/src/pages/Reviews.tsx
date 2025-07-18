@@ -1,6 +1,6 @@
-import { CheckCircle, Eye, Trash2, XCircle } from "lucide-react";
+import { ArrowLeft, CheckCircle, Eye, Trash2, XCircle } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
 import { fetchSubjects } from "../api/subjects";
 import Votes from "../components/Reviews/Votes";
@@ -45,6 +45,7 @@ const Reviews = () => {
 	);
 	const [hasSearched, setHasSearched] = useState(false);
 	const dropdownRef = useRef<HTMLDivElement>(null);
+	const navigate = useNavigate();
 	const code = location.state?.code || "";
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
@@ -160,6 +161,16 @@ const Reviews = () => {
 
 	return (
 		<div className="max-w-7xl mx-auto p-4 md:p-6 bg-white min-h-screen">
+			<button
+				onClick={() => navigate(code ? `/subjects/${code}` : "/")}
+				className="flex items-center text-gray-600 hover:text-gray-900 mb-4"
+			>
+				<ArrowLeft className="w-5 h-5 mr-2" />
+				<span className="text-sm md:text-base">
+					Назад кон
+					{code ? " преглед на предметот" : " домашната страна"}
+				</span>
+			</button>
 			<h1 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8">
 				{isAdmin ? "Администраторски панел" : "Информации од студенти"}
 			</h1>
@@ -340,11 +351,7 @@ const Reviews = () => {
 											setFilters((prev) => ({
 												...prev,
 												my_reviews: newMyReviews,
-												subject: newMyReviews ? "all" : prev.subject,
 											}));
-											if (newMyReviews) {
-												setSelectedSubject(null);
-											}
 										}}
 										className="form-checkbox h-5 w-5 text-blue-600"
 									/>
