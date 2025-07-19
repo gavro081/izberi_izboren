@@ -12,6 +12,7 @@
 - `participants.json` - array listing all courses with their number of participants.
 - `prerequisites.json` - array of subject prerequisites (as strings).
 - `professors.json` - array of all subjects with their respective professors and assistants.
+- `reviews.json` - array of existing reviews used to initially fill the db.
 - `subject_details.json` - JSON containing all subjects and relevant information about them, aggregated from the other data files. used for filling the db. If you want to modify some of the data before filling the database it is preferred to do so in the other files and then rerun the respective command for overwriting this file, instead of changing this file directly.
 - `subjects_by_program.json` - JSON listing all subjects and the programs for which they are mandatory.
 - `subjects_vector.json` - JSON representing the encoded vectors for all subjects, where 1 represents a value that is present.
@@ -33,7 +34,7 @@ the template for running commands is:
 
 ### Scripts
 
-- `fill_db.py` - reads data from subject details and populates the db. useful for initial set up. for overwriting the existing data in the db run the command with --reset flag.
+- `fill_db.py` - reads data from subject details and reviews, then populates the db. useful for initial set up. for overwriting the existing data in the db run the command with --reset flag.
 - `format_prereqs.py` - reads data from prerequisites.json, and writes the formatted output to `data/formatted_prereqs.json`
 - `subject_details.py` - aggregates data from multiple JSON files, and writes the combined information in `/data/subject_details.json`.
 - `subjects_by_program.py` - reads data from mandatory.json, and writes the relevant information to `data/subjects_by_program.json`.
