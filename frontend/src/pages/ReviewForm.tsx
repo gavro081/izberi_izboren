@@ -212,7 +212,7 @@ const ReviewForm = () => {
 	};
 
 	return (
-		<div className="max-w-4xl mx-auto my-4 md:my-6 p-4 md:p-6 rounded-lg shadow-sm">
+		<div className="max-w-4xl mx-auto my-4 md:my-6 p-4 md:p-6 rounded-lg shadow-md">
 			<button
 				onClick={() => navigate(from)}
 				className="flex items-center text-gray-600 hover:text-gray-900 mb-4"
@@ -383,7 +383,7 @@ const ReviewForm = () => {
 						<div>
 							<div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 space-y-2 sm:space-y-0">
 								<h3 className="text-lg font-medium text-gray-900">
-									Начини на оценување ({methods.length}/3)
+									Методи на оценување ({methods.length}/3)
 								</h3>
 								{methods.length < 3 && (
 									<button
@@ -419,7 +419,7 @@ const ReviewForm = () => {
 
 									<div className="mb-4">
 										<label className="block text-sm font-medium text-gray-700 mb-2">
-											Наслов / коментар / забелешка .... (опционално)
+											Дополнителна информација (опционално)
 										</label>
 										<input
 											type="text"
