@@ -264,6 +264,7 @@ def get_explanation_message(criterion, score):
     thresholds = {
         'tags': 0.7, 'evaluation': 0.5, 'technologies': 0.5,
         'professors': 0.5, 'assistants': 0.5, 'participant_score': 0.5,
+        'effort': 0
     }
 
     if score < thresholds.get(criterion, 1.0):
@@ -275,7 +276,8 @@ def get_explanation_message(criterion, score):
         'technologies': f"Се совпаѓа со технологиите кои ги сакаш ({score:.1%})",
         'professors': f"Го предаваат професори кои ги сакаш ({score:.1%})",
         'assistants': f"Има асистенти кои ги сакаш ({score:.1%})",
-        'participant_score': f"Има голем број на студенти",
+        'participant_score': f"Одбран од многу студенти",
+        'effort': f"Се совпаѓа со твојот вложен труд" if score == 1 else f"Не се совпаѓа со твојот вложен труд",
     }
     return messages.get(criterion)
 
@@ -336,7 +338,7 @@ def get_recommendations_with_details(subjects_tag_scores):
             'total_score': total_score,
             # 'primary_reason': primary_reason,
             'explanations': explanations,
-            # 'detailed_scores': individual_scores,
+            'detailed_scores': individual_scores,
             # 'matching_tags': matching_tags,
             'match_percentage': min(total_score * 100, 100)
         })

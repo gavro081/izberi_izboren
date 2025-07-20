@@ -71,7 +71,7 @@ const SubjectCard = ({
 									</span>
 								</div>
 							) : (
-								<p className="font-semibold mb-2">
+								<p className="font-semibold">
 									{recommendationDetails.match_percentage >= 90
 										? "Супер за тебе"
 										: recommendationDetails.match_percentage >= 75
@@ -84,8 +84,11 @@ const SubjectCard = ({
 							<ul className="space-y-1">
 								{recommendationDetails.explanations.map(
 									(explanation, index) => (
-										<li key={index} className="text-xs leading-relaxed">
-											• {explanation}
+										<li
+											key={index}
+											className="text-xs leading-relaxed relative pl-2 before:content-['–'] before:absolute before:left-0"
+										>
+											{explanation}
 										</li>
 									)
 								)}
