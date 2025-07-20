@@ -2,10 +2,10 @@ BIAS_SUBJECT_HAS_ONE = 0.75
 BIAS_STUDENT_HAS_ONE = 0.9
 
 WEIGHTS = {
-    "professors": 0.0325,
-    "assistants": 0.0325,
-    "technologies": 0.065,
-    "tags": 0.4,
+    "professors": 0.055,
+    "assistants": 0.055,
+    "technologies": 0.075,
+    "tags": 0.35,
     "evaluation": 0.15, 
     "effort": 0.3,
     "activated": 0.01,

@@ -14,6 +14,13 @@ export interface Subject {
 	name: string;
 	abstract: string;
 	subject_info: SubjectInfo;
+	recommendation_details?: {
+		match_percentage: number;
+		primary_reason: string;
+		explanations: string[];
+		matching_tags: string[];
+		detailed_scores: Record<string, number>;
+	};
 }
 
 export type SubjectID = Subject["id"];

@@ -183,7 +183,7 @@ const Recommendations = () => {
 									<div className="text-center mb-4 md:mb-8">
 										<h2 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-2">
 											Вашите препораки за {getSeasonText().toLowerCase()}{" "}
-											{getSeasonText().toLowerCase() === "Зимски + Летен"
+											{getSeasonText().toLowerCase() === "зимски + летен"
 												? "семестри"
 												: "семестар"}
 										</h2>
@@ -192,14 +192,12 @@ const Recommendations = () => {
 											оцениш препораките
 										</p>
 									</div>
-									<div
-										className={`grid grid-cols-1 md:grid-cols-2 gap-3 md:auto-rows-[300px] relative pb-4`}
-									>
+									<div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
 										{recommendations.map((subject, index) => (
 											<div
 												key={subject.id}
-												className={`border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 relative ${
-													index % 2 === 0 ? "self-start" : "self-end"
+												className={`border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 ${
+													index % 2 === 0 ? "md:mt-0" : "md:mt-8"
 												}`}
 												style={{
 													animationName: "fadeInUp",
@@ -214,9 +212,10 @@ const Recommendations = () => {
 													openSubjectDetails={openSubjectDetails}
 													openSubjectView={openSubjectView}
 													canReview={true}
-													isFirst={index == 0}
+													isFirst={index === 0}
 													isRecommended={true}
 													isLoading={isLoading}
+													recommendationDetails={subject.recommendation_details}
 												/>
 											</div>
 										))}

@@ -257,23 +257,95 @@ def score_for_preferences(student_vector, eligible_subjects):
 
     return subjects_tag_scores
 
-def get_recommended_subjects(subjects_tag_scores):
-    """
-    generates a list of recommended subjects based on weighted scores.
+def get_explanation_message(criterion, score):
+    """Generates a human-readable explanation for a single matching criterion."""
 
-    args:
-        filtered_subjects_vector (dict): a dictionary where each key is a subject and each value is another dictionary
-            mapping feature keys to their corresponding scores for that subject.
-    returns:
-        list: a list of top N subject names recommended based on their normalized scores. if all scores are zero, returns empty list.
-    """
-    subject_scores = {}
-    for subject in subjects_tag_scores:
-        keys = subjects_tag_scores[subject]
-        score = 0
-        for key in keys:
-            score += WEIGHTS[key] * keys[key]
-        subject_scores[subject] = score
+    # Thresholds to decide if a match is significant enough to be an "explanation"
+    thresholds = {
+        'tags': 0.7, 'evaluation': 0.5, 'technologies': 0.5,
+        'professors': 0.5, 'assistants': 0.5, 'participant_score': 0.5,
+    }
+
+    if score < thresholds.get(criterion, 1.0):
+        return None
+
+    messages = {
+        'tags': f"Супер совпаѓање со твоите полиња на интерес ({score:.1%})",
+        'evaluation': f"Се совпаѓа со твоите посакувани методи на евалуација ({score:.1%})",
+        'technologies': f"Се совпаѓа со технологиите кои ги сакаш ({score:.1%})",
+        'professors': f"Го предаваат професори кои ги сакаш ({score:.1%})",
+        'assistants': f"Има асистенти кои ги сакаш ({score:.1%})",
+        'participant_score': f"Има голем број на студенти",
+    }
+    return messages.get(criterion)
+
+# def get_detailed_tag_matches(student_vector, subject_vector):
+#     """Identifies the specific tags that matched between the student and subject."""
+
+#     student_tags_indices = {i for i, val in enumerate(student_vector['tags']) if val == 1}
+#     subject_tags_indices = {i for i, val in enumerate(subject_vector['tags']) if val == 1}
     
-    top_subjects = list(dict(sorted(subject_scores.items(), key=lambda item: item[1], reverse=True)))[:NUMBER_OF_SUGGESTIONS]
-    return top_subjects
+#     matching_indices = student_tags_indices.intersection(subject_tags_indices)
+    
+#     # Map indices back to tag names from the vocabulary
+#     all_tags = VOCABULARY.get('tags', [])
+#     matching_tags = [all_tags[i] for i in matching_indices if i < len(all_tags)]
+    
+#     return matching_tags
+
+
+def get_recommendations_with_details(subjects_tag_scores):
+    """
+    Generates a sorted list of recommended subjects with detailed explanations.
+
+    Args:
+        subjects_tag_scores (dict): Scores for each subject across different criteria.
+
+    Returns:
+        list: A list of dictionaries, each containing detailed info for a recommended subject.
+    """
+    detailed_results = []
+
+    for subject_name, individual_scores in subjects_tag_scores.items():
+        total_score = 0
+        weighted_scores = {}
+        explanations = []
+
+        for criterion, score in individual_scores.items():
+            weight = WEIGHTS.get(criterion, 0)
+            weighted_score = weight * score
+            total_score += weighted_score
+            weighted_scores[criterion] = weighted_score
+            
+            message = get_explanation_message(criterion, score)
+            if message:
+                explanations.append(message)
+
+            # Sort explanations by their match percentage, it extracts the percentage from the message (e.g. Something (72.8%)) and sorts them in descending order
+            explanations.sort(key=lambda msg: -(float(msg.split('(')[-1].replace('%)', '')) if '(' in msg and '%' in msg else float('-inf')))
+        # primary_reason_criterion = max(weighted_scores, key=weighted_scores.get)
+        # primary_reason_score = individual_scores[primary_reason_criterion]
+        # primary_reason = get_explanation_message(primary_reason_criterion, primary_reason_score)
+        # if not primary_reason:
+        #     primary_reason = f"Добро совпаѓање поради {primary_reason_criterion.replace('_', ' ')}"
+
+        # matching_tags = get_detailed_tag_matches(student_vector, eligible_subjects_dict[subject_name])
+
+        detailed_results.append({
+            'subject_name': subject_name,
+            'total_score': total_score,
+            # 'primary_reason': primary_reason,
+            'explanations': explanations,
+            # 'detailed_scores': individual_scores,
+            # 'matching_tags': matching_tags,
+            'match_percentage': min(total_score * 100, 100)
+        })
+
+
+    max_score = max([res['total_score'] for res in detailed_results]) or 1
+    for res in detailed_results:
+        res['match_percentage'] = round((res['total_score'] / max_score) * 100, 1)
+
+    detailed_results.sort(key=lambda x: x['total_score'], reverse=True)
+    return detailed_results[:NUMBER_OF_SUGGESTIONS]
+    

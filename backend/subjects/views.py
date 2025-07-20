@@ -8,11 +8,12 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from django.db.models import Case, When, Count, F, Q
-from subjects.utils import get_eligible_subjects, get_recommendations_cache_key, get_recommended_subjects, map_to_subjects_vector, score_for_preferences, get_student_vector
+from subjects.utils import get_eligible_subjects, get_recommendations_cache_key, get_recommendations_with_details, map_to_subjects_vector, score_for_preferences, get_student_vector
 from .serializers import SubjectSerializer, EvaluationReviewSerializer, OtherReviewSerializer
 from .models import Subject, Review, EvaluationReview, OtherReview, ReviewVote
 from rest_framework.pagination import LimitOffsetPagination
 from auth_form.permissions import IsStudent, IsAdmin
+import logging
 
 def index(request):
     return HttpResponse("ok")
@@ -41,24 +42,51 @@ class RecommendationsView(APIView):
         if cache_key:
             cached_data = cache.get(cache_key)
             if cached_data:
-                return Response({"data": json.loads(cached_data)}, status=status.HTTP_200_OK)
+                return Response(json.loads(cached_data), status=status.HTTP_200_OK)
         try:
-            subjects = get_eligible_subjects(student, season=season, not_activated=not_activated)
-            subject_vectors = map_to_subjects_vector(subjects)
+            eligible_subjects = get_eligible_subjects(student, season=season, not_activated=not_activated)
+            if not eligible_subjects:
+                return Response({"data": []}, status=status.HTTP_200_OK)
+            
+            eligible_subjects_dict = map_to_subjects_vector(eligible_subjects)
             student_vector = get_student_vector(student)
 
-            final_subjects = get_recommended_subjects(score_for_preferences(student_vector, subject_vectors))
+            subjects_scores = score_for_preferences(student_vector, eligible_subjects_dict)
+            
+            recommendations_with_details = get_recommendations_with_details(
+                subjects_scores
+            )
 
-            order = Case(*[When(name=subject_name, then=pos) for pos, subject_name in enumerate(final_subjects)])
+            if not recommendations_with_details:
+                return Response({"data": []}, status=status.HTTP_200_OK)
+            final_subject_names = [rec['subject_name'] for rec in recommendations_with_details]
+            details_map = {rec['subject_name']: rec for rec in recommendations_with_details}
 
-            recommended_subject_objects = Subject.objects.filter(name__in=final_subjects).order_by(order)
+            order = Case(*[When(name=name, then=pos) for pos, name in enumerate(final_subject_names)])
+            recommended_subject_objects = Subject.objects.filter(name__in=final_subject_names).order_by(order)
 
             serializer = SubjectSerializer(recommended_subject_objects, many=True)
+            
+            final_response_data = []
+            for subject_data in serializer.data:
+                details = details_map.get(subject_data['name'])
+                if details:
+                    subject_data['recommendation_details'] = {
+                        'match_percentage': details['match_percentage'],
+                        # 'primary_reason': details['primary_reason'],
+                        'explanations': details['explanations'],
+                        # 'matching_tags': details['matching_tags'],
+                        # 'detailed_scores': details['detailed_scores']
+                    }
+                final_response_data.append(subject_data)
+
+            response_payload = {"data": final_response_data}
             if cache_key:
-                cache.set(cache_key, json.dumps(serializer.data), timeout=60 * 60 * 24 * 14) # 14 days
-            return Response({"data": serializer.data}, status=status.HTTP_200_OK)
+                cache.set(cache_key, json.dumps(response_payload), timeout=60 * 60 * 24 * 14)
+            return Response(response_payload, status=status.HTTP_200_OK)
 
         except Exception as e:
+            logging.error(f"Recommendation error for student {student.id}: {e}", exc_info=True)
             return Response({"message": f"An error occurred: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class PreferencesView(APIView):
