@@ -87,7 +87,7 @@ def get_eligible_subjects(student, season = 2, not_activated = 0):
             subject_info__semester__in=eligible_semesters
         )
     else:
-        all_subjects = all_subjects.filter(subject_info__semester__gte=current_year * 2)
+        all_subjects = all_subjects.filter(subject_info__semester__gte=(current_year * 2 - 1))
         if study_effort == 5:
             all_subjects = all_subjects.exclude(subject_info__is_easy=True)
 
