@@ -277,7 +277,7 @@ def get_explanation_message(criterion, score):
         'professors': f"Го предаваат професори кои ги сакаш ({score:.1%})",
         'assistants': f"Има асистенти кои ги сакаш ({score:.1%})",
         'participant_score': f"Одбран од многу студенти",
-        'effort': f"Се совпаѓа со твојот вложен труд" if score == 1 else f"Не се совпаѓа со твојот вложен труд",
+        # 'effort': f"Се совпаѓа со твојот вложен труд" if score == 1 else f"Не се совпаѓа со твојот вложен труд",
     }
     return messages.get(criterion)
 

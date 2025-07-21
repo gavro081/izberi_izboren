@@ -42,8 +42,7 @@ class RecommendationsView(APIView):
         if cache_key:
             cached_data = cache.get(cache_key)
             if cached_data:
-                # return Response(json.loads(cached_data), status=status.HTTP_200_OK)
-                pass
+                return Response(json.loads(cached_data), status=status.HTTP_200_OK)
         try:
             eligible_subjects = get_eligible_subjects(student, season=season, not_activated=not_activated)
             if not eligible_subjects:
@@ -72,7 +71,6 @@ class RecommendationsView(APIView):
             for subject_data in serializer.data:
                 details = details_map.get(subject_data['name'])
                 if details:
-                    print(f"Details for subject {subject_data['name']}: {details}")
                     subject_data['recommendation_details'] = {
                         'match_percentage': details['match_percentage'],
                         # 'primary_reason': details['primary_reason'],
