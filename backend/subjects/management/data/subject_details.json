@@ -1589,7 +1589,7 @@
 			"Елена Атанасоска",
 			"Дарко Сасански"
 		],
-		"tags": ["Web Development", "Software Engineering"],
+		"tags": ["Web Development", "Software Engineering", "Databases"],
 		"technologies": ["Spring"],
 		"evaluation": ["Theory", "Code", "Project"],
 		"isEasy": false

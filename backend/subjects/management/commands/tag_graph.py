@@ -68,10 +68,24 @@ EDGES = [
     ("AI / ML", "Mathematics", 3),
     ("Mathematics", "AI / ML", 3),
     ("Data Science", "Mathematics", 3),
-    ("Mathematics", "Data Science", 3)
+    ("Mathematics", "Data Science", 3),
+    ("Software Engineering", "Systems Infrastructure", 0.5),
+    ("Systems Infrastructure", "Software Engineering", 0.5),
+    ("Web Development", "Software Engineering", 1.5),
+    ("Software Engineering", "Web Development", 1.5),
+    ("Software Engineering", "Cloud Engineering & DevOps", 0.5),
+    ("Cloud Engineering & DevOps", "Software Engineering", 1),
+    ("Software Engineering", "Databases", 1.5),
+    ("Databases", "Software Engineering", 1.5),
+    ("Software Engineering", "Computer Science", 1),
+    ("Computer Science", "Software Engineering", 1)
 ]
 
 def add(tag_graph, tag1, tag2, weight):
+    if tag1 not in tag_graph:
+        raise Exception(f"tag '{tag1}' not found in graph.")
+    if tag2 not in tag_graph:
+        raise Exception(f"tag '{tag2}' not found in graph.")
     tag_graph[tag1].append((tag2, weight))
 
 
