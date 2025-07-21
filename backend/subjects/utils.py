@@ -257,19 +257,25 @@ def score_for_preferences(student_vector, eligible_subjects):
 
     return subjects_tag_scores
 
-def get_explanation_message(criterion, score):
+def get_explanation_message(criterion, score, student_vector):
     """Generates a human-readable explanation for a single matching criterion."""
 
+    study_effort = student_vector.get('study_effort', 0)
     # Thresholds to decide if a match is significant enough to be an "explanation"
     thresholds = {
         'tags': 0.7, 'evaluation': 0.5, 'technologies': 0.5,
         'professors': 0.5, 'assistants': 0.5, 'participant_score': 0.5,
-        'effort': 0
+        'effort': 0 # no threshold for effort, as it is binary
     }
 
     if score < thresholds.get(criterion, 1.0):
         return None
 
+    if criterion == "effort":
+        if round(study_effort * 5) not in (2, 4):  # only show for effort==2 or 4
+            return None
+        return "Се совпаѓа со твојот вложен труд" if score == 1 else "Не се совпаѓа со твојот вложен труд"
+    
     messages = {
         'tags': f"Супер совпаѓање со твоите полиња на интерес ({score:.1%})",
         'evaluation': f"Се совпаѓа со твоите посакувани методи на евалуација ({score:.1%})",
@@ -277,7 +283,6 @@ def get_explanation_message(criterion, score):
         'professors': f"Го предаваат професори кои ги сакаш ({score:.1%})",
         'assistants': f"Има асистенти кои ги сакаш ({score:.1%})",
         'participant_score': f"Одбран од многу студенти",
-        # 'effort': f"Се совпаѓа со твојот вложен труд" if score == 1 else f"Не се совпаѓа со твојот вложен труд",
     }
     return messages.get(criterion)
 
@@ -296,7 +301,7 @@ def get_explanation_message(criterion, score):
 #     return matching_tags
 
 
-def get_recommendations_with_details(subjects_tag_scores):
+def get_recommendations_with_details(subjects_tag_scores, student_vector):
     """
     Generates a sorted list of recommended subjects with detailed explanations.
 
@@ -319,7 +324,7 @@ def get_recommendations_with_details(subjects_tag_scores):
             total_score += weighted_score
             weighted_scores[criterion] = weighted_score
             
-            message = get_explanation_message(criterion, score)
+            message = get_explanation_message(criterion, score, student_vector)
             if message:
                 explanations.append(message)
 

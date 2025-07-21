@@ -59,7 +59,7 @@ const SubjectCard = ({
 							className={`rounded-md px-3 py-2 text-sm border ${
 								recommendationDetails.match_percentage === 100 && isFirst
 									? "bg-green-50 text-green-800 border-green-200"
-									: recommendationDetails.match_percentage > 50
+									: recommendationDetails.match_percentage > 25
 									? "bg-blue-50 text-blue-800 border-blue-200"
 									: "bg-red-50 text-red-800 border-red-200"
 							}`}
@@ -76,7 +76,7 @@ const SubjectCard = ({
 										? "Супер за тебе"
 										: recommendationDetails.match_percentage >= 75
 										? "Многу добар избор"
-										: recommendationDetails.match_percentage >= 50
+										: recommendationDetails.match_percentage >= 25
 										? "Добар избор"
 										: "Не е најдобриот избор"}
 								</p>

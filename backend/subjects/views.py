@@ -54,7 +54,7 @@ class RecommendationsView(APIView):
             subjects_scores = score_for_preferences(student_vector, eligible_subjects_dict)
             
             recommendations_with_details = get_recommendations_with_details(
-                subjects_scores
+                subjects_scores, student_vector
             )
 
             if not recommendations_with_details:
