@@ -35,7 +35,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['email', 'full_name', 'password', 'confirm_password']
+        fields = ['email', 'full_name', 'password', 'confirm_password', 'user_type']
     
     def validate(self, data):
         errors = {}
@@ -63,7 +63,6 @@ class RegistrationSerializer(serializers.ModelSerializer):
                 full_name=validated_data['full_name'],
                 user_type='admin',
             )
-
         return user
 
 class LoginSerializer(serializers.Serializer):
