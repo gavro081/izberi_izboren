@@ -157,6 +157,12 @@ const Reviews = () => {
 		}
 	};
 
+	function formatMacedonianDate(dbDate: string): string {
+		// dbDate = "2025-08-20" (YYYY-MM-DD)
+		const [year, month, day] = dbDate.split("-");
+		return `${day}.${month}.${year}`;
+	}
+
 	const isAdmin = user?.user_type === "admin";
 
 	return (
@@ -404,7 +410,9 @@ const Reviews = () => {
 											)}
 										</div>
 										<div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-gray-600">
-											<span>{review.review.date_posted}</span>
+											<span>
+												{formatMacedonianDate(review.review.date_posted)}
+											</span>
 											<span className="break-all">
 												Студент: {review.review.student}{" "}
 											</span>
@@ -448,6 +456,7 @@ const Reviews = () => {
 												<Trash2 className="w-4 h-4" />
 											</button>
 										)}
+
 										{isAdmin && (
 											<>
 												<button
