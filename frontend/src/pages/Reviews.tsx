@@ -160,7 +160,9 @@ const Reviews = () => {
 	function formatMacedonianDate(dbDate: string): string {
 		// dbDate = "2025-08-20" (YYYY-MM-DD)
 		const [year, month, day] = dbDate.split("-");
-		return `${day}.${month}.${year}`;
+		const formattedDay = day.startsWith("0") ? day.slice(1) : day;
+		const formattedMonth = month.startsWith("0") ? month.slice(1) : month;
+		return `${formattedDay}.${formattedMonth}.${year}`;
 	}
 
 	const isAdmin = user?.user_type === "admin";
