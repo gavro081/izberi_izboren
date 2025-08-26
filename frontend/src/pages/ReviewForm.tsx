@@ -190,8 +190,20 @@ const ReviewForm = () => {
 				toast.success("Вашата објава е зачувана!");
 				navigate(-1);
 			} catch (err) {
-				console.error(err);
-				setError("Грешка при зачувување");
+				let errorMsg = "Грешка при зачувување";
+				if (
+					typeof err === "object" &&
+					err !== null &&
+					"response" in err &&
+					typeof (err as any).response === "object" &&
+					"data" in (err as any).response &&
+					typeof (err as any).response.data === "object" &&
+					"error" in (err as any).response.data
+				) {
+					errorMsg = (err as any).response.data.error ?? errorMsg;
+				}
+				console.error(errorMsg);
+				setError(errorMsg);
 			}
 			return;
 		}
