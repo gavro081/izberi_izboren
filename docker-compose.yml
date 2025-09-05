@@ -1,4 +1,17 @@
 services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
   backend:
     build:
       context: ./backend
@@ -8,11 +21,10 @@ services:
     ports:
       - "8000:8000"
     env_file:
-      - ./backend/.env # Load environment variables from the .env file
+      - ./backend/.env
     environment:
       - DEBUG=True
       - DB_PORT=5432
-    command: ./wait-for-db.sh db 5432 python manage.py runserver 0.0.0.0:8000
     depends_on:
       - db
     networks:
@@ -34,17 +46,6 @@ services:
       - VITE_USE_OAUTH=${VITE_USE_OAUTH}
     depends_on:
       - backend
-    networks:
-      - app-network
-
-  db:
-    image: postgres:13
-    environment:
-      - POSTGRES_DB=${DB_NAME}
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
     networks:
       - app-network
 
