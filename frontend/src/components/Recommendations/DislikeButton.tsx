@@ -12,7 +12,9 @@ const DislikeButton = ({ id }: DislikeButtonProps) => {
 		<button
 			onClick={() => toggleDislike(id)}
 			className={`p-1 hover:bg-green-100 rounded transition-colors group ${
-				dislikedIds.has(id) ? "text-red-600 bg-red-100" : "text-gray-400"
+				dislikedIds && dislikedIds.has(id)
+					? "text-red-600 bg-red-100"
+					: "text-gray-400"
 			}`}
 		>
 			<ThumbsDown className="group-hover:text-red-600 transition-colors" />
