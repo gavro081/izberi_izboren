@@ -71,7 +71,6 @@ build/
 # Local env files
 .env
 backend/.env
-.env.*
 
 
 guidelines.txt
